@@ -25,7 +25,9 @@ instruction :   affectation
 	      | condition 
 	      | return 
 	      | read 
-	      | write ;
+	      | write 
+	      |appel;
+appel      :   IDF '(' ( (IDF|CST_ENT) ( ','(IDF|CST_ENT))* )? ')';	
 bloc	   :   'begin'  (declaration)*   (instruction)+   'end';
 affectation:    IDF   '='   exp  
                 | IDF '[' exp (',' exp )* ']' '=' exp ;
