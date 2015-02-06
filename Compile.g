@@ -35,18 +35,17 @@ iteration  :   'for'   IDF   'in'   exp   '..'   exp   'do'   ( instruction )+  
 condition  :   'if'   exp   'then'   ( instruction )+ ('else'   (instruction)+) ?   'fi' ;
 return     :   'return' '('   exp    ')' ;
 read       :   'read'    IDF ;
-write	   :   'write'   (exp  
+write	   :   'write'   (exp
 	       |CSTE_CHAINE );
  exp	   :    plus (('=='^ | '!='^ | '<='^ | '>='^ | '<'^ | '>'^ ) plus)*
  	       | 'true'
  	       | 'false'
  	       | exp2;
 exp2      :     IDF '(' (exp (',' exp)* )? ')'
-               | '-' exp
                | IDF '[' exp (',' exp )* ']' ;
 plus       :   fois (('+'|'-') fois)*;
 fois       :   atom ( ('*'|'/') atom)* ; 
-atom       :   CST_ENT | IDF | '(' exp ')';	
+atom       :   CST_ENT | IDF | '(' exp ')' | '-' atom;	
 CST_ENT    :   ('0'..'9')+;
 CSTE_CHAINE:   '"'('a'..'z' | 'A'..'Z')'"' ;
 IDF        :   ('a'..'z'|'A'..'Z'| '0'..'9')+ ;
