@@ -1,9 +1,8 @@
 grammar Compile;
 
-options{output=AST;
-ASTLabelType=CommonTree;
+options{
+output=AST;
 }
-
 prog 	    :  'do'  (declaration)*   (instruction)+   'end';
 declaration :  dec_var | dec_func | dec_proc;	
 dec_var     :  type    IDF (','   IDF)* ; 
@@ -27,7 +26,7 @@ instruction :   affectation
 	      | read 
 	      | write 
 	      |appel;
-appel      :   IDF '(' ( (IDF|CST_ENT) ( ','(IDF|CST_ENT))* )? ')';	
+appel      :   IDF '(' ( exp( ','exp)* )? ')';	
 bloc	   :   'begin'  (declaration)*   (instruction)+   'end';
 affectation:    IDF   '='   exp  
                 | IDF '[' exp (',' exp )* ']' '=' exp ;
@@ -48,5 +47,5 @@ fois       :   atom (  ('=='^ | '!='^ | '<='^ | '>='^ | '<'^ | '>'^ )  atom)* ;
 atom       :   CST_ENT | IDF | '(' exp ')' | '-' atom;	
 CST_ENT    :   ('0'..'9')+;
 CSTE_CHAINE:   ('"'('a'..'z' | 'A'..'Z'| ' ' | '\'' )+'"');
-IDF        :   ('a'..'z'|'A'..'Z'| '0'..'9')+ ;
-WS         :   (' '|'\t')+ {$channel=HIDDEN;} ;
+IDF        :  ('a'..'z'|'A'..'Z') ('a'..'z'|'A'..'Z'| '0'..'9')* ;
+WS         :   ('/*'.*'*/'|' '|'\t')+ {$channel=HIDDEN;} ;
