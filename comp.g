@@ -40,7 +40,7 @@ ent_proc    : 'procedure'   IDF  param ->^('procedure' ^(IDF param))
 array 	    : 'array' '[' bounds']' -> ^('array' ^(bounds))
 ;
 bounds      :  CST_ENT '..' CST_ENT (','  CST_ENT '..'  CST_ENT )*;
-param       :  '(' (formal   (',' formal   )*)? ')'
+param       :  '(' (formal   (',' formal   )*)? ')'->^(PARAM formal*)
 ;
 
 formal      : ('adr')? IDF   ':'   type   ;
