@@ -18,6 +18,7 @@ APPEL	      ;
 CALL;
 PARAM;
 DEC_VAR;
+ARRAY;
 }
 prog 	    :  'do'  (declaration)*   (instruction)*   'end' -> ^('do' ((declaration)*)? (instruction)* 'end') 
                 ;
@@ -30,22 +31,22 @@ dec_var     :  type    IDF (','   IDF)*->^(VAR type IDF+)
 type        : 'integer'->^('integer')  
                         | 'boolean'->^('boolean')  
                         |  'array' ->^('array');
-dec_func    :  ent_func  (declaration )*  ( instruction)+ 'end' ->^(FONCTION (declaration)* (instruction)+ 'end')
+dec_func    :  ent_func  (declaration )*  ( instruction)* 'end' ->^(ent_func (declaration)* (instruction)+ 'end')
 //^(ent_func (declaration)* (instruction)+ 'end)
 ;
-dec_proc    :  ent_proc  (declaration )*  ( instruction)+ 'end' ->^(PROCEDURE (declaration)* (instruction)+ 'end')
+dec_proc    :  ent_proc  (declaration )*  ( instruction)* 'end' ->^(ent_proc (declaration)* (instruction)+ 'end')
 ;
-ent_func    : 'function'    type   IDF   param -> ^('function' ^(type IDF param))
+ent_func    : 'function'    type   IDF   param -> ^(FONCTION IDF type  param)
 ;
-ent_proc    : 'procedure'   IDF  param ->^('procedure' ^(IDF param))
+ent_proc    : 'procedure'   IDF  param ->^(PROCEDURE IDF param)
 ;
-array 	    : 'array' '[' bounds']' -> ^('array' ^(bounds))
+array 	    : 'array' '[' bounds']' -> ^(ARRAY bounds)
 ;
 bounds      :  CST_ENT '..' CST_ENT (','  CST_ENT '..'  CST_ENT )*;
-param       :  '(' (formal   (',' formal   )*)? ')'->^(PARAM formal*)
+param       :  '(' (formal   (',' formal   )*)? ')'->^(PARAM formal)*
 ;
 
-formal      : ('adr')? IDF   ':'   type   ;
+formal      : ('adr')? IDF   ':'   type   ->^(IDF type);
 instruction :   affectation ->affectation
 	      | bloc  ->bloc
 	      | iteration ->iteration
