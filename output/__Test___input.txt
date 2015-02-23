@@ -1,0 +1,3 @@
+do
+integer x
+end

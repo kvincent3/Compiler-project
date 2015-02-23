@@ -1,4 +1,4 @@
-grammar Compil;
+grammar comp;
 
 options{
 output=AST;
@@ -16,22 +16,24 @@ READ='read';
 WRITE='write';	      
 APPEL	      ;
 CALL;
+PARAM;
+DEC_VAR;
 }
-prog 	    :  'do'  (declaration)*   (instruction)+   'end' -> ^('do' ((declaration)*)? (instruction)+ 'end') 
-;
-declaration :  dec_var -> dec_var
+prog 	    :  'do'  (declaration)*   (instruction)*   'end' -> ^('do' ((declaration)*)? (instruction)* 'end') 
+                ;
+declaration :  dec_var //-> dec_var
 		| dec_func ->dec_func
 		| dec_proc ->dec_proc
 ;	
-dec_var     :  type    IDF (','   IDF)* ->^(VAR type IDF)
+dec_var     :  type    IDF (','   IDF)*->^(VAR type IDF+)
 ; 
 type        : 'integer'->^('integer')  
                         | 'boolean'->^('boolean')  
                         |  'array' ->^('array');
-dec_func    :  ent_func  (declaration )*  ( instruction)+ 'end' ->^(FONCTION)
+dec_func    :  ent_func  (declaration )*  ( instruction)+ 'end' ->^(FONCTION (declaration)* (instruction)+ 'end')
 //^(ent_func (declaration)* (instruction)+ 'end)
 ;
-dec_proc    :  ent_proc  (declaration )*  ( instruction)+ 'end' ->^(PROCEDURE)
+dec_proc    :  ent_proc  (declaration )*  ( instruction)+ 'end' ->^(PROCEDURE (declaration)* (instruction)+ 'end')
 ;
 ent_func    : 'function'    type   IDF   param -> ^('function' ^(type IDF param))
 ;
@@ -78,6 +80,6 @@ atom       :   CST_ENT
 		| '-' atom ->^(VAR '-' atom)
 		;	
 CST_ENT    :   ('0'..'9')+;
-CSTE_CHAINE:   ('"'('a'..'z' | 'A'..'Z'| ' ' | '\'' )+'"');
+CSTE_CHAINE:   ('"'(~'"')* '"');
 IDF        :  ('a'..'z'|'A'..'Z') ('a'..'z'|'A'..'Z'| '0'..'9')* ;
 WS         :   ('/*'.*'*/'|' '|'\t')+ {$channel=HIDDEN;} ;
