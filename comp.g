@@ -30,7 +30,7 @@ dec_var     :  type    IDF (','   IDF)*->^(VAR type IDF+)
 type        : 'integer'->^('integer')  
                         | 'boolean'->^('boolean')  
                         |  'array' ->^('array');
-dec_func    :  ent_func  (declaration )*  ( instruction)+ 'end' ->^(FONCTION (declaration)* (instruction)+ 'end')
+dec_func    :  ent_func  (declaration )*  ( instruction)* 'end' ->^(FONCTION (declaration)* (instruction)+ 'end')
 //^(ent_func (declaration)* (instruction)+ 'end)
 ;
 dec_proc    :  ent_proc  (declaration )*  ( instruction)+ 'end' ->^(PROCEDURE (declaration)* (instruction)+ 'end')
