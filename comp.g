@@ -33,7 +33,7 @@ type        : 'integer'->^('integer')
 dec_func    :  ent_func  (declaration )*  ( instruction)* 'end' ->^(FONCTION (declaration)* (instruction)+ 'end')
 //^(ent_func (declaration)* (instruction)+ 'end)
 ;
-dec_proc    :  ent_proc  (declaration )*  ( instruction)+ 'end' ->^(PROCEDURE (declaration)* (instruction)+ 'end')
+dec_proc    :  ent_proc  (declaration )*  ( instruction)* 'end' ->^(PROCEDURE (declaration)* (instruction)+ 'end')
 ;
 ent_func    : 'function'    type   IDF   param -> ^('function' ^(type IDF param))
 ;
