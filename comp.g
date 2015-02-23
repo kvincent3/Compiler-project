@@ -82,4 +82,4 @@ atom       :   CST_ENT
 CST_ENT    :   ('0'..'9')+;
 CSTE_CHAINE:   ('"'(~'"')* '"');
 IDF        :  ('a'..'z'|'A'..'Z') ('a'..'z'|'A'..'Z'| '0'..'9')* ;
-WS         :   ('/*'.*'*/'|' '|'\t')+ {$channel=HIDDEN;} ;
+WS         :   ('/*'.*'*/'|' '|'\t'|'\n')+ {$channel=HIDDEN;} ;
