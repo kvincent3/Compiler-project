@@ -8,19 +8,22 @@ VAR;
 FONCTION='function';
 PROCEDURE='procedure';
 AFFECTATION='affectation';
+DECLARATION='declaration';
+INSTRUCTION='instruction';
 BLOC;
 ITERATION; 
 CONDITION; 
 RETOUR='retour'; 
 READ='read'; 
 WRITE='write';	      
-APPEL	      ;
+APPEL='Appel'      ;
 CALL;
 PARAM;
+LISTPARAM;
 DEC_VAR;
 ARRAY;
 }
-prog 	    :  'do'  (declaration)*   (instruction)*   'end' -> ^('do' ((declaration)*)? (instruction)* 'end') 
+prog 	    :  'do'  (declaration)*   (instruction)*   'end' -> ^('do' ^(DECLARATION ((declaration)* )?) ^(INSTRUCTION (instruction)*) 'end') 
                 ;
 declaration :  dec_var //-> dec_var
 		| dec_func ->dec_func
@@ -28,7 +31,7 @@ declaration :  dec_var //-> dec_var
 ;	
 dec_var     :  type    IDF (','   IDF)*->^(VAR type IDF+)
 ; 
-type        : 'integer'->^('integer')  
+type        : 		'integer'->^('integer')  
                         | 'boolean'->^('boolean')  
                         |  'array' ->^('array');
 dec_func    :  ent_func  (declaration )*  ( instruction)* 'end' ->^(ent_func (declaration)* (instruction)+ 'end')
@@ -43,10 +46,10 @@ ent_proc    : 'procedure'   IDF  param ->^(PROCEDURE IDF param)
 array 	    : 'array' '[' bounds']' -> ^(ARRAY bounds)
 ;
 bounds      :  CST_ENT '..' CST_ENT (','  CST_ENT '..'  CST_ENT )*;
-param       :  '(' (formal   (',' formal   )*)? ')'->^(PARAM formal)*
+param       :  '(' (formal   (',' formal   )*)? ')'->^(LISTPARAM formal*)/*^(PARAM formal)**/
 ;
 
-formal      : ('adr')? IDF   ':'   type   ->^(IDF type);
+formal      : ('adr')? IDF   ':'   type   ->^(PARAM IDF type);
 instruction :   affectation ->affectation
 	      | bloc  ->bloc
 	      | iteration ->iteration
@@ -55,12 +58,12 @@ instruction :   affectation ->affectation
 	      | read ->read
 	      | write ->write
 	      |appel->appel;
-appel      :   IDF '(' ( exp( ','exp)* )? ')';	
+appel      :   IDF '(' ( exp( ','exp)* )? ')' -> ^(APPEL IDF exp*);	
 bloc	   :   'begin'  (declaration)*   (instruction)+   'end';
 affectation:    IDF   '='   exp -> ^('=' IDF exp)
                 | IDF '[' exp (',' exp )* ']' '=' exp ->^('=' IDF  ^(exp '[' exp (',' exp )* ']' ));
 iteration  :   'for'   IDF   'in'   exp   '..'   exp   'do'   ( instruction )+   'end'->^('for' IDF 'in' exp '..' exp 'do' ^( instruction))   ;
-condition  :   'if'   exp   'then'   ( instruction )+ ('else'   (instruction)+) ?   'fi' ->^('if' exp ^('then' instruction) ('else' (instruction)+)?);
+condition  :   'if'   exp   'then'   ( instruction )+ ('else'   (instruction)+) ?   'fi' ->^('if' exp ^('then' instruction) ^('else' (instruction)+)?);
 retour     :   'retour' '('   exp    ')'->^(RETOUR exp) ;
 read       :   'read'    IDF ->^(READ IDF);
 write	   :   'write' exp->^(WRITE exp)
@@ -70,7 +73,7 @@ write	   :   'write' exp->^(WRITE exp)
  	       | 'true'
  	       | 'false'
  	       | exp2;
-exp2      :     IDF '(' (exp (',' exp)* )? ')'->^(exp IDF)
+exp2      :     IDF '(' (exp (',' exp)* )? ')'->^(APPEL IDF exp*)
                | IDF '[' exp (',' exp )* ']'->^(exp IDF)
                 ;
 plus       :   fois ( ('*'|'/')^ fois)*;
@@ -78,7 +81,7 @@ fois       :   atom (  ('=='^ | '!='^ | '<='^ | '>='^ | '<'^ | '>'^ )  atom)* ;
 atom       :   CST_ENT 
 		| IDF 
 		| '(' exp ')' -> exp
-		| '-' atom ->^(VAR '-' atom)
+		| '-' atom ->^( '-' atom)
 		;	
 CST_ENT    :   ('0'..'9')+;
 CSTE_CHAINE:   ('"'(~'"')* '"');
