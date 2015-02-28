@@ -1,3 +1,10 @@
 do
-integer x
+ a=5
+ b=10
+ for x in 5..9 
+ do
+   read a
+   x=x+1
+   c=9
+ end
 end
