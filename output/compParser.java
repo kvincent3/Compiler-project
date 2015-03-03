@@ -1,4 +1,4 @@
-// $ANTLR 3.2 Sep 23, 2009 12:02:23 /home/etudiants/karim2u/Bureau/COMPILATION/vincent66u/comp.g 2015-02-23 17:25:24
+// $ANTLR 3.2 Sep 23, 2009 12:02:23 /home/katana/Desktop/compile/vincent66u/comp.g 2015-02-25 11:58:18
 
 import org.antlr.runtime.*;
 import java.util.Stack;
@@ -12,69 +12,74 @@ import org.antlr.runtime.tree.*;
 
 public class compParser extends DebugParser {
     public static final String[] tokenNames = new String[] {
-        "<invalid>", "<EOR>", "<DOWN>", "<UP>", "VAR", "FONCTION", "PROCEDURE", "AFFECTATION", "BLOC", "ITERATION", "CONDITION", "RETOUR", "READ", "WRITE", "APPEL", "CALL", "PARAM", "DEC_VAR", "IDF", "CST_ENT", "CSTE_CHAINE", "WS", "'do'", "'end'", "','", "'integer'", "'boolean'", "'array'", "'['", "']'", "'..'", "'('", "')'", "'adr'", "':'", "'begin'", "'='", "'for'", "'in'", "'if'", "'then'", "'else'", "'fi'", "'+'", "'-'", "'true'", "'false'", "'*'", "'/'", "'=='", "'!='", "'<='", "'>='", "'<'", "'>'"
+        "<invalid>", "<EOR>", "<DOWN>", "<UP>", "VAR", "FONCTION", "PROCEDURE", "AFFECTATION", "DECLARATION", "INSTRUCTION", "BLOC", "ITERATION", "CONDITION", "RETOUR", "READ", "WRITE", "APPEL", "CALL", "PARAM", "LISTPARAM", "DEC_VAR", "ARRAY", "IDF", "CST_ENT", "CSTE_CHAINE", "WS", "'do'", "'end'", "','", "'integer'", "'boolean'", "'array'", "'['", "']'", "'..'", "'('", "')'", "'adr'", "':'", "'begin'", "'='", "'for'", "'in'", "'if'", "'then'", "'else'", "'fi'", "'+'", "'-'", "'true'", "'false'", "'*'", "'/'", "'=='", "'!='", "'<='", "'>='", "'<'", "'>'"
     };
-    public static final int AFFECTATION=7;
-    public static final int BLOC=8;
-    public static final int T__50=50;
-    public static final int VAR=4;
-    public static final int IDF=18;
+    public static final int INSTRUCTION=9;
+    public static final int T__29=29;
+    public static final int T__28=28;
+    public static final int IDF=22;
+    public static final int T__27=27;
+    public static final int T__26=26;
+    public static final int PARAM=18;
+    public static final int CONDITION=12;
+    public static final int CSTE_CHAINE=24;
+    public static final int EOF=-1;
+    public static final int DECLARATION=8;
+    public static final int CST_ENT=23;
+    public static final int LISTPARAM=19;
+    public static final int T__55=55;
+    public static final int T__56=56;
+    public static final int T__57=57;
+    public static final int T__58=58;
     public static final int T__51=51;
     public static final int T__52=52;
     public static final int T__53=53;
     public static final int T__54=54;
-    public static final int ITERATION=9;
-    public static final int READ=12;
-    public static final int T__26=26;
-    public static final int T__27=27;
-    public static final int T__28=28;
-    public static final int T__29=29;
-    public static final int T__22=22;
-    public static final int T__23=23;
-    public static final int T__24=24;
-    public static final int CONDITION=10;
-    public static final int T__25=25;
-    public static final int CALL=15;
+    public static final int APPEL=16;
+    public static final int VAR=4;
+    public static final int T__50=50;
+    public static final int ARRAY=21;
+    public static final int ITERATION=11;
+    public static final int T__42=42;
+    public static final int T__43=43;
+    public static final int T__40=40;
+    public static final int T__41=41;
+    public static final int T__46=46;
+    public static final int T__47=47;
+    public static final int T__44=44;
+    public static final int T__45=45;
     public static final int FONCTION=5;
-    public static final int CSTE_CHAINE=20;
-    public static final int WRITE=13;
-    public static final int APPEL=14;
-    public static final int T__37=37;
-    public static final int T__38=38;
-    public static final int T__39=39;
+    public static final int BLOC=10;
+    public static final int T__48=48;
+    public static final int T__49=49;
+    public static final int WRITE=15;
+    public static final int PROCEDURE=6;
+    public static final int RETOUR=13;
+    public static final int T__30=30;
+    public static final int T__31=31;
+    public static final int T__32=32;
+    public static final int WS=25;
     public static final int T__33=33;
     public static final int T__34=34;
     public static final int T__35=35;
     public static final int T__36=36;
-    public static final int WS=21;
-    public static final int EOF=-1;
-    public static final int T__30=30;
-    public static final int T__31=31;
-    public static final int T__32=32;
-    public static final int CST_ENT=19;
-    public static final int PROCEDURE=6;
-    public static final int DEC_VAR=17;
-    public static final int RETOUR=11;
-    public static final int PARAM=16;
-    public static final int T__48=48;
-    public static final int T__49=49;
-    public static final int T__44=44;
-    public static final int T__45=45;
-    public static final int T__46=46;
-    public static final int T__47=47;
-    public static final int T__40=40;
-    public static final int T__41=41;
-    public static final int T__42=42;
-    public static final int T__43=43;
+    public static final int T__37=37;
+    public static final int READ=14;
+    public static final int T__38=38;
+    public static final int T__39=39;
+    public static final int AFFECTATION=7;
+    public static final int CALL=17;
+    public static final int DEC_VAR=20;
 
     // delegates
     // delegators
 
     public static final String[] ruleNames = new String[] {
-        "invalidRule", "prog", "exp2", "bounds", "write", "dec_func", "formal", 
-        "affectation", "exp", "instruction", "condition", "plus", "fois", 
-        "array", "type", "retour", "dec_var", "atom", "ent_proc", "param", 
-        "iteration", "read", "dec_proc", "ent_func", "bloc", "appel", "declaration"
+        "invalidRule", "instruction", "ent_proc", "declaration", "affectation", 
+        "dec_func", "formal", "prog", "array", "iteration", "condition", 
+        "exp2", "atom", "ent_func", "type", "read", "appel", "retour", "plus", 
+        "dec_var", "param", "bounds", "fois", "bloc", "dec_proc", "exp", 
+        "write"
     };
      
         public int ruleLevel = 0;
@@ -124,7 +129,7 @@ public class compParser extends DebugParser {
 
 
     public String[] getTokenNames() { return compParser.tokenNames; }
-    public String getGrammarFileName() { return "/home/etudiants/karim2u/Bureau/COMPILATION/vincent66u/comp.g"; }
+    public String getGrammarFileName() { return "/home/katana/Desktop/compile/vincent66u/comp.g"; }
 
 
     public static class prog_return extends ParserRuleReturnScope {
@@ -133,7 +138,7 @@ public class compParser extends DebugParser {
     };
 
     // $ANTLR start "prog"
-    // /home/etudiants/karim2u/Bureau/COMPILATION/vincent66u/comp.g:22:1: prog : 'do' ( declaration )* ( instruction )* 'end' -> ^( 'do' ( ( declaration )* )? ( instruction )* 'end' ) ;
+    // /home/katana/Desktop/compile/vincent66u/comp.g:26:1: prog : 'do' ( declaration )* ( instruction )* 'end' -> ^( 'do' ^( DECLARATION ( ( declaration )* )? ) ^( INSTRUCTION ( instruction )* ) 'end' ) ;
     public final compParser.prog_return prog() throws RecognitionException {
         compParser.prog_return retval = new compParser.prog_return();
         retval.start = input.LT(1);
@@ -149,27 +154,27 @@ public class compParser extends DebugParser {
 
         Object string_literal1_tree=null;
         Object string_literal4_tree=null;
-        RewriteRuleTokenStream stream_22=new RewriteRuleTokenStream(adaptor,"token 22");
-        RewriteRuleTokenStream stream_23=new RewriteRuleTokenStream(adaptor,"token 23");
-        RewriteRuleSubtreeStream stream_instruction=new RewriteRuleSubtreeStream(adaptor,"rule instruction");
+        RewriteRuleTokenStream stream_26=new RewriteRuleTokenStream(adaptor,"token 26");
+        RewriteRuleTokenStream stream_27=new RewriteRuleTokenStream(adaptor,"token 27");
         RewriteRuleSubtreeStream stream_declaration=new RewriteRuleSubtreeStream(adaptor,"rule declaration");
+        RewriteRuleSubtreeStream stream_instruction=new RewriteRuleSubtreeStream(adaptor,"rule instruction");
         try { dbg.enterRule(getGrammarFileName(), "prog");
         if ( getRuleLevel()==0 ) {dbg.commence();}
         incRuleLevel();
-        dbg.location(22, 1);
+        dbg.location(26, 1);
 
         try {
-            // /home/etudiants/karim2u/Bureau/COMPILATION/vincent66u/comp.g:22:11: ( 'do' ( declaration )* ( instruction )* 'end' -> ^( 'do' ( ( declaration )* )? ( instruction )* 'end' ) )
+            // /home/katana/Desktop/compile/vincent66u/comp.g:26:11: ( 'do' ( declaration )* ( instruction )* 'end' -> ^( 'do' ^( DECLARATION ( ( declaration )* )? ) ^( INSTRUCTION ( instruction )* ) 'end' ) )
             dbg.enterAlt(1);
 
-            // /home/etudiants/karim2u/Bureau/COMPILATION/vincent66u/comp.g:22:14: 'do' ( declaration )* ( instruction )* 'end'
+            // /home/katana/Desktop/compile/vincent66u/comp.g:26:14: 'do' ( declaration )* ( instruction )* 'end'
             {
-            dbg.location(22,14);
-            string_literal1=(Token)match(input,22,FOLLOW_22_in_prog101);  
-            stream_22.add(string_literal1);
+            dbg.location(26,14);
+            string_literal1=(Token)match(input,26,FOLLOW_26_in_prog118);  
+            stream_26.add(string_literal1);
 
-            dbg.location(22,20);
-            // /home/etudiants/karim2u/Bureau/COMPILATION/vincent66u/comp.g:22:20: ( declaration )*
+            dbg.location(26,20);
+            // /home/katana/Desktop/compile/vincent66u/comp.g:26:20: ( declaration )*
             try { dbg.enterSubRule(1);
 
             loop1:
@@ -179,7 +184,7 @@ public class compParser extends DebugParser {
 
                 int LA1_0 = input.LA(1);
 
-                if ( ((LA1_0>=FONCTION && LA1_0<=PROCEDURE)||(LA1_0>=25 && LA1_0<=27)) ) {
+                if ( ((LA1_0>=FONCTION && LA1_0<=PROCEDURE)||(LA1_0>=29 && LA1_0<=31)) ) {
                     alt1=1;
                 }
 
@@ -190,10 +195,10 @@ public class compParser extends DebugParser {
             	case 1 :
             	    dbg.enterAlt(1);
 
-            	    // /home/etudiants/karim2u/Bureau/COMPILATION/vincent66u/comp.g:22:21: declaration
+            	    // /home/katana/Desktop/compile/vincent66u/comp.g:26:21: declaration
             	    {
-            	    dbg.location(22,21);
-            	    pushFollow(FOLLOW_declaration_in_prog105);
+            	    dbg.location(26,21);
+            	    pushFollow(FOLLOW_declaration_in_prog122);
             	    declaration2=declaration();
 
             	    state._fsp--;
@@ -209,8 +214,8 @@ public class compParser extends DebugParser {
             } while (true);
             } finally {dbg.exitSubRule(1);}
 
-            dbg.location(22,37);
-            // /home/etudiants/karim2u/Bureau/COMPILATION/vincent66u/comp.g:22:37: ( instruction )*
+            dbg.location(26,37);
+            // /home/katana/Desktop/compile/vincent66u/comp.g:26:37: ( instruction )*
             try { dbg.enterSubRule(2);
 
             loop2:
@@ -220,7 +225,7 @@ public class compParser extends DebugParser {
 
                 int LA2_0 = input.LA(1);
 
-                if ( ((LA2_0>=RETOUR && LA2_0<=WRITE)||LA2_0==IDF||LA2_0==35||LA2_0==37||LA2_0==39) ) {
+                if ( ((LA2_0>=RETOUR && LA2_0<=WRITE)||LA2_0==IDF||LA2_0==39||LA2_0==41||LA2_0==43) ) {
                     alt2=1;
                 }
 
@@ -231,10 +236,10 @@ public class compParser extends DebugParser {
             	case 1 :
             	    dbg.enterAlt(1);
 
-            	    // /home/etudiants/karim2u/Bureau/COMPILATION/vincent66u/comp.g:22:38: instruction
+            	    // /home/katana/Desktop/compile/vincent66u/comp.g:26:38: instruction
             	    {
-            	    dbg.location(22,38);
-            	    pushFollow(FOLLOW_instruction_in_prog112);
+            	    dbg.location(26,38);
+            	    pushFollow(FOLLOW_instruction_in_prog129);
             	    instruction3=instruction();
 
             	    state._fsp--;
@@ -250,14 +255,14 @@ public class compParser extends DebugParser {
             } while (true);
             } finally {dbg.exitSubRule(2);}
 
-            dbg.location(22,54);
-            string_literal4=(Token)match(input,23,FOLLOW_23_in_prog118);  
-            stream_23.add(string_literal4);
+            dbg.location(26,54);
+            string_literal4=(Token)match(input,27,FOLLOW_27_in_prog135);  
+            stream_27.add(string_literal4);
 
 
 
             // AST REWRITE
-            // elements: 23, 22, instruction, declaration
+            // elements: 26, declaration, 27, instruction
             // token labels: 
             // rule labels: retval
             // token list labels: 
@@ -267,39 +272,59 @@ public class compParser extends DebugParser {
             RewriteRuleSubtreeStream stream_retval=new RewriteRuleSubtreeStream(adaptor,"rule retval",retval!=null?retval.tree:null);
 
             root_0 = (Object)adaptor.nil();
-            // 22:60: -> ^( 'do' ( ( declaration )* )? ( instruction )* 'end' )
+            // 26:60: -> ^( 'do' ^( DECLARATION ( ( declaration )* )? ) ^( INSTRUCTION ( instruction )* ) 'end' )
             {
-                dbg.location(22,63);
-                // /home/etudiants/karim2u/Bureau/COMPILATION/vincent66u/comp.g:22:63: ^( 'do' ( ( declaration )* )? ( instruction )* 'end' )
+                dbg.location(26,63);
+                // /home/katana/Desktop/compile/vincent66u/comp.g:26:63: ^( 'do' ^( DECLARATION ( ( declaration )* )? ) ^( INSTRUCTION ( instruction )* ) 'end' )
                 {
                 Object root_1 = (Object)adaptor.nil();
-                dbg.location(22,65);
-                root_1 = (Object)adaptor.becomeRoot(stream_22.nextNode(), root_1);
+                dbg.location(26,65);
+                root_1 = (Object)adaptor.becomeRoot(stream_26.nextNode(), root_1);
 
-                dbg.location(22,70);
-                // /home/etudiants/karim2u/Bureau/COMPILATION/vincent66u/comp.g:22:70: ( ( declaration )* )?
+                dbg.location(26,70);
+                // /home/katana/Desktop/compile/vincent66u/comp.g:26:70: ^( DECLARATION ( ( declaration )* )? )
+                {
+                Object root_2 = (Object)adaptor.nil();
+                dbg.location(26,72);
+                root_2 = (Object)adaptor.becomeRoot((Object)adaptor.create(DECLARATION, "DECLARATION"), root_2);
+
+                dbg.location(26,84);
+                // /home/katana/Desktop/compile/vincent66u/comp.g:26:84: ( ( declaration )* )?
                 if ( stream_declaration.hasNext() ) {
-                    dbg.location(22,71);
-                    // /home/etudiants/karim2u/Bureau/COMPILATION/vincent66u/comp.g:22:71: ( declaration )*
+                    dbg.location(26,85);
+                    // /home/katana/Desktop/compile/vincent66u/comp.g:26:85: ( declaration )*
                     while ( stream_declaration.hasNext() ) {
-                        dbg.location(22,72);
-                        adaptor.addChild(root_1, stream_declaration.nextTree());
+                        dbg.location(26,86);
+                        adaptor.addChild(root_2, stream_declaration.nextTree());
 
                     }
                     stream_declaration.reset();
 
                 }
                 stream_declaration.reset();
-                dbg.location(22,88);
-                // /home/etudiants/karim2u/Bureau/COMPILATION/vincent66u/comp.g:22:88: ( instruction )*
+
+                adaptor.addChild(root_1, root_2);
+                }
+                dbg.location(26,104);
+                // /home/katana/Desktop/compile/vincent66u/comp.g:26:104: ^( INSTRUCTION ( instruction )* )
+                {
+                Object root_2 = (Object)adaptor.nil();
+                dbg.location(26,106);
+                root_2 = (Object)adaptor.becomeRoot((Object)adaptor.create(INSTRUCTION, "INSTRUCTION"), root_2);
+
+                dbg.location(26,118);
+                // /home/katana/Desktop/compile/vincent66u/comp.g:26:118: ( instruction )*
                 while ( stream_instruction.hasNext() ) {
-                    dbg.location(22,89);
-                    adaptor.addChild(root_1, stream_instruction.nextTree());
+                    dbg.location(26,119);
+                    adaptor.addChild(root_2, stream_instruction.nextTree());
 
                 }
                 stream_instruction.reset();
-                dbg.location(22,103);
-                adaptor.addChild(root_1, stream_23.nextNode());
+
+                adaptor.addChild(root_1, root_2);
+                }
+                dbg.location(26,134);
+                adaptor.addChild(root_1, stream_27.nextNode());
 
                 adaptor.addChild(root_0, root_1);
                 }
@@ -323,7 +348,7 @@ public class compParser extends DebugParser {
         }
         finally {
         }
-        dbg.location(23, 17);
+        dbg.location(27, 17);
 
         }
         finally {
@@ -342,7 +367,7 @@ public class compParser extends DebugParser {
     };
 
     // $ANTLR start "declaration"
-    // /home/etudiants/karim2u/Bureau/COMPILATION/vincent66u/comp.g:24:1: declaration : ( dec_var | dec_func -> dec_func | dec_proc -> dec_proc );
+    // /home/katana/Desktop/compile/vincent66u/comp.g:28:1: declaration : ( dec_var | dec_func -> dec_func | dec_proc -> dec_proc );
     public final compParser.declaration_return declaration() throws RecognitionException {
         compParser.declaration_return retval = new compParser.declaration_return();
         retval.start = input.LT(1);
@@ -361,17 +386,17 @@ public class compParser extends DebugParser {
         try { dbg.enterRule(getGrammarFileName(), "declaration");
         if ( getRuleLevel()==0 ) {dbg.commence();}
         incRuleLevel();
-        dbg.location(24, 1);
+        dbg.location(28, 1);
 
         try {
-            // /home/etudiants/karim2u/Bureau/COMPILATION/vincent66u/comp.g:24:13: ( dec_var | dec_func -> dec_func | dec_proc -> dec_proc )
+            // /home/katana/Desktop/compile/vincent66u/comp.g:28:13: ( dec_var | dec_func -> dec_func | dec_proc -> dec_proc )
             int alt3=3;
             try { dbg.enterDecision(3);
 
             switch ( input.LA(1) ) {
-            case 25:
-            case 26:
-            case 27:
+            case 29:
+            case 30:
+            case 31:
                 {
                 alt3=1;
                 }
@@ -400,12 +425,12 @@ public class compParser extends DebugParser {
                 case 1 :
                     dbg.enterAlt(1);
 
-                    // /home/etudiants/karim2u/Bureau/COMPILATION/vincent66u/comp.g:24:16: dec_var
+                    // /home/katana/Desktop/compile/vincent66u/comp.g:28:16: dec_var
                     {
                     root_0 = (Object)adaptor.nil();
 
-                    dbg.location(24,16);
-                    pushFollow(FOLLOW_dec_var_in_declaration165);
+                    dbg.location(28,16);
+                    pushFollow(FOLLOW_dec_var_in_declaration191);
                     dec_var5=dec_var();
 
                     state._fsp--;
@@ -417,10 +442,10 @@ public class compParser extends DebugParser {
                 case 2 :
                     dbg.enterAlt(2);
 
-                    // /home/etudiants/karim2u/Bureau/COMPILATION/vincent66u/comp.g:25:5: dec_func
+                    // /home/katana/Desktop/compile/vincent66u/comp.g:29:5: dec_func
                     {
-                    dbg.location(25,5);
-                    pushFollow(FOLLOW_dec_func_in_declaration172);
+                    dbg.location(29,5);
+                    pushFollow(FOLLOW_dec_func_in_declaration198);
                     dec_func6=dec_func();
 
                     state._fsp--;
@@ -439,9 +464,9 @@ public class compParser extends DebugParser {
                     RewriteRuleSubtreeStream stream_retval=new RewriteRuleSubtreeStream(adaptor,"rule retval",retval!=null?retval.tree:null);
 
                     root_0 = (Object)adaptor.nil();
-                    // 25:14: -> dec_func
+                    // 29:14: -> dec_func
                     {
-                        dbg.location(25,16);
+                        dbg.location(29,16);
                         adaptor.addChild(root_0, stream_dec_func.nextTree());
 
                     }
@@ -452,10 +477,10 @@ public class compParser extends DebugParser {
                 case 3 :
                     dbg.enterAlt(3);
 
-                    // /home/etudiants/karim2u/Bureau/COMPILATION/vincent66u/comp.g:26:5: dec_proc
+                    // /home/katana/Desktop/compile/vincent66u/comp.g:30:5: dec_proc
                     {
-                    dbg.location(26,5);
-                    pushFollow(FOLLOW_dec_proc_in_declaration181);
+                    dbg.location(30,5);
+                    pushFollow(FOLLOW_dec_proc_in_declaration207);
                     dec_proc7=dec_proc();
 
                     state._fsp--;
@@ -474,9 +499,9 @@ public class compParser extends DebugParser {
                     RewriteRuleSubtreeStream stream_retval=new RewriteRuleSubtreeStream(adaptor,"rule retval",retval!=null?retval.tree:null);
 
                     root_0 = (Object)adaptor.nil();
-                    // 26:14: -> dec_proc
+                    // 30:14: -> dec_proc
                     {
-                        dbg.location(26,16);
+                        dbg.location(30,16);
                         adaptor.addChild(root_0, stream_dec_proc.nextTree());
 
                     }
@@ -500,7 +525,7 @@ public class compParser extends DebugParser {
         }
         finally {
         }
-        dbg.location(27, 1);
+        dbg.location(31, 1);
 
         }
         finally {
@@ -519,7 +544,7 @@ public class compParser extends DebugParser {
     };
 
     // $ANTLR start "dec_var"
-    // /home/etudiants/karim2u/Bureau/COMPILATION/vincent66u/comp.g:28:1: dec_var : type IDF ( ',' IDF )* -> ^( VAR type ( IDF )+ ) ;
+    // /home/katana/Desktop/compile/vincent66u/comp.g:32:1: dec_var : type IDF ( ',' IDF )* -> ^( VAR type ( IDF )+ ) ;
     public final compParser.dec_var_return dec_var() throws RecognitionException {
         compParser.dec_var_return retval = new compParser.dec_var_return();
         retval.start = input.LT(1);
@@ -535,33 +560,33 @@ public class compParser extends DebugParser {
         Object IDF9_tree=null;
         Object char_literal10_tree=null;
         Object IDF11_tree=null;
-        RewriteRuleTokenStream stream_24=new RewriteRuleTokenStream(adaptor,"token 24");
         RewriteRuleTokenStream stream_IDF=new RewriteRuleTokenStream(adaptor,"token IDF");
+        RewriteRuleTokenStream stream_28=new RewriteRuleTokenStream(adaptor,"token 28");
         RewriteRuleSubtreeStream stream_type=new RewriteRuleSubtreeStream(adaptor,"rule type");
         try { dbg.enterRule(getGrammarFileName(), "dec_var");
         if ( getRuleLevel()==0 ) {dbg.commence();}
         incRuleLevel();
-        dbg.location(28, 1);
+        dbg.location(32, 1);
 
         try {
-            // /home/etudiants/karim2u/Bureau/COMPILATION/vincent66u/comp.g:28:13: ( type IDF ( ',' IDF )* -> ^( VAR type ( IDF )+ ) )
+            // /home/katana/Desktop/compile/vincent66u/comp.g:32:13: ( type IDF ( ',' IDF )* -> ^( VAR type ( IDF )+ ) )
             dbg.enterAlt(1);
 
-            // /home/etudiants/karim2u/Bureau/COMPILATION/vincent66u/comp.g:28:16: type IDF ( ',' IDF )*
+            // /home/katana/Desktop/compile/vincent66u/comp.g:32:16: type IDF ( ',' IDF )*
             {
-            dbg.location(28,16);
-            pushFollow(FOLLOW_type_in_dec_var198);
+            dbg.location(32,16);
+            pushFollow(FOLLOW_type_in_dec_var224);
             type8=type();
 
             state._fsp--;
 
             stream_type.add(type8.getTree());
-            dbg.location(28,24);
-            IDF9=(Token)match(input,IDF,FOLLOW_IDF_in_dec_var203);  
+            dbg.location(32,24);
+            IDF9=(Token)match(input,IDF,FOLLOW_IDF_in_dec_var229);  
             stream_IDF.add(IDF9);
 
-            dbg.location(28,28);
-            // /home/etudiants/karim2u/Bureau/COMPILATION/vincent66u/comp.g:28:28: ( ',' IDF )*
+            dbg.location(32,28);
+            // /home/katana/Desktop/compile/vincent66u/comp.g:32:28: ( ',' IDF )*
             try { dbg.enterSubRule(4);
 
             loop4:
@@ -571,7 +596,7 @@ public class compParser extends DebugParser {
 
                 int LA4_0 = input.LA(1);
 
-                if ( (LA4_0==24) ) {
+                if ( (LA4_0==28) ) {
                     alt4=1;
                 }
 
@@ -582,14 +607,14 @@ public class compParser extends DebugParser {
             	case 1 :
             	    dbg.enterAlt(1);
 
-            	    // /home/etudiants/karim2u/Bureau/COMPILATION/vincent66u/comp.g:28:29: ',' IDF
+            	    // /home/katana/Desktop/compile/vincent66u/comp.g:32:29: ',' IDF
             	    {
-            	    dbg.location(28,29);
-            	    char_literal10=(Token)match(input,24,FOLLOW_24_in_dec_var206);  
-            	    stream_24.add(char_literal10);
+            	    dbg.location(32,29);
+            	    char_literal10=(Token)match(input,28,FOLLOW_28_in_dec_var232);  
+            	    stream_28.add(char_literal10);
 
-            	    dbg.location(28,35);
-            	    IDF11=(Token)match(input,IDF,FOLLOW_IDF_in_dec_var210);  
+            	    dbg.location(32,35);
+            	    IDF11=(Token)match(input,IDF,FOLLOW_IDF_in_dec_var236);  
             	    stream_IDF.add(IDF11);
 
 
@@ -615,23 +640,23 @@ public class compParser extends DebugParser {
             RewriteRuleSubtreeStream stream_retval=new RewriteRuleSubtreeStream(adaptor,"rule retval",retval!=null?retval.tree:null);
 
             root_0 = (Object)adaptor.nil();
-            // 28:40: -> ^( VAR type ( IDF )+ )
+            // 32:40: -> ^( VAR type ( IDF )+ )
             {
-                dbg.location(28,42);
-                // /home/etudiants/karim2u/Bureau/COMPILATION/vincent66u/comp.g:28:42: ^( VAR type ( IDF )+ )
+                dbg.location(32,42);
+                // /home/katana/Desktop/compile/vincent66u/comp.g:32:42: ^( VAR type ( IDF )+ )
                 {
                 Object root_1 = (Object)adaptor.nil();
-                dbg.location(28,44);
+                dbg.location(32,44);
                 root_1 = (Object)adaptor.becomeRoot((Object)adaptor.create(VAR, "VAR"), root_1);
 
-                dbg.location(28,48);
+                dbg.location(32,48);
                 adaptor.addChild(root_1, stream_type.nextTree());
-                dbg.location(28,53);
+                dbg.location(32,53);
                 if ( !(stream_IDF.hasNext()) ) {
                     throw new RewriteEarlyExitException();
                 }
                 while ( stream_IDF.hasNext() ) {
-                    dbg.location(28,53);
+                    dbg.location(32,53);
                     adaptor.addChild(root_1, stream_IDF.nextNode());
 
                 }
@@ -659,7 +684,7 @@ public class compParser extends DebugParser {
         }
         finally {
         }
-        dbg.location(29, 1);
+        dbg.location(33, 1);
 
         }
         finally {
@@ -678,7 +703,7 @@ public class compParser extends DebugParser {
     };
 
     // $ANTLR start "type"
-    // /home/etudiants/karim2u/Bureau/COMPILATION/vincent66u/comp.g:30:1: type : ( 'integer' -> ^( 'integer' ) | 'boolean' -> ^( 'boolean' ) | 'array' -> ^( 'array' ) );
+    // /home/katana/Desktop/compile/vincent66u/comp.g:34:1: type : ( 'integer' -> ^( 'integer' ) | 'boolean' -> ^( 'boolean' ) | 'array' -> ^( 'array' ) );
     public final compParser.type_return type() throws RecognitionException {
         compParser.type_return retval = new compParser.type_return();
         retval.start = input.LT(1);
@@ -692,32 +717,32 @@ public class compParser extends DebugParser {
         Object string_literal12_tree=null;
         Object string_literal13_tree=null;
         Object string_literal14_tree=null;
-        RewriteRuleTokenStream stream_25=new RewriteRuleTokenStream(adaptor,"token 25");
-        RewriteRuleTokenStream stream_26=new RewriteRuleTokenStream(adaptor,"token 26");
-        RewriteRuleTokenStream stream_27=new RewriteRuleTokenStream(adaptor,"token 27");
+        RewriteRuleTokenStream stream_30=new RewriteRuleTokenStream(adaptor,"token 30");
+        RewriteRuleTokenStream stream_31=new RewriteRuleTokenStream(adaptor,"token 31");
+        RewriteRuleTokenStream stream_29=new RewriteRuleTokenStream(adaptor,"token 29");
 
         try { dbg.enterRule(getGrammarFileName(), "type");
         if ( getRuleLevel()==0 ) {dbg.commence();}
         incRuleLevel();
-        dbg.location(30, 1);
+        dbg.location(34, 1);
 
         try {
-            // /home/etudiants/karim2u/Bureau/COMPILATION/vincent66u/comp.g:30:13: ( 'integer' -> ^( 'integer' ) | 'boolean' -> ^( 'boolean' ) | 'array' -> ^( 'array' ) )
+            // /home/katana/Desktop/compile/vincent66u/comp.g:34:13: ( 'integer' -> ^( 'integer' ) | 'boolean' -> ^( 'boolean' ) | 'array' -> ^( 'array' ) )
             int alt5=3;
             try { dbg.enterDecision(5);
 
             switch ( input.LA(1) ) {
-            case 25:
+            case 29:
                 {
                 alt5=1;
                 }
                 break;
-            case 26:
+            case 30:
                 {
                 alt5=2;
                 }
                 break;
-            case 27:
+            case 31:
                 {
                 alt5=3;
                 }
@@ -736,16 +761,16 @@ public class compParser extends DebugParser {
                 case 1 :
                     dbg.enterAlt(1);
 
-                    // /home/etudiants/karim2u/Bureau/COMPILATION/vincent66u/comp.g:30:15: 'integer'
+                    // /home/katana/Desktop/compile/vincent66u/comp.g:34:17: 'integer'
                     {
-                    dbg.location(30,15);
-                    string_literal12=(Token)match(input,25,FOLLOW_25_in_type237);  
-                    stream_25.add(string_literal12);
+                    dbg.location(34,17);
+                    string_literal12=(Token)match(input,29,FOLLOW_29_in_type265);  
+                    stream_29.add(string_literal12);
 
 
 
                     // AST REWRITE
-                    // elements: 25
+                    // elements: 29
                     // token labels: 
                     // rule labels: retval
                     // token list labels: 
@@ -755,14 +780,14 @@ public class compParser extends DebugParser {
                     RewriteRuleSubtreeStream stream_retval=new RewriteRuleSubtreeStream(adaptor,"rule retval",retval!=null?retval.tree:null);
 
                     root_0 = (Object)adaptor.nil();
-                    // 30:24: -> ^( 'integer' )
+                    // 34:26: -> ^( 'integer' )
                     {
-                        dbg.location(30,26);
-                        // /home/etudiants/karim2u/Bureau/COMPILATION/vincent66u/comp.g:30:26: ^( 'integer' )
+                        dbg.location(34,28);
+                        // /home/katana/Desktop/compile/vincent66u/comp.g:34:28: ^( 'integer' )
                         {
                         Object root_1 = (Object)adaptor.nil();
-                        dbg.location(30,28);
-                        root_1 = (Object)adaptor.becomeRoot(stream_25.nextNode(), root_1);
+                        dbg.location(34,30);
+                        root_1 = (Object)adaptor.becomeRoot(stream_29.nextNode(), root_1);
 
                         adaptor.addChild(root_0, root_1);
                         }
@@ -775,16 +800,16 @@ public class compParser extends DebugParser {
                 case 2 :
                     dbg.enterAlt(2);
 
-                    // /home/etudiants/karim2u/Bureau/COMPILATION/vincent66u/comp.g:31:27: 'boolean'
+                    // /home/katana/Desktop/compile/vincent66u/comp.g:35:27: 'boolean'
                     {
-                    dbg.location(31,27);
-                    string_literal13=(Token)match(input,26,FOLLOW_26_in_type271);  
-                    stream_26.add(string_literal13);
+                    dbg.location(35,27);
+                    string_literal13=(Token)match(input,30,FOLLOW_30_in_type299);  
+                    stream_30.add(string_literal13);
 
 
 
                     // AST REWRITE
-                    // elements: 26
+                    // elements: 30
                     // token labels: 
                     // rule labels: retval
                     // token list labels: 
@@ -794,14 +819,14 @@ public class compParser extends DebugParser {
                     RewriteRuleSubtreeStream stream_retval=new RewriteRuleSubtreeStream(adaptor,"rule retval",retval!=null?retval.tree:null);
 
                     root_0 = (Object)adaptor.nil();
-                    // 31:36: -> ^( 'boolean' )
+                    // 35:36: -> ^( 'boolean' )
                     {
-                        dbg.location(31,38);
-                        // /home/etudiants/karim2u/Bureau/COMPILATION/vincent66u/comp.g:31:38: ^( 'boolean' )
+                        dbg.location(35,38);
+                        // /home/katana/Desktop/compile/vincent66u/comp.g:35:38: ^( 'boolean' )
                         {
                         Object root_1 = (Object)adaptor.nil();
-                        dbg.location(31,40);
-                        root_1 = (Object)adaptor.becomeRoot(stream_26.nextNode(), root_1);
+                        dbg.location(35,40);
+                        root_1 = (Object)adaptor.becomeRoot(stream_30.nextNode(), root_1);
 
                         adaptor.addChild(root_0, root_1);
                         }
@@ -814,16 +839,16 @@ public class compParser extends DebugParser {
                 case 3 :
                     dbg.enterAlt(3);
 
-                    // /home/etudiants/karim2u/Bureau/COMPILATION/vincent66u/comp.g:32:28: 'array'
+                    // /home/katana/Desktop/compile/vincent66u/comp.g:36:28: 'array'
                     {
-                    dbg.location(32,28);
-                    string_literal14=(Token)match(input,27,FOLLOW_27_in_type306);  
-                    stream_27.add(string_literal14);
+                    dbg.location(36,28);
+                    string_literal14=(Token)match(input,31,FOLLOW_31_in_type334);  
+                    stream_31.add(string_literal14);
 
 
 
                     // AST REWRITE
-                    // elements: 27
+                    // elements: 31
                     // token labels: 
                     // rule labels: retval
                     // token list labels: 
@@ -833,14 +858,14 @@ public class compParser extends DebugParser {
                     RewriteRuleSubtreeStream stream_retval=new RewriteRuleSubtreeStream(adaptor,"rule retval",retval!=null?retval.tree:null);
 
                     root_0 = (Object)adaptor.nil();
-                    // 32:36: -> ^( 'array' )
+                    // 36:36: -> ^( 'array' )
                     {
-                        dbg.location(32,38);
-                        // /home/etudiants/karim2u/Bureau/COMPILATION/vincent66u/comp.g:32:38: ^( 'array' )
+                        dbg.location(36,38);
+                        // /home/katana/Desktop/compile/vincent66u/comp.g:36:38: ^( 'array' )
                         {
                         Object root_1 = (Object)adaptor.nil();
-                        dbg.location(32,40);
-                        root_1 = (Object)adaptor.becomeRoot(stream_27.nextNode(), root_1);
+                        dbg.location(36,40);
+                        root_1 = (Object)adaptor.becomeRoot(stream_31.nextNode(), root_1);
 
                         adaptor.addChild(root_0, root_1);
                         }
@@ -866,7 +891,7 @@ public class compParser extends DebugParser {
         }
         finally {
         }
-        dbg.location(32, 48);
+        dbg.location(36, 48);
 
         }
         finally {
@@ -885,7 +910,7 @@ public class compParser extends DebugParser {
     };
 
     // $ANTLR start "dec_func"
-    // /home/etudiants/karim2u/Bureau/COMPILATION/vincent66u/comp.g:33:1: dec_func : ent_func ( declaration )* ( instruction )+ 'end' -> ^( FONCTION ) ;
+    // /home/katana/Desktop/compile/vincent66u/comp.g:37:1: dec_func : ent_func ( declaration )* ( instruction )* 'end' -> ^( ent_func ( declaration )* ( instruction )+ 'end' ) ;
     public final compParser.dec_func_return dec_func() throws RecognitionException {
         compParser.dec_func_return retval = new compParser.dec_func_return();
         retval.start = input.LT(1);
@@ -901,30 +926,30 @@ public class compParser extends DebugParser {
 
 
         Object string_literal18_tree=null;
-        RewriteRuleTokenStream stream_23=new RewriteRuleTokenStream(adaptor,"token 23");
+        RewriteRuleTokenStream stream_27=new RewriteRuleTokenStream(adaptor,"token 27");
+        RewriteRuleSubtreeStream stream_declaration=new RewriteRuleSubtreeStream(adaptor,"rule declaration");
         RewriteRuleSubtreeStream stream_instruction=new RewriteRuleSubtreeStream(adaptor,"rule instruction");
         RewriteRuleSubtreeStream stream_ent_func=new RewriteRuleSubtreeStream(adaptor,"rule ent_func");
-        RewriteRuleSubtreeStream stream_declaration=new RewriteRuleSubtreeStream(adaptor,"rule declaration");
         try { dbg.enterRule(getGrammarFileName(), "dec_func");
         if ( getRuleLevel()==0 ) {dbg.commence();}
         incRuleLevel();
-        dbg.location(33, 1);
+        dbg.location(37, 1);
 
         try {
-            // /home/etudiants/karim2u/Bureau/COMPILATION/vincent66u/comp.g:33:13: ( ent_func ( declaration )* ( instruction )+ 'end' -> ^( FONCTION ) )
+            // /home/katana/Desktop/compile/vincent66u/comp.g:37:13: ( ent_func ( declaration )* ( instruction )* 'end' -> ^( ent_func ( declaration )* ( instruction )+ 'end' ) )
             dbg.enterAlt(1);
 
-            // /home/etudiants/karim2u/Bureau/COMPILATION/vincent66u/comp.g:33:16: ent_func ( declaration )* ( instruction )+ 'end'
+            // /home/katana/Desktop/compile/vincent66u/comp.g:37:16: ent_func ( declaration )* ( instruction )* 'end'
             {
-            dbg.location(33,16);
-            pushFollow(FOLLOW_ent_func_in_dec_func322);
+            dbg.location(37,16);
+            pushFollow(FOLLOW_ent_func_in_dec_func350);
             ent_func15=ent_func();
 
             state._fsp--;
 
             stream_ent_func.add(ent_func15.getTree());
-            dbg.location(33,26);
-            // /home/etudiants/karim2u/Bureau/COMPILATION/vincent66u/comp.g:33:26: ( declaration )*
+            dbg.location(37,26);
+            // /home/katana/Desktop/compile/vincent66u/comp.g:37:26: ( declaration )*
             try { dbg.enterSubRule(6);
 
             loop6:
@@ -934,7 +959,7 @@ public class compParser extends DebugParser {
 
                 int LA6_0 = input.LA(1);
 
-                if ( ((LA6_0>=FONCTION && LA6_0<=PROCEDURE)||(LA6_0>=25 && LA6_0<=27)) ) {
+                if ( ((LA6_0>=FONCTION && LA6_0<=PROCEDURE)||(LA6_0>=29 && LA6_0<=31)) ) {
                     alt6=1;
                 }
 
@@ -945,10 +970,10 @@ public class compParser extends DebugParser {
             	case 1 :
             	    dbg.enterAlt(1);
 
-            	    // /home/etudiants/karim2u/Bureau/COMPILATION/vincent66u/comp.g:33:27: declaration
+            	    // /home/katana/Desktop/compile/vincent66u/comp.g:37:27: declaration
             	    {
-            	    dbg.location(33,27);
-            	    pushFollow(FOLLOW_declaration_in_dec_func326);
+            	    dbg.location(37,27);
+            	    pushFollow(FOLLOW_declaration_in_dec_func354);
             	    declaration16=declaration();
 
             	    state._fsp--;
@@ -964,9 +989,8 @@ public class compParser extends DebugParser {
             } while (true);
             } finally {dbg.exitSubRule(6);}
 
-            dbg.location(33,43);
-            // /home/etudiants/karim2u/Bureau/COMPILATION/vincent66u/comp.g:33:43: ( instruction )+
-            int cnt7=0;
+            dbg.location(37,43);
+            // /home/katana/Desktop/compile/vincent66u/comp.g:37:43: ( instruction )*
             try { dbg.enterSubRule(7);
 
             loop7:
@@ -976,7 +1000,7 @@ public class compParser extends DebugParser {
 
                 int LA7_0 = input.LA(1);
 
-                if ( ((LA7_0>=RETOUR && LA7_0<=WRITE)||LA7_0==IDF||LA7_0==35||LA7_0==37||LA7_0==39) ) {
+                if ( ((LA7_0>=RETOUR && LA7_0<=WRITE)||LA7_0==IDF||LA7_0==39||LA7_0==41||LA7_0==43) ) {
                     alt7=1;
                 }
 
@@ -987,10 +1011,10 @@ public class compParser extends DebugParser {
             	case 1 :
             	    dbg.enterAlt(1);
 
-            	    // /home/etudiants/karim2u/Bureau/COMPILATION/vincent66u/comp.g:33:45: instruction
+            	    // /home/katana/Desktop/compile/vincent66u/comp.g:37:45: instruction
             	    {
-            	    dbg.location(33,45);
-            	    pushFollow(FOLLOW_instruction_in_dec_func334);
+            	    dbg.location(37,45);
+            	    pushFollow(FOLLOW_instruction_in_dec_func362);
             	    instruction17=instruction();
 
             	    state._fsp--;
@@ -1001,25 +1025,19 @@ public class compParser extends DebugParser {
             	    break;
 
             	default :
-            	    if ( cnt7 >= 1 ) break loop7;
-                        EarlyExitException eee =
-                            new EarlyExitException(7, input);
-                        dbg.recognitionException(eee);
-
-                        throw eee;
+            	    break loop7;
                 }
-                cnt7++;
             } while (true);
             } finally {dbg.exitSubRule(7);}
 
-            dbg.location(33,59);
-            string_literal18=(Token)match(input,23,FOLLOW_23_in_dec_func338);  
-            stream_23.add(string_literal18);
+            dbg.location(37,59);
+            string_literal18=(Token)match(input,27,FOLLOW_27_in_dec_func366);  
+            stream_27.add(string_literal18);
 
 
 
             // AST REWRITE
-            // elements: 
+            // elements: 27, instruction, declaration, ent_func
             // token labels: 
             // rule labels: retval
             // token list labels: 
@@ -1029,339 +1047,35 @@ public class compParser extends DebugParser {
             RewriteRuleSubtreeStream stream_retval=new RewriteRuleSubtreeStream(adaptor,"rule retval",retval!=null?retval.tree:null);
 
             root_0 = (Object)adaptor.nil();
-            // 33:65: -> ^( FONCTION )
+            // 37:65: -> ^( ent_func ( declaration )* ( instruction )+ 'end' )
             {
-                dbg.location(33,67);
-                // /home/etudiants/karim2u/Bureau/COMPILATION/vincent66u/comp.g:33:67: ^( FONCTION )
+                dbg.location(37,67);
+                // /home/katana/Desktop/compile/vincent66u/comp.g:37:67: ^( ent_func ( declaration )* ( instruction )+ 'end' )
                 {
                 Object root_1 = (Object)adaptor.nil();
-                dbg.location(33,69);
-                root_1 = (Object)adaptor.becomeRoot((Object)adaptor.create(FONCTION, "FONCTION"), root_1);
+                dbg.location(37,69);
+                root_1 = (Object)adaptor.becomeRoot(stream_ent_func.nextNode(), root_1);
 
-                adaptor.addChild(root_0, root_1);
+                dbg.location(37,78);
+                // /home/katana/Desktop/compile/vincent66u/comp.g:37:78: ( declaration )*
+                while ( stream_declaration.hasNext() ) {
+                    dbg.location(37,79);
+                    adaptor.addChild(root_1, stream_declaration.nextTree());
+
                 }
-
-            }
-
-            retval.tree = root_0;
-            }
-
-            retval.stop = input.LT(-1);
-
-            retval.tree = (Object)adaptor.rulePostProcessing(root_0);
-            adaptor.setTokenBoundaries(retval.tree, retval.start, retval.stop);
-
-        }
-        catch (RecognitionException re) {
-            reportError(re);
-            recover(input,re);
-    	retval.tree = (Object)adaptor.errorNode(input, retval.start, input.LT(-1), re);
-
-        }
-        finally {
-        }
-        dbg.location(35, 1);
-
-        }
-        finally {
-            dbg.exitRule(getGrammarFileName(), "dec_func");
-            decRuleLevel();
-            if ( getRuleLevel()==0 ) {dbg.terminate();}
-        }
-
-        return retval;
-    }
-    // $ANTLR end "dec_func"
-
-    public static class dec_proc_return extends ParserRuleReturnScope {
-        Object tree;
-        public Object getTree() { return tree; }
-    };
-
-    // $ANTLR start "dec_proc"
-    // /home/etudiants/karim2u/Bureau/COMPILATION/vincent66u/comp.g:36:1: dec_proc : ent_proc ( declaration )* ( instruction )+ 'end' -> ^( PROCEDURE ) ;
-    public final compParser.dec_proc_return dec_proc() throws RecognitionException {
-        compParser.dec_proc_return retval = new compParser.dec_proc_return();
-        retval.start = input.LT(1);
-
-        Object root_0 = null;
-
-        Token string_literal22=null;
-        compParser.ent_proc_return ent_proc19 = null;
-
-        compParser.declaration_return declaration20 = null;
-
-        compParser.instruction_return instruction21 = null;
-
-
-        Object string_literal22_tree=null;
-        RewriteRuleTokenStream stream_23=new RewriteRuleTokenStream(adaptor,"token 23");
-        RewriteRuleSubtreeStream stream_instruction=new RewriteRuleSubtreeStream(adaptor,"rule instruction");
-        RewriteRuleSubtreeStream stream_declaration=new RewriteRuleSubtreeStream(adaptor,"rule declaration");
-        RewriteRuleSubtreeStream stream_ent_proc=new RewriteRuleSubtreeStream(adaptor,"rule ent_proc");
-        try { dbg.enterRule(getGrammarFileName(), "dec_proc");
-        if ( getRuleLevel()==0 ) {dbg.commence();}
-        incRuleLevel();
-        dbg.location(36, 1);
-
-        try {
-            // /home/etudiants/karim2u/Bureau/COMPILATION/vincent66u/comp.g:36:13: ( ent_proc ( declaration )* ( instruction )+ 'end' -> ^( PROCEDURE ) )
-            dbg.enterAlt(1);
-
-            // /home/etudiants/karim2u/Bureau/COMPILATION/vincent66u/comp.g:36:16: ent_proc ( declaration )* ( instruction )+ 'end'
-            {
-            dbg.location(36,16);
-            pushFollow(FOLLOW_ent_proc_in_dec_proc356);
-            ent_proc19=ent_proc();
-
-            state._fsp--;
-
-            stream_ent_proc.add(ent_proc19.getTree());
-            dbg.location(36,26);
-            // /home/etudiants/karim2u/Bureau/COMPILATION/vincent66u/comp.g:36:26: ( declaration )*
-            try { dbg.enterSubRule(8);
-
-            loop8:
-            do {
-                int alt8=2;
-                try { dbg.enterDecision(8);
-
-                int LA8_0 = input.LA(1);
-
-                if ( ((LA8_0>=FONCTION && LA8_0<=PROCEDURE)||(LA8_0>=25 && LA8_0<=27)) ) {
-                    alt8=1;
+                stream_declaration.reset();
+                dbg.location(37,93);
+                if ( !(stream_instruction.hasNext()) ) {
+                    throw new RewriteEarlyExitException();
                 }
+                while ( stream_instruction.hasNext() ) {
+                    dbg.location(37,94);
+                    adaptor.addChild(root_1, stream_instruction.nextTree());
 
-
-                } finally {dbg.exitDecision(8);}
-
-                switch (alt8) {
-            	case 1 :
-            	    dbg.enterAlt(1);
-
-            	    // /home/etudiants/karim2u/Bureau/COMPILATION/vincent66u/comp.g:36:27: declaration
-            	    {
-            	    dbg.location(36,27);
-            	    pushFollow(FOLLOW_declaration_in_dec_proc360);
-            	    declaration20=declaration();
-
-            	    state._fsp--;
-
-            	    stream_declaration.add(declaration20.getTree());
-
-            	    }
-            	    break;
-
-            	default :
-            	    break loop8;
                 }
-            } while (true);
-            } finally {dbg.exitSubRule(8);}
-
-            dbg.location(36,43);
-            // /home/etudiants/karim2u/Bureau/COMPILATION/vincent66u/comp.g:36:43: ( instruction )+
-            int cnt9=0;
-            try { dbg.enterSubRule(9);
-
-            loop9:
-            do {
-                int alt9=2;
-                try { dbg.enterDecision(9);
-
-                int LA9_0 = input.LA(1);
-
-                if ( ((LA9_0>=RETOUR && LA9_0<=WRITE)||LA9_0==IDF||LA9_0==35||LA9_0==37||LA9_0==39) ) {
-                    alt9=1;
-                }
-
-
-                } finally {dbg.exitDecision(9);}
-
-                switch (alt9) {
-            	case 1 :
-            	    dbg.enterAlt(1);
-
-            	    // /home/etudiants/karim2u/Bureau/COMPILATION/vincent66u/comp.g:36:45: instruction
-            	    {
-            	    dbg.location(36,45);
-            	    pushFollow(FOLLOW_instruction_in_dec_proc368);
-            	    instruction21=instruction();
-
-            	    state._fsp--;
-
-            	    stream_instruction.add(instruction21.getTree());
-
-            	    }
-            	    break;
-
-            	default :
-            	    if ( cnt9 >= 1 ) break loop9;
-                        EarlyExitException eee =
-                            new EarlyExitException(9, input);
-                        dbg.recognitionException(eee);
-
-                        throw eee;
-                }
-                cnt9++;
-            } while (true);
-            } finally {dbg.exitSubRule(9);}
-
-            dbg.location(36,59);
-            string_literal22=(Token)match(input,23,FOLLOW_23_in_dec_proc372);  
-            stream_23.add(string_literal22);
-
-
-
-            // AST REWRITE
-            // elements: 
-            // token labels: 
-            // rule labels: retval
-            // token list labels: 
-            // rule list labels: 
-            // wildcard labels: 
-            retval.tree = root_0;
-            RewriteRuleSubtreeStream stream_retval=new RewriteRuleSubtreeStream(adaptor,"rule retval",retval!=null?retval.tree:null);
-
-            root_0 = (Object)adaptor.nil();
-            // 36:65: -> ^( PROCEDURE )
-            {
-                dbg.location(36,67);
-                // /home/etudiants/karim2u/Bureau/COMPILATION/vincent66u/comp.g:36:67: ^( PROCEDURE )
-                {
-                Object root_1 = (Object)adaptor.nil();
-                dbg.location(36,69);
-                root_1 = (Object)adaptor.becomeRoot((Object)adaptor.create(PROCEDURE, "PROCEDURE"), root_1);
-
-                adaptor.addChild(root_0, root_1);
-                }
-
-            }
-
-            retval.tree = root_0;
-            }
-
-            retval.stop = input.LT(-1);
-
-            retval.tree = (Object)adaptor.rulePostProcessing(root_0);
-            adaptor.setTokenBoundaries(retval.tree, retval.start, retval.stop);
-
-        }
-        catch (RecognitionException re) {
-            reportError(re);
-            recover(input,re);
-    	retval.tree = (Object)adaptor.errorNode(input, retval.start, input.LT(-1), re);
-
-        }
-        finally {
-        }
-        dbg.location(37, 1);
-
-        }
-        finally {
-            dbg.exitRule(getGrammarFileName(), "dec_proc");
-            decRuleLevel();
-            if ( getRuleLevel()==0 ) {dbg.terminate();}
-        }
-
-        return retval;
-    }
-    // $ANTLR end "dec_proc"
-
-    public static class ent_func_return extends ParserRuleReturnScope {
-        Object tree;
-        public Object getTree() { return tree; }
-    };
-
-    // $ANTLR start "ent_func"
-    // /home/etudiants/karim2u/Bureau/COMPILATION/vincent66u/comp.g:38:1: ent_func : 'function' type IDF param -> ^( 'function' ^( type IDF param ) ) ;
-    public final compParser.ent_func_return ent_func() throws RecognitionException {
-        compParser.ent_func_return retval = new compParser.ent_func_return();
-        retval.start = input.LT(1);
-
-        Object root_0 = null;
-
-        Token string_literal23=null;
-        Token IDF25=null;
-        compParser.type_return type24 = null;
-
-        compParser.param_return param26 = null;
-
-
-        Object string_literal23_tree=null;
-        Object IDF25_tree=null;
-        RewriteRuleTokenStream stream_FONCTION=new RewriteRuleTokenStream(adaptor,"token FONCTION");
-        RewriteRuleTokenStream stream_IDF=new RewriteRuleTokenStream(adaptor,"token IDF");
-        RewriteRuleSubtreeStream stream_param=new RewriteRuleSubtreeStream(adaptor,"rule param");
-        RewriteRuleSubtreeStream stream_type=new RewriteRuleSubtreeStream(adaptor,"rule type");
-        try { dbg.enterRule(getGrammarFileName(), "ent_func");
-        if ( getRuleLevel()==0 ) {dbg.commence();}
-        incRuleLevel();
-        dbg.location(38, 1);
-
-        try {
-            // /home/etudiants/karim2u/Bureau/COMPILATION/vincent66u/comp.g:38:13: ( 'function' type IDF param -> ^( 'function' ^( type IDF param ) ) )
-            dbg.enterAlt(1);
-
-            // /home/etudiants/karim2u/Bureau/COMPILATION/vincent66u/comp.g:38:15: 'function' type IDF param
-            {
-            dbg.location(38,15);
-            string_literal23=(Token)match(input,FONCTION,FOLLOW_FONCTION_in_ent_func388);  
-            stream_FONCTION.add(string_literal23);
-
-            dbg.location(38,29);
-            pushFollow(FOLLOW_type_in_ent_func393);
-            type24=type();
-
-            state._fsp--;
-
-            stream_type.add(type24.getTree());
-            dbg.location(38,36);
-            IDF25=(Token)match(input,IDF,FOLLOW_IDF_in_ent_func397);  
-            stream_IDF.add(IDF25);
-
-            dbg.location(38,42);
-            pushFollow(FOLLOW_param_in_ent_func401);
-            param26=param();
-
-            state._fsp--;
-
-            stream_param.add(param26.getTree());
-
-
-            // AST REWRITE
-            // elements: type, param, IDF, FONCTION
-            // token labels: 
-            // rule labels: retval
-            // token list labels: 
-            // rule list labels: 
-            // wildcard labels: 
-            retval.tree = root_0;
-            RewriteRuleSubtreeStream stream_retval=new RewriteRuleSubtreeStream(adaptor,"rule retval",retval!=null?retval.tree:null);
-
-            root_0 = (Object)adaptor.nil();
-            // 38:48: -> ^( 'function' ^( type IDF param ) )
-            {
-                dbg.location(38,51);
-                // /home/etudiants/karim2u/Bureau/COMPILATION/vincent66u/comp.g:38:51: ^( 'function' ^( type IDF param ) )
-                {
-                Object root_1 = (Object)adaptor.nil();
-                dbg.location(38,53);
-                root_1 = (Object)adaptor.becomeRoot(stream_FONCTION.nextNode(), root_1);
-
-                dbg.location(38,64);
-                // /home/etudiants/karim2u/Bureau/COMPILATION/vincent66u/comp.g:38:64: ^( type IDF param )
-                {
-                Object root_2 = (Object)adaptor.nil();
-                dbg.location(38,66);
-                root_2 = (Object)adaptor.becomeRoot(stream_type.nextNode(), root_2);
-
-                dbg.location(38,71);
-                adaptor.addChild(root_2, stream_IDF.nextNode());
-                dbg.location(38,75);
-                adaptor.addChild(root_2, stream_param.nextTree());
-
-                adaptor.addChild(root_1, root_2);
-                }
+                stream_instruction.reset();
+                dbg.location(37,108);
+                adaptor.addChild(root_1, stream_27.nextNode());
 
                 adaptor.addChild(root_0, root_1);
                 }
@@ -1389,68 +1103,149 @@ public class compParser extends DebugParser {
 
         }
         finally {
-            dbg.exitRule(getGrammarFileName(), "ent_func");
+            dbg.exitRule(getGrammarFileName(), "dec_func");
             decRuleLevel();
             if ( getRuleLevel()==0 ) {dbg.terminate();}
         }
 
         return retval;
     }
-    // $ANTLR end "ent_func"
+    // $ANTLR end "dec_func"
 
-    public static class ent_proc_return extends ParserRuleReturnScope {
+    public static class dec_proc_return extends ParserRuleReturnScope {
         Object tree;
         public Object getTree() { return tree; }
     };
 
-    // $ANTLR start "ent_proc"
-    // /home/etudiants/karim2u/Bureau/COMPILATION/vincent66u/comp.g:40:1: ent_proc : 'procedure' IDF param -> ^( 'procedure' ^( IDF param ) ) ;
-    public final compParser.ent_proc_return ent_proc() throws RecognitionException {
-        compParser.ent_proc_return retval = new compParser.ent_proc_return();
+    // $ANTLR start "dec_proc"
+    // /home/katana/Desktop/compile/vincent66u/comp.g:40:1: dec_proc : ent_proc ( declaration )* ( instruction )* 'end' -> ^( ent_proc ( declaration )* ( instruction )+ 'end' ) ;
+    public final compParser.dec_proc_return dec_proc() throws RecognitionException {
+        compParser.dec_proc_return retval = new compParser.dec_proc_return();
         retval.start = input.LT(1);
 
         Object root_0 = null;
 
-        Token string_literal27=null;
-        Token IDF28=null;
-        compParser.param_return param29 = null;
+        Token string_literal22=null;
+        compParser.ent_proc_return ent_proc19 = null;
+
+        compParser.declaration_return declaration20 = null;
+
+        compParser.instruction_return instruction21 = null;
 
 
-        Object string_literal27_tree=null;
-        Object IDF28_tree=null;
-        RewriteRuleTokenStream stream_PROCEDURE=new RewriteRuleTokenStream(adaptor,"token PROCEDURE");
-        RewriteRuleTokenStream stream_IDF=new RewriteRuleTokenStream(adaptor,"token IDF");
-        RewriteRuleSubtreeStream stream_param=new RewriteRuleSubtreeStream(adaptor,"rule param");
-        try { dbg.enterRule(getGrammarFileName(), "ent_proc");
+        Object string_literal22_tree=null;
+        RewriteRuleTokenStream stream_27=new RewriteRuleTokenStream(adaptor,"token 27");
+        RewriteRuleSubtreeStream stream_declaration=new RewriteRuleSubtreeStream(adaptor,"rule declaration");
+        RewriteRuleSubtreeStream stream_instruction=new RewriteRuleSubtreeStream(adaptor,"rule instruction");
+        RewriteRuleSubtreeStream stream_ent_proc=new RewriteRuleSubtreeStream(adaptor,"rule ent_proc");
+        try { dbg.enterRule(getGrammarFileName(), "dec_proc");
         if ( getRuleLevel()==0 ) {dbg.commence();}
         incRuleLevel();
         dbg.location(40, 1);
 
         try {
-            // /home/etudiants/karim2u/Bureau/COMPILATION/vincent66u/comp.g:40:13: ( 'procedure' IDF param -> ^( 'procedure' ^( IDF param ) ) )
+            // /home/katana/Desktop/compile/vincent66u/comp.g:40:13: ( ent_proc ( declaration )* ( instruction )* 'end' -> ^( ent_proc ( declaration )* ( instruction )+ 'end' ) )
             dbg.enterAlt(1);
 
-            // /home/etudiants/karim2u/Bureau/COMPILATION/vincent66u/comp.g:40:15: 'procedure' IDF param
+            // /home/katana/Desktop/compile/vincent66u/comp.g:40:16: ent_proc ( declaration )* ( instruction )* 'end'
             {
-            dbg.location(40,15);
-            string_literal27=(Token)match(input,PROCEDURE,FOLLOW_PROCEDURE_in_ent_proc426);  
-            stream_PROCEDURE.add(string_literal27);
-
-            dbg.location(40,29);
-            IDF28=(Token)match(input,IDF,FOLLOW_IDF_in_ent_proc430);  
-            stream_IDF.add(IDF28);
-
-            dbg.location(40,34);
-            pushFollow(FOLLOW_param_in_ent_proc433);
-            param29=param();
+            dbg.location(40,16);
+            pushFollow(FOLLOW_ent_proc_in_dec_proc396);
+            ent_proc19=ent_proc();
 
             state._fsp--;
 
-            stream_param.add(param29.getTree());
+            stream_ent_proc.add(ent_proc19.getTree());
+            dbg.location(40,26);
+            // /home/katana/Desktop/compile/vincent66u/comp.g:40:26: ( declaration )*
+            try { dbg.enterSubRule(8);
+
+            loop8:
+            do {
+                int alt8=2;
+                try { dbg.enterDecision(8);
+
+                int LA8_0 = input.LA(1);
+
+                if ( ((LA8_0>=FONCTION && LA8_0<=PROCEDURE)||(LA8_0>=29 && LA8_0<=31)) ) {
+                    alt8=1;
+                }
+
+
+                } finally {dbg.exitDecision(8);}
+
+                switch (alt8) {
+            	case 1 :
+            	    dbg.enterAlt(1);
+
+            	    // /home/katana/Desktop/compile/vincent66u/comp.g:40:27: declaration
+            	    {
+            	    dbg.location(40,27);
+            	    pushFollow(FOLLOW_declaration_in_dec_proc400);
+            	    declaration20=declaration();
+
+            	    state._fsp--;
+
+            	    stream_declaration.add(declaration20.getTree());
+
+            	    }
+            	    break;
+
+            	default :
+            	    break loop8;
+                }
+            } while (true);
+            } finally {dbg.exitSubRule(8);}
+
+            dbg.location(40,43);
+            // /home/katana/Desktop/compile/vincent66u/comp.g:40:43: ( instruction )*
+            try { dbg.enterSubRule(9);
+
+            loop9:
+            do {
+                int alt9=2;
+                try { dbg.enterDecision(9);
+
+                int LA9_0 = input.LA(1);
+
+                if ( ((LA9_0>=RETOUR && LA9_0<=WRITE)||LA9_0==IDF||LA9_0==39||LA9_0==41||LA9_0==43) ) {
+                    alt9=1;
+                }
+
+
+                } finally {dbg.exitDecision(9);}
+
+                switch (alt9) {
+            	case 1 :
+            	    dbg.enterAlt(1);
+
+            	    // /home/katana/Desktop/compile/vincent66u/comp.g:40:45: instruction
+            	    {
+            	    dbg.location(40,45);
+            	    pushFollow(FOLLOW_instruction_in_dec_proc408);
+            	    instruction21=instruction();
+
+            	    state._fsp--;
+
+            	    stream_instruction.add(instruction21.getTree());
+
+            	    }
+            	    break;
+
+            	default :
+            	    break loop9;
+                }
+            } while (true);
+            } finally {dbg.exitSubRule(9);}
+
+            dbg.location(40,59);
+            string_literal22=(Token)match(input,27,FOLLOW_27_in_dec_proc412);  
+            stream_27.add(string_literal22);
+
 
 
             // AST REWRITE
-            // elements: PROCEDURE, IDF, param
+            // elements: instruction, 27, declaration, ent_proc
             // token labels: 
             // rule labels: retval
             // token list labels: 
@@ -1460,27 +1255,35 @@ public class compParser extends DebugParser {
             RewriteRuleSubtreeStream stream_retval=new RewriteRuleSubtreeStream(adaptor,"rule retval",retval!=null?retval.tree:null);
 
             root_0 = (Object)adaptor.nil();
-            // 40:40: -> ^( 'procedure' ^( IDF param ) )
+            // 40:65: -> ^( ent_proc ( declaration )* ( instruction )+ 'end' )
             {
-                dbg.location(40,42);
-                // /home/etudiants/karim2u/Bureau/COMPILATION/vincent66u/comp.g:40:42: ^( 'procedure' ^( IDF param ) )
+                dbg.location(40,67);
+                // /home/katana/Desktop/compile/vincent66u/comp.g:40:67: ^( ent_proc ( declaration )* ( instruction )+ 'end' )
                 {
                 Object root_1 = (Object)adaptor.nil();
-                dbg.location(40,44);
-                root_1 = (Object)adaptor.becomeRoot(stream_PROCEDURE.nextNode(), root_1);
+                dbg.location(40,69);
+                root_1 = (Object)adaptor.becomeRoot(stream_ent_proc.nextNode(), root_1);
 
-                dbg.location(40,56);
-                // /home/etudiants/karim2u/Bureau/COMPILATION/vincent66u/comp.g:40:56: ^( IDF param )
-                {
-                Object root_2 = (Object)adaptor.nil();
-                dbg.location(40,58);
-                root_2 = (Object)adaptor.becomeRoot(stream_IDF.nextNode(), root_2);
+                dbg.location(40,78);
+                // /home/katana/Desktop/compile/vincent66u/comp.g:40:78: ( declaration )*
+                while ( stream_declaration.hasNext() ) {
+                    dbg.location(40,79);
+                    adaptor.addChild(root_1, stream_declaration.nextTree());
 
-                dbg.location(40,62);
-                adaptor.addChild(root_2, stream_param.nextTree());
-
-                adaptor.addChild(root_1, root_2);
                 }
+                stream_declaration.reset();
+                dbg.location(40,93);
+                if ( !(stream_instruction.hasNext()) ) {
+                    throw new RewriteEarlyExitException();
+                }
+                while ( stream_instruction.hasNext() ) {
+                    dbg.location(40,94);
+                    adaptor.addChild(root_1, stream_instruction.nextTree());
+
+                }
+                stream_instruction.reset();
+                dbg.location(40,108);
+                adaptor.addChild(root_1, stream_27.nextNode());
 
                 adaptor.addChild(root_0, root_1);
                 }
@@ -1508,75 +1311,78 @@ public class compParser extends DebugParser {
 
         }
         finally {
-            dbg.exitRule(getGrammarFileName(), "ent_proc");
+            dbg.exitRule(getGrammarFileName(), "dec_proc");
             decRuleLevel();
             if ( getRuleLevel()==0 ) {dbg.terminate();}
         }
 
         return retval;
     }
-    // $ANTLR end "ent_proc"
+    // $ANTLR end "dec_proc"
 
-    public static class array_return extends ParserRuleReturnScope {
+    public static class ent_func_return extends ParserRuleReturnScope {
         Object tree;
         public Object getTree() { return tree; }
     };
 
-    // $ANTLR start "array"
-    // /home/etudiants/karim2u/Bureau/COMPILATION/vincent66u/comp.g:42:1: array : 'array' '[' bounds ']' -> ^( 'array' ^( bounds ) ) ;
-    public final compParser.array_return array() throws RecognitionException {
-        compParser.array_return retval = new compParser.array_return();
+    // $ANTLR start "ent_func"
+    // /home/katana/Desktop/compile/vincent66u/comp.g:42:1: ent_func : 'function' type IDF param -> ^( FONCTION IDF type param ) ;
+    public final compParser.ent_func_return ent_func() throws RecognitionException {
+        compParser.ent_func_return retval = new compParser.ent_func_return();
         retval.start = input.LT(1);
 
         Object root_0 = null;
 
-        Token string_literal30=null;
-        Token char_literal31=null;
-        Token char_literal33=null;
-        compParser.bounds_return bounds32 = null;
+        Token string_literal23=null;
+        Token IDF25=null;
+        compParser.type_return type24 = null;
+
+        compParser.param_return param26 = null;
 
 
-        Object string_literal30_tree=null;
-        Object char_literal31_tree=null;
-        Object char_literal33_tree=null;
-        RewriteRuleTokenStream stream_27=new RewriteRuleTokenStream(adaptor,"token 27");
-        RewriteRuleTokenStream stream_28=new RewriteRuleTokenStream(adaptor,"token 28");
-        RewriteRuleTokenStream stream_29=new RewriteRuleTokenStream(adaptor,"token 29");
-        RewriteRuleSubtreeStream stream_bounds=new RewriteRuleSubtreeStream(adaptor,"rule bounds");
-        try { dbg.enterRule(getGrammarFileName(), "array");
+        Object string_literal23_tree=null;
+        Object IDF25_tree=null;
+        RewriteRuleTokenStream stream_IDF=new RewriteRuleTokenStream(adaptor,"token IDF");
+        RewriteRuleTokenStream stream_FONCTION=new RewriteRuleTokenStream(adaptor,"token FONCTION");
+        RewriteRuleSubtreeStream stream_param=new RewriteRuleSubtreeStream(adaptor,"rule param");
+        RewriteRuleSubtreeStream stream_type=new RewriteRuleSubtreeStream(adaptor,"rule type");
+        try { dbg.enterRule(getGrammarFileName(), "ent_func");
         if ( getRuleLevel()==0 ) {dbg.commence();}
         incRuleLevel();
         dbg.location(42, 1);
 
         try {
-            // /home/etudiants/karim2u/Bureau/COMPILATION/vincent66u/comp.g:42:12: ( 'array' '[' bounds ']' -> ^( 'array' ^( bounds ) ) )
+            // /home/katana/Desktop/compile/vincent66u/comp.g:42:13: ( 'function' type IDF param -> ^( FONCTION IDF type param ) )
             dbg.enterAlt(1);
 
-            // /home/etudiants/karim2u/Bureau/COMPILATION/vincent66u/comp.g:42:14: 'array' '[' bounds ']'
+            // /home/katana/Desktop/compile/vincent66u/comp.g:42:15: 'function' type IDF param
             {
-            dbg.location(42,14);
-            string_literal30=(Token)match(input,27,FOLLOW_27_in_array457);  
-            stream_27.add(string_literal30);
+            dbg.location(42,15);
+            string_literal23=(Token)match(input,FONCTION,FOLLOW_FONCTION_in_ent_func440);  
+            stream_FONCTION.add(string_literal23);
 
-            dbg.location(42,22);
-            char_literal31=(Token)match(input,28,FOLLOW_28_in_array459);  
-            stream_28.add(char_literal31);
-
-            dbg.location(42,26);
-            pushFollow(FOLLOW_bounds_in_array461);
-            bounds32=bounds();
+            dbg.location(42,29);
+            pushFollow(FOLLOW_type_in_ent_func445);
+            type24=type();
 
             state._fsp--;
 
-            stream_bounds.add(bounds32.getTree());
-            dbg.location(42,32);
-            char_literal33=(Token)match(input,29,FOLLOW_29_in_array462);  
-            stream_29.add(char_literal33);
+            stream_type.add(type24.getTree());
+            dbg.location(42,36);
+            IDF25=(Token)match(input,IDF,FOLLOW_IDF_in_ent_func449);  
+            stream_IDF.add(IDF25);
 
+            dbg.location(42,42);
+            pushFollow(FOLLOW_param_in_ent_func453);
+            param26=param();
+
+            state._fsp--;
+
+            stream_param.add(param26.getTree());
 
 
             // AST REWRITE
-            // elements: 27, bounds
+            // elements: param, IDF, type
             // token labels: 
             // rule labels: retval
             // token list labels: 
@@ -1586,24 +1392,21 @@ public class compParser extends DebugParser {
             RewriteRuleSubtreeStream stream_retval=new RewriteRuleSubtreeStream(adaptor,"rule retval",retval!=null?retval.tree:null);
 
             root_0 = (Object)adaptor.nil();
-            // 42:36: -> ^( 'array' ^( bounds ) )
+            // 42:48: -> ^( FONCTION IDF type param )
             {
-                dbg.location(42,39);
-                // /home/etudiants/karim2u/Bureau/COMPILATION/vincent66u/comp.g:42:39: ^( 'array' ^( bounds ) )
+                dbg.location(42,51);
+                // /home/katana/Desktop/compile/vincent66u/comp.g:42:51: ^( FONCTION IDF type param )
                 {
                 Object root_1 = (Object)adaptor.nil();
-                dbg.location(42,41);
-                root_1 = (Object)adaptor.becomeRoot(stream_27.nextNode(), root_1);
+                dbg.location(42,53);
+                root_1 = (Object)adaptor.becomeRoot((Object)adaptor.create(FONCTION, "FONCTION"), root_1);
 
-                dbg.location(42,49);
-                // /home/etudiants/karim2u/Bureau/COMPILATION/vincent66u/comp.g:42:49: ^( bounds )
-                {
-                Object root_2 = (Object)adaptor.nil();
-                dbg.location(42,51);
-                root_2 = (Object)adaptor.becomeRoot(stream_bounds.nextNode(), root_2);
-
-                adaptor.addChild(root_1, root_2);
-                }
+                dbg.location(42,62);
+                adaptor.addChild(root_1, stream_IDF.nextNode());
+                dbg.location(42,66);
+                adaptor.addChild(root_1, stream_type.nextTree());
+                dbg.location(42,72);
+                adaptor.addChild(root_1, stream_param.nextTree());
 
                 adaptor.addChild(root_0, root_1);
                 }
@@ -1631,6 +1434,233 @@ public class compParser extends DebugParser {
 
         }
         finally {
+            dbg.exitRule(getGrammarFileName(), "ent_func");
+            decRuleLevel();
+            if ( getRuleLevel()==0 ) {dbg.terminate();}
+        }
+
+        return retval;
+    }
+    // $ANTLR end "ent_func"
+
+    public static class ent_proc_return extends ParserRuleReturnScope {
+        Object tree;
+        public Object getTree() { return tree; }
+    };
+
+    // $ANTLR start "ent_proc"
+    // /home/katana/Desktop/compile/vincent66u/comp.g:44:1: ent_proc : 'procedure' IDF param -> ^( PROCEDURE IDF param ) ;
+    public final compParser.ent_proc_return ent_proc() throws RecognitionException {
+        compParser.ent_proc_return retval = new compParser.ent_proc_return();
+        retval.start = input.LT(1);
+
+        Object root_0 = null;
+
+        Token string_literal27=null;
+        Token IDF28=null;
+        compParser.param_return param29 = null;
+
+
+        Object string_literal27_tree=null;
+        Object IDF28_tree=null;
+        RewriteRuleTokenStream stream_IDF=new RewriteRuleTokenStream(adaptor,"token IDF");
+        RewriteRuleTokenStream stream_PROCEDURE=new RewriteRuleTokenStream(adaptor,"token PROCEDURE");
+        RewriteRuleSubtreeStream stream_param=new RewriteRuleSubtreeStream(adaptor,"rule param");
+        try { dbg.enterRule(getGrammarFileName(), "ent_proc");
+        if ( getRuleLevel()==0 ) {dbg.commence();}
+        incRuleLevel();
+        dbg.location(44, 1);
+
+        try {
+            // /home/katana/Desktop/compile/vincent66u/comp.g:44:13: ( 'procedure' IDF param -> ^( PROCEDURE IDF param ) )
+            dbg.enterAlt(1);
+
+            // /home/katana/Desktop/compile/vincent66u/comp.g:44:15: 'procedure' IDF param
+            {
+            dbg.location(44,15);
+            string_literal27=(Token)match(input,PROCEDURE,FOLLOW_PROCEDURE_in_ent_proc477);  
+            stream_PROCEDURE.add(string_literal27);
+
+            dbg.location(44,29);
+            IDF28=(Token)match(input,IDF,FOLLOW_IDF_in_ent_proc481);  
+            stream_IDF.add(IDF28);
+
+            dbg.location(44,34);
+            pushFollow(FOLLOW_param_in_ent_proc484);
+            param29=param();
+
+            state._fsp--;
+
+            stream_param.add(param29.getTree());
+
+
+            // AST REWRITE
+            // elements: param, IDF
+            // token labels: 
+            // rule labels: retval
+            // token list labels: 
+            // rule list labels: 
+            // wildcard labels: 
+            retval.tree = root_0;
+            RewriteRuleSubtreeStream stream_retval=new RewriteRuleSubtreeStream(adaptor,"rule retval",retval!=null?retval.tree:null);
+
+            root_0 = (Object)adaptor.nil();
+            // 44:40: -> ^( PROCEDURE IDF param )
+            {
+                dbg.location(44,42);
+                // /home/katana/Desktop/compile/vincent66u/comp.g:44:42: ^( PROCEDURE IDF param )
+                {
+                Object root_1 = (Object)adaptor.nil();
+                dbg.location(44,44);
+                root_1 = (Object)adaptor.becomeRoot((Object)adaptor.create(PROCEDURE, "PROCEDURE"), root_1);
+
+                dbg.location(44,54);
+                adaptor.addChild(root_1, stream_IDF.nextNode());
+                dbg.location(44,58);
+                adaptor.addChild(root_1, stream_param.nextTree());
+
+                adaptor.addChild(root_0, root_1);
+                }
+
+            }
+
+            retval.tree = root_0;
+            }
+
+            retval.stop = input.LT(-1);
+
+            retval.tree = (Object)adaptor.rulePostProcessing(root_0);
+            adaptor.setTokenBoundaries(retval.tree, retval.start, retval.stop);
+
+        }
+        catch (RecognitionException re) {
+            reportError(re);
+            recover(input,re);
+    	retval.tree = (Object)adaptor.errorNode(input, retval.start, input.LT(-1), re);
+
+        }
+        finally {
+        }
+        dbg.location(45, 1);
+
+        }
+        finally {
+            dbg.exitRule(getGrammarFileName(), "ent_proc");
+            decRuleLevel();
+            if ( getRuleLevel()==0 ) {dbg.terminate();}
+        }
+
+        return retval;
+    }
+    // $ANTLR end "ent_proc"
+
+    public static class array_return extends ParserRuleReturnScope {
+        Object tree;
+        public Object getTree() { return tree; }
+    };
+
+    // $ANTLR start "array"
+    // /home/katana/Desktop/compile/vincent66u/comp.g:46:1: array : 'array' '[' bounds ']' -> ^( ARRAY bounds ) ;
+    public final compParser.array_return array() throws RecognitionException {
+        compParser.array_return retval = new compParser.array_return();
+        retval.start = input.LT(1);
+
+        Object root_0 = null;
+
+        Token string_literal30=null;
+        Token char_literal31=null;
+        Token char_literal33=null;
+        compParser.bounds_return bounds32 = null;
+
+
+        Object string_literal30_tree=null;
+        Object char_literal31_tree=null;
+        Object char_literal33_tree=null;
+        RewriteRuleTokenStream stream_32=new RewriteRuleTokenStream(adaptor,"token 32");
+        RewriteRuleTokenStream stream_31=new RewriteRuleTokenStream(adaptor,"token 31");
+        RewriteRuleTokenStream stream_33=new RewriteRuleTokenStream(adaptor,"token 33");
+        RewriteRuleSubtreeStream stream_bounds=new RewriteRuleSubtreeStream(adaptor,"rule bounds");
+        try { dbg.enterRule(getGrammarFileName(), "array");
+        if ( getRuleLevel()==0 ) {dbg.commence();}
+        incRuleLevel();
+        dbg.location(46, 1);
+
+        try {
+            // /home/katana/Desktop/compile/vincent66u/comp.g:46:12: ( 'array' '[' bounds ']' -> ^( ARRAY bounds ) )
+            dbg.enterAlt(1);
+
+            // /home/katana/Desktop/compile/vincent66u/comp.g:46:14: 'array' '[' bounds ']'
+            {
+            dbg.location(46,14);
+            string_literal30=(Token)match(input,31,FOLLOW_31_in_array506);  
+            stream_31.add(string_literal30);
+
+            dbg.location(46,22);
+            char_literal31=(Token)match(input,32,FOLLOW_32_in_array508);  
+            stream_32.add(char_literal31);
+
+            dbg.location(46,26);
+            pushFollow(FOLLOW_bounds_in_array510);
+            bounds32=bounds();
+
+            state._fsp--;
+
+            stream_bounds.add(bounds32.getTree());
+            dbg.location(46,32);
+            char_literal33=(Token)match(input,33,FOLLOW_33_in_array511);  
+            stream_33.add(char_literal33);
+
+
+
+            // AST REWRITE
+            // elements: bounds
+            // token labels: 
+            // rule labels: retval
+            // token list labels: 
+            // rule list labels: 
+            // wildcard labels: 
+            retval.tree = root_0;
+            RewriteRuleSubtreeStream stream_retval=new RewriteRuleSubtreeStream(adaptor,"rule retval",retval!=null?retval.tree:null);
+
+            root_0 = (Object)adaptor.nil();
+            // 46:36: -> ^( ARRAY bounds )
+            {
+                dbg.location(46,39);
+                // /home/katana/Desktop/compile/vincent66u/comp.g:46:39: ^( ARRAY bounds )
+                {
+                Object root_1 = (Object)adaptor.nil();
+                dbg.location(46,41);
+                root_1 = (Object)adaptor.becomeRoot((Object)adaptor.create(ARRAY, "ARRAY"), root_1);
+
+                dbg.location(46,47);
+                adaptor.addChild(root_1, stream_bounds.nextTree());
+
+                adaptor.addChild(root_0, root_1);
+                }
+
+            }
+
+            retval.tree = root_0;
+            }
+
+            retval.stop = input.LT(-1);
+
+            retval.tree = (Object)adaptor.rulePostProcessing(root_0);
+            adaptor.setTokenBoundaries(retval.tree, retval.start, retval.stop);
+
+        }
+        catch (RecognitionException re) {
+            reportError(re);
+            recover(input,re);
+    	retval.tree = (Object)adaptor.errorNode(input, retval.start, input.LT(-1), re);
+
+        }
+        finally {
+        }
+        dbg.location(47, 1);
+
+        }
+        finally {
             dbg.exitRule(getGrammarFileName(), "array");
             decRuleLevel();
             if ( getRuleLevel()==0 ) {dbg.terminate();}
@@ -1646,7 +1676,7 @@ public class compParser extends DebugParser {
     };
 
     // $ANTLR start "bounds"
-    // /home/etudiants/karim2u/Bureau/COMPILATION/vincent66u/comp.g:44:1: bounds : CST_ENT '..' CST_ENT ( ',' CST_ENT '..' CST_ENT )* ;
+    // /home/katana/Desktop/compile/vincent66u/comp.g:48:1: bounds : CST_ENT '..' CST_ENT ( ',' CST_ENT '..' CST_ENT )* ;
     public final compParser.bounds_return bounds() throws RecognitionException {
         compParser.bounds_return retval = new compParser.bounds_return();
         retval.start = input.LT(1);
@@ -1672,33 +1702,33 @@ public class compParser extends DebugParser {
         try { dbg.enterRule(getGrammarFileName(), "bounds");
         if ( getRuleLevel()==0 ) {dbg.commence();}
         incRuleLevel();
-        dbg.location(44, 1);
+        dbg.location(48, 1);
 
         try {
-            // /home/etudiants/karim2u/Bureau/COMPILATION/vincent66u/comp.g:44:13: ( CST_ENT '..' CST_ENT ( ',' CST_ENT '..' CST_ENT )* )
+            // /home/katana/Desktop/compile/vincent66u/comp.g:48:13: ( CST_ENT '..' CST_ENT ( ',' CST_ENT '..' CST_ENT )* )
             dbg.enterAlt(1);
 
-            // /home/etudiants/karim2u/Bureau/COMPILATION/vincent66u/comp.g:44:16: CST_ENT '..' CST_ENT ( ',' CST_ENT '..' CST_ENT )*
+            // /home/katana/Desktop/compile/vincent66u/comp.g:48:16: CST_ENT '..' CST_ENT ( ',' CST_ENT '..' CST_ENT )*
             {
             root_0 = (Object)adaptor.nil();
 
-            dbg.location(44,16);
-            CST_ENT34=(Token)match(input,CST_ENT,FOLLOW_CST_ENT_in_bounds486); 
+            dbg.location(48,16);
+            CST_ENT34=(Token)match(input,CST_ENT,FOLLOW_CST_ENT_in_bounds533); 
             CST_ENT34_tree = (Object)adaptor.create(CST_ENT34);
             adaptor.addChild(root_0, CST_ENT34_tree);
 
-            dbg.location(44,24);
-            string_literal35=(Token)match(input,30,FOLLOW_30_in_bounds488); 
+            dbg.location(48,24);
+            string_literal35=(Token)match(input,34,FOLLOW_34_in_bounds535); 
             string_literal35_tree = (Object)adaptor.create(string_literal35);
             adaptor.addChild(root_0, string_literal35_tree);
 
-            dbg.location(44,29);
-            CST_ENT36=(Token)match(input,CST_ENT,FOLLOW_CST_ENT_in_bounds490); 
+            dbg.location(48,29);
+            CST_ENT36=(Token)match(input,CST_ENT,FOLLOW_CST_ENT_in_bounds537); 
             CST_ENT36_tree = (Object)adaptor.create(CST_ENT36);
             adaptor.addChild(root_0, CST_ENT36_tree);
 
-            dbg.location(44,37);
-            // /home/etudiants/karim2u/Bureau/COMPILATION/vincent66u/comp.g:44:37: ( ',' CST_ENT '..' CST_ENT )*
+            dbg.location(48,37);
+            // /home/katana/Desktop/compile/vincent66u/comp.g:48:37: ( ',' CST_ENT '..' CST_ENT )*
             try { dbg.enterSubRule(10);
 
             loop10:
@@ -1708,7 +1738,7 @@ public class compParser extends DebugParser {
 
                 int LA10_0 = input.LA(1);
 
-                if ( (LA10_0==24) ) {
+                if ( (LA10_0==28) ) {
                     alt10=1;
                 }
 
@@ -1719,25 +1749,25 @@ public class compParser extends DebugParser {
             	case 1 :
             	    dbg.enterAlt(1);
 
-            	    // /home/etudiants/karim2u/Bureau/COMPILATION/vincent66u/comp.g:44:38: ',' CST_ENT '..' CST_ENT
+            	    // /home/katana/Desktop/compile/vincent66u/comp.g:48:38: ',' CST_ENT '..' CST_ENT
             	    {
-            	    dbg.location(44,38);
-            	    char_literal37=(Token)match(input,24,FOLLOW_24_in_bounds493); 
+            	    dbg.location(48,38);
+            	    char_literal37=(Token)match(input,28,FOLLOW_28_in_bounds540); 
             	    char_literal37_tree = (Object)adaptor.create(char_literal37);
             	    adaptor.addChild(root_0, char_literal37_tree);
 
-            	    dbg.location(44,43);
-            	    CST_ENT38=(Token)match(input,CST_ENT,FOLLOW_CST_ENT_in_bounds496); 
+            	    dbg.location(48,43);
+            	    CST_ENT38=(Token)match(input,CST_ENT,FOLLOW_CST_ENT_in_bounds543); 
             	    CST_ENT38_tree = (Object)adaptor.create(CST_ENT38);
             	    adaptor.addChild(root_0, CST_ENT38_tree);
 
-            	    dbg.location(44,51);
-            	    string_literal39=(Token)match(input,30,FOLLOW_30_in_bounds498); 
+            	    dbg.location(48,51);
+            	    string_literal39=(Token)match(input,34,FOLLOW_34_in_bounds545); 
             	    string_literal39_tree = (Object)adaptor.create(string_literal39);
             	    adaptor.addChild(root_0, string_literal39_tree);
 
-            	    dbg.location(44,57);
-            	    CST_ENT40=(Token)match(input,CST_ENT,FOLLOW_CST_ENT_in_bounds501); 
+            	    dbg.location(48,57);
+            	    CST_ENT40=(Token)match(input,CST_ENT,FOLLOW_CST_ENT_in_bounds548); 
             	    CST_ENT40_tree = (Object)adaptor.create(CST_ENT40);
             	    adaptor.addChild(root_0, CST_ENT40_tree);
 
@@ -1768,7 +1798,7 @@ public class compParser extends DebugParser {
         }
         finally {
         }
-        dbg.location(44, 67);
+        dbg.location(48, 67);
 
         }
         finally {
@@ -1787,7 +1817,7 @@ public class compParser extends DebugParser {
     };
 
     // $ANTLR start "param"
-    // /home/etudiants/karim2u/Bureau/COMPILATION/vincent66u/comp.g:45:1: param : '(' ( formal ( ',' formal )* )? ')' -> ^( PARAM ( formal )* ) ;
+    // /home/katana/Desktop/compile/vincent66u/comp.g:49:1: param : '(' ( formal ( ',' formal )* )? ')' -> ^( LISTPARAM ( formal )* ) ;
     public final compParser.param_return param() throws RecognitionException {
         compParser.param_return retval = new compParser.param_return();
         retval.start = input.LT(1);
@@ -1805,34 +1835,34 @@ public class compParser extends DebugParser {
         Object char_literal41_tree=null;
         Object char_literal43_tree=null;
         Object char_literal45_tree=null;
-        RewriteRuleTokenStream stream_24=new RewriteRuleTokenStream(adaptor,"token 24");
-        RewriteRuleTokenStream stream_31=new RewriteRuleTokenStream(adaptor,"token 31");
-        RewriteRuleTokenStream stream_32=new RewriteRuleTokenStream(adaptor,"token 32");
+        RewriteRuleTokenStream stream_35=new RewriteRuleTokenStream(adaptor,"token 35");
+        RewriteRuleTokenStream stream_36=new RewriteRuleTokenStream(adaptor,"token 36");
+        RewriteRuleTokenStream stream_28=new RewriteRuleTokenStream(adaptor,"token 28");
         RewriteRuleSubtreeStream stream_formal=new RewriteRuleSubtreeStream(adaptor,"rule formal");
         try { dbg.enterRule(getGrammarFileName(), "param");
         if ( getRuleLevel()==0 ) {dbg.commence();}
         incRuleLevel();
-        dbg.location(45, 1);
+        dbg.location(49, 1);
 
         try {
-            // /home/etudiants/karim2u/Bureau/COMPILATION/vincent66u/comp.g:45:13: ( '(' ( formal ( ',' formal )* )? ')' -> ^( PARAM ( formal )* ) )
+            // /home/katana/Desktop/compile/vincent66u/comp.g:49:13: ( '(' ( formal ( ',' formal )* )? ')' -> ^( LISTPARAM ( formal )* ) )
             dbg.enterAlt(1);
 
-            // /home/etudiants/karim2u/Bureau/COMPILATION/vincent66u/comp.g:45:16: '(' ( formal ( ',' formal )* )? ')'
+            // /home/katana/Desktop/compile/vincent66u/comp.g:49:16: '(' ( formal ( ',' formal )* )? ')'
             {
-            dbg.location(45,16);
-            char_literal41=(Token)match(input,31,FOLLOW_31_in_param518);  
-            stream_31.add(char_literal41);
+            dbg.location(49,16);
+            char_literal41=(Token)match(input,35,FOLLOW_35_in_param565);  
+            stream_35.add(char_literal41);
 
-            dbg.location(45,20);
-            // /home/etudiants/karim2u/Bureau/COMPILATION/vincent66u/comp.g:45:20: ( formal ( ',' formal )* )?
+            dbg.location(49,20);
+            // /home/katana/Desktop/compile/vincent66u/comp.g:49:20: ( formal ( ',' formal )* )?
             int alt12=2;
             try { dbg.enterSubRule(12);
             try { dbg.enterDecision(12);
 
             int LA12_0 = input.LA(1);
 
-            if ( (LA12_0==IDF||LA12_0==33) ) {
+            if ( (LA12_0==IDF||LA12_0==37) ) {
                 alt12=1;
             }
             } finally {dbg.exitDecision(12);}
@@ -1841,17 +1871,17 @@ public class compParser extends DebugParser {
                 case 1 :
                     dbg.enterAlt(1);
 
-                    // /home/etudiants/karim2u/Bureau/COMPILATION/vincent66u/comp.g:45:21: formal ( ',' formal )*
+                    // /home/katana/Desktop/compile/vincent66u/comp.g:49:21: formal ( ',' formal )*
                     {
-                    dbg.location(45,21);
-                    pushFollow(FOLLOW_formal_in_param521);
+                    dbg.location(49,21);
+                    pushFollow(FOLLOW_formal_in_param568);
                     formal42=formal();
 
                     state._fsp--;
 
                     stream_formal.add(formal42.getTree());
-                    dbg.location(45,30);
-                    // /home/etudiants/karim2u/Bureau/COMPILATION/vincent66u/comp.g:45:30: ( ',' formal )*
+                    dbg.location(49,30);
+                    // /home/katana/Desktop/compile/vincent66u/comp.g:49:30: ( ',' formal )*
                     try { dbg.enterSubRule(11);
 
                     loop11:
@@ -1861,7 +1891,7 @@ public class compParser extends DebugParser {
 
                         int LA11_0 = input.LA(1);
 
-                        if ( (LA11_0==24) ) {
+                        if ( (LA11_0==28) ) {
                             alt11=1;
                         }
 
@@ -1872,14 +1902,14 @@ public class compParser extends DebugParser {
                     	case 1 :
                     	    dbg.enterAlt(1);
 
-                    	    // /home/etudiants/karim2u/Bureau/COMPILATION/vincent66u/comp.g:45:31: ',' formal
+                    	    // /home/katana/Desktop/compile/vincent66u/comp.g:49:31: ',' formal
                     	    {
-                    	    dbg.location(45,31);
-                    	    char_literal43=(Token)match(input,24,FOLLOW_24_in_param526);  
-                    	    stream_24.add(char_literal43);
+                    	    dbg.location(49,31);
+                    	    char_literal43=(Token)match(input,28,FOLLOW_28_in_param573);  
+                    	    stream_28.add(char_literal43);
 
-                    	    dbg.location(45,35);
-                    	    pushFollow(FOLLOW_formal_in_param528);
+                    	    dbg.location(49,35);
+                    	    pushFollow(FOLLOW_formal_in_param575);
                     	    formal44=formal();
 
                     	    state._fsp--;
@@ -1902,9 +1932,9 @@ public class compParser extends DebugParser {
             }
             } finally {dbg.exitSubRule(12);}
 
-            dbg.location(45,49);
-            char_literal45=(Token)match(input,32,FOLLOW_32_in_param537);  
-            stream_32.add(char_literal45);
+            dbg.location(49,49);
+            char_literal45=(Token)match(input,36,FOLLOW_36_in_param584);  
+            stream_36.add(char_literal45);
 
 
 
@@ -1919,19 +1949,19 @@ public class compParser extends DebugParser {
             RewriteRuleSubtreeStream stream_retval=new RewriteRuleSubtreeStream(adaptor,"rule retval",retval!=null?retval.tree:null);
 
             root_0 = (Object)adaptor.nil();
-            // 45:52: -> ^( PARAM ( formal )* )
+            // 49:52: -> ^( LISTPARAM ( formal )* )
             {
-                dbg.location(45,54);
-                // /home/etudiants/karim2u/Bureau/COMPILATION/vincent66u/comp.g:45:54: ^( PARAM ( formal )* )
+                dbg.location(49,54);
+                // /home/katana/Desktop/compile/vincent66u/comp.g:49:54: ^( LISTPARAM ( formal )* )
                 {
                 Object root_1 = (Object)adaptor.nil();
-                dbg.location(45,56);
-                root_1 = (Object)adaptor.becomeRoot((Object)adaptor.create(PARAM, "PARAM"), root_1);
+                dbg.location(49,56);
+                root_1 = (Object)adaptor.becomeRoot((Object)adaptor.create(LISTPARAM, "LISTPARAM"), root_1);
 
-                dbg.location(45,62);
-                // /home/etudiants/karim2u/Bureau/COMPILATION/vincent66u/comp.g:45:62: ( formal )*
+                dbg.location(49,66);
+                // /home/katana/Desktop/compile/vincent66u/comp.g:49:66: ( formal )*
                 while ( stream_formal.hasNext() ) {
-                    dbg.location(45,62);
+                    dbg.location(49,66);
                     adaptor.addChild(root_1, stream_formal.nextTree());
 
                 }
@@ -1959,7 +1989,7 @@ public class compParser extends DebugParser {
         }
         finally {
         }
-        dbg.location(46, 1);
+        dbg.location(50, 1);
 
         }
         finally {
@@ -1978,7 +2008,7 @@ public class compParser extends DebugParser {
     };
 
     // $ANTLR start "formal"
-    // /home/etudiants/karim2u/Bureau/COMPILATION/vincent66u/comp.g:48:1: formal : ( 'adr' )? IDF ':' type ;
+    // /home/katana/Desktop/compile/vincent66u/comp.g:52:1: formal : ( 'adr' )? IDF ':' type -> ^( PARAM IDF type ) ;
     public final compParser.formal_return formal() throws RecognitionException {
         compParser.formal_return retval = new compParser.formal_return();
         retval.start = input.LT(1);
@@ -1994,29 +2024,30 @@ public class compParser extends DebugParser {
         Object string_literal46_tree=null;
         Object IDF47_tree=null;
         Object char_literal48_tree=null;
-
+        RewriteRuleTokenStream stream_IDF=new RewriteRuleTokenStream(adaptor,"token IDF");
+        RewriteRuleTokenStream stream_37=new RewriteRuleTokenStream(adaptor,"token 37");
+        RewriteRuleTokenStream stream_38=new RewriteRuleTokenStream(adaptor,"token 38");
+        RewriteRuleSubtreeStream stream_type=new RewriteRuleSubtreeStream(adaptor,"rule type");
         try { dbg.enterRule(getGrammarFileName(), "formal");
         if ( getRuleLevel()==0 ) {dbg.commence();}
         incRuleLevel();
-        dbg.location(48, 1);
+        dbg.location(52, 1);
 
         try {
-            // /home/etudiants/karim2u/Bureau/COMPILATION/vincent66u/comp.g:48:13: ( ( 'adr' )? IDF ':' type )
+            // /home/katana/Desktop/compile/vincent66u/comp.g:52:13: ( ( 'adr' )? IDF ':' type -> ^( PARAM IDF type ) )
             dbg.enterAlt(1);
 
-            // /home/etudiants/karim2u/Bureau/COMPILATION/vincent66u/comp.g:48:15: ( 'adr' )? IDF ':' type
+            // /home/katana/Desktop/compile/vincent66u/comp.g:52:15: ( 'adr' )? IDF ':' type
             {
-            root_0 = (Object)adaptor.nil();
-
-            dbg.location(48,15);
-            // /home/etudiants/karim2u/Bureau/COMPILATION/vincent66u/comp.g:48:15: ( 'adr' )?
+            dbg.location(52,15);
+            // /home/katana/Desktop/compile/vincent66u/comp.g:52:15: ( 'adr' )?
             int alt13=2;
             try { dbg.enterSubRule(13);
             try { dbg.enterDecision(13);
 
             int LA13_0 = input.LA(1);
 
-            if ( (LA13_0==33) ) {
+            if ( (LA13_0==37) ) {
                 alt13=1;
             }
             } finally {dbg.exitDecision(13);}
@@ -2025,12 +2056,11 @@ public class compParser extends DebugParser {
                 case 1 :
                     dbg.enterAlt(1);
 
-                    // /home/etudiants/karim2u/Bureau/COMPILATION/vincent66u/comp.g:48:16: 'adr'
+                    // /home/katana/Desktop/compile/vincent66u/comp.g:52:16: 'adr'
                     {
-                    dbg.location(48,16);
-                    string_literal46=(Token)match(input,33,FOLLOW_33_in_formal559); 
-                    string_literal46_tree = (Object)adaptor.create(string_literal46);
-                    adaptor.addChild(root_0, string_literal46_tree);
+                    dbg.location(52,16);
+                    string_literal46=(Token)match(input,37,FOLLOW_37_in_formal607);  
+                    stream_37.add(string_literal46);
 
 
                     }
@@ -2039,24 +2069,54 @@ public class compParser extends DebugParser {
             }
             } finally {dbg.exitSubRule(13);}
 
-            dbg.location(48,24);
-            IDF47=(Token)match(input,IDF,FOLLOW_IDF_in_formal563); 
-            IDF47_tree = (Object)adaptor.create(IDF47);
-            adaptor.addChild(root_0, IDF47_tree);
+            dbg.location(52,24);
+            IDF47=(Token)match(input,IDF,FOLLOW_IDF_in_formal611);  
+            stream_IDF.add(IDF47);
 
-            dbg.location(48,30);
-            char_literal48=(Token)match(input,34,FOLLOW_34_in_formal567); 
-            char_literal48_tree = (Object)adaptor.create(char_literal48);
-            adaptor.addChild(root_0, char_literal48_tree);
+            dbg.location(52,30);
+            char_literal48=(Token)match(input,38,FOLLOW_38_in_formal615);  
+            stream_38.add(char_literal48);
 
-            dbg.location(48,36);
-            pushFollow(FOLLOW_type_in_formal571);
+            dbg.location(52,36);
+            pushFollow(FOLLOW_type_in_formal619);
             type49=type();
 
             state._fsp--;
 
-            adaptor.addChild(root_0, type49.getTree());
+            stream_type.add(type49.getTree());
 
+
+            // AST REWRITE
+            // elements: IDF, type
+            // token labels: 
+            // rule labels: retval
+            // token list labels: 
+            // rule list labels: 
+            // wildcard labels: 
+            retval.tree = root_0;
+            RewriteRuleSubtreeStream stream_retval=new RewriteRuleSubtreeStream(adaptor,"rule retval",retval!=null?retval.tree:null);
+
+            root_0 = (Object)adaptor.nil();
+            // 52:43: -> ^( PARAM IDF type )
+            {
+                dbg.location(52,45);
+                // /home/katana/Desktop/compile/vincent66u/comp.g:52:45: ^( PARAM IDF type )
+                {
+                Object root_1 = (Object)adaptor.nil();
+                dbg.location(52,47);
+                root_1 = (Object)adaptor.becomeRoot((Object)adaptor.create(PARAM, "PARAM"), root_1);
+
+                dbg.location(52,53);
+                adaptor.addChild(root_1, stream_IDF.nextNode());
+                dbg.location(52,57);
+                adaptor.addChild(root_1, stream_type.nextTree());
+
+                adaptor.addChild(root_0, root_1);
+                }
+
+            }
+
+            retval.tree = root_0;
             }
 
             retval.stop = input.LT(-1);
@@ -2073,7 +2133,7 @@ public class compParser extends DebugParser {
         }
         finally {
         }
-        dbg.location(48, 43);
+        dbg.location(52, 62);
 
         }
         finally {
@@ -2092,7 +2152,7 @@ public class compParser extends DebugParser {
     };
 
     // $ANTLR start "instruction"
-    // /home/etudiants/karim2u/Bureau/COMPILATION/vincent66u/comp.g:49:1: instruction : ( affectation -> affectation | bloc -> bloc | iteration -> iteration | condition -> condition | retour -> retour | read -> read | write -> write | appel -> appel );
+    // /home/katana/Desktop/compile/vincent66u/comp.g:53:1: instruction : ( affectation -> affectation | bloc -> bloc | iteration -> iteration | condition -> condition | retour -> retour | read -> read | write -> write | appel -> appel );
     public final compParser.instruction_return instruction() throws RecognitionException {
         compParser.instruction_return retval = new compParser.instruction_return();
         retval.start = input.LT(1);
@@ -2117,20 +2177,20 @@ public class compParser extends DebugParser {
 
 
         RewriteRuleSubtreeStream stream_bloc=new RewriteRuleSubtreeStream(adaptor,"rule bloc");
+        RewriteRuleSubtreeStream stream_retour=new RewriteRuleSubtreeStream(adaptor,"rule retour");
         RewriteRuleSubtreeStream stream_condition=new RewriteRuleSubtreeStream(adaptor,"rule condition");
+        RewriteRuleSubtreeStream stream_write=new RewriteRuleSubtreeStream(adaptor,"rule write");
         RewriteRuleSubtreeStream stream_read=new RewriteRuleSubtreeStream(adaptor,"rule read");
         RewriteRuleSubtreeStream stream_appel=new RewriteRuleSubtreeStream(adaptor,"rule appel");
-        RewriteRuleSubtreeStream stream_retour=new RewriteRuleSubtreeStream(adaptor,"rule retour");
-        RewriteRuleSubtreeStream stream_iteration=new RewriteRuleSubtreeStream(adaptor,"rule iteration");
-        RewriteRuleSubtreeStream stream_write=new RewriteRuleSubtreeStream(adaptor,"rule write");
         RewriteRuleSubtreeStream stream_affectation=new RewriteRuleSubtreeStream(adaptor,"rule affectation");
+        RewriteRuleSubtreeStream stream_iteration=new RewriteRuleSubtreeStream(adaptor,"rule iteration");
         try { dbg.enterRule(getGrammarFileName(), "instruction");
         if ( getRuleLevel()==0 ) {dbg.commence();}
         incRuleLevel();
-        dbg.location(49, 1);
+        dbg.location(53, 1);
 
         try {
-            // /home/etudiants/karim2u/Bureau/COMPILATION/vincent66u/comp.g:49:13: ( affectation -> affectation | bloc -> bloc | iteration -> iteration | condition -> condition | retour -> retour | read -> read | write -> write | appel -> appel )
+            // /home/katana/Desktop/compile/vincent66u/comp.g:53:13: ( affectation -> affectation | bloc -> bloc | iteration -> iteration | condition -> condition | retour -> retour | read -> read | write -> write | appel -> appel )
             int alt14=8;
             try { dbg.enterDecision(14);
 
@@ -2148,10 +2208,10 @@ public class compParser extends DebugParser {
                 case 1 :
                     dbg.enterAlt(1);
 
-                    // /home/etudiants/karim2u/Bureau/COMPILATION/vincent66u/comp.g:49:17: affectation
+                    // /home/katana/Desktop/compile/vincent66u/comp.g:53:17: affectation
                     {
-                    dbg.location(49,17);
-                    pushFollow(FOLLOW_affectation_in_instruction583);
+                    dbg.location(53,17);
+                    pushFollow(FOLLOW_affectation_in_instruction639);
                     affectation50=affectation();
 
                     state._fsp--;
@@ -2170,9 +2230,9 @@ public class compParser extends DebugParser {
                     RewriteRuleSubtreeStream stream_retval=new RewriteRuleSubtreeStream(adaptor,"rule retval",retval!=null?retval.tree:null);
 
                     root_0 = (Object)adaptor.nil();
-                    // 49:29: -> affectation
+                    // 53:29: -> affectation
                     {
-                        dbg.location(49,31);
+                        dbg.location(53,31);
                         adaptor.addChild(root_0, stream_affectation.nextTree());
 
                     }
@@ -2183,10 +2243,10 @@ public class compParser extends DebugParser {
                 case 2 :
                     dbg.enterAlt(2);
 
-                    // /home/etudiants/karim2u/Bureau/COMPILATION/vincent66u/comp.g:50:10: bloc
+                    // /home/katana/Desktop/compile/vincent66u/comp.g:54:10: bloc
                     {
-                    dbg.location(50,10);
-                    pushFollow(FOLLOW_bloc_in_instruction597);
+                    dbg.location(54,10);
+                    pushFollow(FOLLOW_bloc_in_instruction653);
                     bloc51=bloc();
 
                     state._fsp--;
@@ -2205,9 +2265,9 @@ public class compParser extends DebugParser {
                     RewriteRuleSubtreeStream stream_retval=new RewriteRuleSubtreeStream(adaptor,"rule retval",retval!=null?retval.tree:null);
 
                     root_0 = (Object)adaptor.nil();
-                    // 50:16: -> bloc
+                    // 54:16: -> bloc
                     {
-                        dbg.location(50,18);
+                        dbg.location(54,18);
                         adaptor.addChild(root_0, stream_bloc.nextTree());
 
                     }
@@ -2218,10 +2278,10 @@ public class compParser extends DebugParser {
                 case 3 :
                     dbg.enterAlt(3);
 
-                    // /home/etudiants/karim2u/Bureau/COMPILATION/vincent66u/comp.g:51:10: iteration
+                    // /home/katana/Desktop/compile/vincent66u/comp.g:55:10: iteration
                     {
-                    dbg.location(51,10);
-                    pushFollow(FOLLOW_iteration_in_instruction612);
+                    dbg.location(55,10);
+                    pushFollow(FOLLOW_iteration_in_instruction668);
                     iteration52=iteration();
 
                     state._fsp--;
@@ -2240,9 +2300,9 @@ public class compParser extends DebugParser {
                     RewriteRuleSubtreeStream stream_retval=new RewriteRuleSubtreeStream(adaptor,"rule retval",retval!=null?retval.tree:null);
 
                     root_0 = (Object)adaptor.nil();
-                    // 51:20: -> iteration
+                    // 55:20: -> iteration
                     {
-                        dbg.location(51,22);
+                        dbg.location(55,22);
                         adaptor.addChild(root_0, stream_iteration.nextTree());
 
                     }
@@ -2253,10 +2313,10 @@ public class compParser extends DebugParser {
                 case 4 :
                     dbg.enterAlt(4);
 
-                    // /home/etudiants/karim2u/Bureau/COMPILATION/vincent66u/comp.g:52:10: condition
+                    // /home/katana/Desktop/compile/vincent66u/comp.g:56:10: condition
                     {
-                    dbg.location(52,10);
-                    pushFollow(FOLLOW_condition_in_instruction626);
+                    dbg.location(56,10);
+                    pushFollow(FOLLOW_condition_in_instruction682);
                     condition53=condition();
 
                     state._fsp--;
@@ -2275,9 +2335,9 @@ public class compParser extends DebugParser {
                     RewriteRuleSubtreeStream stream_retval=new RewriteRuleSubtreeStream(adaptor,"rule retval",retval!=null?retval.tree:null);
 
                     root_0 = (Object)adaptor.nil();
-                    // 52:20: -> condition
+                    // 56:20: -> condition
                     {
-                        dbg.location(52,22);
+                        dbg.location(56,22);
                         adaptor.addChild(root_0, stream_condition.nextTree());
 
                     }
@@ -2288,10 +2348,10 @@ public class compParser extends DebugParser {
                 case 5 :
                     dbg.enterAlt(5);
 
-                    // /home/etudiants/karim2u/Bureau/COMPILATION/vincent66u/comp.g:53:10: retour
+                    // /home/katana/Desktop/compile/vincent66u/comp.g:57:10: retour
                     {
-                    dbg.location(53,10);
-                    pushFollow(FOLLOW_retour_in_instruction640);
+                    dbg.location(57,10);
+                    pushFollow(FOLLOW_retour_in_instruction696);
                     retour54=retour();
 
                     state._fsp--;
@@ -2310,9 +2370,9 @@ public class compParser extends DebugParser {
                     RewriteRuleSubtreeStream stream_retval=new RewriteRuleSubtreeStream(adaptor,"rule retval",retval!=null?retval.tree:null);
 
                     root_0 = (Object)adaptor.nil();
-                    // 53:17: -> retour
+                    // 57:17: -> retour
                     {
-                        dbg.location(53,19);
+                        dbg.location(57,19);
                         adaptor.addChild(root_0, stream_retour.nextTree());
 
                     }
@@ -2323,10 +2383,10 @@ public class compParser extends DebugParser {
                 case 6 :
                     dbg.enterAlt(6);
 
-                    // /home/etudiants/karim2u/Bureau/COMPILATION/vincent66u/comp.g:54:10: read
+                    // /home/katana/Desktop/compile/vincent66u/comp.g:58:10: read
                     {
-                    dbg.location(54,10);
-                    pushFollow(FOLLOW_read_in_instruction654);
+                    dbg.location(58,10);
+                    pushFollow(FOLLOW_read_in_instruction710);
                     read55=read();
 
                     state._fsp--;
@@ -2345,9 +2405,9 @@ public class compParser extends DebugParser {
                     RewriteRuleSubtreeStream stream_retval=new RewriteRuleSubtreeStream(adaptor,"rule retval",retval!=null?retval.tree:null);
 
                     root_0 = (Object)adaptor.nil();
-                    // 54:15: -> read
+                    // 58:15: -> read
                     {
-                        dbg.location(54,17);
+                        dbg.location(58,17);
                         adaptor.addChild(root_0, stream_read.nextTree());
 
                     }
@@ -2358,10 +2418,10 @@ public class compParser extends DebugParser {
                 case 7 :
                     dbg.enterAlt(7);
 
-                    // /home/etudiants/karim2u/Bureau/COMPILATION/vincent66u/comp.g:55:10: write
+                    // /home/katana/Desktop/compile/vincent66u/comp.g:59:10: write
                     {
-                    dbg.location(55,10);
-                    pushFollow(FOLLOW_write_in_instruction668);
+                    dbg.location(59,10);
+                    pushFollow(FOLLOW_write_in_instruction724);
                     write56=write();
 
                     state._fsp--;
@@ -2380,9 +2440,9 @@ public class compParser extends DebugParser {
                     RewriteRuleSubtreeStream stream_retval=new RewriteRuleSubtreeStream(adaptor,"rule retval",retval!=null?retval.tree:null);
 
                     root_0 = (Object)adaptor.nil();
-                    // 55:16: -> write
+                    // 59:16: -> write
                     {
-                        dbg.location(55,18);
+                        dbg.location(59,18);
                         adaptor.addChild(root_0, stream_write.nextTree());
 
                     }
@@ -2393,10 +2453,10 @@ public class compParser extends DebugParser {
                 case 8 :
                     dbg.enterAlt(8);
 
-                    // /home/etudiants/karim2u/Bureau/COMPILATION/vincent66u/comp.g:56:9: appel
+                    // /home/katana/Desktop/compile/vincent66u/comp.g:60:9: appel
                     {
-                    dbg.location(56,9);
-                    pushFollow(FOLLOW_appel_in_instruction681);
+                    dbg.location(60,9);
+                    pushFollow(FOLLOW_appel_in_instruction737);
                     appel57=appel();
 
                     state._fsp--;
@@ -2415,9 +2475,9 @@ public class compParser extends DebugParser {
                     RewriteRuleSubtreeStream stream_retval=new RewriteRuleSubtreeStream(adaptor,"rule retval",retval!=null?retval.tree:null);
 
                     root_0 = (Object)adaptor.nil();
-                    // 56:14: -> appel
+                    // 60:14: -> appel
                     {
-                        dbg.location(56,16);
+                        dbg.location(60,16);
                         adaptor.addChild(root_0, stream_appel.nextTree());
 
                     }
@@ -2441,7 +2501,7 @@ public class compParser extends DebugParser {
         }
         finally {
         }
-        dbg.location(56, 21);
+        dbg.location(60, 21);
 
         }
         finally {
@@ -2460,7 +2520,7 @@ public class compParser extends DebugParser {
     };
 
     // $ANTLR start "appel"
-    // /home/etudiants/karim2u/Bureau/COMPILATION/vincent66u/comp.g:57:1: appel : IDF '(' ( exp ( ',' exp )* )? ')' ;
+    // /home/katana/Desktop/compile/vincent66u/comp.g:61:1: appel : IDF '(' ( exp ( ',' exp )* )? ')' -> ^( APPEL IDF ( exp )* ) ;
     public final compParser.appel_return appel() throws RecognitionException {
         compParser.appel_return retval = new compParser.appel_return();
         retval.start = input.LT(1);
@@ -2480,39 +2540,39 @@ public class compParser extends DebugParser {
         Object char_literal59_tree=null;
         Object char_literal61_tree=null;
         Object char_literal63_tree=null;
-
+        RewriteRuleTokenStream stream_IDF=new RewriteRuleTokenStream(adaptor,"token IDF");
+        RewriteRuleTokenStream stream_35=new RewriteRuleTokenStream(adaptor,"token 35");
+        RewriteRuleTokenStream stream_36=new RewriteRuleTokenStream(adaptor,"token 36");
+        RewriteRuleTokenStream stream_28=new RewriteRuleTokenStream(adaptor,"token 28");
+        RewriteRuleSubtreeStream stream_exp=new RewriteRuleSubtreeStream(adaptor,"rule exp");
         try { dbg.enterRule(getGrammarFileName(), "appel");
         if ( getRuleLevel()==0 ) {dbg.commence();}
         incRuleLevel();
-        dbg.location(57, 1);
+        dbg.location(61, 1);
 
         try {
-            // /home/etudiants/karim2u/Bureau/COMPILATION/vincent66u/comp.g:57:12: ( IDF '(' ( exp ( ',' exp )* )? ')' )
+            // /home/katana/Desktop/compile/vincent66u/comp.g:61:12: ( IDF '(' ( exp ( ',' exp )* )? ')' -> ^( APPEL IDF ( exp )* ) )
             dbg.enterAlt(1);
 
-            // /home/etudiants/karim2u/Bureau/COMPILATION/vincent66u/comp.g:57:16: IDF '(' ( exp ( ',' exp )* )? ')'
+            // /home/katana/Desktop/compile/vincent66u/comp.g:61:16: IDF '(' ( exp ( ',' exp )* )? ')'
             {
-            root_0 = (Object)adaptor.nil();
+            dbg.location(61,16);
+            IDF58=(Token)match(input,IDF,FOLLOW_IDF_in_appel753);  
+            stream_IDF.add(IDF58);
 
-            dbg.location(57,16);
-            IDF58=(Token)match(input,IDF,FOLLOW_IDF_in_appel697); 
-            IDF58_tree = (Object)adaptor.create(IDF58);
-            adaptor.addChild(root_0, IDF58_tree);
+            dbg.location(61,20);
+            char_literal59=(Token)match(input,35,FOLLOW_35_in_appel755);  
+            stream_35.add(char_literal59);
 
-            dbg.location(57,20);
-            char_literal59=(Token)match(input,31,FOLLOW_31_in_appel699); 
-            char_literal59_tree = (Object)adaptor.create(char_literal59);
-            adaptor.addChild(root_0, char_literal59_tree);
-
-            dbg.location(57,24);
-            // /home/etudiants/karim2u/Bureau/COMPILATION/vincent66u/comp.g:57:24: ( exp ( ',' exp )* )?
+            dbg.location(61,24);
+            // /home/katana/Desktop/compile/vincent66u/comp.g:61:24: ( exp ( ',' exp )* )?
             int alt16=2;
             try { dbg.enterSubRule(16);
             try { dbg.enterDecision(16);
 
             int LA16_0 = input.LA(1);
 
-            if ( ((LA16_0>=IDF && LA16_0<=CST_ENT)||LA16_0==31||(LA16_0>=44 && LA16_0<=46)) ) {
+            if ( ((LA16_0>=IDF && LA16_0<=CST_ENT)||LA16_0==35||(LA16_0>=48 && LA16_0<=50)) ) {
                 alt16=1;
             }
             } finally {dbg.exitDecision(16);}
@@ -2521,17 +2581,17 @@ public class compParser extends DebugParser {
                 case 1 :
                     dbg.enterAlt(1);
 
-                    // /home/etudiants/karim2u/Bureau/COMPILATION/vincent66u/comp.g:57:26: exp ( ',' exp )*
+                    // /home/katana/Desktop/compile/vincent66u/comp.g:61:26: exp ( ',' exp )*
                     {
-                    dbg.location(57,26);
-                    pushFollow(FOLLOW_exp_in_appel703);
+                    dbg.location(61,26);
+                    pushFollow(FOLLOW_exp_in_appel759);
                     exp60=exp();
 
                     state._fsp--;
 
-                    adaptor.addChild(root_0, exp60.getTree());
-                    dbg.location(57,29);
-                    // /home/etudiants/karim2u/Bureau/COMPILATION/vincent66u/comp.g:57:29: ( ',' exp )*
+                    stream_exp.add(exp60.getTree());
+                    dbg.location(61,29);
+                    // /home/katana/Desktop/compile/vincent66u/comp.g:61:29: ( ',' exp )*
                     try { dbg.enterSubRule(15);
 
                     loop15:
@@ -2541,7 +2601,7 @@ public class compParser extends DebugParser {
 
                         int LA15_0 = input.LA(1);
 
-                        if ( (LA15_0==24) ) {
+                        if ( (LA15_0==28) ) {
                             alt15=1;
                         }
 
@@ -2552,20 +2612,19 @@ public class compParser extends DebugParser {
                     	case 1 :
                     	    dbg.enterAlt(1);
 
-                    	    // /home/etudiants/karim2u/Bureau/COMPILATION/vincent66u/comp.g:57:31: ',' exp
+                    	    // /home/katana/Desktop/compile/vincent66u/comp.g:61:31: ',' exp
                     	    {
-                    	    dbg.location(57,31);
-                    	    char_literal61=(Token)match(input,24,FOLLOW_24_in_appel706); 
-                    	    char_literal61_tree = (Object)adaptor.create(char_literal61);
-                    	    adaptor.addChild(root_0, char_literal61_tree);
+                    	    dbg.location(61,31);
+                    	    char_literal61=(Token)match(input,28,FOLLOW_28_in_appel762);  
+                    	    stream_28.add(char_literal61);
 
-                    	    dbg.location(57,34);
-                    	    pushFollow(FOLLOW_exp_in_appel707);
+                    	    dbg.location(61,34);
+                    	    pushFollow(FOLLOW_exp_in_appel763);
                     	    exp62=exp();
 
                     	    state._fsp--;
 
-                    	    adaptor.addChild(root_0, exp62.getTree());
+                    	    stream_exp.add(exp62.getTree());
 
                     	    }
                     	    break;
@@ -2583,12 +2642,49 @@ public class compParser extends DebugParser {
             }
             } finally {dbg.exitSubRule(16);}
 
-            dbg.location(57,43);
-            char_literal63=(Token)match(input,32,FOLLOW_32_in_appel714); 
-            char_literal63_tree = (Object)adaptor.create(char_literal63);
-            adaptor.addChild(root_0, char_literal63_tree);
+            dbg.location(61,43);
+            char_literal63=(Token)match(input,36,FOLLOW_36_in_appel770);  
+            stream_36.add(char_literal63);
 
 
+
+            // AST REWRITE
+            // elements: exp, IDF
+            // token labels: 
+            // rule labels: retval
+            // token list labels: 
+            // rule list labels: 
+            // wildcard labels: 
+            retval.tree = root_0;
+            RewriteRuleSubtreeStream stream_retval=new RewriteRuleSubtreeStream(adaptor,"rule retval",retval!=null?retval.tree:null);
+
+            root_0 = (Object)adaptor.nil();
+            // 61:47: -> ^( APPEL IDF ( exp )* )
+            {
+                dbg.location(61,50);
+                // /home/katana/Desktop/compile/vincent66u/comp.g:61:50: ^( APPEL IDF ( exp )* )
+                {
+                Object root_1 = (Object)adaptor.nil();
+                dbg.location(61,52);
+                root_1 = (Object)adaptor.becomeRoot((Object)adaptor.create(APPEL, "APPEL"), root_1);
+
+                dbg.location(61,58);
+                adaptor.addChild(root_1, stream_IDF.nextNode());
+                dbg.location(61,62);
+                // /home/katana/Desktop/compile/vincent66u/comp.g:61:62: ( exp )*
+                while ( stream_exp.hasNext() ) {
+                    dbg.location(61,62);
+                    adaptor.addChild(root_1, stream_exp.nextTree());
+
+                }
+                stream_exp.reset();
+
+                adaptor.addChild(root_0, root_1);
+                }
+
+            }
+
+            retval.tree = root_0;
             }
 
             retval.stop = input.LT(-1);
@@ -2605,7 +2701,7 @@ public class compParser extends DebugParser {
         }
         finally {
         }
-        dbg.location(57, 46);
+        dbg.location(61, 67);
 
         }
         finally {
@@ -2624,7 +2720,7 @@ public class compParser extends DebugParser {
     };
 
     // $ANTLR start "bloc"
-    // /home/etudiants/karim2u/Bureau/COMPILATION/vincent66u/comp.g:58:1: bloc : 'begin' ( declaration )* ( instruction )+ 'end' ;
+    // /home/katana/Desktop/compile/vincent66u/comp.g:62:1: bloc : 'begin' ( declaration )* ( instruction )+ 'end' ;
     public final compParser.bloc_return bloc() throws RecognitionException {
         compParser.bloc_return retval = new compParser.bloc_return();
         retval.start = input.LT(1);
@@ -2644,23 +2740,23 @@ public class compParser extends DebugParser {
         try { dbg.enterRule(getGrammarFileName(), "bloc");
         if ( getRuleLevel()==0 ) {dbg.commence();}
         incRuleLevel();
-        dbg.location(58, 1);
+        dbg.location(62, 1);
 
         try {
-            // /home/etudiants/karim2u/Bureau/COMPILATION/vincent66u/comp.g:58:9: ( 'begin' ( declaration )* ( instruction )+ 'end' )
+            // /home/katana/Desktop/compile/vincent66u/comp.g:62:9: ( 'begin' ( declaration )* ( instruction )+ 'end' )
             dbg.enterAlt(1);
 
-            // /home/etudiants/karim2u/Bureau/COMPILATION/vincent66u/comp.g:58:13: 'begin' ( declaration )* ( instruction )+ 'end'
+            // /home/katana/Desktop/compile/vincent66u/comp.g:62:13: 'begin' ( declaration )* ( instruction )+ 'end'
             {
             root_0 = (Object)adaptor.nil();
 
-            dbg.location(58,13);
-            string_literal64=(Token)match(input,35,FOLLOW_35_in_bloc727); 
+            dbg.location(62,13);
+            string_literal64=(Token)match(input,39,FOLLOW_39_in_bloc794); 
             string_literal64_tree = (Object)adaptor.create(string_literal64);
             adaptor.addChild(root_0, string_literal64_tree);
 
-            dbg.location(58,22);
-            // /home/etudiants/karim2u/Bureau/COMPILATION/vincent66u/comp.g:58:22: ( declaration )*
+            dbg.location(62,22);
+            // /home/katana/Desktop/compile/vincent66u/comp.g:62:22: ( declaration )*
             try { dbg.enterSubRule(17);
 
             loop17:
@@ -2670,7 +2766,7 @@ public class compParser extends DebugParser {
 
                 int LA17_0 = input.LA(1);
 
-                if ( ((LA17_0>=FONCTION && LA17_0<=PROCEDURE)||(LA17_0>=25 && LA17_0<=27)) ) {
+                if ( ((LA17_0>=FONCTION && LA17_0<=PROCEDURE)||(LA17_0>=29 && LA17_0<=31)) ) {
                     alt17=1;
                 }
 
@@ -2681,10 +2777,10 @@ public class compParser extends DebugParser {
             	case 1 :
             	    dbg.enterAlt(1);
 
-            	    // /home/etudiants/karim2u/Bureau/COMPILATION/vincent66u/comp.g:58:23: declaration
+            	    // /home/katana/Desktop/compile/vincent66u/comp.g:62:23: declaration
             	    {
-            	    dbg.location(58,23);
-            	    pushFollow(FOLLOW_declaration_in_bloc731);
+            	    dbg.location(62,23);
+            	    pushFollow(FOLLOW_declaration_in_bloc798);
             	    declaration65=declaration();
 
             	    state._fsp--;
@@ -2700,8 +2796,8 @@ public class compParser extends DebugParser {
             } while (true);
             } finally {dbg.exitSubRule(17);}
 
-            dbg.location(58,39);
-            // /home/etudiants/karim2u/Bureau/COMPILATION/vincent66u/comp.g:58:39: ( instruction )+
+            dbg.location(62,39);
+            // /home/katana/Desktop/compile/vincent66u/comp.g:62:39: ( instruction )+
             int cnt18=0;
             try { dbg.enterSubRule(18);
 
@@ -2712,7 +2808,7 @@ public class compParser extends DebugParser {
 
                 int LA18_0 = input.LA(1);
 
-                if ( ((LA18_0>=RETOUR && LA18_0<=WRITE)||LA18_0==IDF||LA18_0==35||LA18_0==37||LA18_0==39) ) {
+                if ( ((LA18_0>=RETOUR && LA18_0<=WRITE)||LA18_0==IDF||LA18_0==39||LA18_0==41||LA18_0==43) ) {
                     alt18=1;
                 }
 
@@ -2723,10 +2819,10 @@ public class compParser extends DebugParser {
             	case 1 :
             	    dbg.enterAlt(1);
 
-            	    // /home/etudiants/karim2u/Bureau/COMPILATION/vincent66u/comp.g:58:40: instruction
+            	    // /home/katana/Desktop/compile/vincent66u/comp.g:62:40: instruction
             	    {
-            	    dbg.location(58,40);
-            	    pushFollow(FOLLOW_instruction_in_bloc738);
+            	    dbg.location(62,40);
+            	    pushFollow(FOLLOW_instruction_in_bloc805);
             	    instruction66=instruction();
 
             	    state._fsp--;
@@ -2748,8 +2844,8 @@ public class compParser extends DebugParser {
             } while (true);
             } finally {dbg.exitSubRule(18);}
 
-            dbg.location(58,56);
-            string_literal67=(Token)match(input,23,FOLLOW_23_in_bloc744); 
+            dbg.location(62,56);
+            string_literal67=(Token)match(input,27,FOLLOW_27_in_bloc811); 
             string_literal67_tree = (Object)adaptor.create(string_literal67);
             adaptor.addChild(root_0, string_literal67_tree);
 
@@ -2770,7 +2866,7 @@ public class compParser extends DebugParser {
         }
         finally {
         }
-        dbg.location(58, 61);
+        dbg.location(62, 61);
 
         }
         finally {
@@ -2789,7 +2885,7 @@ public class compParser extends DebugParser {
     };
 
     // $ANTLR start "affectation"
-    // /home/etudiants/karim2u/Bureau/COMPILATION/vincent66u/comp.g:59:1: affectation : ( IDF '=' exp -> ^( '=' IDF exp ) | IDF '[' exp ( ',' exp )* ']' '=' exp -> ^( '=' IDF ^( exp '[' exp ( ',' exp )* ']' ) ) );
+    // /home/katana/Desktop/compile/vincent66u/comp.g:63:1: affectation : ( IDF '=' exp -> ^( '=' IDF exp ) | IDF '[' exp ( ',' exp )* ']' '=' exp -> ^( '=' IDF ^( exp '[' exp ( ',' exp )* ']' ) ) );
     public final compParser.affectation_return affectation() throws RecognitionException {
         compParser.affectation_return retval = new compParser.affectation_return();
         retval.start = input.LT(1);
@@ -2819,19 +2915,19 @@ public class compParser extends DebugParser {
         Object char_literal74_tree=null;
         Object char_literal76_tree=null;
         Object char_literal77_tree=null;
-        RewriteRuleTokenStream stream_24=new RewriteRuleTokenStream(adaptor,"token 24");
-        RewriteRuleTokenStream stream_36=new RewriteRuleTokenStream(adaptor,"token 36");
-        RewriteRuleTokenStream stream_28=new RewriteRuleTokenStream(adaptor,"token 28");
-        RewriteRuleTokenStream stream_29=new RewriteRuleTokenStream(adaptor,"token 29");
+        RewriteRuleTokenStream stream_32=new RewriteRuleTokenStream(adaptor,"token 32");
         RewriteRuleTokenStream stream_IDF=new RewriteRuleTokenStream(adaptor,"token IDF");
+        RewriteRuleTokenStream stream_40=new RewriteRuleTokenStream(adaptor,"token 40");
+        RewriteRuleTokenStream stream_33=new RewriteRuleTokenStream(adaptor,"token 33");
+        RewriteRuleTokenStream stream_28=new RewriteRuleTokenStream(adaptor,"token 28");
         RewriteRuleSubtreeStream stream_exp=new RewriteRuleSubtreeStream(adaptor,"rule exp");
         try { dbg.enterRule(getGrammarFileName(), "affectation");
         if ( getRuleLevel()==0 ) {dbg.commence();}
         incRuleLevel();
-        dbg.location(59, 1);
+        dbg.location(63, 1);
 
         try {
-            // /home/etudiants/karim2u/Bureau/COMPILATION/vincent66u/comp.g:59:12: ( IDF '=' exp -> ^( '=' IDF exp ) | IDF '[' exp ( ',' exp )* ']' '=' exp -> ^( '=' IDF ^( exp '[' exp ( ',' exp )* ']' ) ) )
+            // /home/katana/Desktop/compile/vincent66u/comp.g:63:12: ( IDF '=' exp -> ^( '=' IDF exp ) | IDF '[' exp ( ',' exp )* ']' '=' exp -> ^( '=' IDF ^( exp '[' exp ( ',' exp )* ']' ) ) )
             int alt20=2;
             try { dbg.enterDecision(20);
 
@@ -2840,10 +2936,10 @@ public class compParser extends DebugParser {
             if ( (LA20_0==IDF) ) {
                 int LA20_1 = input.LA(2);
 
-                if ( (LA20_1==36) ) {
+                if ( (LA20_1==40) ) {
                     alt20=1;
                 }
-                else if ( (LA20_1==28) ) {
+                else if ( (LA20_1==32) ) {
                     alt20=2;
                 }
                 else {
@@ -2867,18 +2963,18 @@ public class compParser extends DebugParser {
                 case 1 :
                     dbg.enterAlt(1);
 
-                    // /home/etudiants/karim2u/Bureau/COMPILATION/vincent66u/comp.g:59:17: IDF '=' exp
+                    // /home/katana/Desktop/compile/vincent66u/comp.g:63:17: IDF '=' exp
                     {
-                    dbg.location(59,17);
-                    IDF68=(Token)match(input,IDF,FOLLOW_IDF_in_affectation753);  
+                    dbg.location(63,17);
+                    IDF68=(Token)match(input,IDF,FOLLOW_IDF_in_affectation820);  
                     stream_IDF.add(IDF68);
 
-                    dbg.location(59,23);
-                    char_literal69=(Token)match(input,36,FOLLOW_36_in_affectation757);  
-                    stream_36.add(char_literal69);
+                    dbg.location(63,23);
+                    char_literal69=(Token)match(input,40,FOLLOW_40_in_affectation824);  
+                    stream_40.add(char_literal69);
 
-                    dbg.location(59,29);
-                    pushFollow(FOLLOW_exp_in_affectation761);
+                    dbg.location(63,29);
+                    pushFollow(FOLLOW_exp_in_affectation828);
                     exp70=exp();
 
                     state._fsp--;
@@ -2887,7 +2983,7 @@ public class compParser extends DebugParser {
 
 
                     // AST REWRITE
-                    // elements: IDF, 36, exp
+                    // elements: 40, exp, IDF
                     // token labels: 
                     // rule labels: retval
                     // token list labels: 
@@ -2897,18 +2993,18 @@ public class compParser extends DebugParser {
                     RewriteRuleSubtreeStream stream_retval=new RewriteRuleSubtreeStream(adaptor,"rule retval",retval!=null?retval.tree:null);
 
                     root_0 = (Object)adaptor.nil();
-                    // 59:33: -> ^( '=' IDF exp )
+                    // 63:33: -> ^( '=' IDF exp )
                     {
-                        dbg.location(59,36);
-                        // /home/etudiants/karim2u/Bureau/COMPILATION/vincent66u/comp.g:59:36: ^( '=' IDF exp )
+                        dbg.location(63,36);
+                        // /home/katana/Desktop/compile/vincent66u/comp.g:63:36: ^( '=' IDF exp )
                         {
                         Object root_1 = (Object)adaptor.nil();
-                        dbg.location(59,38);
-                        root_1 = (Object)adaptor.becomeRoot(stream_36.nextNode(), root_1);
+                        dbg.location(63,38);
+                        root_1 = (Object)adaptor.becomeRoot(stream_40.nextNode(), root_1);
 
-                        dbg.location(59,42);
+                        dbg.location(63,42);
                         adaptor.addChild(root_1, stream_IDF.nextNode());
-                        dbg.location(59,46);
+                        dbg.location(63,46);
                         adaptor.addChild(root_1, stream_exp.nextTree());
 
                         adaptor.addChild(root_0, root_1);
@@ -2922,25 +3018,25 @@ public class compParser extends DebugParser {
                 case 2 :
                     dbg.enterAlt(2);
 
-                    // /home/etudiants/karim2u/Bureau/COMPILATION/vincent66u/comp.g:60:19: IDF '[' exp ( ',' exp )* ']' '=' exp
+                    // /home/katana/Desktop/compile/vincent66u/comp.g:64:19: IDF '[' exp ( ',' exp )* ']' '=' exp
                     {
-                    dbg.location(60,19);
-                    IDF71=(Token)match(input,IDF,FOLLOW_IDF_in_affectation791);  
+                    dbg.location(64,19);
+                    IDF71=(Token)match(input,IDF,FOLLOW_IDF_in_affectation858);  
                     stream_IDF.add(IDF71);
 
-                    dbg.location(60,23);
-                    char_literal72=(Token)match(input,28,FOLLOW_28_in_affectation793);  
-                    stream_28.add(char_literal72);
+                    dbg.location(64,23);
+                    char_literal72=(Token)match(input,32,FOLLOW_32_in_affectation860);  
+                    stream_32.add(char_literal72);
 
-                    dbg.location(60,27);
-                    pushFollow(FOLLOW_exp_in_affectation795);
+                    dbg.location(64,27);
+                    pushFollow(FOLLOW_exp_in_affectation862);
                     exp73=exp();
 
                     state._fsp--;
 
                     stream_exp.add(exp73.getTree());
-                    dbg.location(60,31);
-                    // /home/etudiants/karim2u/Bureau/COMPILATION/vincent66u/comp.g:60:31: ( ',' exp )*
+                    dbg.location(64,31);
+                    // /home/katana/Desktop/compile/vincent66u/comp.g:64:31: ( ',' exp )*
                     try { dbg.enterSubRule(19);
 
                     loop19:
@@ -2950,7 +3046,7 @@ public class compParser extends DebugParser {
 
                         int LA19_0 = input.LA(1);
 
-                        if ( (LA19_0==24) ) {
+                        if ( (LA19_0==28) ) {
                             alt19=1;
                         }
 
@@ -2961,14 +3057,14 @@ public class compParser extends DebugParser {
                     	case 1 :
                     	    dbg.enterAlt(1);
 
-                    	    // /home/etudiants/karim2u/Bureau/COMPILATION/vincent66u/comp.g:60:32: ',' exp
+                    	    // /home/katana/Desktop/compile/vincent66u/comp.g:64:32: ',' exp
                     	    {
-                    	    dbg.location(60,32);
-                    	    char_literal74=(Token)match(input,24,FOLLOW_24_in_affectation798);  
-                    	    stream_24.add(char_literal74);
+                    	    dbg.location(64,32);
+                    	    char_literal74=(Token)match(input,28,FOLLOW_28_in_affectation865);  
+                    	    stream_28.add(char_literal74);
 
-                    	    dbg.location(60,36);
-                    	    pushFollow(FOLLOW_exp_in_affectation800);
+                    	    dbg.location(64,36);
+                    	    pushFollow(FOLLOW_exp_in_affectation867);
                     	    exp75=exp();
 
                     	    state._fsp--;
@@ -2984,16 +3080,16 @@ public class compParser extends DebugParser {
                     } while (true);
                     } finally {dbg.exitSubRule(19);}
 
-                    dbg.location(60,43);
-                    char_literal76=(Token)match(input,29,FOLLOW_29_in_affectation805);  
-                    stream_29.add(char_literal76);
+                    dbg.location(64,43);
+                    char_literal76=(Token)match(input,33,FOLLOW_33_in_affectation872);  
+                    stream_33.add(char_literal76);
 
-                    dbg.location(60,47);
-                    char_literal77=(Token)match(input,36,FOLLOW_36_in_affectation807);  
-                    stream_36.add(char_literal77);
+                    dbg.location(64,47);
+                    char_literal77=(Token)match(input,40,FOLLOW_40_in_affectation874);  
+                    stream_40.add(char_literal77);
 
-                    dbg.location(60,51);
-                    pushFollow(FOLLOW_exp_in_affectation809);
+                    dbg.location(64,51);
+                    pushFollow(FOLLOW_exp_in_affectation876);
                     exp78=exp();
 
                     state._fsp--;
@@ -3002,7 +3098,7 @@ public class compParser extends DebugParser {
 
 
                     // AST REWRITE
-                    // elements: 24, exp, IDF, 29, exp, 28, exp, 36
+                    // elements: 32, 40, 28, IDF, 33, exp, exp, exp
                     // token labels: 
                     // rule labels: retval
                     // token list labels: 
@@ -3012,41 +3108,41 @@ public class compParser extends DebugParser {
                     RewriteRuleSubtreeStream stream_retval=new RewriteRuleSubtreeStream(adaptor,"rule retval",retval!=null?retval.tree:null);
 
                     root_0 = (Object)adaptor.nil();
-                    // 60:55: -> ^( '=' IDF ^( exp '[' exp ( ',' exp )* ']' ) )
+                    // 64:55: -> ^( '=' IDF ^( exp '[' exp ( ',' exp )* ']' ) )
                     {
-                        dbg.location(60,57);
-                        // /home/etudiants/karim2u/Bureau/COMPILATION/vincent66u/comp.g:60:57: ^( '=' IDF ^( exp '[' exp ( ',' exp )* ']' ) )
+                        dbg.location(64,57);
+                        // /home/katana/Desktop/compile/vincent66u/comp.g:64:57: ^( '=' IDF ^( exp '[' exp ( ',' exp )* ']' ) )
                         {
                         Object root_1 = (Object)adaptor.nil();
-                        dbg.location(60,59);
-                        root_1 = (Object)adaptor.becomeRoot(stream_36.nextNode(), root_1);
+                        dbg.location(64,59);
+                        root_1 = (Object)adaptor.becomeRoot(stream_40.nextNode(), root_1);
 
-                        dbg.location(60,63);
+                        dbg.location(64,63);
                         adaptor.addChild(root_1, stream_IDF.nextNode());
-                        dbg.location(60,68);
-                        // /home/etudiants/karim2u/Bureau/COMPILATION/vincent66u/comp.g:60:68: ^( exp '[' exp ( ',' exp )* ']' )
+                        dbg.location(64,68);
+                        // /home/katana/Desktop/compile/vincent66u/comp.g:64:68: ^( exp '[' exp ( ',' exp )* ']' )
                         {
                         Object root_2 = (Object)adaptor.nil();
-                        dbg.location(60,70);
+                        dbg.location(64,70);
                         root_2 = (Object)adaptor.becomeRoot(stream_exp.nextNode(), root_2);
 
-                        dbg.location(60,74);
-                        adaptor.addChild(root_2, stream_28.nextNode());
-                        dbg.location(60,78);
+                        dbg.location(64,74);
+                        adaptor.addChild(root_2, stream_32.nextNode());
+                        dbg.location(64,78);
                         adaptor.addChild(root_2, stream_exp.nextTree());
-                        dbg.location(60,82);
-                        // /home/etudiants/karim2u/Bureau/COMPILATION/vincent66u/comp.g:60:82: ( ',' exp )*
-                        while ( stream_24.hasNext()||stream_exp.hasNext() ) {
-                            dbg.location(60,83);
-                            adaptor.addChild(root_2, stream_24.nextNode());
-                            dbg.location(60,87);
+                        dbg.location(64,82);
+                        // /home/katana/Desktop/compile/vincent66u/comp.g:64:82: ( ',' exp )*
+                        while ( stream_28.hasNext()||stream_exp.hasNext() ) {
+                            dbg.location(64,83);
+                            adaptor.addChild(root_2, stream_28.nextNode());
+                            dbg.location(64,87);
                             adaptor.addChild(root_2, stream_exp.nextTree());
 
                         }
-                        stream_24.reset();
+                        stream_28.reset();
                         stream_exp.reset();
-                        dbg.location(60,94);
-                        adaptor.addChild(root_2, stream_29.nextNode());
+                        dbg.location(64,94);
+                        adaptor.addChild(root_2, stream_33.nextNode());
 
                         adaptor.addChild(root_1, root_2);
                         }
@@ -3075,7 +3171,7 @@ public class compParser extends DebugParser {
         }
         finally {
         }
-        dbg.location(60, 100);
+        dbg.location(64, 100);
 
         }
         finally {
@@ -3094,7 +3190,7 @@ public class compParser extends DebugParser {
     };
 
     // $ANTLR start "iteration"
-    // /home/etudiants/karim2u/Bureau/COMPILATION/vincent66u/comp.g:61:1: iteration : 'for' IDF 'in' exp '..' exp 'do' ( instruction )+ 'end' -> ^( 'for' IDF 'in' exp '..' exp 'do' ^( instruction ) ) ;
+    // /home/katana/Desktop/compile/vincent66u/comp.g:65:1: iteration : 'for' IDF 'in' exp '..' exp 'do' ( instruction )+ 'end' -> ^( 'for' IDF 'in' exp '..' exp 'do' ^( instruction ) ) ;
     public final compParser.iteration_return iteration() throws RecognitionException {
         compParser.iteration_return retval = new compParser.iteration_return();
         retval.start = input.LT(1);
@@ -3120,61 +3216,61 @@ public class compParser extends DebugParser {
         Object string_literal83_tree=null;
         Object string_literal85_tree=null;
         Object string_literal87_tree=null;
-        RewriteRuleTokenStream stream_22=new RewriteRuleTokenStream(adaptor,"token 22");
-        RewriteRuleTokenStream stream_23=new RewriteRuleTokenStream(adaptor,"token 23");
-        RewriteRuleTokenStream stream_37=new RewriteRuleTokenStream(adaptor,"token 37");
-        RewriteRuleTokenStream stream_38=new RewriteRuleTokenStream(adaptor,"token 38");
+        RewriteRuleTokenStream stream_42=new RewriteRuleTokenStream(adaptor,"token 42");
+        RewriteRuleTokenStream stream_41=new RewriteRuleTokenStream(adaptor,"token 41");
         RewriteRuleTokenStream stream_IDF=new RewriteRuleTokenStream(adaptor,"token IDF");
-        RewriteRuleTokenStream stream_30=new RewriteRuleTokenStream(adaptor,"token 30");
-        RewriteRuleSubtreeStream stream_instruction=new RewriteRuleSubtreeStream(adaptor,"rule instruction");
+        RewriteRuleTokenStream stream_34=new RewriteRuleTokenStream(adaptor,"token 34");
+        RewriteRuleTokenStream stream_26=new RewriteRuleTokenStream(adaptor,"token 26");
+        RewriteRuleTokenStream stream_27=new RewriteRuleTokenStream(adaptor,"token 27");
         RewriteRuleSubtreeStream stream_exp=new RewriteRuleSubtreeStream(adaptor,"rule exp");
+        RewriteRuleSubtreeStream stream_instruction=new RewriteRuleSubtreeStream(adaptor,"rule instruction");
         try { dbg.enterRule(getGrammarFileName(), "iteration");
         if ( getRuleLevel()==0 ) {dbg.commence();}
         incRuleLevel();
-        dbg.location(61, 1);
+        dbg.location(65, 1);
 
         try {
-            // /home/etudiants/karim2u/Bureau/COMPILATION/vincent66u/comp.g:61:12: ( 'for' IDF 'in' exp '..' exp 'do' ( instruction )+ 'end' -> ^( 'for' IDF 'in' exp '..' exp 'do' ^( instruction ) ) )
+            // /home/katana/Desktop/compile/vincent66u/comp.g:65:12: ( 'for' IDF 'in' exp '..' exp 'do' ( instruction )+ 'end' -> ^( 'for' IDF 'in' exp '..' exp 'do' ^( instruction ) ) )
             dbg.enterAlt(1);
 
-            // /home/etudiants/karim2u/Bureau/COMPILATION/vincent66u/comp.g:61:16: 'for' IDF 'in' exp '..' exp 'do' ( instruction )+ 'end'
+            // /home/katana/Desktop/compile/vincent66u/comp.g:65:16: 'for' IDF 'in' exp '..' exp 'do' ( instruction )+ 'end'
             {
-            dbg.location(61,16);
-            string_literal79=(Token)match(input,37,FOLLOW_37_in_iteration846);  
-            stream_37.add(string_literal79);
+            dbg.location(65,16);
+            string_literal79=(Token)match(input,41,FOLLOW_41_in_iteration913);  
+            stream_41.add(string_literal79);
 
-            dbg.location(61,24);
-            IDF80=(Token)match(input,IDF,FOLLOW_IDF_in_iteration850);  
+            dbg.location(65,24);
+            IDF80=(Token)match(input,IDF,FOLLOW_IDF_in_iteration917);  
             stream_IDF.add(IDF80);
 
-            dbg.location(61,30);
-            string_literal81=(Token)match(input,38,FOLLOW_38_in_iteration854);  
-            stream_38.add(string_literal81);
+            dbg.location(65,30);
+            string_literal81=(Token)match(input,42,FOLLOW_42_in_iteration921);  
+            stream_42.add(string_literal81);
 
-            dbg.location(61,37);
-            pushFollow(FOLLOW_exp_in_iteration858);
+            dbg.location(65,37);
+            pushFollow(FOLLOW_exp_in_iteration925);
             exp82=exp();
 
             state._fsp--;
 
             stream_exp.add(exp82.getTree());
-            dbg.location(61,43);
-            string_literal83=(Token)match(input,30,FOLLOW_30_in_iteration862);  
-            stream_30.add(string_literal83);
+            dbg.location(65,43);
+            string_literal83=(Token)match(input,34,FOLLOW_34_in_iteration929);  
+            stream_34.add(string_literal83);
 
-            dbg.location(61,50);
-            pushFollow(FOLLOW_exp_in_iteration866);
+            dbg.location(65,50);
+            pushFollow(FOLLOW_exp_in_iteration933);
             exp84=exp();
 
             state._fsp--;
 
             stream_exp.add(exp84.getTree());
-            dbg.location(61,56);
-            string_literal85=(Token)match(input,22,FOLLOW_22_in_iteration870);  
-            stream_22.add(string_literal85);
+            dbg.location(65,56);
+            string_literal85=(Token)match(input,26,FOLLOW_26_in_iteration937);  
+            stream_26.add(string_literal85);
 
-            dbg.location(61,63);
-            // /home/etudiants/karim2u/Bureau/COMPILATION/vincent66u/comp.g:61:63: ( instruction )+
+            dbg.location(65,63);
+            // /home/katana/Desktop/compile/vincent66u/comp.g:65:63: ( instruction )+
             int cnt21=0;
             try { dbg.enterSubRule(21);
 
@@ -3185,7 +3281,7 @@ public class compParser extends DebugParser {
 
                 int LA21_0 = input.LA(1);
 
-                if ( ((LA21_0>=RETOUR && LA21_0<=WRITE)||LA21_0==IDF||LA21_0==35||LA21_0==37||LA21_0==39) ) {
+                if ( ((LA21_0>=RETOUR && LA21_0<=WRITE)||LA21_0==IDF||LA21_0==39||LA21_0==41||LA21_0==43) ) {
                     alt21=1;
                 }
 
@@ -3196,10 +3292,10 @@ public class compParser extends DebugParser {
             	case 1 :
             	    dbg.enterAlt(1);
 
-            	    // /home/etudiants/karim2u/Bureau/COMPILATION/vincent66u/comp.g:61:65: instruction
+            	    // /home/katana/Desktop/compile/vincent66u/comp.g:65:65: instruction
             	    {
-            	    dbg.location(61,65);
-            	    pushFollow(FOLLOW_instruction_in_iteration876);
+            	    dbg.location(65,65);
+            	    pushFollow(FOLLOW_instruction_in_iteration943);
             	    instruction86=instruction();
 
             	    state._fsp--;
@@ -3221,14 +3317,14 @@ public class compParser extends DebugParser {
             } while (true);
             } finally {dbg.exitSubRule(21);}
 
-            dbg.location(61,82);
-            string_literal87=(Token)match(input,23,FOLLOW_23_in_iteration883);  
-            stream_23.add(string_literal87);
+            dbg.location(65,82);
+            string_literal87=(Token)match(input,27,FOLLOW_27_in_iteration950);  
+            stream_27.add(string_literal87);
 
 
 
             // AST REWRITE
-            // elements: 38, instruction, IDF, exp, 30, exp, 37, 22
+            // elements: exp, exp, IDF, 42, 26, 34, 41, instruction
             // token labels: 
             // rule labels: retval
             // token list labels: 
@@ -3238,32 +3334,32 @@ public class compParser extends DebugParser {
             RewriteRuleSubtreeStream stream_retval=new RewriteRuleSubtreeStream(adaptor,"rule retval",retval!=null?retval.tree:null);
 
             root_0 = (Object)adaptor.nil();
-            // 61:87: -> ^( 'for' IDF 'in' exp '..' exp 'do' ^( instruction ) )
+            // 65:87: -> ^( 'for' IDF 'in' exp '..' exp 'do' ^( instruction ) )
             {
-                dbg.location(61,89);
-                // /home/etudiants/karim2u/Bureau/COMPILATION/vincent66u/comp.g:61:89: ^( 'for' IDF 'in' exp '..' exp 'do' ^( instruction ) )
+                dbg.location(65,89);
+                // /home/katana/Desktop/compile/vincent66u/comp.g:65:89: ^( 'for' IDF 'in' exp '..' exp 'do' ^( instruction ) )
                 {
                 Object root_1 = (Object)adaptor.nil();
-                dbg.location(61,91);
-                root_1 = (Object)adaptor.becomeRoot(stream_37.nextNode(), root_1);
+                dbg.location(65,91);
+                root_1 = (Object)adaptor.becomeRoot(stream_41.nextNode(), root_1);
 
-                dbg.location(61,97);
+                dbg.location(65,97);
                 adaptor.addChild(root_1, stream_IDF.nextNode());
-                dbg.location(61,101);
-                adaptor.addChild(root_1, stream_38.nextNode());
-                dbg.location(61,106);
+                dbg.location(65,101);
+                adaptor.addChild(root_1, stream_42.nextNode());
+                dbg.location(65,106);
                 adaptor.addChild(root_1, stream_exp.nextTree());
-                dbg.location(61,110);
-                adaptor.addChild(root_1, stream_30.nextNode());
-                dbg.location(61,115);
+                dbg.location(65,110);
+                adaptor.addChild(root_1, stream_34.nextNode());
+                dbg.location(65,115);
                 adaptor.addChild(root_1, stream_exp.nextTree());
-                dbg.location(61,119);
-                adaptor.addChild(root_1, stream_22.nextNode());
-                dbg.location(61,124);
-                // /home/etudiants/karim2u/Bureau/COMPILATION/vincent66u/comp.g:61:124: ^( instruction )
+                dbg.location(65,119);
+                adaptor.addChild(root_1, stream_26.nextNode());
+                dbg.location(65,124);
+                // /home/katana/Desktop/compile/vincent66u/comp.g:65:124: ^( instruction )
                 {
                 Object root_2 = (Object)adaptor.nil();
-                dbg.location(61,127);
+                dbg.location(65,127);
                 root_2 = (Object)adaptor.becomeRoot(stream_instruction.nextNode(), root_2);
 
                 adaptor.addChild(root_1, root_2);
@@ -3291,7 +3387,7 @@ public class compParser extends DebugParser {
         }
         finally {
         }
-        dbg.location(61, 143);
+        dbg.location(65, 143);
 
         }
         finally {
@@ -3310,7 +3406,7 @@ public class compParser extends DebugParser {
     };
 
     // $ANTLR start "condition"
-    // /home/etudiants/karim2u/Bureau/COMPILATION/vincent66u/comp.g:62:1: condition : 'if' exp 'then' ( instruction )+ ( 'else' ( instruction )+ )? 'fi' -> ^( 'if' exp ^( 'then' instruction ) ( 'else' ( instruction )+ )? ) ;
+    // /home/katana/Desktop/compile/vincent66u/comp.g:66:1: condition : 'if' exp 'then' ( instruction )+ ( 'else' ( instruction )+ )? 'fi' -> ^( 'if' exp ^( 'then' instruction ) ( ^( 'else' ( instruction )+ ) )? ) ;
     public final compParser.condition_return condition() throws RecognitionException {
         compParser.condition_return retval = new compParser.condition_return();
         retval.start = input.LT(1);
@@ -3332,40 +3428,40 @@ public class compParser extends DebugParser {
         Object string_literal90_tree=null;
         Object string_literal92_tree=null;
         Object string_literal94_tree=null;
-        RewriteRuleTokenStream stream_39=new RewriteRuleTokenStream(adaptor,"token 39");
-        RewriteRuleTokenStream stream_40=new RewriteRuleTokenStream(adaptor,"token 40");
-        RewriteRuleTokenStream stream_41=new RewriteRuleTokenStream(adaptor,"token 41");
-        RewriteRuleTokenStream stream_42=new RewriteRuleTokenStream(adaptor,"token 42");
-        RewriteRuleSubtreeStream stream_instruction=new RewriteRuleSubtreeStream(adaptor,"rule instruction");
+        RewriteRuleTokenStream stream_43=new RewriteRuleTokenStream(adaptor,"token 43");
+        RewriteRuleTokenStream stream_45=new RewriteRuleTokenStream(adaptor,"token 45");
+        RewriteRuleTokenStream stream_44=new RewriteRuleTokenStream(adaptor,"token 44");
+        RewriteRuleTokenStream stream_46=new RewriteRuleTokenStream(adaptor,"token 46");
         RewriteRuleSubtreeStream stream_exp=new RewriteRuleSubtreeStream(adaptor,"rule exp");
+        RewriteRuleSubtreeStream stream_instruction=new RewriteRuleSubtreeStream(adaptor,"rule instruction");
         try { dbg.enterRule(getGrammarFileName(), "condition");
         if ( getRuleLevel()==0 ) {dbg.commence();}
         incRuleLevel();
-        dbg.location(62, 1);
+        dbg.location(66, 1);
 
         try {
-            // /home/etudiants/karim2u/Bureau/COMPILATION/vincent66u/comp.g:62:12: ( 'if' exp 'then' ( instruction )+ ( 'else' ( instruction )+ )? 'fi' -> ^( 'if' exp ^( 'then' instruction ) ( 'else' ( instruction )+ )? ) )
+            // /home/katana/Desktop/compile/vincent66u/comp.g:66:12: ( 'if' exp 'then' ( instruction )+ ( 'else' ( instruction )+ )? 'fi' -> ^( 'if' exp ^( 'then' instruction ) ( ^( 'else' ( instruction )+ ) )? ) )
             dbg.enterAlt(1);
 
-            // /home/etudiants/karim2u/Bureau/COMPILATION/vincent66u/comp.g:62:16: 'if' exp 'then' ( instruction )+ ( 'else' ( instruction )+ )? 'fi'
+            // /home/katana/Desktop/compile/vincent66u/comp.g:66:16: 'if' exp 'then' ( instruction )+ ( 'else' ( instruction )+ )? 'fi'
             {
-            dbg.location(62,16);
-            string_literal88=(Token)match(input,39,FOLLOW_39_in_condition917);  
-            stream_39.add(string_literal88);
+            dbg.location(66,16);
+            string_literal88=(Token)match(input,43,FOLLOW_43_in_condition984);  
+            stream_43.add(string_literal88);
 
-            dbg.location(62,23);
-            pushFollow(FOLLOW_exp_in_condition921);
+            dbg.location(66,23);
+            pushFollow(FOLLOW_exp_in_condition988);
             exp89=exp();
 
             state._fsp--;
 
             stream_exp.add(exp89.getTree());
-            dbg.location(62,29);
-            string_literal90=(Token)match(input,40,FOLLOW_40_in_condition925);  
-            stream_40.add(string_literal90);
+            dbg.location(66,29);
+            string_literal90=(Token)match(input,44,FOLLOW_44_in_condition992);  
+            stream_44.add(string_literal90);
 
-            dbg.location(62,38);
-            // /home/etudiants/karim2u/Bureau/COMPILATION/vincent66u/comp.g:62:38: ( instruction )+
+            dbg.location(66,38);
+            // /home/katana/Desktop/compile/vincent66u/comp.g:66:38: ( instruction )+
             int cnt22=0;
             try { dbg.enterSubRule(22);
 
@@ -3376,7 +3472,7 @@ public class compParser extends DebugParser {
 
                 int LA22_0 = input.LA(1);
 
-                if ( ((LA22_0>=RETOUR && LA22_0<=WRITE)||LA22_0==IDF||LA22_0==35||LA22_0==37||LA22_0==39) ) {
+                if ( ((LA22_0>=RETOUR && LA22_0<=WRITE)||LA22_0==IDF||LA22_0==39||LA22_0==41||LA22_0==43) ) {
                     alt22=1;
                 }
 
@@ -3387,10 +3483,10 @@ public class compParser extends DebugParser {
             	case 1 :
             	    dbg.enterAlt(1);
 
-            	    // /home/etudiants/karim2u/Bureau/COMPILATION/vincent66u/comp.g:62:40: instruction
+            	    // /home/katana/Desktop/compile/vincent66u/comp.g:66:40: instruction
             	    {
-            	    dbg.location(62,40);
-            	    pushFollow(FOLLOW_instruction_in_condition931);
+            	    dbg.location(66,40);
+            	    pushFollow(FOLLOW_instruction_in_condition998);
             	    instruction91=instruction();
 
             	    state._fsp--;
@@ -3412,15 +3508,15 @@ public class compParser extends DebugParser {
             } while (true);
             } finally {dbg.exitSubRule(22);}
 
-            dbg.location(62,55);
-            // /home/etudiants/karim2u/Bureau/COMPILATION/vincent66u/comp.g:62:55: ( 'else' ( instruction )+ )?
+            dbg.location(66,55);
+            // /home/katana/Desktop/compile/vincent66u/comp.g:66:55: ( 'else' ( instruction )+ )?
             int alt24=2;
             try { dbg.enterSubRule(24);
             try { dbg.enterDecision(24);
 
             int LA24_0 = input.LA(1);
 
-            if ( (LA24_0==41) ) {
+            if ( (LA24_0==45) ) {
                 alt24=1;
             }
             } finally {dbg.exitDecision(24);}
@@ -3429,14 +3525,14 @@ public class compParser extends DebugParser {
                 case 1 :
                     dbg.enterAlt(1);
 
-                    // /home/etudiants/karim2u/Bureau/COMPILATION/vincent66u/comp.g:62:56: 'else' ( instruction )+
+                    // /home/katana/Desktop/compile/vincent66u/comp.g:66:56: 'else' ( instruction )+
                     {
-                    dbg.location(62,56);
-                    string_literal92=(Token)match(input,41,FOLLOW_41_in_condition937);  
-                    stream_41.add(string_literal92);
+                    dbg.location(66,56);
+                    string_literal92=(Token)match(input,45,FOLLOW_45_in_condition1004);  
+                    stream_45.add(string_literal92);
 
-                    dbg.location(62,65);
-                    // /home/etudiants/karim2u/Bureau/COMPILATION/vincent66u/comp.g:62:65: ( instruction )+
+                    dbg.location(66,65);
+                    // /home/katana/Desktop/compile/vincent66u/comp.g:66:65: ( instruction )+
                     int cnt23=0;
                     try { dbg.enterSubRule(23);
 
@@ -3447,7 +3543,7 @@ public class compParser extends DebugParser {
 
                         int LA23_0 = input.LA(1);
 
-                        if ( ((LA23_0>=RETOUR && LA23_0<=WRITE)||LA23_0==IDF||LA23_0==35||LA23_0==37||LA23_0==39) ) {
+                        if ( ((LA23_0>=RETOUR && LA23_0<=WRITE)||LA23_0==IDF||LA23_0==39||LA23_0==41||LA23_0==43) ) {
                             alt23=1;
                         }
 
@@ -3458,10 +3554,10 @@ public class compParser extends DebugParser {
                     	case 1 :
                     	    dbg.enterAlt(1);
 
-                    	    // /home/etudiants/karim2u/Bureau/COMPILATION/vincent66u/comp.g:62:66: instruction
+                    	    // /home/katana/Desktop/compile/vincent66u/comp.g:66:66: instruction
                     	    {
-                    	    dbg.location(62,66);
-                    	    pushFollow(FOLLOW_instruction_in_condition942);
+                    	    dbg.location(66,66);
+                    	    pushFollow(FOLLOW_instruction_in_condition1009);
                     	    instruction93=instruction();
 
                     	    state._fsp--;
@@ -3490,14 +3586,14 @@ public class compParser extends DebugParser {
             }
             } finally {dbg.exitSubRule(24);}
 
-            dbg.location(62,85);
-            string_literal94=(Token)match(input,42,FOLLOW_42_in_condition951);  
-            stream_42.add(string_literal94);
+            dbg.location(66,85);
+            string_literal94=(Token)match(input,46,FOLLOW_46_in_condition1018);  
+            stream_46.add(string_literal94);
 
 
 
             // AST REWRITE
-            // elements: 39, instruction, 40, instruction, exp, 41
+            // elements: exp, 44, instruction, 43, instruction, 45
             // token labels: 
             // rule labels: retval
             // token list labels: 
@@ -3507,48 +3603,56 @@ public class compParser extends DebugParser {
             RewriteRuleSubtreeStream stream_retval=new RewriteRuleSubtreeStream(adaptor,"rule retval",retval!=null?retval.tree:null);
 
             root_0 = (Object)adaptor.nil();
-            // 62:90: -> ^( 'if' exp ^( 'then' instruction ) ( 'else' ( instruction )+ )? )
+            // 66:90: -> ^( 'if' exp ^( 'then' instruction ) ( ^( 'else' ( instruction )+ ) )? )
             {
-                dbg.location(62,92);
-                // /home/etudiants/karim2u/Bureau/COMPILATION/vincent66u/comp.g:62:92: ^( 'if' exp ^( 'then' instruction ) ( 'else' ( instruction )+ )? )
+                dbg.location(66,92);
+                // /home/katana/Desktop/compile/vincent66u/comp.g:66:92: ^( 'if' exp ^( 'then' instruction ) ( ^( 'else' ( instruction )+ ) )? )
                 {
                 Object root_1 = (Object)adaptor.nil();
-                dbg.location(62,94);
-                root_1 = (Object)adaptor.becomeRoot(stream_39.nextNode(), root_1);
+                dbg.location(66,94);
+                root_1 = (Object)adaptor.becomeRoot(stream_43.nextNode(), root_1);
 
-                dbg.location(62,99);
+                dbg.location(66,99);
                 adaptor.addChild(root_1, stream_exp.nextTree());
-                dbg.location(62,103);
-                // /home/etudiants/karim2u/Bureau/COMPILATION/vincent66u/comp.g:62:103: ^( 'then' instruction )
+                dbg.location(66,103);
+                // /home/katana/Desktop/compile/vincent66u/comp.g:66:103: ^( 'then' instruction )
                 {
                 Object root_2 = (Object)adaptor.nil();
-                dbg.location(62,105);
-                root_2 = (Object)adaptor.becomeRoot(stream_40.nextNode(), root_2);
+                dbg.location(66,105);
+                root_2 = (Object)adaptor.becomeRoot(stream_44.nextNode(), root_2);
 
-                dbg.location(62,112);
+                dbg.location(66,112);
                 adaptor.addChild(root_2, stream_instruction.nextTree());
 
                 adaptor.addChild(root_1, root_2);
                 }
-                dbg.location(62,125);
-                // /home/etudiants/karim2u/Bureau/COMPILATION/vincent66u/comp.g:62:125: ( 'else' ( instruction )+ )?
-                if ( stream_instruction.hasNext()||stream_41.hasNext() ) {
-                    dbg.location(62,126);
-                    adaptor.addChild(root_1, stream_41.nextNode());
-                    dbg.location(62,133);
+                dbg.location(66,125);
+                // /home/katana/Desktop/compile/vincent66u/comp.g:66:125: ( ^( 'else' ( instruction )+ ) )?
+                if ( stream_instruction.hasNext()||stream_45.hasNext() ) {
+                    dbg.location(66,125);
+                    // /home/katana/Desktop/compile/vincent66u/comp.g:66:125: ^( 'else' ( instruction )+ )
+                    {
+                    Object root_2 = (Object)adaptor.nil();
+                    dbg.location(66,127);
+                    root_2 = (Object)adaptor.becomeRoot(stream_45.nextNode(), root_2);
+
+                    dbg.location(66,134);
                     if ( !(stream_instruction.hasNext()) ) {
                         throw new RewriteEarlyExitException();
                     }
                     while ( stream_instruction.hasNext() ) {
-                        dbg.location(62,134);
-                        adaptor.addChild(root_1, stream_instruction.nextTree());
+                        dbg.location(66,135);
+                        adaptor.addChild(root_2, stream_instruction.nextTree());
 
                     }
                     stream_instruction.reset();
 
+                    adaptor.addChild(root_1, root_2);
+                    }
+
                 }
                 stream_instruction.reset();
-                stream_41.reset();
+                stream_45.reset();
 
                 adaptor.addChild(root_0, root_1);
                 }
@@ -3572,7 +3676,7 @@ public class compParser extends DebugParser {
         }
         finally {
         }
-        dbg.location(62, 150);
+        dbg.location(66, 151);
 
         }
         finally {
@@ -3591,7 +3695,7 @@ public class compParser extends DebugParser {
     };
 
     // $ANTLR start "retour"
-    // /home/etudiants/karim2u/Bureau/COMPILATION/vincent66u/comp.g:63:1: retour : 'retour' '(' exp ')' -> ^( RETOUR exp ) ;
+    // /home/katana/Desktop/compile/vincent66u/comp.g:67:1: retour : 'retour' '(' exp ')' -> ^( RETOUR exp ) ;
     public final compParser.retour_return retour() throws RecognitionException {
         compParser.retour_return retval = new compParser.retour_return();
         retval.start = input.LT(1);
@@ -3608,38 +3712,38 @@ public class compParser extends DebugParser {
         Object char_literal96_tree=null;
         Object char_literal98_tree=null;
         RewriteRuleTokenStream stream_RETOUR=new RewriteRuleTokenStream(adaptor,"token RETOUR");
-        RewriteRuleTokenStream stream_31=new RewriteRuleTokenStream(adaptor,"token 31");
-        RewriteRuleTokenStream stream_32=new RewriteRuleTokenStream(adaptor,"token 32");
+        RewriteRuleTokenStream stream_35=new RewriteRuleTokenStream(adaptor,"token 35");
+        RewriteRuleTokenStream stream_36=new RewriteRuleTokenStream(adaptor,"token 36");
         RewriteRuleSubtreeStream stream_exp=new RewriteRuleSubtreeStream(adaptor,"rule exp");
         try { dbg.enterRule(getGrammarFileName(), "retour");
         if ( getRuleLevel()==0 ) {dbg.commence();}
         incRuleLevel();
-        dbg.location(63, 1);
+        dbg.location(67, 1);
 
         try {
-            // /home/etudiants/karim2u/Bureau/COMPILATION/vincent66u/comp.g:63:12: ( 'retour' '(' exp ')' -> ^( RETOUR exp ) )
+            // /home/katana/Desktop/compile/vincent66u/comp.g:67:12: ( 'retour' '(' exp ')' -> ^( RETOUR exp ) )
             dbg.enterAlt(1);
 
-            // /home/etudiants/karim2u/Bureau/COMPILATION/vincent66u/comp.g:63:16: 'retour' '(' exp ')'
+            // /home/katana/Desktop/compile/vincent66u/comp.g:67:16: 'retour' '(' exp ')'
             {
-            dbg.location(63,16);
-            string_literal95=(Token)match(input,RETOUR,FOLLOW_RETOUR_in_retour987);  
+            dbg.location(67,16);
+            string_literal95=(Token)match(input,RETOUR,FOLLOW_RETOUR_in_retour1054);  
             stream_RETOUR.add(string_literal95);
 
-            dbg.location(63,25);
-            char_literal96=(Token)match(input,31,FOLLOW_31_in_retour989);  
-            stream_31.add(char_literal96);
+            dbg.location(67,25);
+            char_literal96=(Token)match(input,35,FOLLOW_35_in_retour1056);  
+            stream_35.add(char_literal96);
 
-            dbg.location(63,31);
-            pushFollow(FOLLOW_exp_in_retour993);
+            dbg.location(67,31);
+            pushFollow(FOLLOW_exp_in_retour1060);
             exp97=exp();
 
             state._fsp--;
 
             stream_exp.add(exp97.getTree());
-            dbg.location(63,38);
-            char_literal98=(Token)match(input,32,FOLLOW_32_in_retour998);  
-            stream_32.add(char_literal98);
+            dbg.location(67,38);
+            char_literal98=(Token)match(input,36,FOLLOW_36_in_retour1065);  
+            stream_36.add(char_literal98);
 
 
 
@@ -3654,16 +3758,16 @@ public class compParser extends DebugParser {
             RewriteRuleSubtreeStream stream_retval=new RewriteRuleSubtreeStream(adaptor,"rule retval",retval!=null?retval.tree:null);
 
             root_0 = (Object)adaptor.nil();
-            // 63:41: -> ^( RETOUR exp )
+            // 67:41: -> ^( RETOUR exp )
             {
-                dbg.location(63,43);
-                // /home/etudiants/karim2u/Bureau/COMPILATION/vincent66u/comp.g:63:43: ^( RETOUR exp )
+                dbg.location(67,43);
+                // /home/katana/Desktop/compile/vincent66u/comp.g:67:43: ^( RETOUR exp )
                 {
                 Object root_1 = (Object)adaptor.nil();
-                dbg.location(63,45);
+                dbg.location(67,45);
                 root_1 = (Object)adaptor.becomeRoot((Object)adaptor.create(RETOUR, "RETOUR"), root_1);
 
-                dbg.location(63,52);
+                dbg.location(67,52);
                 adaptor.addChild(root_1, stream_exp.nextTree());
 
                 adaptor.addChild(root_0, root_1);
@@ -3688,7 +3792,7 @@ public class compParser extends DebugParser {
         }
         finally {
         }
-        dbg.location(63, 57);
+        dbg.location(67, 57);
 
         }
         finally {
@@ -3707,7 +3811,7 @@ public class compParser extends DebugParser {
     };
 
     // $ANTLR start "read"
-    // /home/etudiants/karim2u/Bureau/COMPILATION/vincent66u/comp.g:64:1: read : 'read' IDF -> ^( READ IDF ) ;
+    // /home/katana/Desktop/compile/vincent66u/comp.g:68:1: read : 'read' IDF -> ^( READ IDF ) ;
     public final compParser.read_return read() throws RecognitionException {
         compParser.read_return retval = new compParser.read_return();
         retval.start = input.LT(1);
@@ -3719,26 +3823,26 @@ public class compParser extends DebugParser {
 
         Object string_literal99_tree=null;
         Object IDF100_tree=null;
-        RewriteRuleTokenStream stream_READ=new RewriteRuleTokenStream(adaptor,"token READ");
         RewriteRuleTokenStream stream_IDF=new RewriteRuleTokenStream(adaptor,"token IDF");
+        RewriteRuleTokenStream stream_READ=new RewriteRuleTokenStream(adaptor,"token READ");
 
         try { dbg.enterRule(getGrammarFileName(), "read");
         if ( getRuleLevel()==0 ) {dbg.commence();}
         incRuleLevel();
-        dbg.location(64, 1);
+        dbg.location(68, 1);
 
         try {
-            // /home/etudiants/karim2u/Bureau/COMPILATION/vincent66u/comp.g:64:12: ( 'read' IDF -> ^( READ IDF ) )
+            // /home/katana/Desktop/compile/vincent66u/comp.g:68:12: ( 'read' IDF -> ^( READ IDF ) )
             dbg.enterAlt(1);
 
-            // /home/etudiants/karim2u/Bureau/COMPILATION/vincent66u/comp.g:64:16: 'read' IDF
+            // /home/katana/Desktop/compile/vincent66u/comp.g:68:16: 'read' IDF
             {
-            dbg.location(64,16);
-            string_literal99=(Token)match(input,READ,FOLLOW_READ_in_read1020);  
+            dbg.location(68,16);
+            string_literal99=(Token)match(input,READ,FOLLOW_READ_in_read1087);  
             stream_READ.add(string_literal99);
 
-            dbg.location(64,26);
-            IDF100=(Token)match(input,IDF,FOLLOW_IDF_in_read1025);  
+            dbg.location(68,26);
+            IDF100=(Token)match(input,IDF,FOLLOW_IDF_in_read1092);  
             stream_IDF.add(IDF100);
 
 
@@ -3754,16 +3858,16 @@ public class compParser extends DebugParser {
             RewriteRuleSubtreeStream stream_retval=new RewriteRuleSubtreeStream(adaptor,"rule retval",retval!=null?retval.tree:null);
 
             root_0 = (Object)adaptor.nil();
-            // 64:30: -> ^( READ IDF )
+            // 68:30: -> ^( READ IDF )
             {
-                dbg.location(64,32);
-                // /home/etudiants/karim2u/Bureau/COMPILATION/vincent66u/comp.g:64:32: ^( READ IDF )
+                dbg.location(68,32);
+                // /home/katana/Desktop/compile/vincent66u/comp.g:68:32: ^( READ IDF )
                 {
                 Object root_1 = (Object)adaptor.nil();
-                dbg.location(64,34);
+                dbg.location(68,34);
                 root_1 = (Object)adaptor.becomeRoot((Object)adaptor.create(READ, "READ"), root_1);
 
-                dbg.location(64,39);
+                dbg.location(68,39);
                 adaptor.addChild(root_1, stream_IDF.nextNode());
 
                 adaptor.addChild(root_0, root_1);
@@ -3788,7 +3892,7 @@ public class compParser extends DebugParser {
         }
         finally {
         }
-        dbg.location(64, 43);
+        dbg.location(68, 43);
 
         }
         finally {
@@ -3807,7 +3911,7 @@ public class compParser extends DebugParser {
     };
 
     // $ANTLR start "write"
-    // /home/etudiants/karim2u/Bureau/COMPILATION/vincent66u/comp.g:65:1: write : ( 'write' exp -> ^( WRITE exp ) | 'write' CSTE_CHAINE -> ^( WRITE CSTE_CHAINE ) );
+    // /home/katana/Desktop/compile/vincent66u/comp.g:69:1: write : ( 'write' exp -> ^( WRITE exp ) | 'write' CSTE_CHAINE -> ^( WRITE CSTE_CHAINE ) );
     public final compParser.write_return write() throws RecognitionException {
         compParser.write_return retval = new compParser.write_return();
         retval.start = input.LT(1);
@@ -3829,10 +3933,10 @@ public class compParser extends DebugParser {
         try { dbg.enterRule(getGrammarFileName(), "write");
         if ( getRuleLevel()==0 ) {dbg.commence();}
         incRuleLevel();
-        dbg.location(65, 1);
+        dbg.location(69, 1);
 
         try {
-            // /home/etudiants/karim2u/Bureau/COMPILATION/vincent66u/comp.g:65:10: ( 'write' exp -> ^( WRITE exp ) | 'write' CSTE_CHAINE -> ^( WRITE CSTE_CHAINE ) )
+            // /home/katana/Desktop/compile/vincent66u/comp.g:69:10: ( 'write' exp -> ^( WRITE exp ) | 'write' CSTE_CHAINE -> ^( WRITE CSTE_CHAINE ) )
             int alt25=2;
             try { dbg.enterDecision(25);
 
@@ -3844,7 +3948,7 @@ public class compParser extends DebugParser {
                 if ( (LA25_1==CSTE_CHAINE) ) {
                     alt25=2;
                 }
-                else if ( ((LA25_1>=IDF && LA25_1<=CST_ENT)||LA25_1==31||(LA25_1>=44 && LA25_1<=46)) ) {
+                else if ( ((LA25_1>=IDF && LA25_1<=CST_ENT)||LA25_1==35||(LA25_1>=48 && LA25_1<=50)) ) {
                     alt25=1;
                 }
                 else {
@@ -3868,14 +3972,14 @@ public class compParser extends DebugParser {
                 case 1 :
                     dbg.enterAlt(1);
 
-                    // /home/etudiants/karim2u/Bureau/COMPILATION/vincent66u/comp.g:65:14: 'write' exp
+                    // /home/katana/Desktop/compile/vincent66u/comp.g:69:14: 'write' exp
                     {
-                    dbg.location(65,14);
-                    string_literal101=(Token)match(input,WRITE,FOLLOW_WRITE_in_write1044);  
+                    dbg.location(69,14);
+                    string_literal101=(Token)match(input,WRITE,FOLLOW_WRITE_in_write1111);  
                     stream_WRITE.add(string_literal101);
 
-                    dbg.location(65,22);
-                    pushFollow(FOLLOW_exp_in_write1046);
+                    dbg.location(69,22);
+                    pushFollow(FOLLOW_exp_in_write1113);
                     exp102=exp();
 
                     state._fsp--;
@@ -3894,16 +3998,16 @@ public class compParser extends DebugParser {
                     RewriteRuleSubtreeStream stream_retval=new RewriteRuleSubtreeStream(adaptor,"rule retval",retval!=null?retval.tree:null);
 
                     root_0 = (Object)adaptor.nil();
-                    // 65:25: -> ^( WRITE exp )
+                    // 69:25: -> ^( WRITE exp )
                     {
-                        dbg.location(65,27);
-                        // /home/etudiants/karim2u/Bureau/COMPILATION/vincent66u/comp.g:65:27: ^( WRITE exp )
+                        dbg.location(69,27);
+                        // /home/katana/Desktop/compile/vincent66u/comp.g:69:27: ^( WRITE exp )
                         {
                         Object root_1 = (Object)adaptor.nil();
-                        dbg.location(65,29);
+                        dbg.location(69,29);
                         root_1 = (Object)adaptor.becomeRoot((Object)adaptor.create(WRITE, "WRITE"), root_1);
 
-                        dbg.location(65,35);
+                        dbg.location(69,35);
                         adaptor.addChild(root_1, stream_exp.nextTree());
 
                         adaptor.addChild(root_0, root_1);
@@ -3917,14 +4021,14 @@ public class compParser extends DebugParser {
                 case 2 :
                     dbg.enterAlt(2);
 
-                    // /home/etudiants/karim2u/Bureau/COMPILATION/vincent66u/comp.g:66:10: 'write' CSTE_CHAINE
+                    // /home/katana/Desktop/compile/vincent66u/comp.g:70:10: 'write' CSTE_CHAINE
                     {
-                    dbg.location(66,10);
-                    string_literal103=(Token)match(input,WRITE,FOLLOW_WRITE_in_write1063);  
+                    dbg.location(70,10);
+                    string_literal103=(Token)match(input,WRITE,FOLLOW_WRITE_in_write1130);  
                     stream_WRITE.add(string_literal103);
 
-                    dbg.location(66,18);
-                    CSTE_CHAINE104=(Token)match(input,CSTE_CHAINE,FOLLOW_CSTE_CHAINE_in_write1065);  
+                    dbg.location(70,18);
+                    CSTE_CHAINE104=(Token)match(input,CSTE_CHAINE,FOLLOW_CSTE_CHAINE_in_write1132);  
                     stream_CSTE_CHAINE.add(CSTE_CHAINE104);
 
 
@@ -3940,16 +4044,16 @@ public class compParser extends DebugParser {
                     RewriteRuleSubtreeStream stream_retval=new RewriteRuleSubtreeStream(adaptor,"rule retval",retval!=null?retval.tree:null);
 
                     root_0 = (Object)adaptor.nil();
-                    // 66:30: -> ^( WRITE CSTE_CHAINE )
+                    // 70:30: -> ^( WRITE CSTE_CHAINE )
                     {
-                        dbg.location(66,32);
-                        // /home/etudiants/karim2u/Bureau/COMPILATION/vincent66u/comp.g:66:32: ^( WRITE CSTE_CHAINE )
+                        dbg.location(70,32);
+                        // /home/katana/Desktop/compile/vincent66u/comp.g:70:32: ^( WRITE CSTE_CHAINE )
                         {
                         Object root_1 = (Object)adaptor.nil();
-                        dbg.location(66,34);
+                        dbg.location(70,34);
                         root_1 = (Object)adaptor.becomeRoot((Object)adaptor.create(WRITE, "WRITE"), root_1);
 
-                        dbg.location(66,40);
+                        dbg.location(70,40);
                         adaptor.addChild(root_1, stream_CSTE_CHAINE.nextNode());
 
                         adaptor.addChild(root_0, root_1);
@@ -3976,7 +4080,7 @@ public class compParser extends DebugParser {
         }
         finally {
         }
-        dbg.location(67, 9);
+        dbg.location(71, 9);
 
         }
         finally {
@@ -3995,7 +4099,7 @@ public class compParser extends DebugParser {
     };
 
     // $ANTLR start "exp"
-    // /home/etudiants/karim2u/Bureau/COMPILATION/vincent66u/comp.g:68:2: exp : ( plus ( ( '+' | '-' ) plus )* | 'true' | 'false' | exp2 );
+    // /home/katana/Desktop/compile/vincent66u/comp.g:72:2: exp : ( plus ( ( '+' | '-' ) plus )* | 'true' | 'false' | exp2 );
     public final compParser.exp_return exp() throws RecognitionException {
         compParser.exp_return retval = new compParser.exp_return();
         retval.start = input.LT(1);
@@ -4019,17 +4123,17 @@ public class compParser extends DebugParser {
         try { dbg.enterRule(getGrammarFileName(), "exp");
         if ( getRuleLevel()==0 ) {dbg.commence();}
         incRuleLevel();
-        dbg.location(68, 2);
+        dbg.location(72, 2);
 
         try {
-            // /home/etudiants/karim2u/Bureau/COMPILATION/vincent66u/comp.g:68:9: ( plus ( ( '+' | '-' ) plus )* | 'true' | 'false' | exp2 )
+            // /home/katana/Desktop/compile/vincent66u/comp.g:72:9: ( plus ( ( '+' | '-' ) plus )* | 'true' | 'false' | exp2 )
             int alt27=4;
             try { dbg.enterDecision(27);
 
             switch ( input.LA(1) ) {
             case CST_ENT:
-            case 31:
-            case 44:
+            case 35:
+            case 48:
                 {
                 alt27=1;
                 }
@@ -4038,10 +4142,10 @@ public class compParser extends DebugParser {
                 {
                 int LA27_2 = input.LA(2);
 
-                if ( (LA27_2==28||LA27_2==31) ) {
+                if ( (LA27_2==32||LA27_2==35) ) {
                     alt27=4;
                 }
-                else if ( ((LA27_2>=RETOUR && LA27_2<=WRITE)||LA27_2==IDF||(LA27_2>=22 && LA27_2<=24)||(LA27_2>=29 && LA27_2<=30)||LA27_2==32||LA27_2==35||LA27_2==37||(LA27_2>=39 && LA27_2<=44)||(LA27_2>=47 && LA27_2<=54)) ) {
+                else if ( ((LA27_2>=RETOUR && LA27_2<=WRITE)||LA27_2==IDF||(LA27_2>=26 && LA27_2<=28)||(LA27_2>=33 && LA27_2<=34)||LA27_2==36||LA27_2==39||LA27_2==41||(LA27_2>=43 && LA27_2<=48)||(LA27_2>=51 && LA27_2<=58)) ) {
                     alt27=1;
                 }
                 else {
@@ -4053,12 +4157,12 @@ public class compParser extends DebugParser {
                 }
                 }
                 break;
-            case 45:
+            case 49:
                 {
                 alt27=2;
                 }
                 break;
-            case 46:
+            case 50:
                 {
                 alt27=3;
                 }
@@ -4077,19 +4181,19 @@ public class compParser extends DebugParser {
                 case 1 :
                     dbg.enterAlt(1);
 
-                    // /home/etudiants/karim2u/Bureau/COMPILATION/vincent66u/comp.g:68:14: plus ( ( '+' | '-' ) plus )*
+                    // /home/katana/Desktop/compile/vincent66u/comp.g:72:14: plus ( ( '+' | '-' ) plus )*
                     {
                     root_0 = (Object)adaptor.nil();
 
-                    dbg.location(68,14);
-                    pushFollow(FOLLOW_plus_in_exp1095);
+                    dbg.location(72,14);
+                    pushFollow(FOLLOW_plus_in_exp1162);
                     plus105=plus();
 
                     state._fsp--;
 
                     adaptor.addChild(root_0, plus105.getTree());
-                    dbg.location(68,19);
-                    // /home/etudiants/karim2u/Bureau/COMPILATION/vincent66u/comp.g:68:19: ( ( '+' | '-' ) plus )*
+                    dbg.location(72,19);
+                    // /home/katana/Desktop/compile/vincent66u/comp.g:72:19: ( ( '+' | '-' ) plus )*
                     try { dbg.enterSubRule(26);
 
                     loop26:
@@ -4099,7 +4203,7 @@ public class compParser extends DebugParser {
 
                         int LA26_0 = input.LA(1);
 
-                        if ( ((LA26_0>=43 && LA26_0<=44)) ) {
+                        if ( ((LA26_0>=47 && LA26_0<=48)) ) {
                             alt26=1;
                         }
 
@@ -4110,12 +4214,12 @@ public class compParser extends DebugParser {
                     	case 1 :
                     	    dbg.enterAlt(1);
 
-                    	    // /home/etudiants/karim2u/Bureau/COMPILATION/vincent66u/comp.g:68:20: ( '+' | '-' ) plus
+                    	    // /home/katana/Desktop/compile/vincent66u/comp.g:72:20: ( '+' | '-' ) plus
                     	    {
-                    	    dbg.location(68,20);
+                    	    dbg.location(72,20);
                     	    set106=(Token)input.LT(1);
                     	    set106=(Token)input.LT(1);
-                    	    if ( (input.LA(1)>=43 && input.LA(1)<=44) ) {
+                    	    if ( (input.LA(1)>=47 && input.LA(1)<=48) ) {
                     	        input.consume();
                     	        root_0 = (Object)adaptor.becomeRoot((Object)adaptor.create(set106), root_0);
                     	        state.errorRecovery=false;
@@ -4126,8 +4230,8 @@ public class compParser extends DebugParser {
                     	        throw mse;
                     	    }
 
-                    	    dbg.location(68,31);
-                    	    pushFollow(FOLLOW_plus_in_exp1105);
+                    	    dbg.location(72,31);
+                    	    pushFollow(FOLLOW_plus_in_exp1172);
                     	    plus107=plus();
 
                     	    state._fsp--;
@@ -4149,12 +4253,12 @@ public class compParser extends DebugParser {
                 case 2 :
                     dbg.enterAlt(2);
 
-                    // /home/etudiants/karim2u/Bureau/COMPILATION/vincent66u/comp.g:69:12: 'true'
+                    // /home/katana/Desktop/compile/vincent66u/comp.g:73:12: 'true'
                     {
                     root_0 = (Object)adaptor.nil();
 
-                    dbg.location(69,12);
-                    string_literal108=(Token)match(input,45,FOLLOW_45_in_exp1120); 
+                    dbg.location(73,12);
+                    string_literal108=(Token)match(input,49,FOLLOW_49_in_exp1187); 
                     string_literal108_tree = (Object)adaptor.create(string_literal108);
                     adaptor.addChild(root_0, string_literal108_tree);
 
@@ -4164,12 +4268,12 @@ public class compParser extends DebugParser {
                 case 3 :
                     dbg.enterAlt(3);
 
-                    // /home/etudiants/karim2u/Bureau/COMPILATION/vincent66u/comp.g:70:12: 'false'
+                    // /home/katana/Desktop/compile/vincent66u/comp.g:74:12: 'false'
                     {
                     root_0 = (Object)adaptor.nil();
 
-                    dbg.location(70,12);
-                    string_literal109=(Token)match(input,46,FOLLOW_46_in_exp1133); 
+                    dbg.location(74,12);
+                    string_literal109=(Token)match(input,50,FOLLOW_50_in_exp1200); 
                     string_literal109_tree = (Object)adaptor.create(string_literal109);
                     adaptor.addChild(root_0, string_literal109_tree);
 
@@ -4179,12 +4283,12 @@ public class compParser extends DebugParser {
                 case 4 :
                     dbg.enterAlt(4);
 
-                    // /home/etudiants/karim2u/Bureau/COMPILATION/vincent66u/comp.g:71:12: exp2
+                    // /home/katana/Desktop/compile/vincent66u/comp.g:75:12: exp2
                     {
                     root_0 = (Object)adaptor.nil();
 
-                    dbg.location(71,12);
-                    pushFollow(FOLLOW_exp2_in_exp1146);
+                    dbg.location(75,12);
+                    pushFollow(FOLLOW_exp2_in_exp1213);
                     exp2110=exp2();
 
                     state._fsp--;
@@ -4209,7 +4313,7 @@ public class compParser extends DebugParser {
         }
         finally {
         }
-        dbg.location(71, 16);
+        dbg.location(75, 16);
 
         }
         finally {
@@ -4228,7 +4332,7 @@ public class compParser extends DebugParser {
     };
 
     // $ANTLR start "exp2"
-    // /home/etudiants/karim2u/Bureau/COMPILATION/vincent66u/comp.g:72:1: exp2 : ( IDF '(' ( exp ( ',' exp )* )? ')' -> ^( exp IDF ) | IDF '[' exp ( ',' exp )* ']' -> ^( exp IDF ) );
+    // /home/katana/Desktop/compile/vincent66u/comp.g:76:1: exp2 : ( IDF '(' ( exp ( ',' exp )* )? ')' -> ^( APPEL IDF ( exp )* ) | IDF '[' exp ( ',' exp )* ']' -> ^( exp IDF ) );
     public final compParser.exp2_return exp2() throws RecognitionException {
         compParser.exp2_return retval = new compParser.exp2_return();
         retval.start = input.LT(1);
@@ -4260,20 +4364,20 @@ public class compParser extends DebugParser {
         Object char_literal118_tree=null;
         Object char_literal120_tree=null;
         Object char_literal122_tree=null;
-        RewriteRuleTokenStream stream_24=new RewriteRuleTokenStream(adaptor,"token 24");
-        RewriteRuleTokenStream stream_28=new RewriteRuleTokenStream(adaptor,"token 28");
-        RewriteRuleTokenStream stream_29=new RewriteRuleTokenStream(adaptor,"token 29");
-        RewriteRuleTokenStream stream_IDF=new RewriteRuleTokenStream(adaptor,"token IDF");
-        RewriteRuleTokenStream stream_31=new RewriteRuleTokenStream(adaptor,"token 31");
         RewriteRuleTokenStream stream_32=new RewriteRuleTokenStream(adaptor,"token 32");
+        RewriteRuleTokenStream stream_IDF=new RewriteRuleTokenStream(adaptor,"token IDF");
+        RewriteRuleTokenStream stream_35=new RewriteRuleTokenStream(adaptor,"token 35");
+        RewriteRuleTokenStream stream_36=new RewriteRuleTokenStream(adaptor,"token 36");
+        RewriteRuleTokenStream stream_33=new RewriteRuleTokenStream(adaptor,"token 33");
+        RewriteRuleTokenStream stream_28=new RewriteRuleTokenStream(adaptor,"token 28");
         RewriteRuleSubtreeStream stream_exp=new RewriteRuleSubtreeStream(adaptor,"rule exp");
         try { dbg.enterRule(getGrammarFileName(), "exp2");
         if ( getRuleLevel()==0 ) {dbg.commence();}
         incRuleLevel();
-        dbg.location(72, 1);
+        dbg.location(76, 1);
 
         try {
-            // /home/etudiants/karim2u/Bureau/COMPILATION/vincent66u/comp.g:72:11: ( IDF '(' ( exp ( ',' exp )* )? ')' -> ^( exp IDF ) | IDF '[' exp ( ',' exp )* ']' -> ^( exp IDF ) )
+            // /home/katana/Desktop/compile/vincent66u/comp.g:76:11: ( IDF '(' ( exp ( ',' exp )* )? ')' -> ^( APPEL IDF ( exp )* ) | IDF '[' exp ( ',' exp )* ']' -> ^( exp IDF ) )
             int alt31=2;
             try { dbg.enterDecision(31);
 
@@ -4282,10 +4386,10 @@ public class compParser extends DebugParser {
             if ( (LA31_0==IDF) ) {
                 int LA31_1 = input.LA(2);
 
-                if ( (LA31_1==31) ) {
+                if ( (LA31_1==35) ) {
                     alt31=1;
                 }
-                else if ( (LA31_1==28) ) {
+                else if ( (LA31_1==32) ) {
                     alt31=2;
                 }
                 else {
@@ -4309,25 +4413,25 @@ public class compParser extends DebugParser {
                 case 1 :
                     dbg.enterAlt(1);
 
-                    // /home/etudiants/karim2u/Bureau/COMPILATION/vincent66u/comp.g:72:17: IDF '(' ( exp ( ',' exp )* )? ')'
+                    // /home/katana/Desktop/compile/vincent66u/comp.g:76:17: IDF '(' ( exp ( ',' exp )* )? ')'
                     {
-                    dbg.location(72,17);
-                    IDF111=(Token)match(input,IDF,FOLLOW_IDF_in_exp21162);  
+                    dbg.location(76,17);
+                    IDF111=(Token)match(input,IDF,FOLLOW_IDF_in_exp21229);  
                     stream_IDF.add(IDF111);
 
-                    dbg.location(72,21);
-                    char_literal112=(Token)match(input,31,FOLLOW_31_in_exp21164);  
-                    stream_31.add(char_literal112);
+                    dbg.location(76,21);
+                    char_literal112=(Token)match(input,35,FOLLOW_35_in_exp21231);  
+                    stream_35.add(char_literal112);
 
-                    dbg.location(72,25);
-                    // /home/etudiants/karim2u/Bureau/COMPILATION/vincent66u/comp.g:72:25: ( exp ( ',' exp )* )?
+                    dbg.location(76,25);
+                    // /home/katana/Desktop/compile/vincent66u/comp.g:76:25: ( exp ( ',' exp )* )?
                     int alt29=2;
                     try { dbg.enterSubRule(29);
                     try { dbg.enterDecision(29);
 
                     int LA29_0 = input.LA(1);
 
-                    if ( ((LA29_0>=IDF && LA29_0<=CST_ENT)||LA29_0==31||(LA29_0>=44 && LA29_0<=46)) ) {
+                    if ( ((LA29_0>=IDF && LA29_0<=CST_ENT)||LA29_0==35||(LA29_0>=48 && LA29_0<=50)) ) {
                         alt29=1;
                     }
                     } finally {dbg.exitDecision(29);}
@@ -4336,17 +4440,17 @@ public class compParser extends DebugParser {
                         case 1 :
                             dbg.enterAlt(1);
 
-                            // /home/etudiants/karim2u/Bureau/COMPILATION/vincent66u/comp.g:72:26: exp ( ',' exp )*
+                            // /home/katana/Desktop/compile/vincent66u/comp.g:76:26: exp ( ',' exp )*
                             {
-                            dbg.location(72,26);
-                            pushFollow(FOLLOW_exp_in_exp21167);
+                            dbg.location(76,26);
+                            pushFollow(FOLLOW_exp_in_exp21234);
                             exp113=exp();
 
                             state._fsp--;
 
                             stream_exp.add(exp113.getTree());
-                            dbg.location(72,30);
-                            // /home/etudiants/karim2u/Bureau/COMPILATION/vincent66u/comp.g:72:30: ( ',' exp )*
+                            dbg.location(76,30);
+                            // /home/katana/Desktop/compile/vincent66u/comp.g:76:30: ( ',' exp )*
                             try { dbg.enterSubRule(28);
 
                             loop28:
@@ -4356,7 +4460,7 @@ public class compParser extends DebugParser {
 
                                 int LA28_0 = input.LA(1);
 
-                                if ( (LA28_0==24) ) {
+                                if ( (LA28_0==28) ) {
                                     alt28=1;
                                 }
 
@@ -4367,14 +4471,14 @@ public class compParser extends DebugParser {
                             	case 1 :
                             	    dbg.enterAlt(1);
 
-                            	    // /home/etudiants/karim2u/Bureau/COMPILATION/vincent66u/comp.g:72:31: ',' exp
+                            	    // /home/katana/Desktop/compile/vincent66u/comp.g:76:31: ',' exp
                             	    {
-                            	    dbg.location(72,31);
-                            	    char_literal114=(Token)match(input,24,FOLLOW_24_in_exp21170);  
-                            	    stream_24.add(char_literal114);
+                            	    dbg.location(76,31);
+                            	    char_literal114=(Token)match(input,28,FOLLOW_28_in_exp21237);  
+                            	    stream_28.add(char_literal114);
 
-                            	    dbg.location(72,35);
-                            	    pushFollow(FOLLOW_exp_in_exp21172);
+                            	    dbg.location(76,35);
+                            	    pushFollow(FOLLOW_exp_in_exp21239);
                             	    exp115=exp();
 
                             	    state._fsp--;
@@ -4397,9 +4501,9 @@ public class compParser extends DebugParser {
                     }
                     } finally {dbg.exitSubRule(29);}
 
-                    dbg.location(72,44);
-                    char_literal116=(Token)match(input,32,FOLLOW_32_in_exp21179);  
-                    stream_32.add(char_literal116);
+                    dbg.location(76,44);
+                    char_literal116=(Token)match(input,36,FOLLOW_36_in_exp21246);  
+                    stream_36.add(char_literal116);
 
 
 
@@ -4414,17 +4518,25 @@ public class compParser extends DebugParser {
                     RewriteRuleSubtreeStream stream_retval=new RewriteRuleSubtreeStream(adaptor,"rule retval",retval!=null?retval.tree:null);
 
                     root_0 = (Object)adaptor.nil();
-                    // 72:47: -> ^( exp IDF )
+                    // 76:47: -> ^( APPEL IDF ( exp )* )
                     {
-                        dbg.location(72,49);
-                        // /home/etudiants/karim2u/Bureau/COMPILATION/vincent66u/comp.g:72:49: ^( exp IDF )
+                        dbg.location(76,49);
+                        // /home/katana/Desktop/compile/vincent66u/comp.g:76:49: ^( APPEL IDF ( exp )* )
                         {
                         Object root_1 = (Object)adaptor.nil();
-                        dbg.location(72,51);
-                        root_1 = (Object)adaptor.becomeRoot(stream_exp.nextNode(), root_1);
+                        dbg.location(76,51);
+                        root_1 = (Object)adaptor.becomeRoot((Object)adaptor.create(APPEL, "APPEL"), root_1);
 
-                        dbg.location(72,55);
+                        dbg.location(76,57);
                         adaptor.addChild(root_1, stream_IDF.nextNode());
+                        dbg.location(76,61);
+                        // /home/katana/Desktop/compile/vincent66u/comp.g:76:61: ( exp )*
+                        while ( stream_exp.hasNext() ) {
+                            dbg.location(76,61);
+                            adaptor.addChild(root_1, stream_exp.nextTree());
+
+                        }
+                        stream_exp.reset();
 
                         adaptor.addChild(root_0, root_1);
                         }
@@ -4437,25 +4549,25 @@ public class compParser extends DebugParser {
                 case 2 :
                     dbg.enterAlt(2);
 
-                    // /home/etudiants/karim2u/Bureau/COMPILATION/vincent66u/comp.g:73:18: IDF '[' exp ( ',' exp )* ']'
+                    // /home/katana/Desktop/compile/vincent66u/comp.g:77:18: IDF '[' exp ( ',' exp )* ']'
                     {
-                    dbg.location(73,18);
-                    IDF117=(Token)match(input,IDF,FOLLOW_IDF_in_exp21204);  
+                    dbg.location(77,18);
+                    IDF117=(Token)match(input,IDF,FOLLOW_IDF_in_exp21274);  
                     stream_IDF.add(IDF117);
 
-                    dbg.location(73,22);
-                    char_literal118=(Token)match(input,28,FOLLOW_28_in_exp21206);  
-                    stream_28.add(char_literal118);
+                    dbg.location(77,22);
+                    char_literal118=(Token)match(input,32,FOLLOW_32_in_exp21276);  
+                    stream_32.add(char_literal118);
 
-                    dbg.location(73,26);
-                    pushFollow(FOLLOW_exp_in_exp21208);
+                    dbg.location(77,26);
+                    pushFollow(FOLLOW_exp_in_exp21278);
                     exp119=exp();
 
                     state._fsp--;
 
                     stream_exp.add(exp119.getTree());
-                    dbg.location(73,30);
-                    // /home/etudiants/karim2u/Bureau/COMPILATION/vincent66u/comp.g:73:30: ( ',' exp )*
+                    dbg.location(77,30);
+                    // /home/katana/Desktop/compile/vincent66u/comp.g:77:30: ( ',' exp )*
                     try { dbg.enterSubRule(30);
 
                     loop30:
@@ -4465,7 +4577,7 @@ public class compParser extends DebugParser {
 
                         int LA30_0 = input.LA(1);
 
-                        if ( (LA30_0==24) ) {
+                        if ( (LA30_0==28) ) {
                             alt30=1;
                         }
 
@@ -4476,14 +4588,14 @@ public class compParser extends DebugParser {
                     	case 1 :
                     	    dbg.enterAlt(1);
 
-                    	    // /home/etudiants/karim2u/Bureau/COMPILATION/vincent66u/comp.g:73:31: ',' exp
+                    	    // /home/katana/Desktop/compile/vincent66u/comp.g:77:31: ',' exp
                     	    {
-                    	    dbg.location(73,31);
-                    	    char_literal120=(Token)match(input,24,FOLLOW_24_in_exp21211);  
-                    	    stream_24.add(char_literal120);
+                    	    dbg.location(77,31);
+                    	    char_literal120=(Token)match(input,28,FOLLOW_28_in_exp21281);  
+                    	    stream_28.add(char_literal120);
 
-                    	    dbg.location(73,35);
-                    	    pushFollow(FOLLOW_exp_in_exp21213);
+                    	    dbg.location(77,35);
+                    	    pushFollow(FOLLOW_exp_in_exp21283);
                     	    exp121=exp();
 
                     	    state._fsp--;
@@ -4499,9 +4611,9 @@ public class compParser extends DebugParser {
                     } while (true);
                     } finally {dbg.exitSubRule(30);}
 
-                    dbg.location(73,42);
-                    char_literal122=(Token)match(input,29,FOLLOW_29_in_exp21218);  
-                    stream_29.add(char_literal122);
+                    dbg.location(77,42);
+                    char_literal122=(Token)match(input,33,FOLLOW_33_in_exp21288);  
+                    stream_33.add(char_literal122);
 
 
 
@@ -4516,16 +4628,16 @@ public class compParser extends DebugParser {
                     RewriteRuleSubtreeStream stream_retval=new RewriteRuleSubtreeStream(adaptor,"rule retval",retval!=null?retval.tree:null);
 
                     root_0 = (Object)adaptor.nil();
-                    // 73:45: -> ^( exp IDF )
+                    // 77:45: -> ^( exp IDF )
                     {
-                        dbg.location(73,47);
-                        // /home/etudiants/karim2u/Bureau/COMPILATION/vincent66u/comp.g:73:47: ^( exp IDF )
+                        dbg.location(77,47);
+                        // /home/katana/Desktop/compile/vincent66u/comp.g:77:47: ^( exp IDF )
                         {
                         Object root_1 = (Object)adaptor.nil();
-                        dbg.location(73,49);
+                        dbg.location(77,49);
                         root_1 = (Object)adaptor.becomeRoot(stream_exp.nextNode(), root_1);
 
-                        dbg.location(73,53);
+                        dbg.location(77,53);
                         adaptor.addChild(root_1, stream_IDF.nextNode());
 
                         adaptor.addChild(root_0, root_1);
@@ -4552,7 +4664,7 @@ public class compParser extends DebugParser {
         }
         finally {
         }
-        dbg.location(74, 17);
+        dbg.location(78, 17);
 
         }
         finally {
@@ -4571,7 +4683,7 @@ public class compParser extends DebugParser {
     };
 
     // $ANTLR start "plus"
-    // /home/etudiants/karim2u/Bureau/COMPILATION/vincent66u/comp.g:75:1: plus : fois ( ( '*' | '/' ) fois )* ;
+    // /home/katana/Desktop/compile/vincent66u/comp.g:79:1: plus : fois ( ( '*' | '/' ) fois )* ;
     public final compParser.plus_return plus() throws RecognitionException {
         compParser.plus_return retval = new compParser.plus_return();
         retval.start = input.LT(1);
@@ -4589,25 +4701,25 @@ public class compParser extends DebugParser {
         try { dbg.enterRule(getGrammarFileName(), "plus");
         if ( getRuleLevel()==0 ) {dbg.commence();}
         incRuleLevel();
-        dbg.location(75, 1);
+        dbg.location(79, 1);
 
         try {
-            // /home/etudiants/karim2u/Bureau/COMPILATION/vincent66u/comp.g:75:12: ( fois ( ( '*' | '/' ) fois )* )
+            // /home/katana/Desktop/compile/vincent66u/comp.g:79:12: ( fois ( ( '*' | '/' ) fois )* )
             dbg.enterAlt(1);
 
-            // /home/etudiants/karim2u/Bureau/COMPILATION/vincent66u/comp.g:75:16: fois ( ( '*' | '/' ) fois )*
+            // /home/katana/Desktop/compile/vincent66u/comp.g:79:16: fois ( ( '*' | '/' ) fois )*
             {
             root_0 = (Object)adaptor.nil();
 
-            dbg.location(75,16);
-            pushFollow(FOLLOW_fois_in_plus1256);
+            dbg.location(79,16);
+            pushFollow(FOLLOW_fois_in_plus1326);
             fois123=fois();
 
             state._fsp--;
 
             adaptor.addChild(root_0, fois123.getTree());
-            dbg.location(75,21);
-            // /home/etudiants/karim2u/Bureau/COMPILATION/vincent66u/comp.g:75:21: ( ( '*' | '/' ) fois )*
+            dbg.location(79,21);
+            // /home/katana/Desktop/compile/vincent66u/comp.g:79:21: ( ( '*' | '/' ) fois )*
             try { dbg.enterSubRule(32);
 
             loop32:
@@ -4617,7 +4729,7 @@ public class compParser extends DebugParser {
 
                 int LA32_0 = input.LA(1);
 
-                if ( ((LA32_0>=47 && LA32_0<=48)) ) {
+                if ( ((LA32_0>=51 && LA32_0<=52)) ) {
                     alt32=1;
                 }
 
@@ -4628,12 +4740,12 @@ public class compParser extends DebugParser {
             	case 1 :
             	    dbg.enterAlt(1);
 
-            	    // /home/etudiants/karim2u/Bureau/COMPILATION/vincent66u/comp.g:75:23: ( '*' | '/' ) fois
+            	    // /home/katana/Desktop/compile/vincent66u/comp.g:79:23: ( '*' | '/' ) fois
             	    {
-            	    dbg.location(75,23);
+            	    dbg.location(79,23);
             	    set124=(Token)input.LT(1);
             	    set124=(Token)input.LT(1);
-            	    if ( (input.LA(1)>=47 && input.LA(1)<=48) ) {
+            	    if ( (input.LA(1)>=51 && input.LA(1)<=52) ) {
             	        input.consume();
             	        root_0 = (Object)adaptor.becomeRoot((Object)adaptor.create(set124), root_0);
             	        state.errorRecovery=false;
@@ -4644,8 +4756,8 @@ public class compParser extends DebugParser {
             	        throw mse;
             	    }
 
-            	    dbg.location(75,34);
-            	    pushFollow(FOLLOW_fois_in_plus1267);
+            	    dbg.location(79,34);
+            	    pushFollow(FOLLOW_fois_in_plus1337);
             	    fois125=fois();
 
             	    state._fsp--;
@@ -4678,7 +4790,7 @@ public class compParser extends DebugParser {
         }
         finally {
         }
-        dbg.location(75, 40);
+        dbg.location(79, 40);
 
         }
         finally {
@@ -4697,7 +4809,7 @@ public class compParser extends DebugParser {
     };
 
     // $ANTLR start "fois"
-    // /home/etudiants/karim2u/Bureau/COMPILATION/vincent66u/comp.g:76:1: fois : atom ( ( '==' | '!=' | '<=' | '>=' | '<' | '>' ) atom )* ;
+    // /home/katana/Desktop/compile/vincent66u/comp.g:80:1: fois : atom ( ( '==' | '!=' | '<=' | '>=' | '<' | '>' ) atom )* ;
     public final compParser.fois_return fois() throws RecognitionException {
         compParser.fois_return retval = new compParser.fois_return();
         retval.start = input.LT(1);
@@ -4725,25 +4837,25 @@ public class compParser extends DebugParser {
         try { dbg.enterRule(getGrammarFileName(), "fois");
         if ( getRuleLevel()==0 ) {dbg.commence();}
         incRuleLevel();
-        dbg.location(76, 1);
+        dbg.location(80, 1);
 
         try {
-            // /home/etudiants/karim2u/Bureau/COMPILATION/vincent66u/comp.g:76:12: ( atom ( ( '==' | '!=' | '<=' | '>=' | '<' | '>' ) atom )* )
+            // /home/katana/Desktop/compile/vincent66u/comp.g:80:12: ( atom ( ( '==' | '!=' | '<=' | '>=' | '<' | '>' ) atom )* )
             dbg.enterAlt(1);
 
-            // /home/etudiants/karim2u/Bureau/COMPILATION/vincent66u/comp.g:76:16: atom ( ( '==' | '!=' | '<=' | '>=' | '<' | '>' ) atom )*
+            // /home/katana/Desktop/compile/vincent66u/comp.g:80:16: atom ( ( '==' | '!=' | '<=' | '>=' | '<' | '>' ) atom )*
             {
             root_0 = (Object)adaptor.nil();
 
-            dbg.location(76,16);
-            pushFollow(FOLLOW_atom_in_fois1284);
+            dbg.location(80,16);
+            pushFollow(FOLLOW_atom_in_fois1354);
             atom126=atom();
 
             state._fsp--;
 
             adaptor.addChild(root_0, atom126.getTree());
-            dbg.location(76,21);
-            // /home/etudiants/karim2u/Bureau/COMPILATION/vincent66u/comp.g:76:21: ( ( '==' | '!=' | '<=' | '>=' | '<' | '>' ) atom )*
+            dbg.location(80,21);
+            // /home/katana/Desktop/compile/vincent66u/comp.g:80:21: ( ( '==' | '!=' | '<=' | '>=' | '<' | '>' ) atom )*
             try { dbg.enterSubRule(34);
 
             loop34:
@@ -4753,7 +4865,7 @@ public class compParser extends DebugParser {
 
                 int LA34_0 = input.LA(1);
 
-                if ( ((LA34_0>=49 && LA34_0<=54)) ) {
+                if ( ((LA34_0>=53 && LA34_0<=58)) ) {
                     alt34=1;
                 }
 
@@ -4764,41 +4876,41 @@ public class compParser extends DebugParser {
             	case 1 :
             	    dbg.enterAlt(1);
 
-            	    // /home/etudiants/karim2u/Bureau/COMPILATION/vincent66u/comp.g:76:24: ( '==' | '!=' | '<=' | '>=' | '<' | '>' ) atom
+            	    // /home/katana/Desktop/compile/vincent66u/comp.g:80:24: ( '==' | '!=' | '<=' | '>=' | '<' | '>' ) atom
             	    {
-            	    dbg.location(76,24);
-            	    // /home/etudiants/karim2u/Bureau/COMPILATION/vincent66u/comp.g:76:24: ( '==' | '!=' | '<=' | '>=' | '<' | '>' )
+            	    dbg.location(80,24);
+            	    // /home/katana/Desktop/compile/vincent66u/comp.g:80:24: ( '==' | '!=' | '<=' | '>=' | '<' | '>' )
             	    int alt33=6;
             	    try { dbg.enterSubRule(33);
             	    try { dbg.enterDecision(33);
 
             	    switch ( input.LA(1) ) {
-            	    case 49:
+            	    case 53:
             	        {
             	        alt33=1;
             	        }
             	        break;
-            	    case 50:
+            	    case 54:
             	        {
             	        alt33=2;
             	        }
             	        break;
-            	    case 51:
+            	    case 55:
             	        {
             	        alt33=3;
             	        }
             	        break;
-            	    case 52:
+            	    case 56:
             	        {
             	        alt33=4;
             	        }
             	        break;
-            	    case 53:
+            	    case 57:
             	        {
             	        alt33=5;
             	        }
             	        break;
-            	    case 54:
+            	    case 58:
             	        {
             	        alt33=6;
             	        }
@@ -4817,10 +4929,10 @@ public class compParser extends DebugParser {
             	        case 1 :
             	            dbg.enterAlt(1);
 
-            	            // /home/etudiants/karim2u/Bureau/COMPILATION/vincent66u/comp.g:76:25: '=='
+            	            // /home/katana/Desktop/compile/vincent66u/comp.g:80:25: '=='
             	            {
-            	            dbg.location(76,29);
-            	            string_literal127=(Token)match(input,49,FOLLOW_49_in_fois1290); 
+            	            dbg.location(80,29);
+            	            string_literal127=(Token)match(input,53,FOLLOW_53_in_fois1360); 
             	            string_literal127_tree = (Object)adaptor.create(string_literal127);
             	            root_0 = (Object)adaptor.becomeRoot(string_literal127_tree, root_0);
 
@@ -4830,10 +4942,10 @@ public class compParser extends DebugParser {
             	        case 2 :
             	            dbg.enterAlt(2);
 
-            	            // /home/etudiants/karim2u/Bureau/COMPILATION/vincent66u/comp.g:76:33: '!='
+            	            // /home/katana/Desktop/compile/vincent66u/comp.g:80:33: '!='
             	            {
-            	            dbg.location(76,37);
-            	            string_literal128=(Token)match(input,50,FOLLOW_50_in_fois1295); 
+            	            dbg.location(80,37);
+            	            string_literal128=(Token)match(input,54,FOLLOW_54_in_fois1365); 
             	            string_literal128_tree = (Object)adaptor.create(string_literal128);
             	            root_0 = (Object)adaptor.becomeRoot(string_literal128_tree, root_0);
 
@@ -4843,10 +4955,10 @@ public class compParser extends DebugParser {
             	        case 3 :
             	            dbg.enterAlt(3);
 
-            	            // /home/etudiants/karim2u/Bureau/COMPILATION/vincent66u/comp.g:76:41: '<='
+            	            // /home/katana/Desktop/compile/vincent66u/comp.g:80:41: '<='
             	            {
-            	            dbg.location(76,45);
-            	            string_literal129=(Token)match(input,51,FOLLOW_51_in_fois1300); 
+            	            dbg.location(80,45);
+            	            string_literal129=(Token)match(input,55,FOLLOW_55_in_fois1370); 
             	            string_literal129_tree = (Object)adaptor.create(string_literal129);
             	            root_0 = (Object)adaptor.becomeRoot(string_literal129_tree, root_0);
 
@@ -4856,10 +4968,10 @@ public class compParser extends DebugParser {
             	        case 4 :
             	            dbg.enterAlt(4);
 
-            	            // /home/etudiants/karim2u/Bureau/COMPILATION/vincent66u/comp.g:76:49: '>='
+            	            // /home/katana/Desktop/compile/vincent66u/comp.g:80:49: '>='
             	            {
-            	            dbg.location(76,53);
-            	            string_literal130=(Token)match(input,52,FOLLOW_52_in_fois1305); 
+            	            dbg.location(80,53);
+            	            string_literal130=(Token)match(input,56,FOLLOW_56_in_fois1375); 
             	            string_literal130_tree = (Object)adaptor.create(string_literal130);
             	            root_0 = (Object)adaptor.becomeRoot(string_literal130_tree, root_0);
 
@@ -4869,10 +4981,10 @@ public class compParser extends DebugParser {
             	        case 5 :
             	            dbg.enterAlt(5);
 
-            	            // /home/etudiants/karim2u/Bureau/COMPILATION/vincent66u/comp.g:76:57: '<'
+            	            // /home/katana/Desktop/compile/vincent66u/comp.g:80:57: '<'
             	            {
-            	            dbg.location(76,60);
-            	            char_literal131=(Token)match(input,53,FOLLOW_53_in_fois1310); 
+            	            dbg.location(80,60);
+            	            char_literal131=(Token)match(input,57,FOLLOW_57_in_fois1380); 
             	            char_literal131_tree = (Object)adaptor.create(char_literal131);
             	            root_0 = (Object)adaptor.becomeRoot(char_literal131_tree, root_0);
 
@@ -4882,10 +4994,10 @@ public class compParser extends DebugParser {
             	        case 6 :
             	            dbg.enterAlt(6);
 
-            	            // /home/etudiants/karim2u/Bureau/COMPILATION/vincent66u/comp.g:76:64: '>'
+            	            // /home/katana/Desktop/compile/vincent66u/comp.g:80:64: '>'
             	            {
-            	            dbg.location(76,67);
-            	            char_literal132=(Token)match(input,54,FOLLOW_54_in_fois1315); 
+            	            dbg.location(80,67);
+            	            char_literal132=(Token)match(input,58,FOLLOW_58_in_fois1385); 
             	            char_literal132_tree = (Object)adaptor.create(char_literal132);
             	            root_0 = (Object)adaptor.becomeRoot(char_literal132_tree, root_0);
 
@@ -4896,8 +5008,8 @@ public class compParser extends DebugParser {
             	    }
             	    } finally {dbg.exitSubRule(33);}
 
-            	    dbg.location(76,72);
-            	    pushFollow(FOLLOW_atom_in_fois1321);
+            	    dbg.location(80,72);
+            	    pushFollow(FOLLOW_atom_in_fois1391);
             	    atom133=atom();
 
             	    state._fsp--;
@@ -4930,7 +5042,7 @@ public class compParser extends DebugParser {
         }
         finally {
         }
-        dbg.location(76, 79);
+        dbg.location(80, 79);
 
         }
         finally {
@@ -4949,7 +5061,7 @@ public class compParser extends DebugParser {
     };
 
     // $ANTLR start "atom"
-    // /home/etudiants/karim2u/Bureau/COMPILATION/vincent66u/comp.g:77:1: atom : ( CST_ENT | IDF | '(' exp ')' -> exp | '-' atom -> ^( VAR '-' atom ) );
+    // /home/katana/Desktop/compile/vincent66u/comp.g:81:1: atom : ( CST_ENT | IDF | '(' exp ')' -> exp | '-' atom -> ^( '-' atom ) );
     public final compParser.atom_return atom() throws RecognitionException {
         compParser.atom_return retval = new compParser.atom_return();
         retval.start = input.LT(1);
@@ -4971,18 +5083,18 @@ public class compParser extends DebugParser {
         Object char_literal136_tree=null;
         Object char_literal138_tree=null;
         Object char_literal139_tree=null;
-        RewriteRuleTokenStream stream_44=new RewriteRuleTokenStream(adaptor,"token 44");
-        RewriteRuleTokenStream stream_31=new RewriteRuleTokenStream(adaptor,"token 31");
-        RewriteRuleTokenStream stream_32=new RewriteRuleTokenStream(adaptor,"token 32");
-        RewriteRuleSubtreeStream stream_exp=new RewriteRuleSubtreeStream(adaptor,"rule exp");
+        RewriteRuleTokenStream stream_48=new RewriteRuleTokenStream(adaptor,"token 48");
+        RewriteRuleTokenStream stream_35=new RewriteRuleTokenStream(adaptor,"token 35");
+        RewriteRuleTokenStream stream_36=new RewriteRuleTokenStream(adaptor,"token 36");
         RewriteRuleSubtreeStream stream_atom=new RewriteRuleSubtreeStream(adaptor,"rule atom");
+        RewriteRuleSubtreeStream stream_exp=new RewriteRuleSubtreeStream(adaptor,"rule exp");
         try { dbg.enterRule(getGrammarFileName(), "atom");
         if ( getRuleLevel()==0 ) {dbg.commence();}
         incRuleLevel();
-        dbg.location(77, 1);
+        dbg.location(81, 1);
 
         try {
-            // /home/etudiants/karim2u/Bureau/COMPILATION/vincent66u/comp.g:77:12: ( CST_ENT | IDF | '(' exp ')' -> exp | '-' atom -> ^( VAR '-' atom ) )
+            // /home/katana/Desktop/compile/vincent66u/comp.g:81:12: ( CST_ENT | IDF | '(' exp ')' -> exp | '-' atom -> ^( '-' atom ) )
             int alt35=4;
             try { dbg.enterDecision(35);
 
@@ -4997,12 +5109,12 @@ public class compParser extends DebugParser {
                 alt35=2;
                 }
                 break;
-            case 31:
+            case 35:
                 {
                 alt35=3;
                 }
                 break;
-            case 44:
+            case 48:
                 {
                 alt35=4;
                 }
@@ -5021,12 +5133,12 @@ public class compParser extends DebugParser {
                 case 1 :
                     dbg.enterAlt(1);
 
-                    // /home/etudiants/karim2u/Bureau/COMPILATION/vincent66u/comp.g:77:16: CST_ENT
+                    // /home/katana/Desktop/compile/vincent66u/comp.g:81:16: CST_ENT
                     {
                     root_0 = (Object)adaptor.nil();
 
-                    dbg.location(77,16);
-                    CST_ENT134=(Token)match(input,CST_ENT,FOLLOW_CST_ENT_in_atom1339); 
+                    dbg.location(81,16);
+                    CST_ENT134=(Token)match(input,CST_ENT,FOLLOW_CST_ENT_in_atom1409); 
                     CST_ENT134_tree = (Object)adaptor.create(CST_ENT134);
                     adaptor.addChild(root_0, CST_ENT134_tree);
 
@@ -5036,12 +5148,12 @@ public class compParser extends DebugParser {
                 case 2 :
                     dbg.enterAlt(2);
 
-                    // /home/etudiants/karim2u/Bureau/COMPILATION/vincent66u/comp.g:78:5: IDF
+                    // /home/katana/Desktop/compile/vincent66u/comp.g:82:5: IDF
                     {
                     root_0 = (Object)adaptor.nil();
 
-                    dbg.location(78,5);
-                    IDF135=(Token)match(input,IDF,FOLLOW_IDF_in_atom1346); 
+                    dbg.location(82,5);
+                    IDF135=(Token)match(input,IDF,FOLLOW_IDF_in_atom1416); 
                     IDF135_tree = (Object)adaptor.create(IDF135);
                     adaptor.addChild(root_0, IDF135_tree);
 
@@ -5051,22 +5163,22 @@ public class compParser extends DebugParser {
                 case 3 :
                     dbg.enterAlt(3);
 
-                    // /home/etudiants/karim2u/Bureau/COMPILATION/vincent66u/comp.g:79:5: '(' exp ')'
+                    // /home/katana/Desktop/compile/vincent66u/comp.g:83:5: '(' exp ')'
                     {
-                    dbg.location(79,5);
-                    char_literal136=(Token)match(input,31,FOLLOW_31_in_atom1353);  
-                    stream_31.add(char_literal136);
+                    dbg.location(83,5);
+                    char_literal136=(Token)match(input,35,FOLLOW_35_in_atom1423);  
+                    stream_35.add(char_literal136);
 
-                    dbg.location(79,9);
-                    pushFollow(FOLLOW_exp_in_atom1355);
+                    dbg.location(83,9);
+                    pushFollow(FOLLOW_exp_in_atom1425);
                     exp137=exp();
 
                     state._fsp--;
 
                     stream_exp.add(exp137.getTree());
-                    dbg.location(79,13);
-                    char_literal138=(Token)match(input,32,FOLLOW_32_in_atom1357);  
-                    stream_32.add(char_literal138);
+                    dbg.location(83,13);
+                    char_literal138=(Token)match(input,36,FOLLOW_36_in_atom1427);  
+                    stream_36.add(char_literal138);
 
 
 
@@ -5081,9 +5193,9 @@ public class compParser extends DebugParser {
                     RewriteRuleSubtreeStream stream_retval=new RewriteRuleSubtreeStream(adaptor,"rule retval",retval!=null?retval.tree:null);
 
                     root_0 = (Object)adaptor.nil();
-                    // 79:17: -> exp
+                    // 83:17: -> exp
                     {
-                        dbg.location(79,20);
+                        dbg.location(83,20);
                         adaptor.addChild(root_0, stream_exp.nextTree());
 
                     }
@@ -5094,14 +5206,14 @@ public class compParser extends DebugParser {
                 case 4 :
                     dbg.enterAlt(4);
 
-                    // /home/etudiants/karim2u/Bureau/COMPILATION/vincent66u/comp.g:80:5: '-' atom
+                    // /home/katana/Desktop/compile/vincent66u/comp.g:84:5: '-' atom
                     {
-                    dbg.location(80,5);
-                    char_literal139=(Token)match(input,44,FOLLOW_44_in_atom1367);  
-                    stream_44.add(char_literal139);
+                    dbg.location(84,5);
+                    char_literal139=(Token)match(input,48,FOLLOW_48_in_atom1437);  
+                    stream_48.add(char_literal139);
 
-                    dbg.location(80,9);
-                    pushFollow(FOLLOW_atom_in_atom1369);
+                    dbg.location(84,9);
+                    pushFollow(FOLLOW_atom_in_atom1439);
                     atom140=atom();
 
                     state._fsp--;
@@ -5110,7 +5222,7 @@ public class compParser extends DebugParser {
 
 
                     // AST REWRITE
-                    // elements: atom, 44
+                    // elements: 48, atom
                     // token labels: 
                     // rule labels: retval
                     // token list labels: 
@@ -5120,18 +5232,16 @@ public class compParser extends DebugParser {
                     RewriteRuleSubtreeStream stream_retval=new RewriteRuleSubtreeStream(adaptor,"rule retval",retval!=null?retval.tree:null);
 
                     root_0 = (Object)adaptor.nil();
-                    // 80:14: -> ^( VAR '-' atom )
+                    // 84:14: -> ^( '-' atom )
                     {
-                        dbg.location(80,16);
-                        // /home/etudiants/karim2u/Bureau/COMPILATION/vincent66u/comp.g:80:16: ^( VAR '-' atom )
+                        dbg.location(84,16);
+                        // /home/katana/Desktop/compile/vincent66u/comp.g:84:16: ^( '-' atom )
                         {
                         Object root_1 = (Object)adaptor.nil();
-                        dbg.location(80,18);
-                        root_1 = (Object)adaptor.becomeRoot((Object)adaptor.create(VAR, "VAR"), root_1);
+                        dbg.location(84,19);
+                        root_1 = (Object)adaptor.becomeRoot(stream_48.nextNode(), root_1);
 
-                        dbg.location(80,22);
-                        adaptor.addChild(root_1, stream_44.nextNode());
-                        dbg.location(80,26);
+                        dbg.location(84,23);
                         adaptor.addChild(root_1, stream_atom.nextTree());
 
                         adaptor.addChild(root_0, root_1);
@@ -5158,7 +5268,7 @@ public class compParser extends DebugParser {
         }
         finally {
         }
-        dbg.location(81, 3);
+        dbg.location(85, 3);
 
         }
         finally {
@@ -5180,15 +5290,15 @@ public class compParser extends DebugParser {
     static final String DFA14_eofS =
         "\12\uffff";
     static final String DFA14_minS =
-        "\1\13\1\34\10\uffff";
+        "\1\15\1\40\10\uffff";
     static final String DFA14_maxS =
-        "\1\47\1\44\10\uffff";
+        "\1\53\1\50\10\uffff";
     static final String DFA14_acceptS =
         "\2\uffff\1\2\1\3\1\4\1\5\1\6\1\7\1\1\1\10";
     static final String DFA14_specialS =
         "\12\uffff}>";
     static final String[] DFA14_transitionS = {
-            "\1\5\1\6\1\7\4\uffff\1\1\20\uffff\1\2\1\uffff\1\3\1\uffff\1"+
+            "\1\5\1\6\1\7\6\uffff\1\1\20\uffff\1\2\1\uffff\1\3\1\uffff\1"+
             "\4",
             "\1\10\2\uffff\1\11\4\uffff\1\10",
             "",
@@ -5231,7 +5341,7 @@ public class compParser extends DebugParser {
             this.transition = DFA14_transition;
         }
         public String getDescription() {
-            return "49:1: instruction : ( affectation -> affectation | bloc -> bloc | iteration -> iteration | condition -> condition | retour -> retour | read -> read | write -> write | appel -> appel );";
+            return "53:1: instruction : ( affectation -> affectation | bloc -> bloc | iteration -> iteration | condition -> condition | retour -> retour | read -> read | write -> write | appel -> appel );";
         }
         public void error(NoViableAltException nvae) {
             dbg.recognitionException(nvae);
@@ -5239,145 +5349,145 @@ public class compParser extends DebugParser {
     }
  
 
-    public static final BitSet FOLLOW_22_in_prog101 = new BitSet(new long[]{0x000000A80E843860L});
-    public static final BitSet FOLLOW_declaration_in_prog105 = new BitSet(new long[]{0x000000A80E843860L});
-    public static final BitSet FOLLOW_instruction_in_prog112 = new BitSet(new long[]{0x000000A800843800L});
-    public static final BitSet FOLLOW_23_in_prog118 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_dec_var_in_declaration165 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_dec_func_in_declaration172 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_dec_proc_in_declaration181 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_type_in_dec_var198 = new BitSet(new long[]{0x0000000000040000L});
-    public static final BitSet FOLLOW_IDF_in_dec_var203 = new BitSet(new long[]{0x0000000001000002L});
-    public static final BitSet FOLLOW_24_in_dec_var206 = new BitSet(new long[]{0x0000000000040000L});
-    public static final BitSet FOLLOW_IDF_in_dec_var210 = new BitSet(new long[]{0x0000000001000002L});
-    public static final BitSet FOLLOW_25_in_type237 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_26_in_type271 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_27_in_type306 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ent_func_in_dec_func322 = new BitSet(new long[]{0x000000A80E043860L});
-    public static final BitSet FOLLOW_declaration_in_dec_func326 = new BitSet(new long[]{0x000000A80E043860L});
-    public static final BitSet FOLLOW_instruction_in_dec_func334 = new BitSet(new long[]{0x000000A800843800L});
-    public static final BitSet FOLLOW_23_in_dec_func338 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ent_proc_in_dec_proc356 = new BitSet(new long[]{0x000000A80E043860L});
-    public static final BitSet FOLLOW_declaration_in_dec_proc360 = new BitSet(new long[]{0x000000A80E043860L});
-    public static final BitSet FOLLOW_instruction_in_dec_proc368 = new BitSet(new long[]{0x000000A800843800L});
-    public static final BitSet FOLLOW_23_in_dec_proc372 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_FONCTION_in_ent_func388 = new BitSet(new long[]{0x000000000E000000L});
-    public static final BitSet FOLLOW_type_in_ent_func393 = new BitSet(new long[]{0x0000000000040000L});
-    public static final BitSet FOLLOW_IDF_in_ent_func397 = new BitSet(new long[]{0x0000000080000000L});
-    public static final BitSet FOLLOW_param_in_ent_func401 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_PROCEDURE_in_ent_proc426 = new BitSet(new long[]{0x0000000000040000L});
-    public static final BitSet FOLLOW_IDF_in_ent_proc430 = new BitSet(new long[]{0x0000000080000000L});
-    public static final BitSet FOLLOW_param_in_ent_proc433 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_27_in_array457 = new BitSet(new long[]{0x0000000010000000L});
-    public static final BitSet FOLLOW_28_in_array459 = new BitSet(new long[]{0x0000000000080000L});
-    public static final BitSet FOLLOW_bounds_in_array461 = new BitSet(new long[]{0x0000000020000000L});
-    public static final BitSet FOLLOW_29_in_array462 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_CST_ENT_in_bounds486 = new BitSet(new long[]{0x0000000040000000L});
-    public static final BitSet FOLLOW_30_in_bounds488 = new BitSet(new long[]{0x0000000000080000L});
-    public static final BitSet FOLLOW_CST_ENT_in_bounds490 = new BitSet(new long[]{0x0000000001000002L});
-    public static final BitSet FOLLOW_24_in_bounds493 = new BitSet(new long[]{0x0000000000080000L});
-    public static final BitSet FOLLOW_CST_ENT_in_bounds496 = new BitSet(new long[]{0x0000000040000000L});
-    public static final BitSet FOLLOW_30_in_bounds498 = new BitSet(new long[]{0x0000000000080000L});
-    public static final BitSet FOLLOW_CST_ENT_in_bounds501 = new BitSet(new long[]{0x0000000001000002L});
-    public static final BitSet FOLLOW_31_in_param518 = new BitSet(new long[]{0x0000000300040000L});
-    public static final BitSet FOLLOW_formal_in_param521 = new BitSet(new long[]{0x0000000101000000L});
-    public static final BitSet FOLLOW_24_in_param526 = new BitSet(new long[]{0x0000000200040000L});
-    public static final BitSet FOLLOW_formal_in_param528 = new BitSet(new long[]{0x0000000101000000L});
-    public static final BitSet FOLLOW_32_in_param537 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_33_in_formal559 = new BitSet(new long[]{0x0000000000040000L});
-    public static final BitSet FOLLOW_IDF_in_formal563 = new BitSet(new long[]{0x0000000400000000L});
-    public static final BitSet FOLLOW_34_in_formal567 = new BitSet(new long[]{0x000000000E000000L});
-    public static final BitSet FOLLOW_type_in_formal571 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_affectation_in_instruction583 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_bloc_in_instruction597 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_iteration_in_instruction612 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_condition_in_instruction626 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_retour_in_instruction640 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_read_in_instruction654 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_write_in_instruction668 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_appel_in_instruction681 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_IDF_in_appel697 = new BitSet(new long[]{0x0000000080000000L});
-    public static final BitSet FOLLOW_31_in_appel699 = new BitSet(new long[]{0x00007001800C0000L});
-    public static final BitSet FOLLOW_exp_in_appel703 = new BitSet(new long[]{0x0000000101000000L});
-    public static final BitSet FOLLOW_24_in_appel706 = new BitSet(new long[]{0x00007000800C0000L});
-    public static final BitSet FOLLOW_exp_in_appel707 = new BitSet(new long[]{0x0000000101000000L});
-    public static final BitSet FOLLOW_32_in_appel714 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_35_in_bloc727 = new BitSet(new long[]{0x000000A80E043860L});
-    public static final BitSet FOLLOW_declaration_in_bloc731 = new BitSet(new long[]{0x000000A80E043860L});
-    public static final BitSet FOLLOW_instruction_in_bloc738 = new BitSet(new long[]{0x000000A800843800L});
-    public static final BitSet FOLLOW_23_in_bloc744 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_IDF_in_affectation753 = new BitSet(new long[]{0x0000001000000000L});
-    public static final BitSet FOLLOW_36_in_affectation757 = new BitSet(new long[]{0x00007000800C0000L});
-    public static final BitSet FOLLOW_exp_in_affectation761 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_IDF_in_affectation791 = new BitSet(new long[]{0x0000000010000000L});
-    public static final BitSet FOLLOW_28_in_affectation793 = new BitSet(new long[]{0x00007000800C0000L});
-    public static final BitSet FOLLOW_exp_in_affectation795 = new BitSet(new long[]{0x0000000021000000L});
-    public static final BitSet FOLLOW_24_in_affectation798 = new BitSet(new long[]{0x00007000800C0000L});
-    public static final BitSet FOLLOW_exp_in_affectation800 = new BitSet(new long[]{0x0000000021000000L});
-    public static final BitSet FOLLOW_29_in_affectation805 = new BitSet(new long[]{0x0000001000000000L});
-    public static final BitSet FOLLOW_36_in_affectation807 = new BitSet(new long[]{0x00007000800C0000L});
-    public static final BitSet FOLLOW_exp_in_affectation809 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_37_in_iteration846 = new BitSet(new long[]{0x0000000000040000L});
-    public static final BitSet FOLLOW_IDF_in_iteration850 = new BitSet(new long[]{0x0000004000000000L});
-    public static final BitSet FOLLOW_38_in_iteration854 = new BitSet(new long[]{0x00007000800C0000L});
-    public static final BitSet FOLLOW_exp_in_iteration858 = new BitSet(new long[]{0x0000000040000000L});
-    public static final BitSet FOLLOW_30_in_iteration862 = new BitSet(new long[]{0x00007000800C0000L});
-    public static final BitSet FOLLOW_exp_in_iteration866 = new BitSet(new long[]{0x0000000000400000L});
-    public static final BitSet FOLLOW_22_in_iteration870 = new BitSet(new long[]{0x000000A800043800L});
-    public static final BitSet FOLLOW_instruction_in_iteration876 = new BitSet(new long[]{0x000000A800843800L});
-    public static final BitSet FOLLOW_23_in_iteration883 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_39_in_condition917 = new BitSet(new long[]{0x00007000800C0000L});
-    public static final BitSet FOLLOW_exp_in_condition921 = new BitSet(new long[]{0x0000010000000000L});
-    public static final BitSet FOLLOW_40_in_condition925 = new BitSet(new long[]{0x000000A800043800L});
-    public static final BitSet FOLLOW_instruction_in_condition931 = new BitSet(new long[]{0x000006A800043800L});
-    public static final BitSet FOLLOW_41_in_condition937 = new BitSet(new long[]{0x000000A800043800L});
-    public static final BitSet FOLLOW_instruction_in_condition942 = new BitSet(new long[]{0x000004A800043800L});
-    public static final BitSet FOLLOW_42_in_condition951 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_RETOUR_in_retour987 = new BitSet(new long[]{0x0000000080000000L});
-    public static final BitSet FOLLOW_31_in_retour989 = new BitSet(new long[]{0x00007000800C0000L});
-    public static final BitSet FOLLOW_exp_in_retour993 = new BitSet(new long[]{0x0000000100000000L});
-    public static final BitSet FOLLOW_32_in_retour998 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_READ_in_read1020 = new BitSet(new long[]{0x0000000000040000L});
-    public static final BitSet FOLLOW_IDF_in_read1025 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_WRITE_in_write1044 = new BitSet(new long[]{0x00007000800C0000L});
-    public static final BitSet FOLLOW_exp_in_write1046 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_WRITE_in_write1063 = new BitSet(new long[]{0x0000000000100000L});
-    public static final BitSet FOLLOW_CSTE_CHAINE_in_write1065 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_plus_in_exp1095 = new BitSet(new long[]{0x0000180000000002L});
-    public static final BitSet FOLLOW_set_in_exp1098 = new BitSet(new long[]{0x00001000800C0000L});
-    public static final BitSet FOLLOW_plus_in_exp1105 = new BitSet(new long[]{0x0000180000000002L});
-    public static final BitSet FOLLOW_45_in_exp1120 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_46_in_exp1133 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_exp2_in_exp1146 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_IDF_in_exp21162 = new BitSet(new long[]{0x0000000080000000L});
-    public static final BitSet FOLLOW_31_in_exp21164 = new BitSet(new long[]{0x00007001800C0000L});
-    public static final BitSet FOLLOW_exp_in_exp21167 = new BitSet(new long[]{0x0000000101000000L});
-    public static final BitSet FOLLOW_24_in_exp21170 = new BitSet(new long[]{0x00007000800C0000L});
-    public static final BitSet FOLLOW_exp_in_exp21172 = new BitSet(new long[]{0x0000000101000000L});
-    public static final BitSet FOLLOW_32_in_exp21179 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_IDF_in_exp21204 = new BitSet(new long[]{0x0000000010000000L});
-    public static final BitSet FOLLOW_28_in_exp21206 = new BitSet(new long[]{0x00007000800C0000L});
-    public static final BitSet FOLLOW_exp_in_exp21208 = new BitSet(new long[]{0x0000000021000000L});
-    public static final BitSet FOLLOW_24_in_exp21211 = new BitSet(new long[]{0x00007000800C0000L});
-    public static final BitSet FOLLOW_exp_in_exp21213 = new BitSet(new long[]{0x0000000021000000L});
-    public static final BitSet FOLLOW_29_in_exp21218 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_fois_in_plus1256 = new BitSet(new long[]{0x0001800000000002L});
-    public static final BitSet FOLLOW_set_in_plus1260 = new BitSet(new long[]{0x00001000800C0000L});
-    public static final BitSet FOLLOW_fois_in_plus1267 = new BitSet(new long[]{0x0001800000000002L});
-    public static final BitSet FOLLOW_atom_in_fois1284 = new BitSet(new long[]{0x007E000000000002L});
-    public static final BitSet FOLLOW_49_in_fois1290 = new BitSet(new long[]{0x00001000800C0000L});
-    public static final BitSet FOLLOW_50_in_fois1295 = new BitSet(new long[]{0x00001000800C0000L});
-    public static final BitSet FOLLOW_51_in_fois1300 = new BitSet(new long[]{0x00001000800C0000L});
-    public static final BitSet FOLLOW_52_in_fois1305 = new BitSet(new long[]{0x00001000800C0000L});
-    public static final BitSet FOLLOW_53_in_fois1310 = new BitSet(new long[]{0x00001000800C0000L});
-    public static final BitSet FOLLOW_54_in_fois1315 = new BitSet(new long[]{0x00001000800C0000L});
-    public static final BitSet FOLLOW_atom_in_fois1321 = new BitSet(new long[]{0x007E000000000002L});
-    public static final BitSet FOLLOW_CST_ENT_in_atom1339 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_IDF_in_atom1346 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_31_in_atom1353 = new BitSet(new long[]{0x00007000800C0000L});
-    public static final BitSet FOLLOW_exp_in_atom1355 = new BitSet(new long[]{0x0000000100000000L});
-    public static final BitSet FOLLOW_32_in_atom1357 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_44_in_atom1367 = new BitSet(new long[]{0x00001000800C0000L});
-    public static final BitSet FOLLOW_atom_in_atom1369 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_26_in_prog118 = new BitSet(new long[]{0x00000A80E840E060L});
+    public static final BitSet FOLLOW_declaration_in_prog122 = new BitSet(new long[]{0x00000A80E840E060L});
+    public static final BitSet FOLLOW_instruction_in_prog129 = new BitSet(new long[]{0x00000A800840E000L});
+    public static final BitSet FOLLOW_27_in_prog135 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_dec_var_in_declaration191 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_dec_func_in_declaration198 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_dec_proc_in_declaration207 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_type_in_dec_var224 = new BitSet(new long[]{0x0000000000400000L});
+    public static final BitSet FOLLOW_IDF_in_dec_var229 = new BitSet(new long[]{0x0000000010000002L});
+    public static final BitSet FOLLOW_28_in_dec_var232 = new BitSet(new long[]{0x0000000000400000L});
+    public static final BitSet FOLLOW_IDF_in_dec_var236 = new BitSet(new long[]{0x0000000010000002L});
+    public static final BitSet FOLLOW_29_in_type265 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_30_in_type299 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_31_in_type334 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ent_func_in_dec_func350 = new BitSet(new long[]{0x00000A80E840E060L});
+    public static final BitSet FOLLOW_declaration_in_dec_func354 = new BitSet(new long[]{0x00000A80E840E060L});
+    public static final BitSet FOLLOW_instruction_in_dec_func362 = new BitSet(new long[]{0x00000A800840E000L});
+    public static final BitSet FOLLOW_27_in_dec_func366 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ent_proc_in_dec_proc396 = new BitSet(new long[]{0x00000A80E840E060L});
+    public static final BitSet FOLLOW_declaration_in_dec_proc400 = new BitSet(new long[]{0x00000A80E840E060L});
+    public static final BitSet FOLLOW_instruction_in_dec_proc408 = new BitSet(new long[]{0x00000A800840E000L});
+    public static final BitSet FOLLOW_27_in_dec_proc412 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_FONCTION_in_ent_func440 = new BitSet(new long[]{0x00000000E0000000L});
+    public static final BitSet FOLLOW_type_in_ent_func445 = new BitSet(new long[]{0x0000000000400000L});
+    public static final BitSet FOLLOW_IDF_in_ent_func449 = new BitSet(new long[]{0x0000000800000000L});
+    public static final BitSet FOLLOW_param_in_ent_func453 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_PROCEDURE_in_ent_proc477 = new BitSet(new long[]{0x0000000000400000L});
+    public static final BitSet FOLLOW_IDF_in_ent_proc481 = new BitSet(new long[]{0x0000000800000000L});
+    public static final BitSet FOLLOW_param_in_ent_proc484 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_31_in_array506 = new BitSet(new long[]{0x0000000100000000L});
+    public static final BitSet FOLLOW_32_in_array508 = new BitSet(new long[]{0x0000000000800000L});
+    public static final BitSet FOLLOW_bounds_in_array510 = new BitSet(new long[]{0x0000000200000000L});
+    public static final BitSet FOLLOW_33_in_array511 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_CST_ENT_in_bounds533 = new BitSet(new long[]{0x0000000400000000L});
+    public static final BitSet FOLLOW_34_in_bounds535 = new BitSet(new long[]{0x0000000000800000L});
+    public static final BitSet FOLLOW_CST_ENT_in_bounds537 = new BitSet(new long[]{0x0000000010000002L});
+    public static final BitSet FOLLOW_28_in_bounds540 = new BitSet(new long[]{0x0000000000800000L});
+    public static final BitSet FOLLOW_CST_ENT_in_bounds543 = new BitSet(new long[]{0x0000000400000000L});
+    public static final BitSet FOLLOW_34_in_bounds545 = new BitSet(new long[]{0x0000000000800000L});
+    public static final BitSet FOLLOW_CST_ENT_in_bounds548 = new BitSet(new long[]{0x0000000010000002L});
+    public static final BitSet FOLLOW_35_in_param565 = new BitSet(new long[]{0x0000003000400000L});
+    public static final BitSet FOLLOW_formal_in_param568 = new BitSet(new long[]{0x0000001010000000L});
+    public static final BitSet FOLLOW_28_in_param573 = new BitSet(new long[]{0x0000002000400000L});
+    public static final BitSet FOLLOW_formal_in_param575 = new BitSet(new long[]{0x0000001010000000L});
+    public static final BitSet FOLLOW_36_in_param584 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_37_in_formal607 = new BitSet(new long[]{0x0000000000400000L});
+    public static final BitSet FOLLOW_IDF_in_formal611 = new BitSet(new long[]{0x0000004000000000L});
+    public static final BitSet FOLLOW_38_in_formal615 = new BitSet(new long[]{0x00000000E0000000L});
+    public static final BitSet FOLLOW_type_in_formal619 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_affectation_in_instruction639 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_bloc_in_instruction653 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_iteration_in_instruction668 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_condition_in_instruction682 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_retour_in_instruction696 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_read_in_instruction710 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_write_in_instruction724 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_appel_in_instruction737 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_IDF_in_appel753 = new BitSet(new long[]{0x0000000800000000L});
+    public static final BitSet FOLLOW_35_in_appel755 = new BitSet(new long[]{0x0007001800C00000L});
+    public static final BitSet FOLLOW_exp_in_appel759 = new BitSet(new long[]{0x0000001010000000L});
+    public static final BitSet FOLLOW_28_in_appel762 = new BitSet(new long[]{0x0007000800C00000L});
+    public static final BitSet FOLLOW_exp_in_appel763 = new BitSet(new long[]{0x0000001010000000L});
+    public static final BitSet FOLLOW_36_in_appel770 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_39_in_bloc794 = new BitSet(new long[]{0x00000A80E040E060L});
+    public static final BitSet FOLLOW_declaration_in_bloc798 = new BitSet(new long[]{0x00000A80E040E060L});
+    public static final BitSet FOLLOW_instruction_in_bloc805 = new BitSet(new long[]{0x00000A800840E000L});
+    public static final BitSet FOLLOW_27_in_bloc811 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_IDF_in_affectation820 = new BitSet(new long[]{0x0000010000000000L});
+    public static final BitSet FOLLOW_40_in_affectation824 = new BitSet(new long[]{0x0007000800C00000L});
+    public static final BitSet FOLLOW_exp_in_affectation828 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_IDF_in_affectation858 = new BitSet(new long[]{0x0000000100000000L});
+    public static final BitSet FOLLOW_32_in_affectation860 = new BitSet(new long[]{0x0007000800C00000L});
+    public static final BitSet FOLLOW_exp_in_affectation862 = new BitSet(new long[]{0x0000000210000000L});
+    public static final BitSet FOLLOW_28_in_affectation865 = new BitSet(new long[]{0x0007000800C00000L});
+    public static final BitSet FOLLOW_exp_in_affectation867 = new BitSet(new long[]{0x0000000210000000L});
+    public static final BitSet FOLLOW_33_in_affectation872 = new BitSet(new long[]{0x0000010000000000L});
+    public static final BitSet FOLLOW_40_in_affectation874 = new BitSet(new long[]{0x0007000800C00000L});
+    public static final BitSet FOLLOW_exp_in_affectation876 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_41_in_iteration913 = new BitSet(new long[]{0x0000000000400000L});
+    public static final BitSet FOLLOW_IDF_in_iteration917 = new BitSet(new long[]{0x0000040000000000L});
+    public static final BitSet FOLLOW_42_in_iteration921 = new BitSet(new long[]{0x0007000800C00000L});
+    public static final BitSet FOLLOW_exp_in_iteration925 = new BitSet(new long[]{0x0000000400000000L});
+    public static final BitSet FOLLOW_34_in_iteration929 = new BitSet(new long[]{0x0007000800C00000L});
+    public static final BitSet FOLLOW_exp_in_iteration933 = new BitSet(new long[]{0x0000000004000000L});
+    public static final BitSet FOLLOW_26_in_iteration937 = new BitSet(new long[]{0x00000A800040E000L});
+    public static final BitSet FOLLOW_instruction_in_iteration943 = new BitSet(new long[]{0x00000A800840E000L});
+    public static final BitSet FOLLOW_27_in_iteration950 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_43_in_condition984 = new BitSet(new long[]{0x0007000800C00000L});
+    public static final BitSet FOLLOW_exp_in_condition988 = new BitSet(new long[]{0x0000100000000000L});
+    public static final BitSet FOLLOW_44_in_condition992 = new BitSet(new long[]{0x00000A800040E000L});
+    public static final BitSet FOLLOW_instruction_in_condition998 = new BitSet(new long[]{0x00006A800040E000L});
+    public static final BitSet FOLLOW_45_in_condition1004 = new BitSet(new long[]{0x00000A800040E000L});
+    public static final BitSet FOLLOW_instruction_in_condition1009 = new BitSet(new long[]{0x00004A800040E000L});
+    public static final BitSet FOLLOW_46_in_condition1018 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_RETOUR_in_retour1054 = new BitSet(new long[]{0x0000000800000000L});
+    public static final BitSet FOLLOW_35_in_retour1056 = new BitSet(new long[]{0x0007000800C00000L});
+    public static final BitSet FOLLOW_exp_in_retour1060 = new BitSet(new long[]{0x0000001000000000L});
+    public static final BitSet FOLLOW_36_in_retour1065 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_READ_in_read1087 = new BitSet(new long[]{0x0000000000400000L});
+    public static final BitSet FOLLOW_IDF_in_read1092 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_WRITE_in_write1111 = new BitSet(new long[]{0x0007000800C00000L});
+    public static final BitSet FOLLOW_exp_in_write1113 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_WRITE_in_write1130 = new BitSet(new long[]{0x0000000001000000L});
+    public static final BitSet FOLLOW_CSTE_CHAINE_in_write1132 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_plus_in_exp1162 = new BitSet(new long[]{0x0001800000000002L});
+    public static final BitSet FOLLOW_set_in_exp1165 = new BitSet(new long[]{0x0001000800C00000L});
+    public static final BitSet FOLLOW_plus_in_exp1172 = new BitSet(new long[]{0x0001800000000002L});
+    public static final BitSet FOLLOW_49_in_exp1187 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_50_in_exp1200 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_exp2_in_exp1213 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_IDF_in_exp21229 = new BitSet(new long[]{0x0000000800000000L});
+    public static final BitSet FOLLOW_35_in_exp21231 = new BitSet(new long[]{0x0007001800C00000L});
+    public static final BitSet FOLLOW_exp_in_exp21234 = new BitSet(new long[]{0x0000001010000000L});
+    public static final BitSet FOLLOW_28_in_exp21237 = new BitSet(new long[]{0x0007000800C00000L});
+    public static final BitSet FOLLOW_exp_in_exp21239 = new BitSet(new long[]{0x0000001010000000L});
+    public static final BitSet FOLLOW_36_in_exp21246 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_IDF_in_exp21274 = new BitSet(new long[]{0x0000000100000000L});
+    public static final BitSet FOLLOW_32_in_exp21276 = new BitSet(new long[]{0x0007000800C00000L});
+    public static final BitSet FOLLOW_exp_in_exp21278 = new BitSet(new long[]{0x0000000210000000L});
+    public static final BitSet FOLLOW_28_in_exp21281 = new BitSet(new long[]{0x0007000800C00000L});
+    public static final BitSet FOLLOW_exp_in_exp21283 = new BitSet(new long[]{0x0000000210000000L});
+    public static final BitSet FOLLOW_33_in_exp21288 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_fois_in_plus1326 = new BitSet(new long[]{0x0018000000000002L});
+    public static final BitSet FOLLOW_set_in_plus1330 = new BitSet(new long[]{0x0001000800C00000L});
+    public static final BitSet FOLLOW_fois_in_plus1337 = new BitSet(new long[]{0x0018000000000002L});
+    public static final BitSet FOLLOW_atom_in_fois1354 = new BitSet(new long[]{0x07E0000000000002L});
+    public static final BitSet FOLLOW_53_in_fois1360 = new BitSet(new long[]{0x0001000800C00000L});
+    public static final BitSet FOLLOW_54_in_fois1365 = new BitSet(new long[]{0x0001000800C00000L});
+    public static final BitSet FOLLOW_55_in_fois1370 = new BitSet(new long[]{0x0001000800C00000L});
+    public static final BitSet FOLLOW_56_in_fois1375 = new BitSet(new long[]{0x0001000800C00000L});
+    public static final BitSet FOLLOW_57_in_fois1380 = new BitSet(new long[]{0x0001000800C00000L});
+    public static final BitSet FOLLOW_58_in_fois1385 = new BitSet(new long[]{0x0001000800C00000L});
+    public static final BitSet FOLLOW_atom_in_fois1391 = new BitSet(new long[]{0x07E0000000000002L});
+    public static final BitSet FOLLOW_CST_ENT_in_atom1409 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_IDF_in_atom1416 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_35_in_atom1423 = new BitSet(new long[]{0x0007000800C00000L});
+    public static final BitSet FOLLOW_exp_in_atom1425 = new BitSet(new long[]{0x0000001000000000L});
+    public static final BitSet FOLLOW_36_in_atom1427 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_48_in_atom1437 = new BitSet(new long[]{0x0001000800C00000L});
+    public static final BitSet FOLLOW_atom_in_atom1439 = new BitSet(new long[]{0x0000000000000002L});
 
 }

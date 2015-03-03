@@ -1,3 +1,7 @@
 do
-integer x
+ array [1..5,1..6,1..5] T
+ procedure theEnd ()
+  write "tete"
+ end
+x=T[i]
 end

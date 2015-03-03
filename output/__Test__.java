@@ -6,7 +6,7 @@ import org.antlr.runtime.debug.DebugEventSocketProxy;
 public class __Test__ {
 
     public static void main(String args[]) throws Exception {
-        compLexer lex = new compLexer(new ANTLRFileStream("/home/etudiants/karim2u/Bureau/COMPILATION/vincent66u/output/__Test___input.txt", "UTF8"));
+        compLexer lex = new compLexer(new ANTLRFileStream("/home/katana/Desktop/compile/vincent66u/output/__Test___input.txt", "UTF8"));
         CommonTokenStream tokens = new CommonTokenStream(lex);
 
         compParser g = new compParser(tokens, 49100, null);
