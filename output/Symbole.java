@@ -11,7 +11,7 @@ public class Symbole {
 		super();
 		this.nom = nom;
 		this.type = type;
-		this.paramtre = paramtre;
+		this.parametre = paramtre;
 		this.numeroRegion = numeroRegion;
 		this.numeroImbrication = numeroImbrication;
 	}
@@ -29,10 +29,10 @@ public class Symbole {
 		this.type = type;
 	}
 	public String getParamtre() {
-		return paramtre;
+		return parametre;
 	}
 	public void setParamtre(String paramtre) {
-		this.paramtre = paramtre;
+		this.parametre = paramtre;
 	}
 	public String getNumeroRegion() {
 		return numeroRegion;
