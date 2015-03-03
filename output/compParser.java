@@ -1,4 +1,4 @@
-// $ANTLR 3.2 Sep 23, 2009 12:02:23 /home/katana/Desktop/compilation/vincent66u/comp.g 2015-03-03 12:44:38
+// $ANTLR 3.2 Sep 23, 2009 12:02:23 /home/vincent/Bureau/comp.g 2015-02-28 18:33:49
 
 import org.antlr.runtime.*;
 import java.util.Stack;
@@ -97,7 +97,7 @@ public class compParser extends Parser {
     }
 
     public String[] getTokenNames() { return compParser.tokenNames; }
-    public String getGrammarFileName() { return "/home/katana/Desktop/compilation/vincent66u/comp.g"; }
+    public String getGrammarFileName() { return "/home/vincent/Bureau/comp.g"; }
 
 
     public static class prog_return extends ParserRuleReturnScope {
@@ -106,7 +106,7 @@ public class compParser extends Parser {
     };
 
     // $ANTLR start "prog"
-    // /home/katana/Desktop/compilation/vincent66u/comp.g:32:1: prog : 'do' ( declaration )* ( instruction )* 'end' -> ^( 'do' ^( DECLARATION ( ( declaration )* )? ) ^( INSTRUCTION ( instruction )* ) 'end' ) ;
+    // /home/vincent/Bureau/comp.g:32:1: prog : 'do' ( declaration )* ( instruction )* 'end' -> ^( 'do' ^( DECLARATION ( ( declaration )* )? ) ^( INSTRUCTION ( instruction )* ) 'end' ) ;
     public final compParser.prog_return prog() throws RecognitionException {
         compParser.prog_return retval = new compParser.prog_return();
         retval.start = input.LT(1);
@@ -127,13 +127,13 @@ public class compParser extends Parser {
         RewriteRuleSubtreeStream stream_declaration=new RewriteRuleSubtreeStream(adaptor,"rule declaration");
         RewriteRuleSubtreeStream stream_instruction=new RewriteRuleSubtreeStream(adaptor,"rule instruction");
         try {
-            // /home/katana/Desktop/compilation/vincent66u/comp.g:32:11: ( 'do' ( declaration )* ( instruction )* 'end' -> ^( 'do' ^( DECLARATION ( ( declaration )* )? ) ^( INSTRUCTION ( instruction )* ) 'end' ) )
-            // /home/katana/Desktop/compilation/vincent66u/comp.g:32:14: 'do' ( declaration )* ( instruction )* 'end'
+            // /home/vincent/Bureau/comp.g:32:11: ( 'do' ( declaration )* ( instruction )* 'end' -> ^( 'do' ^( DECLARATION ( ( declaration )* )? ) ^( INSTRUCTION ( instruction )* ) 'end' ) )
+            // /home/vincent/Bureau/comp.g:32:14: 'do' ( declaration )* ( instruction )* 'end'
             {
             string_literal1=(Token)match(input,31,FOLLOW_31_in_prog140);  
             stream_31.add(string_literal1);
 
-            // /home/katana/Desktop/compilation/vincent66u/comp.g:32:20: ( declaration )*
+            // /home/vincent/Bureau/comp.g:32:20: ( declaration )*
             loop1:
             do {
                 int alt1=2;
@@ -146,7 +146,7 @@ public class compParser extends Parser {
 
                 switch (alt1) {
             	case 1 :
-            	    // /home/katana/Desktop/compilation/vincent66u/comp.g:32:21: declaration
+            	    // /home/vincent/Bureau/comp.g:32:21: declaration
             	    {
             	    pushFollow(FOLLOW_declaration_in_prog144);
             	    declaration2=declaration();
@@ -163,7 +163,7 @@ public class compParser extends Parser {
                 }
             } while (true);
 
-            // /home/katana/Desktop/compilation/vincent66u/comp.g:32:37: ( instruction )*
+            // /home/vincent/Bureau/comp.g:32:37: ( instruction )*
             loop2:
             do {
                 int alt2=2;
@@ -176,7 +176,7 @@ public class compParser extends Parser {
 
                 switch (alt2) {
             	case 1 :
-            	    // /home/katana/Desktop/compilation/vincent66u/comp.g:32:38: instruction
+            	    // /home/vincent/Bureau/comp.g:32:38: instruction
             	    {
             	    pushFollow(FOLLOW_instruction_in_prog151);
             	    instruction3=instruction();
@@ -199,7 +199,7 @@ public class compParser extends Parser {
 
 
             // AST REWRITE
-            // elements: instruction, 32, declaration, 31
+            // elements: declaration, instruction, 32, 31
             // token labels: 
             // rule labels: retval
             // token list labels: 
@@ -211,19 +211,19 @@ public class compParser extends Parser {
             root_0 = (CommonTree)adaptor.nil();
             // 32:60: -> ^( 'do' ^( DECLARATION ( ( declaration )* )? ) ^( INSTRUCTION ( instruction )* ) 'end' )
             {
-                // /home/katana/Desktop/compilation/vincent66u/comp.g:32:63: ^( 'do' ^( DECLARATION ( ( declaration )* )? ) ^( INSTRUCTION ( instruction )* ) 'end' )
+                // /home/vincent/Bureau/comp.g:32:63: ^( 'do' ^( DECLARATION ( ( declaration )* )? ) ^( INSTRUCTION ( instruction )* ) 'end' )
                 {
                 CommonTree root_1 = (CommonTree)adaptor.nil();
                 root_1 = (CommonTree)adaptor.becomeRoot(stream_31.nextNode(), root_1);
 
-                // /home/katana/Desktop/compilation/vincent66u/comp.g:32:70: ^( DECLARATION ( ( declaration )* )? )
+                // /home/vincent/Bureau/comp.g:32:70: ^( DECLARATION ( ( declaration )* )? )
                 {
                 CommonTree root_2 = (CommonTree)adaptor.nil();
                 root_2 = (CommonTree)adaptor.becomeRoot((CommonTree)adaptor.create(DECLARATION, "DECLARATION"), root_2);
 
-                // /home/katana/Desktop/compilation/vincent66u/comp.g:32:84: ( ( declaration )* )?
+                // /home/vincent/Bureau/comp.g:32:84: ( ( declaration )* )?
                 if ( stream_declaration.hasNext() ) {
-                    // /home/katana/Desktop/compilation/vincent66u/comp.g:32:85: ( declaration )*
+                    // /home/vincent/Bureau/comp.g:32:85: ( declaration )*
                     while ( stream_declaration.hasNext() ) {
                         adaptor.addChild(root_2, stream_declaration.nextTree());
 
@@ -235,12 +235,12 @@ public class compParser extends Parser {
 
                 adaptor.addChild(root_1, root_2);
                 }
-                // /home/katana/Desktop/compilation/vincent66u/comp.g:32:104: ^( INSTRUCTION ( instruction )* )
+                // /home/vincent/Bureau/comp.g:32:104: ^( INSTRUCTION ( instruction )* )
                 {
                 CommonTree root_2 = (CommonTree)adaptor.nil();
                 root_2 = (CommonTree)adaptor.becomeRoot((CommonTree)adaptor.create(INSTRUCTION, "INSTRUCTION"), root_2);
 
-                // /home/katana/Desktop/compilation/vincent66u/comp.g:32:118: ( instruction )*
+                // /home/vincent/Bureau/comp.g:32:118: ( instruction )*
                 while ( stream_instruction.hasNext() ) {
                     adaptor.addChild(root_2, stream_instruction.nextTree());
 
@@ -283,7 +283,7 @@ public class compParser extends Parser {
     };
 
     // $ANTLR start "declaration"
-    // /home/katana/Desktop/compilation/vincent66u/comp.g:34:1: declaration : ( dec_var | dec_func -> dec_func | dec_proc -> dec_proc );
+    // /home/vincent/Bureau/comp.g:34:1: declaration : ( dec_var | dec_func -> dec_func | dec_proc -> dec_proc );
     public final compParser.declaration_return declaration() throws RecognitionException {
         compParser.declaration_return retval = new compParser.declaration_return();
         retval.start = input.LT(1);
@@ -300,7 +300,7 @@ public class compParser extends Parser {
         RewriteRuleSubtreeStream stream_dec_func=new RewriteRuleSubtreeStream(adaptor,"rule dec_func");
         RewriteRuleSubtreeStream stream_dec_proc=new RewriteRuleSubtreeStream(adaptor,"rule dec_proc");
         try {
-            // /home/katana/Desktop/compilation/vincent66u/comp.g:34:13: ( dec_var | dec_func -> dec_func | dec_proc -> dec_proc )
+            // /home/vincent/Bureau/comp.g:34:13: ( dec_var | dec_func -> dec_func | dec_proc -> dec_proc )
             int alt3=3;
             switch ( input.LA(1) ) {
             case 34:
@@ -329,7 +329,7 @@ public class compParser extends Parser {
 
             switch (alt3) {
                 case 1 :
-                    // /home/katana/Desktop/compilation/vincent66u/comp.g:34:16: dec_var
+                    // /home/vincent/Bureau/comp.g:34:16: dec_var
                     {
                     root_0 = (CommonTree)adaptor.nil();
 
@@ -343,7 +343,7 @@ public class compParser extends Parser {
                     }
                     break;
                 case 2 :
-                    // /home/katana/Desktop/compilation/vincent66u/comp.g:35:5: dec_func
+                    // /home/vincent/Bureau/comp.g:35:5: dec_func
                     {
                     pushFollow(FOLLOW_dec_func_in_declaration220);
                     dec_func6=dec_func();
@@ -374,7 +374,7 @@ public class compParser extends Parser {
                     }
                     break;
                 case 3 :
-                    // /home/katana/Desktop/compilation/vincent66u/comp.g:36:5: dec_proc
+                    // /home/vincent/Bureau/comp.g:36:5: dec_proc
                     {
                     pushFollow(FOLLOW_dec_proc_in_declaration229);
                     dec_proc7=dec_proc();
@@ -430,7 +430,7 @@ public class compParser extends Parser {
     };
 
     // $ANTLR start "dec_var"
-    // /home/katana/Desktop/compilation/vincent66u/comp.g:38:1: dec_var : type IDF ( ',' IDF )* -> ^( VAR type ( IDF )+ ) ;
+    // /home/vincent/Bureau/comp.g:38:1: dec_var : type IDF ( ',' IDF )* -> ^( VAR type ( IDF )+ ) ;
     public final compParser.dec_var_return dec_var() throws RecognitionException {
         compParser.dec_var_return retval = new compParser.dec_var_return();
         retval.start = input.LT(1);
@@ -450,8 +450,8 @@ public class compParser extends Parser {
         RewriteRuleTokenStream stream_33=new RewriteRuleTokenStream(adaptor,"token 33");
         RewriteRuleSubtreeStream stream_type=new RewriteRuleSubtreeStream(adaptor,"rule type");
         try {
-            // /home/katana/Desktop/compilation/vincent66u/comp.g:38:13: ( type IDF ( ',' IDF )* -> ^( VAR type ( IDF )+ ) )
-            // /home/katana/Desktop/compilation/vincent66u/comp.g:38:16: type IDF ( ',' IDF )*
+            // /home/vincent/Bureau/comp.g:38:13: ( type IDF ( ',' IDF )* -> ^( VAR type ( IDF )+ ) )
+            // /home/vincent/Bureau/comp.g:38:16: type IDF ( ',' IDF )*
             {
             pushFollow(FOLLOW_type_in_dec_var246);
             type8=type();
@@ -462,7 +462,7 @@ public class compParser extends Parser {
             IDF9=(Token)match(input,IDF,FOLLOW_IDF_in_dec_var251);  
             stream_IDF.add(IDF9);
 
-            // /home/katana/Desktop/compilation/vincent66u/comp.g:38:28: ( ',' IDF )*
+            // /home/vincent/Bureau/comp.g:38:28: ( ',' IDF )*
             loop4:
             do {
                 int alt4=2;
@@ -475,7 +475,7 @@ public class compParser extends Parser {
 
                 switch (alt4) {
             	case 1 :
-            	    // /home/katana/Desktop/compilation/vincent66u/comp.g:38:29: ',' IDF
+            	    // /home/vincent/Bureau/comp.g:38:29: ',' IDF
             	    {
             	    char_literal10=(Token)match(input,33,FOLLOW_33_in_dec_var254);  
             	    stream_33.add(char_literal10);
@@ -507,7 +507,7 @@ public class compParser extends Parser {
             root_0 = (CommonTree)adaptor.nil();
             // 38:40: -> ^( VAR type ( IDF )+ )
             {
-                // /home/katana/Desktop/compilation/vincent66u/comp.g:38:42: ^( VAR type ( IDF )+ )
+                // /home/vincent/Bureau/comp.g:38:42: ^( VAR type ( IDF )+ )
                 {
                 CommonTree root_1 = (CommonTree)adaptor.nil();
                 root_1 = (CommonTree)adaptor.becomeRoot((CommonTree)adaptor.create(VAR, "VAR"), root_1);
@@ -554,7 +554,7 @@ public class compParser extends Parser {
     };
 
     // $ANTLR start "type"
-    // /home/katana/Desktop/compilation/vincent66u/comp.g:40:1: type : ( 'integer' -> ^( 'integer' ) | 'boolean' -> ^( 'boolean' ) | array -> ^( array ) );
+    // /home/vincent/Bureau/comp.g:40:1: type : ( 'integer' -> ^( 'integer' ) | 'boolean' -> ^( 'boolean' ) | array -> ^( array ) );
     public final compParser.type_return type() throws RecognitionException {
         compParser.type_return retval = new compParser.type_return();
         retval.start = input.LT(1);
@@ -572,7 +572,7 @@ public class compParser extends Parser {
         RewriteRuleTokenStream stream_34=new RewriteRuleTokenStream(adaptor,"token 34");
         RewriteRuleSubtreeStream stream_array=new RewriteRuleSubtreeStream(adaptor,"rule array");
         try {
-            // /home/katana/Desktop/compilation/vincent66u/comp.g:40:13: ( 'integer' -> ^( 'integer' ) | 'boolean' -> ^( 'boolean' ) | array -> ^( array ) )
+            // /home/vincent/Bureau/comp.g:40:13: ( 'integer' -> ^( 'integer' ) | 'boolean' -> ^( 'boolean' ) | array -> ^( array ) )
             int alt5=3;
             switch ( input.LA(1) ) {
             case 34:
@@ -599,7 +599,7 @@ public class compParser extends Parser {
 
             switch (alt5) {
                 case 1 :
-                    // /home/katana/Desktop/compilation/vincent66u/comp.g:40:17: 'integer'
+                    // /home/vincent/Bureau/comp.g:40:17: 'integer'
                     {
                     string_literal12=(Token)match(input,34,FOLLOW_34_in_type287);  
                     stream_34.add(string_literal12);
@@ -619,7 +619,7 @@ public class compParser extends Parser {
                     root_0 = (CommonTree)adaptor.nil();
                     // 40:26: -> ^( 'integer' )
                     {
-                        // /home/katana/Desktop/compilation/vincent66u/comp.g:40:28: ^( 'integer' )
+                        // /home/vincent/Bureau/comp.g:40:28: ^( 'integer' )
                         {
                         CommonTree root_1 = (CommonTree)adaptor.nil();
                         root_1 = (CommonTree)adaptor.becomeRoot(stream_34.nextNode(), root_1);
@@ -633,7 +633,7 @@ public class compParser extends Parser {
                     }
                     break;
                 case 2 :
-                    // /home/katana/Desktop/compilation/vincent66u/comp.g:41:27: 'boolean'
+                    // /home/vincent/Bureau/comp.g:41:27: 'boolean'
                     {
                     string_literal13=(Token)match(input,35,FOLLOW_35_in_type321);  
                     stream_35.add(string_literal13);
@@ -653,7 +653,7 @@ public class compParser extends Parser {
                     root_0 = (CommonTree)adaptor.nil();
                     // 41:36: -> ^( 'boolean' )
                     {
-                        // /home/katana/Desktop/compilation/vincent66u/comp.g:41:38: ^( 'boolean' )
+                        // /home/vincent/Bureau/comp.g:41:38: ^( 'boolean' )
                         {
                         CommonTree root_1 = (CommonTree)adaptor.nil();
                         root_1 = (CommonTree)adaptor.becomeRoot(stream_35.nextNode(), root_1);
@@ -667,7 +667,7 @@ public class compParser extends Parser {
                     }
                     break;
                 case 3 :
-                    // /home/katana/Desktop/compilation/vincent66u/comp.g:42:28: array
+                    // /home/vincent/Bureau/comp.g:42:28: array
                     {
                     pushFollow(FOLLOW_array_in_type356);
                     array14=array();
@@ -690,7 +690,7 @@ public class compParser extends Parser {
                     root_0 = (CommonTree)adaptor.nil();
                     // 42:34: -> ^( array )
                     {
-                        // /home/katana/Desktop/compilation/vincent66u/comp.g:42:36: ^( array )
+                        // /home/vincent/Bureau/comp.g:42:36: ^( array )
                         {
                         CommonTree root_1 = (CommonTree)adaptor.nil();
                         root_1 = (CommonTree)adaptor.becomeRoot(stream_array.nextNode(), root_1);
@@ -729,7 +729,7 @@ public class compParser extends Parser {
     };
 
     // $ANTLR start "dec_func"
-    // /home/katana/Desktop/compilation/vincent66u/comp.g:43:1: dec_func : ent_func ( declaration )* ( instruction )* 'end' -> ^( ent_func ^( BLOC ( declaration )* ( instruction )+ ) 'end' ) ;
+    // /home/vincent/Bureau/comp.g:43:1: dec_func : ent_func ( declaration )* ( instruction )* 'end' -> ^( ent_func ^( BLOC ( declaration )* ( instruction )+ ) 'end' ) ;
     public final compParser.dec_func_return dec_func() throws RecognitionException {
         compParser.dec_func_return retval = new compParser.dec_func_return();
         retval.start = input.LT(1);
@@ -750,8 +750,8 @@ public class compParser extends Parser {
         RewriteRuleSubtreeStream stream_instruction=new RewriteRuleSubtreeStream(adaptor,"rule instruction");
         RewriteRuleSubtreeStream stream_ent_func=new RewriteRuleSubtreeStream(adaptor,"rule ent_func");
         try {
-            // /home/katana/Desktop/compilation/vincent66u/comp.g:43:13: ( ent_func ( declaration )* ( instruction )* 'end' -> ^( ent_func ^( BLOC ( declaration )* ( instruction )+ ) 'end' ) )
-            // /home/katana/Desktop/compilation/vincent66u/comp.g:43:16: ent_func ( declaration )* ( instruction )* 'end'
+            // /home/vincent/Bureau/comp.g:43:13: ( ent_func ( declaration )* ( instruction )* 'end' -> ^( ent_func ^( BLOC ( declaration )* ( instruction )+ ) 'end' ) )
+            // /home/vincent/Bureau/comp.g:43:16: ent_func ( declaration )* ( instruction )* 'end'
             {
             pushFollow(FOLLOW_ent_func_in_dec_func372);
             ent_func15=ent_func();
@@ -759,7 +759,7 @@ public class compParser extends Parser {
             state._fsp--;
 
             stream_ent_func.add(ent_func15.getTree());
-            // /home/katana/Desktop/compilation/vincent66u/comp.g:43:26: ( declaration )*
+            // /home/vincent/Bureau/comp.g:43:26: ( declaration )*
             loop6:
             do {
                 int alt6=2;
@@ -772,7 +772,7 @@ public class compParser extends Parser {
 
                 switch (alt6) {
             	case 1 :
-            	    // /home/katana/Desktop/compilation/vincent66u/comp.g:43:27: declaration
+            	    // /home/vincent/Bureau/comp.g:43:27: declaration
             	    {
             	    pushFollow(FOLLOW_declaration_in_dec_func376);
             	    declaration16=declaration();
@@ -789,7 +789,7 @@ public class compParser extends Parser {
                 }
             } while (true);
 
-            // /home/katana/Desktop/compilation/vincent66u/comp.g:43:43: ( instruction )*
+            // /home/vincent/Bureau/comp.g:43:43: ( instruction )*
             loop7:
             do {
                 int alt7=2;
@@ -802,7 +802,7 @@ public class compParser extends Parser {
 
                 switch (alt7) {
             	case 1 :
-            	    // /home/katana/Desktop/compilation/vincent66u/comp.g:43:45: instruction
+            	    // /home/vincent/Bureau/comp.g:43:45: instruction
             	    {
             	    pushFollow(FOLLOW_instruction_in_dec_func384);
             	    instruction17=instruction();
@@ -825,7 +825,7 @@ public class compParser extends Parser {
 
 
             // AST REWRITE
-            // elements: 32, instruction, declaration, ent_func
+            // elements: instruction, 32, declaration, ent_func
             // token labels: 
             // rule labels: retval
             // token list labels: 
@@ -837,17 +837,17 @@ public class compParser extends Parser {
             root_0 = (CommonTree)adaptor.nil();
             // 43:65: -> ^( ent_func ^( BLOC ( declaration )* ( instruction )+ ) 'end' )
             {
-                // /home/katana/Desktop/compilation/vincent66u/comp.g:43:67: ^( ent_func ^( BLOC ( declaration )* ( instruction )+ ) 'end' )
+                // /home/vincent/Bureau/comp.g:43:67: ^( ent_func ^( BLOC ( declaration )* ( instruction )+ ) 'end' )
                 {
                 CommonTree root_1 = (CommonTree)adaptor.nil();
                 root_1 = (CommonTree)adaptor.becomeRoot(stream_ent_func.nextNode(), root_1);
 
-                // /home/katana/Desktop/compilation/vincent66u/comp.g:43:78: ^( BLOC ( declaration )* ( instruction )+ )
+                // /home/vincent/Bureau/comp.g:43:78: ^( BLOC ( declaration )* ( instruction )+ )
                 {
                 CommonTree root_2 = (CommonTree)adaptor.nil();
                 root_2 = (CommonTree)adaptor.becomeRoot((CommonTree)adaptor.create(BLOC, "BLOC"), root_2);
 
-                // /home/katana/Desktop/compilation/vincent66u/comp.g:43:84: ( declaration )*
+                // /home/vincent/Bureau/comp.g:43:84: ( declaration )*
                 while ( stream_declaration.hasNext() ) {
                     adaptor.addChild(root_2, stream_declaration.nextTree());
 
@@ -898,7 +898,7 @@ public class compParser extends Parser {
     };
 
     // $ANTLR start "dec_proc"
-    // /home/katana/Desktop/compilation/vincent66u/comp.g:46:1: dec_proc : ent_proc ( declaration )* ( instruction )* 'end' -> ^( ent_proc ^( BLOC ( declaration )* ( instruction )+ ) 'end' ) ;
+    // /home/vincent/Bureau/comp.g:46:1: dec_proc : ent_proc ( declaration )* ( instruction )* 'end' -> ^( ent_proc ^( BLOC ( declaration )* ( instruction )+ ) 'end' ) ;
     public final compParser.dec_proc_return dec_proc() throws RecognitionException {
         compParser.dec_proc_return retval = new compParser.dec_proc_return();
         retval.start = input.LT(1);
@@ -919,8 +919,8 @@ public class compParser extends Parser {
         RewriteRuleSubtreeStream stream_instruction=new RewriteRuleSubtreeStream(adaptor,"rule instruction");
         RewriteRuleSubtreeStream stream_ent_proc=new RewriteRuleSubtreeStream(adaptor,"rule ent_proc");
         try {
-            // /home/katana/Desktop/compilation/vincent66u/comp.g:46:13: ( ent_proc ( declaration )* ( instruction )* 'end' -> ^( ent_proc ^( BLOC ( declaration )* ( instruction )+ ) 'end' ) )
-            // /home/katana/Desktop/compilation/vincent66u/comp.g:46:16: ent_proc ( declaration )* ( instruction )* 'end'
+            // /home/vincent/Bureau/comp.g:46:13: ( ent_proc ( declaration )* ( instruction )* 'end' -> ^( ent_proc ^( BLOC ( declaration )* ( instruction )+ ) 'end' ) )
+            // /home/vincent/Bureau/comp.g:46:16: ent_proc ( declaration )* ( instruction )* 'end'
             {
             pushFollow(FOLLOW_ent_proc_in_dec_proc421);
             ent_proc19=ent_proc();
@@ -928,7 +928,7 @@ public class compParser extends Parser {
             state._fsp--;
 
             stream_ent_proc.add(ent_proc19.getTree());
-            // /home/katana/Desktop/compilation/vincent66u/comp.g:46:26: ( declaration )*
+            // /home/vincent/Bureau/comp.g:46:26: ( declaration )*
             loop8:
             do {
                 int alt8=2;
@@ -941,7 +941,7 @@ public class compParser extends Parser {
 
                 switch (alt8) {
             	case 1 :
-            	    // /home/katana/Desktop/compilation/vincent66u/comp.g:46:27: declaration
+            	    // /home/vincent/Bureau/comp.g:46:27: declaration
             	    {
             	    pushFollow(FOLLOW_declaration_in_dec_proc425);
             	    declaration20=declaration();
@@ -958,7 +958,7 @@ public class compParser extends Parser {
                 }
             } while (true);
 
-            // /home/katana/Desktop/compilation/vincent66u/comp.g:46:43: ( instruction )*
+            // /home/vincent/Bureau/comp.g:46:43: ( instruction )*
             loop9:
             do {
                 int alt9=2;
@@ -971,7 +971,7 @@ public class compParser extends Parser {
 
                 switch (alt9) {
             	case 1 :
-            	    // /home/katana/Desktop/compilation/vincent66u/comp.g:46:45: instruction
+            	    // /home/vincent/Bureau/comp.g:46:45: instruction
             	    {
             	    pushFollow(FOLLOW_instruction_in_dec_proc433);
             	    instruction21=instruction();
@@ -994,7 +994,7 @@ public class compParser extends Parser {
 
 
             // AST REWRITE
-            // elements: ent_proc, 32, instruction, declaration
+            // elements: declaration, instruction, 32, ent_proc
             // token labels: 
             // rule labels: retval
             // token list labels: 
@@ -1006,17 +1006,17 @@ public class compParser extends Parser {
             root_0 = (CommonTree)adaptor.nil();
             // 46:65: -> ^( ent_proc ^( BLOC ( declaration )* ( instruction )+ ) 'end' )
             {
-                // /home/katana/Desktop/compilation/vincent66u/comp.g:46:67: ^( ent_proc ^( BLOC ( declaration )* ( instruction )+ ) 'end' )
+                // /home/vincent/Bureau/comp.g:46:67: ^( ent_proc ^( BLOC ( declaration )* ( instruction )+ ) 'end' )
                 {
                 CommonTree root_1 = (CommonTree)adaptor.nil();
                 root_1 = (CommonTree)adaptor.becomeRoot(stream_ent_proc.nextNode(), root_1);
 
-                // /home/katana/Desktop/compilation/vincent66u/comp.g:46:78: ^( BLOC ( declaration )* ( instruction )+ )
+                // /home/vincent/Bureau/comp.g:46:78: ^( BLOC ( declaration )* ( instruction )+ )
                 {
                 CommonTree root_2 = (CommonTree)adaptor.nil();
                 root_2 = (CommonTree)adaptor.becomeRoot((CommonTree)adaptor.create(BLOC, "BLOC"), root_2);
 
-                // /home/katana/Desktop/compilation/vincent66u/comp.g:46:85: ( declaration )*
+                // /home/vincent/Bureau/comp.g:46:85: ( declaration )*
                 while ( stream_declaration.hasNext() ) {
                     adaptor.addChild(root_2, stream_declaration.nextTree());
 
@@ -1067,7 +1067,7 @@ public class compParser extends Parser {
     };
 
     // $ANTLR start "ent_func"
-    // /home/katana/Desktop/compilation/vincent66u/comp.g:48:1: ent_func : 'function' type IDF param -> ^( FONCTION IDF type param ) ;
+    // /home/vincent/Bureau/comp.g:48:1: ent_func : 'function' type IDF param -> ^( FONCTION IDF type param ) ;
     public final compParser.ent_func_return ent_func() throws RecognitionException {
         compParser.ent_func_return retval = new compParser.ent_func_return();
         retval.start = input.LT(1);
@@ -1088,8 +1088,8 @@ public class compParser extends Parser {
         RewriteRuleSubtreeStream stream_param=new RewriteRuleSubtreeStream(adaptor,"rule param");
         RewriteRuleSubtreeStream stream_type=new RewriteRuleSubtreeStream(adaptor,"rule type");
         try {
-            // /home/katana/Desktop/compilation/vincent66u/comp.g:48:13: ( 'function' type IDF param -> ^( FONCTION IDF type param ) )
-            // /home/katana/Desktop/compilation/vincent66u/comp.g:48:15: 'function' type IDF param
+            // /home/vincent/Bureau/comp.g:48:13: ( 'function' type IDF param -> ^( FONCTION IDF type param ) )
+            // /home/vincent/Bureau/comp.g:48:15: 'function' type IDF param
             {
             string_literal23=(Token)match(input,FONCTION,FOLLOW_FONCTION_in_ent_func469);  
             stream_FONCTION.add(string_literal23);
@@ -1112,7 +1112,7 @@ public class compParser extends Parser {
 
 
             // AST REWRITE
-            // elements: param, type, IDF
+            // elements: type, IDF, param
             // token labels: 
             // rule labels: retval
             // token list labels: 
@@ -1124,7 +1124,7 @@ public class compParser extends Parser {
             root_0 = (CommonTree)adaptor.nil();
             // 48:48: -> ^( FONCTION IDF type param )
             {
-                // /home/katana/Desktop/compilation/vincent66u/comp.g:48:51: ^( FONCTION IDF type param )
+                // /home/vincent/Bureau/comp.g:48:51: ^( FONCTION IDF type param )
                 {
                 CommonTree root_1 = (CommonTree)adaptor.nil();
                 root_1 = (CommonTree)adaptor.becomeRoot((CommonTree)adaptor.create(FONCTION, "FONCTION"), root_1);
@@ -1165,7 +1165,7 @@ public class compParser extends Parser {
     };
 
     // $ANTLR start "ent_proc"
-    // /home/katana/Desktop/compilation/vincent66u/comp.g:50:1: ent_proc : 'procedure' IDF param -> ^( PROCEDURE IDF param ) ;
+    // /home/vincent/Bureau/comp.g:50:1: ent_proc : 'procedure' IDF param -> ^( PROCEDURE IDF param ) ;
     public final compParser.ent_proc_return ent_proc() throws RecognitionException {
         compParser.ent_proc_return retval = new compParser.ent_proc_return();
         retval.start = input.LT(1);
@@ -1183,8 +1183,8 @@ public class compParser extends Parser {
         RewriteRuleTokenStream stream_PROCEDURE=new RewriteRuleTokenStream(adaptor,"token PROCEDURE");
         RewriteRuleSubtreeStream stream_param=new RewriteRuleSubtreeStream(adaptor,"rule param");
         try {
-            // /home/katana/Desktop/compilation/vincent66u/comp.g:50:13: ( 'procedure' IDF param -> ^( PROCEDURE IDF param ) )
-            // /home/katana/Desktop/compilation/vincent66u/comp.g:50:15: 'procedure' IDF param
+            // /home/vincent/Bureau/comp.g:50:13: ( 'procedure' IDF param -> ^( PROCEDURE IDF param ) )
+            // /home/vincent/Bureau/comp.g:50:15: 'procedure' IDF param
             {
             string_literal27=(Token)match(input,PROCEDURE,FOLLOW_PROCEDURE_in_ent_proc506);  
             stream_PROCEDURE.add(string_literal27);
@@ -1213,7 +1213,7 @@ public class compParser extends Parser {
             root_0 = (CommonTree)adaptor.nil();
             // 50:40: -> ^( PROCEDURE IDF param )
             {
-                // /home/katana/Desktop/compilation/vincent66u/comp.g:50:42: ^( PROCEDURE IDF param )
+                // /home/vincent/Bureau/comp.g:50:42: ^( PROCEDURE IDF param )
                 {
                 CommonTree root_1 = (CommonTree)adaptor.nil();
                 root_1 = (CommonTree)adaptor.becomeRoot((CommonTree)adaptor.create(PROCEDURE, "PROCEDURE"), root_1);
@@ -1253,7 +1253,7 @@ public class compParser extends Parser {
     };
 
     // $ANTLR start "array"
-    // /home/katana/Desktop/compilation/vincent66u/comp.g:52:1: array : 'array' '[' bounds ']' -> ^( ARRAY bounds ) ;
+    // /home/vincent/Bureau/comp.g:52:1: array : 'array' '[' bounds ']' -> ^( ARRAY bounds ) ;
     public final compParser.array_return array() throws RecognitionException {
         compParser.array_return retval = new compParser.array_return();
         retval.start = input.LT(1);
@@ -1274,8 +1274,8 @@ public class compParser extends Parser {
         RewriteRuleTokenStream stream_38=new RewriteRuleTokenStream(adaptor,"token 38");
         RewriteRuleSubtreeStream stream_bounds=new RewriteRuleSubtreeStream(adaptor,"rule bounds");
         try {
-            // /home/katana/Desktop/compilation/vincent66u/comp.g:52:12: ( 'array' '[' bounds ']' -> ^( ARRAY bounds ) )
-            // /home/katana/Desktop/compilation/vincent66u/comp.g:52:14: 'array' '[' bounds ']'
+            // /home/vincent/Bureau/comp.g:52:12: ( 'array' '[' bounds ']' -> ^( ARRAY bounds ) )
+            // /home/vincent/Bureau/comp.g:52:14: 'array' '[' bounds ']'
             {
             string_literal30=(Token)match(input,36,FOLLOW_36_in_array535);  
             stream_36.add(string_literal30);
@@ -1307,7 +1307,7 @@ public class compParser extends Parser {
             root_0 = (CommonTree)adaptor.nil();
             // 52:36: -> ^( ARRAY bounds )
             {
-                // /home/katana/Desktop/compilation/vincent66u/comp.g:52:39: ^( ARRAY bounds )
+                // /home/vincent/Bureau/comp.g:52:39: ^( ARRAY bounds )
                 {
                 CommonTree root_1 = (CommonTree)adaptor.nil();
                 root_1 = (CommonTree)adaptor.becomeRoot((CommonTree)adaptor.create(ARRAY, "ARRAY"), root_1);
@@ -1346,7 +1346,7 @@ public class compParser extends Parser {
     };
 
     // $ANTLR start "bounds"
-    // /home/katana/Desktop/compilation/vincent66u/comp.g:54:1: bounds : CST_ENT '..' CST_ENT ( ',' CST_ENT '..' CST_ENT )* -> ^( INTERVAL ( ^( BOUNDS CST_ENT CST_ENT ) )+ ) ;
+    // /home/vincent/Bureau/comp.g:54:1: bounds : CST_ENT '..' CST_ENT ( ',' CST_ENT '..' CST_ENT )* -> ^( INTERVAL ( ^( BOUNDS CST_ENT CST_ENT ) )+ ) ;
     public final compParser.bounds_return bounds() throws RecognitionException {
         compParser.bounds_return retval = new compParser.bounds_return();
         retval.start = input.LT(1);
@@ -1373,8 +1373,8 @@ public class compParser extends Parser {
         RewriteRuleTokenStream stream_CST_ENT=new RewriteRuleTokenStream(adaptor,"token CST_ENT");
 
         try {
-            // /home/katana/Desktop/compilation/vincent66u/comp.g:54:13: ( CST_ENT '..' CST_ENT ( ',' CST_ENT '..' CST_ENT )* -> ^( INTERVAL ( ^( BOUNDS CST_ENT CST_ENT ) )+ ) )
-            // /home/katana/Desktop/compilation/vincent66u/comp.g:54:16: CST_ENT '..' CST_ENT ( ',' CST_ENT '..' CST_ENT )*
+            // /home/vincent/Bureau/comp.g:54:13: ( CST_ENT '..' CST_ENT ( ',' CST_ENT '..' CST_ENT )* -> ^( INTERVAL ( ^( BOUNDS CST_ENT CST_ENT ) )+ ) )
+            // /home/vincent/Bureau/comp.g:54:16: CST_ENT '..' CST_ENT ( ',' CST_ENT '..' CST_ENT )*
             {
             CST_ENT34=(Token)match(input,CST_ENT,FOLLOW_CST_ENT_in_bounds562);  
             stream_CST_ENT.add(CST_ENT34);
@@ -1385,7 +1385,7 @@ public class compParser extends Parser {
             CST_ENT36=(Token)match(input,CST_ENT,FOLLOW_CST_ENT_in_bounds566);  
             stream_CST_ENT.add(CST_ENT36);
 
-            // /home/katana/Desktop/compilation/vincent66u/comp.g:54:37: ( ',' CST_ENT '..' CST_ENT )*
+            // /home/vincent/Bureau/comp.g:54:37: ( ',' CST_ENT '..' CST_ENT )*
             loop10:
             do {
                 int alt10=2;
@@ -1398,7 +1398,7 @@ public class compParser extends Parser {
 
                 switch (alt10) {
             	case 1 :
-            	    // /home/katana/Desktop/compilation/vincent66u/comp.g:54:38: ',' CST_ENT '..' CST_ENT
+            	    // /home/vincent/Bureau/comp.g:54:38: ',' CST_ENT '..' CST_ENT
             	    {
             	    char_literal37=(Token)match(input,33,FOLLOW_33_in_bounds569);  
             	    stream_33.add(char_literal37);
@@ -1436,7 +1436,7 @@ public class compParser extends Parser {
             root_0 = (CommonTree)adaptor.nil();
             // 54:67: -> ^( INTERVAL ( ^( BOUNDS CST_ENT CST_ENT ) )+ )
             {
-                // /home/katana/Desktop/compilation/vincent66u/comp.g:54:69: ^( INTERVAL ( ^( BOUNDS CST_ENT CST_ENT ) )+ )
+                // /home/vincent/Bureau/comp.g:54:69: ^( INTERVAL ( ^( BOUNDS CST_ENT CST_ENT ) )+ )
                 {
                 CommonTree root_1 = (CommonTree)adaptor.nil();
                 root_1 = (CommonTree)adaptor.becomeRoot((CommonTree)adaptor.create(INTERVAL, "INTERVAL"), root_1);
@@ -1445,7 +1445,7 @@ public class compParser extends Parser {
                     throw new RewriteEarlyExitException();
                 }
                 while ( stream_CST_ENT.hasNext()||stream_CST_ENT.hasNext() ) {
-                    // /home/katana/Desktop/compilation/vincent66u/comp.g:54:80: ^( BOUNDS CST_ENT CST_ENT )
+                    // /home/vincent/Bureau/comp.g:54:80: ^( BOUNDS CST_ENT CST_ENT )
                     {
                     CommonTree root_2 = (CommonTree)adaptor.nil();
                     root_2 = (CommonTree)adaptor.becomeRoot((CommonTree)adaptor.create(BOUNDS, "BOUNDS"), root_2);
@@ -1492,7 +1492,7 @@ public class compParser extends Parser {
     };
 
     // $ANTLR start "param"
-    // /home/katana/Desktop/compilation/vincent66u/comp.g:55:1: param : '(' ( formal ( ',' formal )* )? ')' -> ^( LISTPARAM ( formal )* ) ;
+    // /home/vincent/Bureau/comp.g:55:1: param : '(' ( formal ( ',' formal )* )? ')' -> ^( LISTPARAM ( formal )* ) ;
     public final compParser.param_return param() throws RecognitionException {
         compParser.param_return retval = new compParser.param_return();
         retval.start = input.LT(1);
@@ -1515,13 +1515,13 @@ public class compParser extends Parser {
         RewriteRuleTokenStream stream_33=new RewriteRuleTokenStream(adaptor,"token 33");
         RewriteRuleSubtreeStream stream_formal=new RewriteRuleSubtreeStream(adaptor,"rule formal");
         try {
-            // /home/katana/Desktop/compilation/vincent66u/comp.g:55:13: ( '(' ( formal ( ',' formal )* )? ')' -> ^( LISTPARAM ( formal )* ) )
-            // /home/katana/Desktop/compilation/vincent66u/comp.g:55:16: '(' ( formal ( ',' formal )* )? ')'
+            // /home/vincent/Bureau/comp.g:55:13: ( '(' ( formal ( ',' formal )* )? ')' -> ^( LISTPARAM ( formal )* ) )
+            // /home/vincent/Bureau/comp.g:55:16: '(' ( formal ( ',' formal )* )? ')'
             {
             char_literal41=(Token)match(input,40,FOLLOW_40_in_param607);  
             stream_40.add(char_literal41);
 
-            // /home/katana/Desktop/compilation/vincent66u/comp.g:55:20: ( formal ( ',' formal )* )?
+            // /home/vincent/Bureau/comp.g:55:20: ( formal ( ',' formal )* )?
             int alt12=2;
             int LA12_0 = input.LA(1);
 
@@ -1530,7 +1530,7 @@ public class compParser extends Parser {
             }
             switch (alt12) {
                 case 1 :
-                    // /home/katana/Desktop/compilation/vincent66u/comp.g:55:21: formal ( ',' formal )*
+                    // /home/vincent/Bureau/comp.g:55:21: formal ( ',' formal )*
                     {
                     pushFollow(FOLLOW_formal_in_param610);
                     formal42=formal();
@@ -1538,7 +1538,7 @@ public class compParser extends Parser {
                     state._fsp--;
 
                     stream_formal.add(formal42.getTree());
-                    // /home/katana/Desktop/compilation/vincent66u/comp.g:55:30: ( ',' formal )*
+                    // /home/vincent/Bureau/comp.g:55:30: ( ',' formal )*
                     loop11:
                     do {
                         int alt11=2;
@@ -1551,7 +1551,7 @@ public class compParser extends Parser {
 
                         switch (alt11) {
                     	case 1 :
-                    	    // /home/katana/Desktop/compilation/vincent66u/comp.g:55:31: ',' formal
+                    	    // /home/vincent/Bureau/comp.g:55:31: ',' formal
                     	    {
                     	    char_literal43=(Token)match(input,33,FOLLOW_33_in_param615);  
                     	    stream_33.add(char_literal43);
@@ -1595,12 +1595,12 @@ public class compParser extends Parser {
             root_0 = (CommonTree)adaptor.nil();
             // 55:52: -> ^( LISTPARAM ( formal )* )
             {
-                // /home/katana/Desktop/compilation/vincent66u/comp.g:55:54: ^( LISTPARAM ( formal )* )
+                // /home/vincent/Bureau/comp.g:55:54: ^( LISTPARAM ( formal )* )
                 {
                 CommonTree root_1 = (CommonTree)adaptor.nil();
                 root_1 = (CommonTree)adaptor.becomeRoot((CommonTree)adaptor.create(LISTPARAM, "LISTPARAM"), root_1);
 
-                // /home/katana/Desktop/compilation/vincent66u/comp.g:55:66: ( formal )*
+                // /home/vincent/Bureau/comp.g:55:66: ( formal )*
                 while ( stream_formal.hasNext() ) {
                     adaptor.addChild(root_1, stream_formal.nextTree());
 
@@ -1639,7 +1639,7 @@ public class compParser extends Parser {
     };
 
     // $ANTLR start "formal"
-    // /home/katana/Desktop/compilation/vincent66u/comp.g:58:1: formal : ( 'adr' )? IDF ':' type -> ^( PARAM ( 'adr' )? IDF type ) ;
+    // /home/vincent/Bureau/comp.g:58:1: formal : ( 'adr' )? IDF ':' type -> ^( PARAM ( 'adr' )? IDF type ) ;
     public final compParser.formal_return formal() throws RecognitionException {
         compParser.formal_return retval = new compParser.formal_return();
         retval.start = input.LT(1);
@@ -1660,10 +1660,10 @@ public class compParser extends Parser {
         RewriteRuleTokenStream stream_IDF=new RewriteRuleTokenStream(adaptor,"token IDF");
         RewriteRuleSubtreeStream stream_type=new RewriteRuleSubtreeStream(adaptor,"rule type");
         try {
-            // /home/katana/Desktop/compilation/vincent66u/comp.g:58:13: ( ( 'adr' )? IDF ':' type -> ^( PARAM ( 'adr' )? IDF type ) )
-            // /home/katana/Desktop/compilation/vincent66u/comp.g:58:15: ( 'adr' )? IDF ':' type
+            // /home/vincent/Bureau/comp.g:58:13: ( ( 'adr' )? IDF ':' type -> ^( PARAM ( 'adr' )? IDF type ) )
+            // /home/vincent/Bureau/comp.g:58:15: ( 'adr' )? IDF ':' type
             {
-            // /home/katana/Desktop/compilation/vincent66u/comp.g:58:15: ( 'adr' )?
+            // /home/vincent/Bureau/comp.g:58:15: ( 'adr' )?
             int alt13=2;
             int LA13_0 = input.LA(1);
 
@@ -1672,7 +1672,7 @@ public class compParser extends Parser {
             }
             switch (alt13) {
                 case 1 :
-                    // /home/katana/Desktop/compilation/vincent66u/comp.g:58:16: 'adr'
+                    // /home/vincent/Bureau/comp.g:58:16: 'adr'
                     {
                     string_literal46=(Token)match(input,42,FOLLOW_42_in_formal649);  
                     stream_42.add(string_literal46);
@@ -1698,7 +1698,7 @@ public class compParser extends Parser {
 
 
             // AST REWRITE
-            // elements: type, IDF, 42
+            // elements: IDF, type, 42
             // token labels: 
             // rule labels: retval
             // token list labels: 
@@ -1710,12 +1710,12 @@ public class compParser extends Parser {
             root_0 = (CommonTree)adaptor.nil();
             // 58:43: -> ^( PARAM ( 'adr' )? IDF type )
             {
-                // /home/katana/Desktop/compilation/vincent66u/comp.g:58:45: ^( PARAM ( 'adr' )? IDF type )
+                // /home/vincent/Bureau/comp.g:58:45: ^( PARAM ( 'adr' )? IDF type )
                 {
                 CommonTree root_1 = (CommonTree)adaptor.nil();
                 root_1 = (CommonTree)adaptor.becomeRoot((CommonTree)adaptor.create(PARAM, "PARAM"), root_1);
 
-                // /home/katana/Desktop/compilation/vincent66u/comp.g:58:53: ( 'adr' )?
+                // /home/vincent/Bureau/comp.g:58:53: ( 'adr' )?
                 if ( stream_42.hasNext() ) {
                     adaptor.addChild(root_1, stream_42.nextNode());
 
@@ -1756,7 +1756,7 @@ public class compParser extends Parser {
     };
 
     // $ANTLR start "instruction"
-    // /home/katana/Desktop/compilation/vincent66u/comp.g:59:1: instruction : ( affectation -> affectation | bloc -> bloc | iteration -> iteration | condition -> condition | retour -> retour | read -> read | write -> write | appel -> appel );
+    // /home/vincent/Bureau/comp.g:59:1: instruction : ( affectation -> affectation | bloc -> bloc | iteration -> iteration | condition -> condition | retour -> retour | read -> read | write -> write | appel -> appel );
     public final compParser.instruction_return instruction() throws RecognitionException {
         compParser.instruction_return retval = new compParser.instruction_return();
         retval.start = input.LT(1);
@@ -1789,12 +1789,12 @@ public class compParser extends Parser {
         RewriteRuleSubtreeStream stream_affectation=new RewriteRuleSubtreeStream(adaptor,"rule affectation");
         RewriteRuleSubtreeStream stream_iteration=new RewriteRuleSubtreeStream(adaptor,"rule iteration");
         try {
-            // /home/katana/Desktop/compilation/vincent66u/comp.g:59:13: ( affectation -> affectation | bloc -> bloc | iteration -> iteration | condition -> condition | retour -> retour | read -> read | write -> write | appel -> appel )
+            // /home/vincent/Bureau/comp.g:59:13: ( affectation -> affectation | bloc -> bloc | iteration -> iteration | condition -> condition | retour -> retour | read -> read | write -> write | appel -> appel )
             int alt14=8;
             alt14 = dfa14.predict(input);
             switch (alt14) {
                 case 1 :
-                    // /home/katana/Desktop/compilation/vincent66u/comp.g:59:17: affectation
+                    // /home/vincent/Bureau/comp.g:59:17: affectation
                     {
                     pushFollow(FOLLOW_affectation_in_instruction684);
                     affectation50=affectation();
@@ -1825,7 +1825,7 @@ public class compParser extends Parser {
                     }
                     break;
                 case 2 :
-                    // /home/katana/Desktop/compilation/vincent66u/comp.g:60:10: bloc
+                    // /home/vincent/Bureau/comp.g:60:10: bloc
                     {
                     pushFollow(FOLLOW_bloc_in_instruction698);
                     bloc51=bloc();
@@ -1856,7 +1856,7 @@ public class compParser extends Parser {
                     }
                     break;
                 case 3 :
-                    // /home/katana/Desktop/compilation/vincent66u/comp.g:61:10: iteration
+                    // /home/vincent/Bureau/comp.g:61:10: iteration
                     {
                     pushFollow(FOLLOW_iteration_in_instruction713);
                     iteration52=iteration();
@@ -1887,7 +1887,7 @@ public class compParser extends Parser {
                     }
                     break;
                 case 4 :
-                    // /home/katana/Desktop/compilation/vincent66u/comp.g:62:10: condition
+                    // /home/vincent/Bureau/comp.g:62:10: condition
                     {
                     pushFollow(FOLLOW_condition_in_instruction727);
                     condition53=condition();
@@ -1918,7 +1918,7 @@ public class compParser extends Parser {
                     }
                     break;
                 case 5 :
-                    // /home/katana/Desktop/compilation/vincent66u/comp.g:63:10: retour
+                    // /home/vincent/Bureau/comp.g:63:10: retour
                     {
                     pushFollow(FOLLOW_retour_in_instruction741);
                     retour54=retour();
@@ -1949,7 +1949,7 @@ public class compParser extends Parser {
                     }
                     break;
                 case 6 :
-                    // /home/katana/Desktop/compilation/vincent66u/comp.g:64:10: read
+                    // /home/vincent/Bureau/comp.g:64:10: read
                     {
                     pushFollow(FOLLOW_read_in_instruction755);
                     read55=read();
@@ -1980,7 +1980,7 @@ public class compParser extends Parser {
                     }
                     break;
                 case 7 :
-                    // /home/katana/Desktop/compilation/vincent66u/comp.g:65:10: write
+                    // /home/vincent/Bureau/comp.g:65:10: write
                     {
                     pushFollow(FOLLOW_write_in_instruction769);
                     write56=write();
@@ -2011,7 +2011,7 @@ public class compParser extends Parser {
                     }
                     break;
                 case 8 :
-                    // /home/katana/Desktop/compilation/vincent66u/comp.g:66:9: appel
+                    // /home/vincent/Bureau/comp.g:66:9: appel
                     {
                     pushFollow(FOLLOW_appel_in_instruction782);
                     appel57=appel();
@@ -2067,7 +2067,7 @@ public class compParser extends Parser {
     };
 
     // $ANTLR start "appel"
-    // /home/katana/Desktop/compilation/vincent66u/comp.g:67:1: appel : IDF '(' ( exp ( ',' exp )* )? ')' -> ^( APPEL IDF ( exp )* ) ;
+    // /home/vincent/Bureau/comp.g:67:1: appel : IDF '(' ( exp ( ',' exp )* )? ')' -> ^( APPEL IDF ( exp )* ) ;
     public final compParser.appel_return appel() throws RecognitionException {
         compParser.appel_return retval = new compParser.appel_return();
         retval.start = input.LT(1);
@@ -2093,8 +2093,8 @@ public class compParser extends Parser {
         RewriteRuleTokenStream stream_33=new RewriteRuleTokenStream(adaptor,"token 33");
         RewriteRuleSubtreeStream stream_exp=new RewriteRuleSubtreeStream(adaptor,"rule exp");
         try {
-            // /home/katana/Desktop/compilation/vincent66u/comp.g:67:12: ( IDF '(' ( exp ( ',' exp )* )? ')' -> ^( APPEL IDF ( exp )* ) )
-            // /home/katana/Desktop/compilation/vincent66u/comp.g:67:16: IDF '(' ( exp ( ',' exp )* )? ')'
+            // /home/vincent/Bureau/comp.g:67:12: ( IDF '(' ( exp ( ',' exp )* )? ')' -> ^( APPEL IDF ( exp )* ) )
+            // /home/vincent/Bureau/comp.g:67:16: IDF '(' ( exp ( ',' exp )* )? ')'
             {
             IDF58=(Token)match(input,IDF,FOLLOW_IDF_in_appel798);  
             stream_IDF.add(IDF58);
@@ -2102,7 +2102,7 @@ public class compParser extends Parser {
             char_literal59=(Token)match(input,40,FOLLOW_40_in_appel800);  
             stream_40.add(char_literal59);
 
-            // /home/katana/Desktop/compilation/vincent66u/comp.g:67:24: ( exp ( ',' exp )* )?
+            // /home/vincent/Bureau/comp.g:67:24: ( exp ( ',' exp )* )?
             int alt16=2;
             int LA16_0 = input.LA(1);
 
@@ -2111,7 +2111,7 @@ public class compParser extends Parser {
             }
             switch (alt16) {
                 case 1 :
-                    // /home/katana/Desktop/compilation/vincent66u/comp.g:67:26: exp ( ',' exp )*
+                    // /home/vincent/Bureau/comp.g:67:26: exp ( ',' exp )*
                     {
                     pushFollow(FOLLOW_exp_in_appel804);
                     exp60=exp();
@@ -2119,7 +2119,7 @@ public class compParser extends Parser {
                     state._fsp--;
 
                     stream_exp.add(exp60.getTree());
-                    // /home/katana/Desktop/compilation/vincent66u/comp.g:67:29: ( ',' exp )*
+                    // /home/vincent/Bureau/comp.g:67:29: ( ',' exp )*
                     loop15:
                     do {
                         int alt15=2;
@@ -2132,7 +2132,7 @@ public class compParser extends Parser {
 
                         switch (alt15) {
                     	case 1 :
-                    	    // /home/katana/Desktop/compilation/vincent66u/comp.g:67:31: ',' exp
+                    	    // /home/vincent/Bureau/comp.g:67:31: ',' exp
                     	    {
                     	    char_literal61=(Token)match(input,33,FOLLOW_33_in_appel807);  
                     	    stream_33.add(char_literal61);
@@ -2164,7 +2164,7 @@ public class compParser extends Parser {
 
 
             // AST REWRITE
-            // elements: exp, IDF
+            // elements: IDF, exp
             // token labels: 
             // rule labels: retval
             // token list labels: 
@@ -2176,13 +2176,13 @@ public class compParser extends Parser {
             root_0 = (CommonTree)adaptor.nil();
             // 67:47: -> ^( APPEL IDF ( exp )* )
             {
-                // /home/katana/Desktop/compilation/vincent66u/comp.g:67:50: ^( APPEL IDF ( exp )* )
+                // /home/vincent/Bureau/comp.g:67:50: ^( APPEL IDF ( exp )* )
                 {
                 CommonTree root_1 = (CommonTree)adaptor.nil();
                 root_1 = (CommonTree)adaptor.becomeRoot((CommonTree)adaptor.create(APPEL, "APPEL"), root_1);
 
                 adaptor.addChild(root_1, stream_IDF.nextNode());
-                // /home/katana/Desktop/compilation/vincent66u/comp.g:67:62: ( exp )*
+                // /home/vincent/Bureau/comp.g:67:62: ( exp )*
                 while ( stream_exp.hasNext() ) {
                     adaptor.addChild(root_1, stream_exp.nextTree());
 
@@ -2221,7 +2221,7 @@ public class compParser extends Parser {
     };
 
     // $ANTLR start "bloc"
-    // /home/katana/Desktop/compilation/vincent66u/comp.g:68:1: bloc : 'begin' ( declaration )* ( instruction )+ 'end' ;
+    // /home/vincent/Bureau/comp.g:68:1: bloc : 'begin' ( declaration )* ( instruction )+ 'end' ;
     public final compParser.bloc_return bloc() throws RecognitionException {
         compParser.bloc_return retval = new compParser.bloc_return();
         retval.start = input.LT(1);
@@ -2239,8 +2239,8 @@ public class compParser extends Parser {
         CommonTree string_literal67_tree=null;
 
         try {
-            // /home/katana/Desktop/compilation/vincent66u/comp.g:68:9: ( 'begin' ( declaration )* ( instruction )+ 'end' )
-            // /home/katana/Desktop/compilation/vincent66u/comp.g:68:13: 'begin' ( declaration )* ( instruction )+ 'end'
+            // /home/vincent/Bureau/comp.g:68:9: ( 'begin' ( declaration )* ( instruction )+ 'end' )
+            // /home/vincent/Bureau/comp.g:68:13: 'begin' ( declaration )* ( instruction )+ 'end'
             {
             root_0 = (CommonTree)adaptor.nil();
 
@@ -2248,7 +2248,7 @@ public class compParser extends Parser {
             string_literal64_tree = (CommonTree)adaptor.create(string_literal64);
             adaptor.addChild(root_0, string_literal64_tree);
 
-            // /home/katana/Desktop/compilation/vincent66u/comp.g:68:22: ( declaration )*
+            // /home/vincent/Bureau/comp.g:68:22: ( declaration )*
             loop17:
             do {
                 int alt17=2;
@@ -2261,7 +2261,7 @@ public class compParser extends Parser {
 
                 switch (alt17) {
             	case 1 :
-            	    // /home/katana/Desktop/compilation/vincent66u/comp.g:68:23: declaration
+            	    // /home/vincent/Bureau/comp.g:68:23: declaration
             	    {
             	    pushFollow(FOLLOW_declaration_in_bloc843);
             	    declaration65=declaration();
@@ -2278,7 +2278,7 @@ public class compParser extends Parser {
                 }
             } while (true);
 
-            // /home/katana/Desktop/compilation/vincent66u/comp.g:68:39: ( instruction )+
+            // /home/vincent/Bureau/comp.g:68:39: ( instruction )+
             int cnt18=0;
             loop18:
             do {
@@ -2292,7 +2292,7 @@ public class compParser extends Parser {
 
                 switch (alt18) {
             	case 1 :
-            	    // /home/katana/Desktop/compilation/vincent66u/comp.g:68:40: instruction
+            	    // /home/vincent/Bureau/comp.g:68:40: instruction
             	    {
             	    pushFollow(FOLLOW_instruction_in_bloc850);
             	    instruction66=instruction();
@@ -2344,7 +2344,7 @@ public class compParser extends Parser {
     };
 
     // $ANTLR start "affectation"
-    // /home/katana/Desktop/compilation/vincent66u/comp.g:69:1: affectation : ( IDF '=' exp -> ^( '=' IDF exp ) | IDF '[' exp4 ( ',' exp4 )* ']' '=' exp -> ^( '=' IDF ^( CASE ( exp4 )+ ) ^( VAL exp ) ) );
+    // /home/vincent/Bureau/comp.g:69:1: affectation : ( IDF '=' exp -> ^( '=' IDF exp ) | IDF '[' exp4 ( ',' exp4 )* ']' '=' exp -> ^( '=' IDF ^( CASE ( exp4 )+ ) ^( VAL exp ) ) );
     public final compParser.affectation_return affectation() throws RecognitionException {
         compParser.affectation_return retval = new compParser.affectation_return();
         retval.start = input.LT(1);
@@ -2382,7 +2382,7 @@ public class compParser extends Parser {
         RewriteRuleSubtreeStream stream_exp=new RewriteRuleSubtreeStream(adaptor,"rule exp");
         RewriteRuleSubtreeStream stream_exp4=new RewriteRuleSubtreeStream(adaptor,"rule exp4");
         try {
-            // /home/katana/Desktop/compilation/vincent66u/comp.g:69:12: ( IDF '=' exp -> ^( '=' IDF exp ) | IDF '[' exp4 ( ',' exp4 )* ']' '=' exp -> ^( '=' IDF ^( CASE ( exp4 )+ ) ^( VAL exp ) ) )
+            // /home/vincent/Bureau/comp.g:69:12: ( IDF '=' exp -> ^( '=' IDF exp ) | IDF '[' exp4 ( ',' exp4 )* ']' '=' exp -> ^( '=' IDF ^( CASE ( exp4 )+ ) ^( VAL exp ) ) )
             int alt20=2;
             int LA20_0 = input.LA(1);
 
@@ -2410,7 +2410,7 @@ public class compParser extends Parser {
             }
             switch (alt20) {
                 case 1 :
-                    // /home/katana/Desktop/compilation/vincent66u/comp.g:69:17: IDF '=' exp
+                    // /home/vincent/Bureau/comp.g:69:17: IDF '=' exp
                     {
                     IDF68=(Token)match(input,IDF,FOLLOW_IDF_in_affectation865);  
                     stream_IDF.add(IDF68);
@@ -2427,7 +2427,7 @@ public class compParser extends Parser {
 
 
                     // AST REWRITE
-                    // elements: exp, IDF, 45
+                    // elements: 45, IDF, exp
                     // token labels: 
                     // rule labels: retval
                     // token list labels: 
@@ -2439,7 +2439,7 @@ public class compParser extends Parser {
                     root_0 = (CommonTree)adaptor.nil();
                     // 69:33: -> ^( '=' IDF exp )
                     {
-                        // /home/katana/Desktop/compilation/vincent66u/comp.g:69:36: ^( '=' IDF exp )
+                        // /home/vincent/Bureau/comp.g:69:36: ^( '=' IDF exp )
                         {
                         CommonTree root_1 = (CommonTree)adaptor.nil();
                         root_1 = (CommonTree)adaptor.becomeRoot(stream_45.nextNode(), root_1);
@@ -2456,7 +2456,7 @@ public class compParser extends Parser {
                     }
                     break;
                 case 2 :
-                    // /home/katana/Desktop/compilation/vincent66u/comp.g:70:19: IDF '[' exp4 ( ',' exp4 )* ']' '=' exp
+                    // /home/vincent/Bureau/comp.g:70:19: IDF '[' exp4 ( ',' exp4 )* ']' '=' exp
                     {
                     IDF71=(Token)match(input,IDF,FOLLOW_IDF_in_affectation903);  
                     stream_IDF.add(IDF71);
@@ -2470,7 +2470,7 @@ public class compParser extends Parser {
                     state._fsp--;
 
                     stream_exp4.add(exp473.getTree());
-                    // /home/katana/Desktop/compilation/vincent66u/comp.g:70:32: ( ',' exp4 )*
+                    // /home/vincent/Bureau/comp.g:70:32: ( ',' exp4 )*
                     loop19:
                     do {
                         int alt19=2;
@@ -2483,7 +2483,7 @@ public class compParser extends Parser {
 
                         switch (alt19) {
                     	case 1 :
-                    	    // /home/katana/Desktop/compilation/vincent66u/comp.g:70:33: ',' exp4
+                    	    // /home/vincent/Bureau/comp.g:70:33: ',' exp4
                     	    {
                     	    char_literal74=(Token)match(input,33,FOLLOW_33_in_affectation910);  
                     	    stream_33.add(char_literal74);
@@ -2518,7 +2518,7 @@ public class compParser extends Parser {
 
 
                     // AST REWRITE
-                    // elements: 45, exp, exp4, IDF
+                    // elements: exp4, exp, IDF, 45
                     // token labels: 
                     // rule labels: retval
                     // token list labels: 
@@ -2530,13 +2530,13 @@ public class compParser extends Parser {
                     root_0 = (CommonTree)adaptor.nil();
                     // 70:57: -> ^( '=' IDF ^( CASE ( exp4 )+ ) ^( VAL exp ) )
                     {
-                        // /home/katana/Desktop/compilation/vincent66u/comp.g:70:59: ^( '=' IDF ^( CASE ( exp4 )+ ) ^( VAL exp ) )
+                        // /home/vincent/Bureau/comp.g:70:59: ^( '=' IDF ^( CASE ( exp4 )+ ) ^( VAL exp ) )
                         {
                         CommonTree root_1 = (CommonTree)adaptor.nil();
                         root_1 = (CommonTree)adaptor.becomeRoot(stream_45.nextNode(), root_1);
 
                         adaptor.addChild(root_1, stream_IDF.nextNode());
-                        // /home/katana/Desktop/compilation/vincent66u/comp.g:70:70: ^( CASE ( exp4 )+ )
+                        // /home/vincent/Bureau/comp.g:70:70: ^( CASE ( exp4 )+ )
                         {
                         CommonTree root_2 = (CommonTree)adaptor.nil();
                         root_2 = (CommonTree)adaptor.becomeRoot((CommonTree)adaptor.create(CASE, "CASE"), root_2);
@@ -2552,7 +2552,7 @@ public class compParser extends Parser {
 
                         adaptor.addChild(root_1, root_2);
                         }
-                        // /home/katana/Desktop/compilation/vincent66u/comp.g:70:85: ^( VAL exp )
+                        // /home/vincent/Bureau/comp.g:70:85: ^( VAL exp )
                         {
                         CommonTree root_2 = (CommonTree)adaptor.nil();
                         root_2 = (CommonTree)adaptor.becomeRoot((CommonTree)adaptor.create(VAL, "VAL"), root_2);
@@ -2596,7 +2596,7 @@ public class compParser extends Parser {
     };
 
     // $ANTLR start "exp4"
-    // /home/katana/Desktop/compilation/vincent66u/comp.g:71:1: exp4 : exp ;
+    // /home/vincent/Bureau/comp.g:71:1: exp4 : exp ;
     public final compParser.exp4_return exp4() throws RecognitionException {
         compParser.exp4_return retval = new compParser.exp4_return();
         retval.start = input.LT(1);
@@ -2608,8 +2608,8 @@ public class compParser extends Parser {
 
 
         try {
-            // /home/katana/Desktop/compilation/vincent66u/comp.g:72:2: ( exp )
-            // /home/katana/Desktop/compilation/vincent66u/comp.g:72:4: exp
+            // /home/vincent/Bureau/comp.g:72:2: ( exp )
+            // /home/vincent/Bureau/comp.g:72:4: exp
             {
             root_0 = (CommonTree)adaptor.nil();
 
@@ -2646,7 +2646,7 @@ public class compParser extends Parser {
     };
 
     // $ANTLR start "iteration"
-    // /home/katana/Desktop/compilation/vincent66u/comp.g:73:1: iteration : 'for' IDF 'in' exp '..' exp 'do' ( instruction )+ 'end' -> ^( 'for' IDF exp exp ^( BLOC ( instruction )* ) ) ;
+    // /home/vincent/Bureau/comp.g:73:1: iteration : 'for' IDF 'in' exp '..' exp 'do' ( instruction )+ 'end' -> ^( 'for' IDF exp exp ^( BLOC ( instruction )* ) ) ;
     public final compParser.iteration_return iteration() throws RecognitionException {
         compParser.iteration_return retval = new compParser.iteration_return();
         retval.start = input.LT(1);
@@ -2681,8 +2681,8 @@ public class compParser extends Parser {
         RewriteRuleSubtreeStream stream_exp=new RewriteRuleSubtreeStream(adaptor,"rule exp");
         RewriteRuleSubtreeStream stream_instruction=new RewriteRuleSubtreeStream(adaptor,"rule instruction");
         try {
-            // /home/katana/Desktop/compilation/vincent66u/comp.g:73:12: ( 'for' IDF 'in' exp '..' exp 'do' ( instruction )+ 'end' -> ^( 'for' IDF exp exp ^( BLOC ( instruction )* ) ) )
-            // /home/katana/Desktop/compilation/vincent66u/comp.g:73:16: 'for' IDF 'in' exp '..' exp 'do' ( instruction )+ 'end'
+            // /home/vincent/Bureau/comp.g:73:12: ( 'for' IDF 'in' exp '..' exp 'do' ( instruction )+ 'end' -> ^( 'for' IDF exp exp ^( BLOC ( instruction )* ) ) )
+            // /home/vincent/Bureau/comp.g:73:16: 'for' IDF 'in' exp '..' exp 'do' ( instruction )+ 'end'
             {
             string_literal80=(Token)match(input,46,FOLLOW_46_in_iteration968);  
             stream_46.add(string_literal80);
@@ -2711,7 +2711,7 @@ public class compParser extends Parser {
             string_literal86=(Token)match(input,31,FOLLOW_31_in_iteration992);  
             stream_31.add(string_literal86);
 
-            // /home/katana/Desktop/compilation/vincent66u/comp.g:73:63: ( instruction )+
+            // /home/vincent/Bureau/comp.g:73:63: ( instruction )+
             int cnt21=0;
             loop21:
             do {
@@ -2725,7 +2725,7 @@ public class compParser extends Parser {
 
                 switch (alt21) {
             	case 1 :
-            	    // /home/katana/Desktop/compilation/vincent66u/comp.g:73:65: instruction
+            	    // /home/vincent/Bureau/comp.g:73:65: instruction
             	    {
             	    pushFollow(FOLLOW_instruction_in_iteration998);
             	    instruction87=instruction();
@@ -2752,7 +2752,7 @@ public class compParser extends Parser {
 
 
             // AST REWRITE
-            // elements: instruction, IDF, exp, exp, 46
+            // elements: 46, exp, IDF, exp, instruction
             // token labels: 
             // rule labels: retval
             // token list labels: 
@@ -2764,7 +2764,7 @@ public class compParser extends Parser {
             root_0 = (CommonTree)adaptor.nil();
             // 73:87: -> ^( 'for' IDF exp exp ^( BLOC ( instruction )* ) )
             {
-                // /home/katana/Desktop/compilation/vincent66u/comp.g:73:89: ^( 'for' IDF exp exp ^( BLOC ( instruction )* ) )
+                // /home/vincent/Bureau/comp.g:73:89: ^( 'for' IDF exp exp ^( BLOC ( instruction )* ) )
                 {
                 CommonTree root_1 = (CommonTree)adaptor.nil();
                 root_1 = (CommonTree)adaptor.becomeRoot(stream_46.nextNode(), root_1);
@@ -2772,12 +2772,12 @@ public class compParser extends Parser {
                 adaptor.addChild(root_1, stream_IDF.nextNode());
                 adaptor.addChild(root_1, stream_exp.nextTree());
                 adaptor.addChild(root_1, stream_exp.nextTree());
-                // /home/katana/Desktop/compilation/vincent66u/comp.g:73:112: ^( BLOC ( instruction )* )
+                // /home/vincent/Bureau/comp.g:73:112: ^( BLOC ( instruction )* )
                 {
                 CommonTree root_2 = (CommonTree)adaptor.nil();
                 root_2 = (CommonTree)adaptor.becomeRoot((CommonTree)adaptor.create(BLOC, "BLOC"), root_2);
 
-                // /home/katana/Desktop/compilation/vincent66u/comp.g:73:119: ( instruction )*
+                // /home/vincent/Bureau/comp.g:73:119: ( instruction )*
                 while ( stream_instruction.hasNext() ) {
                     adaptor.addChild(root_2, stream_instruction.nextTree());
 
@@ -2819,7 +2819,7 @@ public class compParser extends Parser {
     };
 
     // $ANTLR start "condition"
-    // /home/katana/Desktop/compilation/vincent66u/comp.g:74:1: condition : 'if' exp 'then' ( instruction )+ ( 'else' ( instruction )+ )? 'fi' -> ^( 'if' exp ^( 'then' instruction ) ( ^( 'else' ( instruction )+ ) )? ) ;
+    // /home/vincent/Bureau/comp.g:74:1: condition : 'if' exp 'then' ( instruction )+ ( 'else' ( instruction )+ )? 'fi' -> ^( 'if' exp ^( 'then' instruction ) ( ^( 'else' ( instruction )+ ) )? ) ;
     public final compParser.condition_return condition() throws RecognitionException {
         compParser.condition_return retval = new compParser.condition_return();
         retval.start = input.LT(1);
@@ -2848,8 +2848,8 @@ public class compParser extends Parser {
         RewriteRuleSubtreeStream stream_exp=new RewriteRuleSubtreeStream(adaptor,"rule exp");
         RewriteRuleSubtreeStream stream_instruction=new RewriteRuleSubtreeStream(adaptor,"rule instruction");
         try {
-            // /home/katana/Desktop/compilation/vincent66u/comp.g:74:12: ( 'if' exp 'then' ( instruction )+ ( 'else' ( instruction )+ )? 'fi' -> ^( 'if' exp ^( 'then' instruction ) ( ^( 'else' ( instruction )+ ) )? ) )
-            // /home/katana/Desktop/compilation/vincent66u/comp.g:74:16: 'if' exp 'then' ( instruction )+ ( 'else' ( instruction )+ )? 'fi'
+            // /home/vincent/Bureau/comp.g:74:12: ( 'if' exp 'then' ( instruction )+ ( 'else' ( instruction )+ )? 'fi' -> ^( 'if' exp ^( 'then' instruction ) ( ^( 'else' ( instruction )+ ) )? ) )
+            // /home/vincent/Bureau/comp.g:74:16: 'if' exp 'then' ( instruction )+ ( 'else' ( instruction )+ )? 'fi'
             {
             string_literal89=(Token)match(input,48,FOLLOW_48_in_condition1038);  
             stream_48.add(string_literal89);
@@ -2863,7 +2863,7 @@ public class compParser extends Parser {
             string_literal91=(Token)match(input,49,FOLLOW_49_in_condition1046);  
             stream_49.add(string_literal91);
 
-            // /home/katana/Desktop/compilation/vincent66u/comp.g:74:38: ( instruction )+
+            // /home/vincent/Bureau/comp.g:74:38: ( instruction )+
             int cnt22=0;
             loop22:
             do {
@@ -2877,7 +2877,7 @@ public class compParser extends Parser {
 
                 switch (alt22) {
             	case 1 :
-            	    // /home/katana/Desktop/compilation/vincent66u/comp.g:74:40: instruction
+            	    // /home/vincent/Bureau/comp.g:74:40: instruction
             	    {
             	    pushFollow(FOLLOW_instruction_in_condition1052);
             	    instruction92=instruction();
@@ -2898,7 +2898,7 @@ public class compParser extends Parser {
                 cnt22++;
             } while (true);
 
-            // /home/katana/Desktop/compilation/vincent66u/comp.g:74:55: ( 'else' ( instruction )+ )?
+            // /home/vincent/Bureau/comp.g:74:55: ( 'else' ( instruction )+ )?
             int alt24=2;
             int LA24_0 = input.LA(1);
 
@@ -2907,12 +2907,12 @@ public class compParser extends Parser {
             }
             switch (alt24) {
                 case 1 :
-                    // /home/katana/Desktop/compilation/vincent66u/comp.g:74:56: 'else' ( instruction )+
+                    // /home/vincent/Bureau/comp.g:74:56: 'else' ( instruction )+
                     {
                     string_literal93=(Token)match(input,50,FOLLOW_50_in_condition1058);  
                     stream_50.add(string_literal93);
 
-                    // /home/katana/Desktop/compilation/vincent66u/comp.g:74:65: ( instruction )+
+                    // /home/vincent/Bureau/comp.g:74:65: ( instruction )+
                     int cnt23=0;
                     loop23:
                     do {
@@ -2926,7 +2926,7 @@ public class compParser extends Parser {
 
                         switch (alt23) {
                     	case 1 :
-                    	    // /home/katana/Desktop/compilation/vincent66u/comp.g:74:66: instruction
+                    	    // /home/vincent/Bureau/comp.g:74:66: instruction
                     	    {
                     	    pushFollow(FOLLOW_instruction_in_condition1063);
                     	    instruction94=instruction();
@@ -2959,7 +2959,7 @@ public class compParser extends Parser {
 
 
             // AST REWRITE
-            // elements: instruction, instruction, 50, exp, 48, 49
+            // elements: instruction, instruction, 49, exp, 48, 50
             // token labels: 
             // rule labels: retval
             // token list labels: 
@@ -2971,13 +2971,13 @@ public class compParser extends Parser {
             root_0 = (CommonTree)adaptor.nil();
             // 74:90: -> ^( 'if' exp ^( 'then' instruction ) ( ^( 'else' ( instruction )+ ) )? )
             {
-                // /home/katana/Desktop/compilation/vincent66u/comp.g:74:92: ^( 'if' exp ^( 'then' instruction ) ( ^( 'else' ( instruction )+ ) )? )
+                // /home/vincent/Bureau/comp.g:74:92: ^( 'if' exp ^( 'then' instruction ) ( ^( 'else' ( instruction )+ ) )? )
                 {
                 CommonTree root_1 = (CommonTree)adaptor.nil();
                 root_1 = (CommonTree)adaptor.becomeRoot(stream_48.nextNode(), root_1);
 
                 adaptor.addChild(root_1, stream_exp.nextTree());
-                // /home/katana/Desktop/compilation/vincent66u/comp.g:74:103: ^( 'then' instruction )
+                // /home/vincent/Bureau/comp.g:74:103: ^( 'then' instruction )
                 {
                 CommonTree root_2 = (CommonTree)adaptor.nil();
                 root_2 = (CommonTree)adaptor.becomeRoot(stream_49.nextNode(), root_2);
@@ -2986,9 +2986,9 @@ public class compParser extends Parser {
 
                 adaptor.addChild(root_1, root_2);
                 }
-                // /home/katana/Desktop/compilation/vincent66u/comp.g:74:125: ( ^( 'else' ( instruction )+ ) )?
+                // /home/vincent/Bureau/comp.g:74:125: ( ^( 'else' ( instruction )+ ) )?
                 if ( stream_instruction.hasNext()||stream_50.hasNext() ) {
-                    // /home/katana/Desktop/compilation/vincent66u/comp.g:74:125: ^( 'else' ( instruction )+ )
+                    // /home/vincent/Bureau/comp.g:74:125: ^( 'else' ( instruction )+ )
                     {
                     CommonTree root_2 = (CommonTree)adaptor.nil();
                     root_2 = (CommonTree)adaptor.becomeRoot(stream_50.nextNode(), root_2);
@@ -3041,7 +3041,7 @@ public class compParser extends Parser {
     };
 
     // $ANTLR start "retour"
-    // /home/katana/Desktop/compilation/vincent66u/comp.g:75:1: retour : 'return' '(' exp ')' -> ^( RETOUR exp ) ;
+    // /home/vincent/Bureau/comp.g:75:1: retour : 'return' '(' exp ')' -> ^( RETOUR exp ) ;
     public final compParser.retour_return retour() throws RecognitionException {
         compParser.retour_return retval = new compParser.retour_return();
         retval.start = input.LT(1);
@@ -3062,8 +3062,8 @@ public class compParser extends Parser {
         RewriteRuleTokenStream stream_52=new RewriteRuleTokenStream(adaptor,"token 52");
         RewriteRuleSubtreeStream stream_exp=new RewriteRuleSubtreeStream(adaptor,"rule exp");
         try {
-            // /home/katana/Desktop/compilation/vincent66u/comp.g:75:12: ( 'return' '(' exp ')' -> ^( RETOUR exp ) )
-            // /home/katana/Desktop/compilation/vincent66u/comp.g:75:16: 'return' '(' exp ')'
+            // /home/vincent/Bureau/comp.g:75:12: ( 'return' '(' exp ')' -> ^( RETOUR exp ) )
+            // /home/vincent/Bureau/comp.g:75:16: 'return' '(' exp ')'
             {
             string_literal96=(Token)match(input,52,FOLLOW_52_in_retour1108);  
             stream_52.add(string_literal96);
@@ -3095,7 +3095,7 @@ public class compParser extends Parser {
             root_0 = (CommonTree)adaptor.nil();
             // 75:41: -> ^( RETOUR exp )
             {
-                // /home/katana/Desktop/compilation/vincent66u/comp.g:75:43: ^( RETOUR exp )
+                // /home/vincent/Bureau/comp.g:75:43: ^( RETOUR exp )
                 {
                 CommonTree root_1 = (CommonTree)adaptor.nil();
                 root_1 = (CommonTree)adaptor.becomeRoot((CommonTree)adaptor.create(RETOUR, "RETOUR"), root_1);
@@ -3134,7 +3134,7 @@ public class compParser extends Parser {
     };
 
     // $ANTLR start "read"
-    // /home/katana/Desktop/compilation/vincent66u/comp.g:76:1: read : 'read' IDF -> ^( READ IDF ) ;
+    // /home/vincent/Bureau/comp.g:76:1: read : 'read' IDF -> ^( READ IDF ) ;
     public final compParser.read_return read() throws RecognitionException {
         compParser.read_return retval = new compParser.read_return();
         retval.start = input.LT(1);
@@ -3150,8 +3150,8 @@ public class compParser extends Parser {
         RewriteRuleTokenStream stream_READ=new RewriteRuleTokenStream(adaptor,"token READ");
 
         try {
-            // /home/katana/Desktop/compilation/vincent66u/comp.g:76:12: ( 'read' IDF -> ^( READ IDF ) )
-            // /home/katana/Desktop/compilation/vincent66u/comp.g:76:16: 'read' IDF
+            // /home/vincent/Bureau/comp.g:76:12: ( 'read' IDF -> ^( READ IDF ) )
+            // /home/vincent/Bureau/comp.g:76:16: 'read' IDF
             {
             string_literal100=(Token)match(input,READ,FOLLOW_READ_in_read1141);  
             stream_READ.add(string_literal100);
@@ -3174,7 +3174,7 @@ public class compParser extends Parser {
             root_0 = (CommonTree)adaptor.nil();
             // 76:30: -> ^( READ IDF )
             {
-                // /home/katana/Desktop/compilation/vincent66u/comp.g:76:32: ^( READ IDF )
+                // /home/vincent/Bureau/comp.g:76:32: ^( READ IDF )
                 {
                 CommonTree root_1 = (CommonTree)adaptor.nil();
                 root_1 = (CommonTree)adaptor.becomeRoot((CommonTree)adaptor.create(READ, "READ"), root_1);
@@ -3213,7 +3213,7 @@ public class compParser extends Parser {
     };
 
     // $ANTLR start "write"
-    // /home/katana/Desktop/compilation/vincent66u/comp.g:77:1: write : ( 'write' exp -> ^( WRITE exp ) | 'write' CSTE_CHAINE -> ^( WRITE CSTE_CHAINE ) );
+    // /home/vincent/Bureau/comp.g:77:1: write : ( 'write' exp -> ^( WRITE exp ) | 'write' CSTE_CHAINE -> ^( WRITE CSTE_CHAINE ) );
     public final compParser.write_return write() throws RecognitionException {
         compParser.write_return retval = new compParser.write_return();
         retval.start = input.LT(1);
@@ -3233,7 +3233,7 @@ public class compParser extends Parser {
         RewriteRuleTokenStream stream_WRITE=new RewriteRuleTokenStream(adaptor,"token WRITE");
         RewriteRuleSubtreeStream stream_exp=new RewriteRuleSubtreeStream(adaptor,"rule exp");
         try {
-            // /home/katana/Desktop/compilation/vincent66u/comp.g:77:10: ( 'write' exp -> ^( WRITE exp ) | 'write' CSTE_CHAINE -> ^( WRITE CSTE_CHAINE ) )
+            // /home/vincent/Bureau/comp.g:77:10: ( 'write' exp -> ^( WRITE exp ) | 'write' CSTE_CHAINE -> ^( WRITE CSTE_CHAINE ) )
             int alt25=2;
             int LA25_0 = input.LA(1);
 
@@ -3261,7 +3261,7 @@ public class compParser extends Parser {
             }
             switch (alt25) {
                 case 1 :
-                    // /home/katana/Desktop/compilation/vincent66u/comp.g:77:14: 'write' exp
+                    // /home/vincent/Bureau/comp.g:77:14: 'write' exp
                     {
                     string_literal102=(Token)match(input,WRITE,FOLLOW_WRITE_in_write1165);  
                     stream_WRITE.add(string_literal102);
@@ -3287,7 +3287,7 @@ public class compParser extends Parser {
                     root_0 = (CommonTree)adaptor.nil();
                     // 77:25: -> ^( WRITE exp )
                     {
-                        // /home/katana/Desktop/compilation/vincent66u/comp.g:77:27: ^( WRITE exp )
+                        // /home/vincent/Bureau/comp.g:77:27: ^( WRITE exp )
                         {
                         CommonTree root_1 = (CommonTree)adaptor.nil();
                         root_1 = (CommonTree)adaptor.becomeRoot((CommonTree)adaptor.create(WRITE, "WRITE"), root_1);
@@ -3303,7 +3303,7 @@ public class compParser extends Parser {
                     }
                     break;
                 case 2 :
-                    // /home/katana/Desktop/compilation/vincent66u/comp.g:78:10: 'write' CSTE_CHAINE
+                    // /home/vincent/Bureau/comp.g:78:10: 'write' CSTE_CHAINE
                     {
                     string_literal104=(Token)match(input,WRITE,FOLLOW_WRITE_in_write1184);  
                     stream_WRITE.add(string_literal104);
@@ -3326,7 +3326,7 @@ public class compParser extends Parser {
                     root_0 = (CommonTree)adaptor.nil();
                     // 78:30: -> ^( WRITE CSTE_CHAINE )
                     {
-                        // /home/katana/Desktop/compilation/vincent66u/comp.g:78:32: ^( WRITE CSTE_CHAINE )
+                        // /home/vincent/Bureau/comp.g:78:32: ^( WRITE CSTE_CHAINE )
                         {
                         CommonTree root_1 = (CommonTree)adaptor.nil();
                         root_1 = (CommonTree)adaptor.becomeRoot((CommonTree)adaptor.create(WRITE, "WRITE"), root_1);
@@ -3367,7 +3367,7 @@ public class compParser extends Parser {
     };
 
     // $ANTLR start "exp"
-    // /home/katana/Desktop/compilation/vincent66u/comp.g:80:2: exp : ( plus ( ( '+' | '-' ) plus )* | 'true' | 'false' | exp2 );
+    // /home/vincent/Bureau/comp.g:80:2: exp : ( plus ( ( '+' | '-' ) plus )* | 'true' | 'false' | exp2 );
     public final compParser.exp_return exp() throws RecognitionException {
         compParser.exp_return retval = new compParser.exp_return();
         retval.start = input.LT(1);
@@ -3389,7 +3389,7 @@ public class compParser extends Parser {
         CommonTree string_literal110_tree=null;
 
         try {
-            // /home/katana/Desktop/compilation/vincent66u/comp.g:80:9: ( plus ( ( '+' | '-' ) plus )* | 'true' | 'false' | exp2 )
+            // /home/vincent/Bureau/comp.g:80:9: ( plus ( ( '+' | '-' ) plus )* | 'true' | 'false' | exp2 )
             int alt27=4;
             switch ( input.LA(1) ) {
             case CST_ENT:
@@ -3436,7 +3436,7 @@ public class compParser extends Parser {
 
             switch (alt27) {
                 case 1 :
-                    // /home/katana/Desktop/compilation/vincent66u/comp.g:80:14: plus ( ( '+' | '-' ) plus )*
+                    // /home/vincent/Bureau/comp.g:80:14: plus ( ( '+' | '-' ) plus )*
                     {
                     root_0 = (CommonTree)adaptor.nil();
 
@@ -3446,7 +3446,7 @@ public class compParser extends Parser {
                     state._fsp--;
 
                     adaptor.addChild(root_0, plus106.getTree());
-                    // /home/katana/Desktop/compilation/vincent66u/comp.g:80:19: ( ( '+' | '-' ) plus )*
+                    // /home/vincent/Bureau/comp.g:80:19: ( ( '+' | '-' ) plus )*
                     loop26:
                     do {
                         int alt26=2;
@@ -3459,7 +3459,7 @@ public class compParser extends Parser {
 
                         switch (alt26) {
                     	case 1 :
-                    	    // /home/katana/Desktop/compilation/vincent66u/comp.g:80:20: ( '+' | '-' ) plus
+                    	    // /home/vincent/Bureau/comp.g:80:20: ( '+' | '-' ) plus
                     	    {
                     	    set107=(Token)input.LT(1);
                     	    set107=(Token)input.LT(1);
@@ -3492,7 +3492,7 @@ public class compParser extends Parser {
                     }
                     break;
                 case 2 :
-                    // /home/katana/Desktop/compilation/vincent66u/comp.g:81:12: 'true'
+                    // /home/vincent/Bureau/comp.g:81:12: 'true'
                     {
                     root_0 = (CommonTree)adaptor.nil();
 
@@ -3504,7 +3504,7 @@ public class compParser extends Parser {
                     }
                     break;
                 case 3 :
-                    // /home/katana/Desktop/compilation/vincent66u/comp.g:82:12: 'false'
+                    // /home/vincent/Bureau/comp.g:82:12: 'false'
                     {
                     root_0 = (CommonTree)adaptor.nil();
 
@@ -3516,7 +3516,7 @@ public class compParser extends Parser {
                     }
                     break;
                 case 4 :
-                    // /home/katana/Desktop/compilation/vincent66u/comp.g:83:12: exp2
+                    // /home/vincent/Bureau/comp.g:83:12: exp2
                     {
                     root_0 = (CommonTree)adaptor.nil();
 
@@ -3555,7 +3555,7 @@ public class compParser extends Parser {
     };
 
     // $ANTLR start "exp2"
-    // /home/katana/Desktop/compilation/vincent66u/comp.g:84:1: exp2 : ( IDF '(' ( exp ( ',' exp )* )? ')' -> ^( APPEL IDF ( exp )* ) | IDF '[' exp ( ',' exp )* ']' -> ^( TABLEAU IDF ^( CASE ( exp )+ ) ) );
+    // /home/vincent/Bureau/comp.g:84:1: exp2 : ( IDF '(' ( exp ( ',' exp )* )? ')' -> ^( APPEL IDF ( exp )* ) | IDF '[' exp ( ',' exp )* ']' -> ^( TABLEAU IDF ^( CASE ( exp )+ ) ) );
     public final compParser.exp2_return exp2() throws RecognitionException {
         compParser.exp2_return retval = new compParser.exp2_return();
         retval.start = input.LT(1);
@@ -3595,7 +3595,7 @@ public class compParser extends Parser {
         RewriteRuleTokenStream stream_38=new RewriteRuleTokenStream(adaptor,"token 38");
         RewriteRuleSubtreeStream stream_exp=new RewriteRuleSubtreeStream(adaptor,"rule exp");
         try {
-            // /home/katana/Desktop/compilation/vincent66u/comp.g:84:11: ( IDF '(' ( exp ( ',' exp )* )? ')' -> ^( APPEL IDF ( exp )* ) | IDF '[' exp ( ',' exp )* ']' -> ^( TABLEAU IDF ^( CASE ( exp )+ ) ) )
+            // /home/vincent/Bureau/comp.g:84:11: ( IDF '(' ( exp ( ',' exp )* )? ')' -> ^( APPEL IDF ( exp )* ) | IDF '[' exp ( ',' exp )* ']' -> ^( TABLEAU IDF ^( CASE ( exp )+ ) ) )
             int alt31=2;
             int LA31_0 = input.LA(1);
 
@@ -3623,7 +3623,7 @@ public class compParser extends Parser {
             }
             switch (alt31) {
                 case 1 :
-                    // /home/katana/Desktop/compilation/vincent66u/comp.g:84:17: IDF '(' ( exp ( ',' exp )* )? ')'
+                    // /home/vincent/Bureau/comp.g:84:17: IDF '(' ( exp ( ',' exp )* )? ')'
                     {
                     IDF112=(Token)match(input,IDF,FOLLOW_IDF_in_exp21283);  
                     stream_IDF.add(IDF112);
@@ -3631,7 +3631,7 @@ public class compParser extends Parser {
                     char_literal113=(Token)match(input,40,FOLLOW_40_in_exp21285);  
                     stream_40.add(char_literal113);
 
-                    // /home/katana/Desktop/compilation/vincent66u/comp.g:84:25: ( exp ( ',' exp )* )?
+                    // /home/vincent/Bureau/comp.g:84:25: ( exp ( ',' exp )* )?
                     int alt29=2;
                     int LA29_0 = input.LA(1);
 
@@ -3640,7 +3640,7 @@ public class compParser extends Parser {
                     }
                     switch (alt29) {
                         case 1 :
-                            // /home/katana/Desktop/compilation/vincent66u/comp.g:84:26: exp ( ',' exp )*
+                            // /home/vincent/Bureau/comp.g:84:26: exp ( ',' exp )*
                             {
                             pushFollow(FOLLOW_exp_in_exp21288);
                             exp114=exp();
@@ -3648,7 +3648,7 @@ public class compParser extends Parser {
                             state._fsp--;
 
                             stream_exp.add(exp114.getTree());
-                            // /home/katana/Desktop/compilation/vincent66u/comp.g:84:30: ( ',' exp )*
+                            // /home/vincent/Bureau/comp.g:84:30: ( ',' exp )*
                             loop28:
                             do {
                                 int alt28=2;
@@ -3661,7 +3661,7 @@ public class compParser extends Parser {
 
                                 switch (alt28) {
                             	case 1 :
-                            	    // /home/katana/Desktop/compilation/vincent66u/comp.g:84:31: ',' exp
+                            	    // /home/vincent/Bureau/comp.g:84:31: ',' exp
                             	    {
                             	    char_literal115=(Token)match(input,33,FOLLOW_33_in_exp21291);  
                             	    stream_33.add(char_literal115);
@@ -3693,7 +3693,7 @@ public class compParser extends Parser {
 
 
                     // AST REWRITE
-                    // elements: exp, IDF
+                    // elements: IDF, exp
                     // token labels: 
                     // rule labels: retval
                     // token list labels: 
@@ -3705,13 +3705,13 @@ public class compParser extends Parser {
                     root_0 = (CommonTree)adaptor.nil();
                     // 84:47: -> ^( APPEL IDF ( exp )* )
                     {
-                        // /home/katana/Desktop/compilation/vincent66u/comp.g:84:49: ^( APPEL IDF ( exp )* )
+                        // /home/vincent/Bureau/comp.g:84:49: ^( APPEL IDF ( exp )* )
                         {
                         CommonTree root_1 = (CommonTree)adaptor.nil();
                         root_1 = (CommonTree)adaptor.becomeRoot((CommonTree)adaptor.create(APPEL, "APPEL"), root_1);
 
                         adaptor.addChild(root_1, stream_IDF.nextNode());
-                        // /home/katana/Desktop/compilation/vincent66u/comp.g:84:61: ( exp )*
+                        // /home/vincent/Bureau/comp.g:84:61: ( exp )*
                         while ( stream_exp.hasNext() ) {
                             adaptor.addChild(root_1, stream_exp.nextTree());
 
@@ -3727,7 +3727,7 @@ public class compParser extends Parser {
                     }
                     break;
                 case 2 :
-                    // /home/katana/Desktop/compilation/vincent66u/comp.g:85:18: IDF '[' exp ( ',' exp )* ']'
+                    // /home/vincent/Bureau/comp.g:85:18: IDF '[' exp ( ',' exp )* ']'
                     {
                     IDF118=(Token)match(input,IDF,FOLLOW_IDF_in_exp21328);  
                     stream_IDF.add(IDF118);
@@ -3741,7 +3741,7 @@ public class compParser extends Parser {
                     state._fsp--;
 
                     stream_exp.add(exp120.getTree());
-                    // /home/katana/Desktop/compilation/vincent66u/comp.g:85:30: ( ',' exp )*
+                    // /home/vincent/Bureau/comp.g:85:30: ( ',' exp )*
                     loop30:
                     do {
                         int alt30=2;
@@ -3754,7 +3754,7 @@ public class compParser extends Parser {
 
                         switch (alt30) {
                     	case 1 :
-                    	    // /home/katana/Desktop/compilation/vincent66u/comp.g:85:31: ',' exp
+                    	    // /home/vincent/Bureau/comp.g:85:31: ',' exp
                     	    {
                     	    char_literal121=(Token)match(input,33,FOLLOW_33_in_exp21335);  
                     	    stream_33.add(char_literal121);
@@ -3780,7 +3780,7 @@ public class compParser extends Parser {
 
 
                     // AST REWRITE
-                    // elements: IDF, exp
+                    // elements: exp, IDF
                     // token labels: 
                     // rule labels: retval
                     // token list labels: 
@@ -3792,13 +3792,13 @@ public class compParser extends Parser {
                     root_0 = (CommonTree)adaptor.nil();
                     // 85:45: -> ^( TABLEAU IDF ^( CASE ( exp )+ ) )
                     {
-                        // /home/katana/Desktop/compilation/vincent66u/comp.g:85:47: ^( TABLEAU IDF ^( CASE ( exp )+ ) )
+                        // /home/vincent/Bureau/comp.g:85:47: ^( TABLEAU IDF ^( CASE ( exp )+ ) )
                         {
                         CommonTree root_1 = (CommonTree)adaptor.nil();
                         root_1 = (CommonTree)adaptor.becomeRoot((CommonTree)adaptor.create(TABLEAU, "TABLEAU"), root_1);
 
                         adaptor.addChild(root_1, stream_IDF.nextNode());
-                        // /home/katana/Desktop/compilation/vincent66u/comp.g:85:61: ^( CASE ( exp )+ )
+                        // /home/vincent/Bureau/comp.g:85:61: ^( CASE ( exp )+ )
                         {
                         CommonTree root_2 = (CommonTree)adaptor.nil();
                         root_2 = (CommonTree)adaptor.becomeRoot((CommonTree)adaptor.create(CASE, "CASE"), root_2);
@@ -3849,7 +3849,7 @@ public class compParser extends Parser {
     };
 
     // $ANTLR start "plus"
-    // /home/katana/Desktop/compilation/vincent66u/comp.g:87:1: plus : fois ( ( '*' | '/' ) fois )* ;
+    // /home/vincent/Bureau/comp.g:87:1: plus : fois ( ( '*' | '/' ) fois )* ;
     public final compParser.plus_return plus() throws RecognitionException {
         compParser.plus_return retval = new compParser.plus_return();
         retval.start = input.LT(1);
@@ -3865,8 +3865,8 @@ public class compParser extends Parser {
         CommonTree set125_tree=null;
 
         try {
-            // /home/katana/Desktop/compilation/vincent66u/comp.g:87:12: ( fois ( ( '*' | '/' ) fois )* )
-            // /home/katana/Desktop/compilation/vincent66u/comp.g:87:16: fois ( ( '*' | '/' ) fois )*
+            // /home/vincent/Bureau/comp.g:87:12: ( fois ( ( '*' | '/' ) fois )* )
+            // /home/vincent/Bureau/comp.g:87:16: fois ( ( '*' | '/' ) fois )*
             {
             root_0 = (CommonTree)adaptor.nil();
 
@@ -3876,7 +3876,7 @@ public class compParser extends Parser {
             state._fsp--;
 
             adaptor.addChild(root_0, fois124.getTree());
-            // /home/katana/Desktop/compilation/vincent66u/comp.g:87:21: ( ( '*' | '/' ) fois )*
+            // /home/vincent/Bureau/comp.g:87:21: ( ( '*' | '/' ) fois )*
             loop32:
             do {
                 int alt32=2;
@@ -3889,7 +3889,7 @@ public class compParser extends Parser {
 
                 switch (alt32) {
             	case 1 :
-            	    // /home/katana/Desktop/compilation/vincent66u/comp.g:87:23: ( '*' | '/' ) fois
+            	    // /home/vincent/Bureau/comp.g:87:23: ( '*' | '/' ) fois
             	    {
             	    set125=(Token)input.LT(1);
             	    set125=(Token)input.LT(1);
@@ -3945,7 +3945,7 @@ public class compParser extends Parser {
     };
 
     // $ANTLR start "fois"
-    // /home/katana/Desktop/compilation/vincent66u/comp.g:88:1: fois : atom ( ( '==' | '!=' | '<=' | '>=' | '<' | '>' ) atom )* ;
+    // /home/vincent/Bureau/comp.g:88:1: fois : atom ( ( '==' | '!=' | '<=' | '>=' | '<' | '>' ) atom )* ;
     public final compParser.fois_return fois() throws RecognitionException {
         compParser.fois_return retval = new compParser.fois_return();
         retval.start = input.LT(1);
@@ -3971,8 +3971,8 @@ public class compParser extends Parser {
         CommonTree char_literal133_tree=null;
 
         try {
-            // /home/katana/Desktop/compilation/vincent66u/comp.g:88:12: ( atom ( ( '==' | '!=' | '<=' | '>=' | '<' | '>' ) atom )* )
-            // /home/katana/Desktop/compilation/vincent66u/comp.g:88:16: atom ( ( '==' | '!=' | '<=' | '>=' | '<' | '>' ) atom )*
+            // /home/vincent/Bureau/comp.g:88:12: ( atom ( ( '==' | '!=' | '<=' | '>=' | '<' | '>' ) atom )* )
+            // /home/vincent/Bureau/comp.g:88:16: atom ( ( '==' | '!=' | '<=' | '>=' | '<' | '>' ) atom )*
             {
             root_0 = (CommonTree)adaptor.nil();
 
@@ -3982,7 +3982,7 @@ public class compParser extends Parser {
             state._fsp--;
 
             adaptor.addChild(root_0, atom127.getTree());
-            // /home/katana/Desktop/compilation/vincent66u/comp.g:88:21: ( ( '==' | '!=' | '<=' | '>=' | '<' | '>' ) atom )*
+            // /home/vincent/Bureau/comp.g:88:21: ( ( '==' | '!=' | '<=' | '>=' | '<' | '>' ) atom )*
             loop34:
             do {
                 int alt34=2;
@@ -3995,9 +3995,9 @@ public class compParser extends Parser {
 
                 switch (alt34) {
             	case 1 :
-            	    // /home/katana/Desktop/compilation/vincent66u/comp.g:88:24: ( '==' | '!=' | '<=' | '>=' | '<' | '>' ) atom
+            	    // /home/vincent/Bureau/comp.g:88:24: ( '==' | '!=' | '<=' | '>=' | '<' | '>' ) atom
             	    {
-            	    // /home/katana/Desktop/compilation/vincent66u/comp.g:88:24: ( '==' | '!=' | '<=' | '>=' | '<' | '>' )
+            	    // /home/vincent/Bureau/comp.g:88:24: ( '==' | '!=' | '<=' | '>=' | '<' | '>' )
             	    int alt33=6;
             	    switch ( input.LA(1) ) {
             	    case 59:
@@ -4039,7 +4039,7 @@ public class compParser extends Parser {
 
             	    switch (alt33) {
             	        case 1 :
-            	            // /home/katana/Desktop/compilation/vincent66u/comp.g:88:25: '=='
+            	            // /home/vincent/Bureau/comp.g:88:25: '=='
             	            {
             	            string_literal128=(Token)match(input,59,FOLLOW_59_in_fois1421); 
             	            string_literal128_tree = (CommonTree)adaptor.create(string_literal128);
@@ -4049,7 +4049,7 @@ public class compParser extends Parser {
             	            }
             	            break;
             	        case 2 :
-            	            // /home/katana/Desktop/compilation/vincent66u/comp.g:88:33: '!='
+            	            // /home/vincent/Bureau/comp.g:88:33: '!='
             	            {
             	            string_literal129=(Token)match(input,60,FOLLOW_60_in_fois1426); 
             	            string_literal129_tree = (CommonTree)adaptor.create(string_literal129);
@@ -4059,7 +4059,7 @@ public class compParser extends Parser {
             	            }
             	            break;
             	        case 3 :
-            	            // /home/katana/Desktop/compilation/vincent66u/comp.g:88:41: '<='
+            	            // /home/vincent/Bureau/comp.g:88:41: '<='
             	            {
             	            string_literal130=(Token)match(input,61,FOLLOW_61_in_fois1431); 
             	            string_literal130_tree = (CommonTree)adaptor.create(string_literal130);
@@ -4069,7 +4069,7 @@ public class compParser extends Parser {
             	            }
             	            break;
             	        case 4 :
-            	            // /home/katana/Desktop/compilation/vincent66u/comp.g:88:49: '>='
+            	            // /home/vincent/Bureau/comp.g:88:49: '>='
             	            {
             	            string_literal131=(Token)match(input,62,FOLLOW_62_in_fois1436); 
             	            string_literal131_tree = (CommonTree)adaptor.create(string_literal131);
@@ -4079,7 +4079,7 @@ public class compParser extends Parser {
             	            }
             	            break;
             	        case 5 :
-            	            // /home/katana/Desktop/compilation/vincent66u/comp.g:88:57: '<'
+            	            // /home/vincent/Bureau/comp.g:88:57: '<'
             	            {
             	            char_literal132=(Token)match(input,63,FOLLOW_63_in_fois1441); 
             	            char_literal132_tree = (CommonTree)adaptor.create(char_literal132);
@@ -4089,7 +4089,7 @@ public class compParser extends Parser {
             	            }
             	            break;
             	        case 6 :
-            	            // /home/katana/Desktop/compilation/vincent66u/comp.g:88:64: '>'
+            	            // /home/vincent/Bureau/comp.g:88:64: '>'
             	            {
             	            char_literal133=(Token)match(input,64,FOLLOW_64_in_fois1446); 
             	            char_literal133_tree = (CommonTree)adaptor.create(char_literal133);
@@ -4143,7 +4143,7 @@ public class compParser extends Parser {
     };
 
     // $ANTLR start "atom"
-    // /home/katana/Desktop/compilation/vincent66u/comp.g:89:1: atom : ( CST_ENT | IDF | '(' exp ')' -> exp | '-' atom -> ^( '-' atom ) );
+    // /home/vincent/Bureau/comp.g:89:1: atom : ( CST_ENT | IDF | '(' exp ')' -> exp | '-' atom -> ^( '-' atom ) );
     public final compParser.atom_return atom() throws RecognitionException {
         compParser.atom_return retval = new compParser.atom_return();
         retval.start = input.LT(1);
@@ -4171,7 +4171,7 @@ public class compParser extends Parser {
         RewriteRuleSubtreeStream stream_atom=new RewriteRuleSubtreeStream(adaptor,"rule atom");
         RewriteRuleSubtreeStream stream_exp=new RewriteRuleSubtreeStream(adaptor,"rule exp");
         try {
-            // /home/katana/Desktop/compilation/vincent66u/comp.g:89:12: ( CST_ENT | IDF | '(' exp ')' -> exp | '-' atom -> ^( '-' atom ) )
+            // /home/vincent/Bureau/comp.g:89:12: ( CST_ENT | IDF | '(' exp ')' -> exp | '-' atom -> ^( '-' atom ) )
             int alt35=4;
             switch ( input.LA(1) ) {
             case CST_ENT:
@@ -4203,7 +4203,7 @@ public class compParser extends Parser {
 
             switch (alt35) {
                 case 1 :
-                    // /home/katana/Desktop/compilation/vincent66u/comp.g:89:16: CST_ENT
+                    // /home/vincent/Bureau/comp.g:89:16: CST_ENT
                     {
                     root_0 = (CommonTree)adaptor.nil();
 
@@ -4215,7 +4215,7 @@ public class compParser extends Parser {
                     }
                     break;
                 case 2 :
-                    // /home/katana/Desktop/compilation/vincent66u/comp.g:90:5: IDF
+                    // /home/vincent/Bureau/comp.g:90:5: IDF
                     {
                     root_0 = (CommonTree)adaptor.nil();
 
@@ -4227,7 +4227,7 @@ public class compParser extends Parser {
                     }
                     break;
                 case 3 :
-                    // /home/katana/Desktop/compilation/vincent66u/comp.g:91:5: '(' exp ')'
+                    // /home/vincent/Bureau/comp.g:91:5: '(' exp ')'
                     {
                     char_literal137=(Token)match(input,40,FOLLOW_40_in_atom1484);  
                     stream_40.add(char_literal137);
@@ -4264,7 +4264,7 @@ public class compParser extends Parser {
                     }
                     break;
                 case 4 :
-                    // /home/katana/Desktop/compilation/vincent66u/comp.g:92:5: '-' atom
+                    // /home/vincent/Bureau/comp.g:92:5: '-' atom
                     {
                     char_literal140=(Token)match(input,54,FOLLOW_54_in_atom1498);  
                     stream_54.add(char_literal140);
@@ -4278,7 +4278,7 @@ public class compParser extends Parser {
 
 
                     // AST REWRITE
-                    // elements: 54, atom
+                    // elements: atom, 54
                     // token labels: 
                     // rule labels: retval
                     // token list labels: 
@@ -4290,7 +4290,7 @@ public class compParser extends Parser {
                     root_0 = (CommonTree)adaptor.nil();
                     // 92:14: -> ^( '-' atom )
                     {
-                        // /home/katana/Desktop/compilation/vincent66u/comp.g:92:16: ^( '-' atom )
+                        // /home/vincent/Bureau/comp.g:92:16: ^( '-' atom )
                         {
                         CommonTree root_1 = (CommonTree)adaptor.nil();
                         root_1 = (CommonTree)adaptor.becomeRoot(stream_54.nextNode(), root_1);
