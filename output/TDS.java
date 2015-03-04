@@ -8,6 +8,10 @@ public class TDS {
 	String nom;
 	ArrayList<Symbole> variable = new ArrayList<Symbole>();
 	
+	public TDS(){
+		
+	}
+	
 	public TDS(String nom, ArrayList<Symbole> variable) {
 		super();
 		this.nom = nom;

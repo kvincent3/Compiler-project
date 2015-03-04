@@ -6,6 +6,9 @@ public class Symbole {
 	String numeroRegion;
 	String numeroImbrication;
 	
+	public Symbole(){
+		
+	}
 	public Symbole(String nom, String type, String paramtre,
 			String numeroRegion, String numeroImbrication) {
 		super();
