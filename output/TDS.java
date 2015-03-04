@@ -51,11 +51,19 @@ public class TDS {
 					String nom=ast.getChild(i).getChild(0).getText();
 					String type=ast.getChild(i).getChild(1).getText();
 					int parametre = ast.getChild(i).getChild(2).getChildCount();
-					System.out.print(nom+" "+type+" "+parametre+" "+prof);
+					System.out.println("fonction: "+nom+" "+type+" "+parametre+" "+prof);
 					table.add(new Symbole(nom,type,parametre,0,prof));
-					System.out.print("\n\n");
+					System.out.println("------------");
 					getSymboleFct(ast.getChild(i).getChild(3),prof+1);
-				}else{
+				}
+				else if(ast.getChild(i).getText().equals("PROCEDURE")){
+					String nom=ast.getChild(i).getChild(0).getText();
+					System.out.println("procedure: "+nom+" "+prof);
+					table.add(new Symbole(nom,null,0,0,prof));
+					System.out.println("------------");
+					getSymboleFct(ast.getChild(i).getChild(2),prof+1);
+				}
+				else{
 					getSymboleFct(ast.getChild(i),prof+1);
 				}	
 			}
