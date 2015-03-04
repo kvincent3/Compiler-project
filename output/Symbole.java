@@ -2,23 +2,22 @@
 public class Symbole {
 	String nom;
 	String type;
-	String parametre;
-	String numeroRegion;
-	String numeroImbrication;
+	int parametre;
+	int numeroRegion;
+	int numeroImbrication;
 	
 	public Symbole(){
 		
 	}
-	public Symbole(String nom, String type, String paramtre,
-			String numeroRegion, String numeroImbrication) {
+	public Symbole(String nom, String type, int parametre,
+			int numeroRegion, int numeroImbrication) {
 		super();
 		this.nom = nom;
 		this.type = type;
-		this.parametre = paramtre;
+		this.parametre = parametre;
 		this.numeroRegion = numeroRegion;
 		this.numeroImbrication = numeroImbrication;
 	}
-	
 	public String getNom() {
 		return nom;
 	}
@@ -31,24 +30,25 @@ public class Symbole {
 	public void setType(String type) {
 		this.type = type;
 	}
-	public String getParamtre() {
+	public int getParametre() {
 		return parametre;
 	}
-	public void setParamtre(String paramtre) {
-		this.parametre = paramtre;
+	public void setParametre(int parametre) {
+		this.parametre = parametre;
 	}
-	public String getNumeroRegion() {
+	public int getNumeroRegion() {
 		return numeroRegion;
 	}
-	public void setNumeroRegion(String numeroRegion) {
+	public void setNumeroRegion(int numeroRegion) {
 		this.numeroRegion = numeroRegion;
 	}
-	public String getNumeroImbrication() {
+	public int getNumeroImbrication() {
 		return numeroImbrication;
 	}
-	public void setNumeroImbrication(String numeroImbrication) {
+	public void setNumeroImbrication(int numeroImbrication) {
 		this.numeroImbrication = numeroImbrication;
 	}
+	
 
 	
 	

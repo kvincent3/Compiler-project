@@ -6,16 +6,16 @@ import org.antlr.runtime.tree.Tree;
 
 public class TDS {
 	String nom;
-	ArrayList<Symbole> variable = new ArrayList<Symbole>();
+	ArrayList<Symbole> table = new ArrayList<Symbole>();
 	
 	public TDS(){
 		
 	}
 	
-	public TDS(String nom, ArrayList<Symbole> variable) {
+	public TDS(String nom, ArrayList<Symbole> table) {
 		super();
 		this.nom = nom;
-		this.variable = variable;
+		this.table = table;
 	}
 
 	public String getNom() {
@@ -27,12 +27,41 @@ public class TDS {
 	}
 
 	public ArrayList<Symbole> getVariable() {
-		return variable;
+		return table;
 	}
 
-	public void setVariable(ArrayList<Symbole> variable) {
-		this.variable = variable;
+	public void setVariable(ArrayList<Symbole> table) {
+		this.table = table;
 	}
+	
+	public void getSymboleFct(Tree ast,int prof){
+		if(ast==null){
+			return;
+		}
+		if(ast.getText().equals("do")){
+			for(int i=0;i<ast.getChildCount();i++){
+				if(ast.getChild(i).getText().equals("DECLARATION")){
+					getSymboleFct(ast.getChild(i),prof+1);
+				}
+			}
+		}
+		else{
+			for(int i=0;i<ast.getChildCount();i++){
+				if(ast.getChild(i).getText().equals("FONCTION")){
+					String nom=ast.getChild(i).getChild(0).getText();
+					String type=ast.getChild(i).getChild(1).getText();
+					int parametre = ast.getChild(i).getChild(2).getChildCount();
+					System.out.print(nom+" "+type+" "+parametre+" "+prof);
+					table.add(new Symbole(nom,type,parametre,0,prof));
+					System.out.print("\n\n");
+					getSymboleFct(ast.getChild(i).getChild(3),prof+1);
+				}else{
+					getSymboleFct(ast.getChild(i),prof+1);
+				}	
+			}
+		}
+	}
+	
 	public void getSymboleVar(Tree ast,int prof,ArrayList<Symbole> l)
 	{
 		if(ast==null)
@@ -77,7 +106,7 @@ public class TDS {
 					{
 					 String id=child_i.getChild(j).getText();
 					System.out.print("id: "+id+" ");
-					l.add(new Symbole(id,type,null,null,Integer.toString(prof+1)));
+					l.add(new Symbole(id,type,0,0,prof+1));
 					}
 					System.out.print("\n\n");
 				}
