@@ -70,17 +70,19 @@ public class TDS {
 		}
 	}
 	
-	public void getSymboleVar(Tree ast,int prof,ArrayList<Symbole> l)
-	{
+	public void getSymboleVar(Tree ast,int prof,int region,ArrayList<Symbole> l)//init ast 0 0 l
+	{ 
 		if(ast==null)
 		{
+			System.out.println("arr");
 			return ;
 		}
 		if(ast.getChildCount()==0)
 		{
-			System.out.println("feuille");
+			//System.out.println("feuille");
 			return;
 		}
+		//System.out.print("etiquette : "+ast.getText()+" prof= "+prof+" \n");
 		if(ast.getText().equals("do"))
 		{
 			for(int i=0;i<ast.getChildCount();i++)
@@ -89,53 +91,60 @@ public class TDS {
 				if(ast.getChild(i).getText().equals("DECLARATION"))
 				{
 					System.out.println("fils declaration");
-					getSymboleVar(ast.getChild(i),1,l);
-					
+					getSymboleVar(ast.getChild(i),prof,region,l);
+					return;//on ne traverse qu une seule fois le noeud declaration
 				}
 				if(ast.getChild(i).getText().equals("INSTRUCTION"))
 				{
 					System.out.println("fils instruction");
-					getSymboleVar(ast.getChild(i),1,l);
+					getSymboleVar(ast.getChild(i),prof,region,l);
+					return;
 				}
 			}
 		}
 		
-		if(ast.getText().equals("DECLARATION"))
+		if(ast.getText().equals("VAR"))
+		{
+			String type=ast.getChild(0).getText();
+			System.out.println("variable(s) trouvée(s)");
+			System.out.print("type: "+type+" ");
+			for(int j=1;j<ast.getChildCount();j++)
+			{
+			 String id=ast.getChild(j).getText();
+			System.out.print("id: "+id+" ");
+			l.add(new Symbole(id,type,null,Integer.toString(region),Integer.toString(prof)));
+			}
+			System.out.print("profondeur: "+prof);
+			System.out.print(" region: "+region);
+			System.out.print("\n\n");
+			return;
+			
+		}
+		else if(ast.getText().equals("FONCTION")||ast.getText().equals("PROCEDURE") )
 		{
 			for(int i=0;i<ast.getChildCount();i++)
 			{
-				Tree child_i=ast.getChild(i);
-				if(child_i.getText().equals("VAR"))
-				{
-					String type=child_i.getChild(0).getText();
-					System.out.println("variable(s) trouvée(s)");
-					System.out.print("type: "+type+" ");
-					for(int j=1;j<child_i.getChildCount();j++)
-					{
-					 String id=child_i.getChild(j).getText();
-					System.out.print("id: "+id+" ");
-					l.add(new Symbole(id,type,0,0,prof+1));
-					}
-					System.out.print("\n\n");
-				}
-				else
-				{
-					getSymboleVar(ast.getChild(i),prof,l);
-				}
-				
+			getSymboleVar(ast.getChild(i),prof+1,region,l);
 			}
+			return;
 		}
-		else if(ast.getText().equals("INSTRUCTION"))
+		
+		for(int i=0,r=region;i<ast.getChildCount();i++)
 		{
-			for(int i=0;i<ast.getChildCount();i++)
-			{
-				
-				getSymboleVar(ast.getChild(i),prof,l);
-			}
+		  Tree child_i=ast.getChild(i);
+		  if(child_i.getText().equals("FONCTION")||child_i.getText().equals("PROCEDURE"))
+		  {
+			  r=r+1;
+		  getSymboleVar(ast.getChild(i),prof,r,l);
+		  }
+		  else
+		  {
+			  getSymboleVar(ast.getChild(i),prof,region,l);
+		  }
 		}
 		
 		
-		;
+		
 		return ;
 		
 		
