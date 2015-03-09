@@ -72,7 +72,6 @@ public class TDS {
 	
 	public void getSymboleVar(Tree ast,int prof,int region,ArrayList<Symbole> l)//init ast 0 0 l
 	{ 
-		//static int region=0;
 		if(ast==null)
 		{
 			System.out.println("arr");
@@ -132,7 +131,7 @@ public class TDS {
 				
 			 String id=ast.getChild(j).getText();
 			System.out.print("id: "+id+" ");
-			l.add(new Symbole(id,type,0,region,prof,0));
+			l.add(new Symbole(id,type,null,Integer.toString(region),Integer.toString(prof)));
 			}
 			System.out.print("profondeur: "+prof);
 			System.out.print(" region: "+region);
@@ -172,3 +171,4 @@ public class TDS {
 
 	
 }
+
