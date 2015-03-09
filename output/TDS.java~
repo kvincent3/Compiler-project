@@ -110,6 +110,7 @@ public class TDS {
 			System.out.print("type: "+type+" ");
 			for(int j=1;j<ast.getChildCount();j++)
 			{
+<<<<<<< HEAD
 				Tree child_i=ast.getChild(i);
 				if(child_i.getText().equals("VAR"))
 				{
@@ -129,9 +130,11 @@ public class TDS {
 					getSymboleVar(ast.getChild(i),prof,l);
 				}
 				
+=======
 			 String id=ast.getChild(j).getText();
 			System.out.print("id: "+id+" ");
 			l.add(new Symbole(id,type,null,Integer.toString(region),Integer.toString(prof)));
+>>>>>>> b22ec98630b1b25db24c0c44dced83d60139ea0a
 			}
 			System.out.print("profondeur: "+prof);
 			System.out.print(" region: "+region);
