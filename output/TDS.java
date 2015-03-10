@@ -7,7 +7,7 @@ import org.antlr.runtime.tree.Tree;
 public class TDS {
 	String nom;
 	ArrayList<Symbole> table = new ArrayList<Symbole>();
-	
+	int reg=0;
 	public TDS(){
 		
 	}
