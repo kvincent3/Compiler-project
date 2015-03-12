@@ -38,7 +38,10 @@ public class Main {
         System.out.println(st);*/
         ast = (CommonTree) result.getTree();
         ArrayList<Symbole> sym = new ArrayList<Symbole>();
-        new TDS().getSymboleFct(ast,0,0,sym);
+        TDS tds = new TDS();
+        tds.getSymboleFct2(ast,0,0,sym);
+        //tds.getSymboleVar(ast, 0,0, sym);
+        tds.merge(sym);
         //System.out.println(((Tree)result.tree).toStringTree());
         
         

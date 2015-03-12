@@ -8,7 +8,9 @@ public class TDS {
 	String nom;
 	ArrayList<Symbole> table = new ArrayList<Symbole>();
 	int regionRef=0;
+	int regiontds;
 	int regionFct;
+	ArrayList<Symbole> symboles = new ArrayList<Symbole>();
 	ArrayList<TDS> tds = new ArrayList<TDS>();
 	
 	int reg=0;
@@ -18,9 +20,9 @@ public class TDS {
 		
 	}
 	
-	public TDS(String nom) {
-		super();
-		this.nom = nom;
+	public TDS(int regiontds) 
+	{
+		this.regiontds = regiontds;
 	}
 
 	public String getNom() {
@@ -30,7 +32,16 @@ public class TDS {
 	public void setNom(String nom) {
 		this.nom = nom;
 	}
+       
+	public ArrayList<Symbole> getSymboles()
+	{
+		return this.symboles;
+	}
 
+	public int getregion()
+	{
+		return regiontds;
+	}
 
 	public void getSymboleFct2(Tree ast,int prof, int regionFct2,ArrayList<Symbole> table){
 		if(ast==null){
@@ -60,7 +71,7 @@ public class TDS {
 						table.add(new Symbole(nomParam,typeParam,0,regionFct2Param,profParam,0));
 					}
 					System.out.println("fonction: "+nom+" type: "+type+" parametre: "+parametre+" prof: "+prof+" region : "+regionFct2);
-					table.add(new Symbole(nom,type,parametre,0,prof,regionFct2));
+					table.add(new Symbole(nom,type,parametre,regionFct2,prof,0));
 					System.out.println("------------");
 					getSymboleFct2(ast.getChild(i).getChild(3),prof+1,++regionFct,table);
 					
@@ -68,7 +79,7 @@ public class TDS {
 				else if(ast.getChild(i).getText().equals("PROCEDURE")){
 					String nom=ast.getChild(i).getChild(0).getText();
 					System.out.println("procedure: "+nom+" "+" prof: "+prof+" "+" region : "+regionFct2);
-					table.add(new Symbole(nom,null,0,0,prof,regionFct2));
+					table.add(new Symbole(nom,null,0,regionFct2,prof,0));
 					System.out.println("------------");
 					
 					getSymboleFct2(ast.getChild(i).getChild(2),prof+1,++regionFct,table);
@@ -135,7 +146,7 @@ public class TDS {
 					if(salut){
 						regionFct=regionRef;
 					}
-					getSymboleFct(ast.getChild(i).getChild(2),prof+1,regionFct+1);
+					getSymboleFct(ast.getChild(i).getChild(2),prof+1,regionFct+1,table);
 				
 				}
 				else{
@@ -292,9 +303,41 @@ public class TDS {
 			
 			
 		}
+
+
+           	public void merge(ArrayList<Symbole> sym) 
+		{
+			TDSGlobal tdsFinal = new TDSGlobal();
+			for (int i=0;i<sym.size();i++)
+			{
+				Symbole Symbolecourant = sym.get(i);
+				System.out.println(Symbolecourant.getNom()+"   "+Symbolecourant.getNumeroRegion());
+			    boolean ispresent=false;
+				for (int j=0;j<tdsFinal.getTDSparRegion().size();j++)
+				{
+					TDS TDScourante = tdsFinal.getTDSparRegion().get(j);
+					if (TDScourante.getregion() == Symbolecourant.getNumeroRegion())
+					{
+					    ispresent =true;
+					    TDScourante.getSymboles().add(Symbolecourant);
+					}
+				}
+				if (!ispresent)
+				{
+					TDS nouvelle = new TDS (Symbolecourant.getNumeroRegion());
+
+					nouvelle.getSymboles().add(Symbolecourant);
+					tdsFinal.getTDSparRegion().add(nouvelle);
+				}
+			}
+			System.out.println("\n\n");
+			tdsFinal.display();
+	       }
+
 	}
 	
 	
 	
+
 
 
