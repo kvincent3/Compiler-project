@@ -7,7 +7,7 @@ import org.antlr.runtime.tree.Tree;
 public class TDS {
 	String nom;
 	ArrayList<Symbole> table = new ArrayList<Symbole>();
-	int regionFct;
+	int regionRef=0;
 	ArrayList<TDS> tds = new ArrayList<TDS>();
 	
 	int reg=0;
@@ -51,14 +51,30 @@ public class TDS {
 			}
 		}
 		else{
+			boolean salut=false;
 			for(int i=0;i<ast.getChildCount();i++){
+				if(prof==0){
+					regionFct=0;
+					salut=true;
+				}
 				if(ast.getChild(i).getText().equals("FONCTION")){
+					/*if(ast.getText().equals("DECLARATION")){
+					}
+					else if(regionFct<regionRef){
+						regionFct=regionRef+1;
+					}*/
 					String nom=ast.getChild(i).getChild(0).getText();
 					String type=ast.getChild(i).getChild(1).getText();
 					int parametre = ast.getChild(i).getChild(2).getChildCount();
 					System.out.println("fonction: "+nom+" type: "+type+" parametre: "+parametre+" prof: "+prof+" region : "+regionFct);
 					table.add(new Symbole(nom,type,parametre,0,prof,regionFct));
 					System.out.println("------------");
+					if(regionFct>regionRef){
+						regionRef=regionFct+1;
+					}
+					if(salut){
+						regionFct=regionRef;
+					}
 					getSymboleFct(ast.getChild(i).getChild(3),prof+1,regionFct+1);
 				}
 				else if(ast.getChild(i).getText().equals("PROCEDURE")){
@@ -66,11 +82,17 @@ public class TDS {
 					System.out.println("procedure: "+nom+" "+" prof: "+prof+" "+" region : "+regionFct);
 					table.add(new Symbole(nom,null,0,0,prof,regionFct));
 					System.out.println("------------");
+					if(regionFct>regionRef){
+						regionRef=regionFct+1;
+					}
+					if(salut){
+						regionFct=regionRef;
+					}
 					getSymboleFct(ast.getChild(i).getChild(2),prof+1,regionFct+1);
 				}
 				else{
-					getSymboleFct(ast.getChild(i),prof+1,regionFct+1);
-				}	
+					getSymboleFct(ast.getChild(i),prof+1,regionFct);
+				}
 			}
 		}
 	}
