@@ -114,7 +114,7 @@ public class TDS {
 			{
 			 String id=ast.getChild(j).getText();
 			System.out.print("id: "+id+" ");
-			l.add(new Symbole(id,type,null,Integer.toString(region),Integer.toString(prof)));
+			l.add(new Symbole(id,type,0,region,prof,0));
 			}
 			System.out.print("profondeur: "+prof);
 			System.out.print(" region: "+region);
