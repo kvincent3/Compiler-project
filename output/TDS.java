@@ -31,8 +31,56 @@ public class TDS {
 		this.nom = nom;
 	}
 
+
+	public void getSymboleFct2(Tree ast,int prof, int regionFct2,ArrayList<Symbole> table){
+		if(ast==null){
+			return;
+		}
+		if(ast.getText().equals("do")){
+			for(int i=0;i<ast.getChildCount();i++){
+				if(ast.getChild(i).getText().equals("DECLARATION")){
+					getSymboleFct2(ast.getChild(i),0,0,table);
+					
+				}
+			}
+		}
+		else{
+			for(int i=0;i<ast.getChildCount();i++){
+				
+				if(ast.getChild(i).getText().equals("FONCTION")){
+					
+					String nom=ast.getChild(i).getChild(0).getText();
+					String type=ast.getChild(i).getChild(1).getText();
+					int parametre = ast.getChild(i).getChild(2).getChildCount();
+					System.out.println("fonction: "+nom+" type: "+type+" parametre: "+parametre+" prof: "+prof+" region : "+regionFct2);
+					table.add(new Symbole(nom,type,parametre,0,prof,regionFct2));
+					System.out.println("------------");
+					getSymboleFct2(ast.getChild(i).getChild(3),prof+1,++regionFct,table);
+					
+				}
+				else if(ast.getChild(i).getText().equals("PROCEDURE")){
+					String nom=ast.getChild(i).getChild(0).getText();
+					System.out.println("procedure: "+nom+" "+" prof: "+prof+" "+" region : "+regionFct2);
+					table.add(new Symbole(nom,null,0,0,prof,regionFct2));
+					System.out.println("------------");
+					
+					getSymboleFct2(ast.getChild(i).getChild(2),prof+1,++regionFct,table);
+					
+					//regionFct++;
+				}
+				else{
+					getSymboleFct2(ast.getChild(i),prof+1,regionFct2,table);
+					//regionFct++;
+				}	
+			}
+		}
+	}
 	
-	public void getSymboleFct(Tree ast,int prof, int regionFct,ArrayList<Symbole> table){
+	
+	
+	
+	
+	void getSymboleFct(Tree ast,int prof, int regionFct,ArrayList<Symbole> table){
 		if(ast==null){
 			return;
 		}
@@ -62,24 +110,22 @@ public class TDS {
 					System.out.println("fonction: "+nom+" type: "+type+" parametre: "+parametre+" prof: "+prof+" region : "+regionFct);
 					table.add(new Symbole(nom,type,parametre,0,prof,regionFct));
 					System.out.println("------------");
-<<<<<<< HEAD
+
 					if(regionFct>regionRef){
 						regionRef=regionFct+1;
 					}
 					if(salut){
 						regionFct=regionRef;
 					}
-					getSymboleFct(ast.getChild(i).getChild(3),prof+1,regionFct+1);
-=======
+					
 					getSymboleFct(ast.getChild(i).getChild(3),prof+1,regionFct+1,table);
->>>>>>> 824ddaeff2ec8f68f5adab771153d2fccee01c69
 				}
 				else if(ast.getChild(i).getText().equals("PROCEDURE")){
 					String nom=ast.getChild(i).getChild(0).getText();
 					System.out.println("procedure: "+nom+" "+" prof: "+prof+" "+" region : "+regionFct);
 					table.add(new Symbole(nom,null,0,0,prof,regionFct));
 					System.out.println("------------");
-<<<<<<< HEAD
+
 					if(regionFct>regionRef){
 						regionRef=regionFct+1;
 					}
@@ -87,17 +133,12 @@ public class TDS {
 						regionFct=regionRef;
 					}
 					getSymboleFct(ast.getChild(i).getChild(2),prof+1,regionFct+1);
-				}
-				else{
-					getSymboleFct(ast.getChild(i),prof+1,regionFct);
-				}
-=======
-					getSymboleFct(ast.getChild(i).getChild(2),prof+1,regionFct+1,table);
+				
 				}
 				else{
 					getSymboleFct(ast.getChild(i),prof+1,regionFct+1,table);
 				}	
->>>>>>> 824ddaeff2ec8f68f5adab771153d2fccee01c69
+
 			}
 		}
 	}
@@ -226,7 +267,7 @@ public class TDS {
 		}	if(ast.getText().equals("ARRAY"))
 		{
 			String id=ast.getChild(1).getText();
-			System.out.println("Tableau trouvé");
+			System.out.println("Tableau trouvï¿½");
 			System.out.print("id: "+id+" ");			
 			l.add(new Symbole(id,"array",0,region,prof,depl));
 			System.out.print(" depl: "+depl+" ");
