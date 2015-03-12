@@ -153,11 +153,68 @@ public class TDS {
 		
 		
 		return ;
-		
-		
+		}
+	
+	public void getSymboleArray(Tree ast,int prof,int region,ArrayList<Symbole> l){
+		if(ast==null)
+		{
+			System.out.println("err");
+			return ;
+		}
+		if(ast.getChildCount()==0)
+		{
+			//System.out.println("feuille");
+			return;
+		}
+		//System.out.print("etiquette : "+ast.getText()+" prof= "+prof+" \n");
+		if(ast.getText().equals("do"))
+		{
+			for(int i=0;i<ast.getChildCount();i++)
+			{
+				
+				if(ast.getChild(i).getText().equals("DECLARATION"))
+				{
+					System.out.println("fils declaration");
+					getSymboleArray(ast.getChild(i),prof,region,l);
+					 reg=0;
+					return;//on ne traverse qu une seule fois le noeud declaration
+				}
+				if(ast.getChild(i).getText().equals("INSTRUCTION"))
+				{
+					System.out.println("fils instruction");
+					getSymboleArray(ast.getChild(i),prof,region,l);
+					reg=0;
+					return;
+				}
+			}
+		}	if(ast.getText().equals("ARRAY"))
+		{
+			String id=ast.getChild(1).getText();
+			System.out.println("Tableau trouvé");
+			System.out.print("id: "+id+" ");			
+			l.add(new Symbole(id,"array",0,region,prof,depl));
+			System.out.print(" depl: "+depl+" ");
+			depl++;
+			
+			
+	//Bricolage??		
+			Tree ast2=ast.getChild(0).getChild(0);
+			int k=ast2.getChildCount();
+			System.out.println("Tableau de dimension:"+k);
+			for (int p=0; p<=k;p++){
+			System.out.println("Borne inferiure="+ast2.getChild(p).getChild(0)+"Borne superieure="+ast2.getChild(p).getChild(1));	
+			}
+			}
+			System.out.print("profondeur: "+prof);
+			System.out.print(" region: "+region);
+			System.out.print("\n\n");
+			return;
+			
+			
+		}
 	}
+	
+	
+	
 
-	
-	
-}
 
