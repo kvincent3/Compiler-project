@@ -8,6 +8,7 @@ public class TDS {
 	String nom;
 	ArrayList<Symbole> table = new ArrayList<Symbole>();
 	int regionRef=0;
+	int regionFct;
 	ArrayList<TDS> tds = new ArrayList<TDS>();
 	
 	int reg=0;
@@ -17,10 +18,9 @@ public class TDS {
 		
 	}
 	
-	public TDS(String nom, ArrayList<Symbole> table) {
+	public TDS(String nom) {
 		super();
 		this.nom = nom;
-		this.table = table;
 	}
 
 	public String getNom() {
@@ -31,22 +31,15 @@ public class TDS {
 		this.nom = nom;
 	}
 
-	public ArrayList<Symbole> getVariable() {
-		return table;
-	}
-
-	public void setVariable(ArrayList<Symbole> table) {
-		this.table = table;
-	}
 	
-	public void getSymboleFct(Tree ast,int prof, int regionFct){
+	public void getSymboleFct(Tree ast,int prof, int regionFct,ArrayList<Symbole> table){
 		if(ast==null){
 			return;
 		}
 		if(ast.getText().equals("do")){
 			for(int i=0;i<ast.getChildCount();i++){
 				if(ast.getChild(i).getText().equals("DECLARATION")){
-					getSymboleFct(ast.getChild(i),0,0);
+					getSymboleFct(ast.getChild(i),0,0,table);
 				}
 			}
 		}
@@ -69,6 +62,7 @@ public class TDS {
 					System.out.println("fonction: "+nom+" type: "+type+" parametre: "+parametre+" prof: "+prof+" region : "+regionFct);
 					table.add(new Symbole(nom,type,parametre,0,prof,regionFct));
 					System.out.println("------------");
+<<<<<<< HEAD
 					if(regionFct>regionRef){
 						regionRef=regionFct+1;
 					}
@@ -76,12 +70,16 @@ public class TDS {
 						regionFct=regionRef;
 					}
 					getSymboleFct(ast.getChild(i).getChild(3),prof+1,regionFct+1);
+=======
+					getSymboleFct(ast.getChild(i).getChild(3),prof+1,regionFct+1,table);
+>>>>>>> 824ddaeff2ec8f68f5adab771153d2fccee01c69
 				}
 				else if(ast.getChild(i).getText().equals("PROCEDURE")){
 					String nom=ast.getChild(i).getChild(0).getText();
 					System.out.println("procedure: "+nom+" "+" prof: "+prof+" "+" region : "+regionFct);
 					table.add(new Symbole(nom,null,0,0,prof,regionFct));
 					System.out.println("------------");
+<<<<<<< HEAD
 					if(regionFct>regionRef){
 						regionRef=regionFct+1;
 					}
@@ -93,6 +91,13 @@ public class TDS {
 				else{
 					getSymboleFct(ast.getChild(i),prof+1,regionFct);
 				}
+=======
+					getSymboleFct(ast.getChild(i).getChild(2),prof+1,regionFct+1,table);
+				}
+				else{
+					getSymboleFct(ast.getChild(i),prof+1,regionFct+1,table);
+				}	
+>>>>>>> 824ddaeff2ec8f68f5adab771153d2fccee01c69
 			}
 		}
 	}
@@ -184,11 +189,68 @@ public class TDS {
 		
 		
 		return ;
-		
-		
+		}
+	
+	public void getSymboleArray(Tree ast,int prof,int region,ArrayList<Symbole> l){
+		if(ast==null)
+		{
+			System.out.println("err");
+			return ;
+		}
+		if(ast.getChildCount()==0)
+		{
+			//System.out.println("feuille");
+			return;
+		}
+		//System.out.print("etiquette : "+ast.getText()+" prof= "+prof+" \n");
+		if(ast.getText().equals("do"))
+		{
+			for(int i=0;i<ast.getChildCount();i++)
+			{
+				
+				if(ast.getChild(i).getText().equals("DECLARATION"))
+				{
+					System.out.println("fils declaration");
+					getSymboleArray(ast.getChild(i),prof,region,l);
+					 reg=0;
+					return;//on ne traverse qu une seule fois le noeud declaration
+				}
+				if(ast.getChild(i).getText().equals("INSTRUCTION"))
+				{
+					System.out.println("fils instruction");
+					getSymboleArray(ast.getChild(i),prof,region,l);
+					reg=0;
+					return;
+				}
+			}
+		}	if(ast.getText().equals("ARRAY"))
+		{
+			String id=ast.getChild(1).getText();
+			System.out.println("Tableau trouvé");
+			System.out.print("id: "+id+" ");			
+			l.add(new Symbole(id,"array",0,region,prof,depl));
+			System.out.print(" depl: "+depl+" ");
+			depl++;
+			
+			
+	//Bricolage??		
+			Tree ast2=ast.getChild(0).getChild(0);
+			int k=ast2.getChildCount();
+			System.out.println("Tableau de dimension:"+k);
+			for (int p=0; p<=k;p++){
+			System.out.println("Borne inferiure="+ast2.getChild(p).getChild(0)+"Borne superieure="+ast2.getChild(p).getChild(1));	
+			}
+			}
+			System.out.print("profondeur: "+prof);
+			System.out.print(" region: "+region);
+			System.out.print("\n\n");
+			return;
+			
+			
+		}
 	}
+	
+	
+	
 
-	
-	
-}
 

@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 
 public class Symbole {
 	String nom;
@@ -6,6 +7,7 @@ public class Symbole {
 	int numeroRegion;
 	int numeroImbrication;
 	int deplacement;
+	private ArrayList<Symbole> params=null;
 	
 	public Symbole(){
 		
@@ -21,7 +23,18 @@ public class Symbole {
 		this.numeroImbrication = numeroImbrication;
 		this.deplacement = deplacement;
 	}
-
+    public void addSymboleParam(Symbole sym)
+    {
+    	if(params==null)
+    		params=new ArrayList<Symbole>();
+    	if(sym!=null)
+    		params.add(sym);
+    	
+    }
+    public ArrayList<Symbole> getParam()
+    {
+    	return params;
+    }
 	public String getNom() {
 		return nom;
 	}
