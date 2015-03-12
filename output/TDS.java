@@ -10,6 +10,9 @@ public class TDS {
 	int regionFct;
 	ArrayList<TDS> tds = new ArrayList<TDS>();
 	
+	int reg=0;
+	int depl=0;
+
 	public TDS(){
 		
 	}
@@ -72,8 +75,13 @@ public class TDS {
 		}
 	}
 	
+	
+	
+	
+	
 	public void getSymboleVar(Tree ast,int prof,int region,ArrayList<Symbole> l)//init ast 0 0 l
 	{ 
+		//static int region=0;
 		if(ast==null)
 		{
 			System.out.println("arr");
@@ -94,12 +102,14 @@ public class TDS {
 				{
 					System.out.println("fils declaration");
 					getSymboleVar(ast.getChild(i),prof,region,l);
+					 reg=0;
 					return;//on ne traverse qu une seule fois le noeud declaration
 				}
 				if(ast.getChild(i).getText().equals("INSTRUCTION"))
 				{
 					System.out.println("fils instruction");
 					getSymboleVar(ast.getChild(i),prof,region,l);
+					reg=0;
 					return;
 				}
 			}
@@ -112,28 +122,11 @@ public class TDS {
 			System.out.print("type: "+type+" ");
 			for(int j=1;j<ast.getChildCount();j++)
 			{
-				Tree child_i=ast.getChild(i);
-				if(child_i.getText().equals("VAR"))
-				{
-					String type=child_i.getChild(0).getText();
-					System.out.println("variable(s) trouvée(s)");
-					System.out.print("type: "+type+" ");
-					for(int j=1;j<child_i.getChildCount();j++)
-					{
-					 String id=child_i.getChild(j).getText();
-					System.out.print("id: "+id+" ");
-					l.add(new Symbole(id,type,0,0,prof+1,0));
-					}
-					System.out.print("\n\n");
-				}
-				else
-				{
-					getSymboleVar(ast.getChild(i),prof,l);
-				}
-				
 			 String id=ast.getChild(j).getText();
 			System.out.print("id: "+id+" ");
-			l.add(new Symbole(id,type,null,Integer.toString(region),Integer.toString(prof)));
+			l.add(new Symbole(id,type,0,region,prof,depl));
+			System.out.print(" depl: "+depl+" ");
+			depl++;
 			}
 			System.out.print("profondeur: "+prof);
 			System.out.print(" region: "+region);
@@ -145,8 +138,10 @@ public class TDS {
 		{
 			for(int i=0;i<ast.getChildCount();i++)
 			{
+			depl=0;
 			getSymboleVar(ast.getChild(i),prof+1,region,l);
 			}
+			
 			return;
 		}
 		
@@ -155,8 +150,8 @@ public class TDS {
 		  Tree child_i=ast.getChild(i);
 		  if(child_i.getText().equals("FONCTION")||child_i.getText().equals("PROCEDURE"))
 		  {
-			  r=r+1;
-		  getSymboleVar(ast.getChild(i),prof,r,l);
+			  reg++;
+		  getSymboleVar(ast.getChild(i),prof,reg,l);
 		  }
 		  else
 		  {
@@ -171,6 +166,7 @@ public class TDS {
 		
 	}
 
+	
 	
 }
 
