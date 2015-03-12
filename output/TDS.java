@@ -8,6 +8,7 @@ public class TDS {
 	String nom;
 	ArrayList<Symbole> table = new ArrayList<Symbole>();
 	int reg=0;
+	int depl=0;
 	public TDS(){
 		
 	}
@@ -70,8 +71,13 @@ public class TDS {
 		}
 	}
 	
+	
+	
+	
+	
 	public void getSymboleVar(Tree ast,int prof,int region,ArrayList<Symbole> l)//init ast 0 0 l
 	{ 
+		//static int region=0;
 		if(ast==null)
 		{
 			System.out.println("arr");
@@ -114,7 +120,9 @@ public class TDS {
 			{
 			 String id=ast.getChild(j).getText();
 			System.out.print("id: "+id+" ");
-			l.add(new Symbole(id,type,0,region,prof,0));
+			l.add(new Symbole(id,type,0,region,prof,depl));
+			System.out.print(" depl: "+depl+" ");
+			depl++;
 			}
 			System.out.print("profondeur: "+prof);
 			System.out.print(" region: "+region);
@@ -126,8 +134,10 @@ public class TDS {
 		{
 			for(int i=0;i<ast.getChildCount();i++)
 			{
+			depl=0;
 			getSymboleVar(ast.getChild(i),prof+1,region,l);
 			}
+			
 			return;
 		}
 		
