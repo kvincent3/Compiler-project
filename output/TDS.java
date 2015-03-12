@@ -6,7 +6,6 @@ import org.antlr.runtime.tree.Tree;
 
 public class TDS {
 	String nom;
-	ArrayList<Symbole> table = new ArrayList<Symbole>();
 	int regionFct;
 	ArrayList<TDS> tds = new ArrayList<TDS>();
 	
@@ -17,10 +16,9 @@ public class TDS {
 		
 	}
 	
-	public TDS(String nom, ArrayList<Symbole> table) {
+	public TDS(String nom) {
 		super();
 		this.nom = nom;
-		this.table = table;
 	}
 
 	public String getNom() {
@@ -31,22 +29,15 @@ public class TDS {
 		this.nom = nom;
 	}
 
-	public ArrayList<Symbole> getVariable() {
-		return table;
-	}
-
-	public void setVariable(ArrayList<Symbole> table) {
-		this.table = table;
-	}
 	
-	public void getSymboleFct(Tree ast,int prof, int regionFct){
+	public void getSymboleFct(Tree ast,int prof, int regionFct,ArrayList<Symbole> table){
 		if(ast==null){
 			return;
 		}
 		if(ast.getText().equals("do")){
 			for(int i=0;i<ast.getChildCount();i++){
 				if(ast.getChild(i).getText().equals("DECLARATION")){
-					getSymboleFct(ast.getChild(i),0,0);
+					getSymboleFct(ast.getChild(i),0,0,table);
 				}
 			}
 		}
@@ -59,17 +50,17 @@ public class TDS {
 					System.out.println("fonction: "+nom+" type: "+type+" parametre: "+parametre+" prof: "+prof+" region : "+regionFct);
 					table.add(new Symbole(nom,type,parametre,0,prof,regionFct));
 					System.out.println("------------");
-					getSymboleFct(ast.getChild(i).getChild(3),prof+1,regionFct+1);
+					getSymboleFct(ast.getChild(i).getChild(3),prof+1,regionFct+1,table);
 				}
 				else if(ast.getChild(i).getText().equals("PROCEDURE")){
 					String nom=ast.getChild(i).getChild(0).getText();
 					System.out.println("procedure: "+nom+" "+" prof: "+prof+" "+" region : "+regionFct);
 					table.add(new Symbole(nom,null,0,0,prof,regionFct));
 					System.out.println("------------");
-					getSymboleFct(ast.getChild(i).getChild(2),prof+1,regionFct+1);
+					getSymboleFct(ast.getChild(i).getChild(2),prof+1,regionFct+1,table);
 				}
 				else{
-					getSymboleFct(ast.getChild(i),prof+1,regionFct+1);
+					getSymboleFct(ast.getChild(i),prof+1,regionFct+1,table);
 				}	
 			}
 		}
