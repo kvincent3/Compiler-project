@@ -40,7 +40,6 @@ public class TDS {
 			for(int i=0;i<ast.getChildCount();i++){
 				if(ast.getChild(i).getText().equals("DECLARATION")){
 					getSymboleFct2(ast.getChild(i),0,0,table);
-					
 				}
 			}
 		}
@@ -52,6 +51,14 @@ public class TDS {
 					String nom=ast.getChild(i).getChild(0).getText();
 					String type=ast.getChild(i).getChild(1).getText();
 					int parametre = ast.getChild(i).getChild(2).getChildCount();
+					for(int j=0;j<ast.getChild(i).getChild(2).getChildCount();j++){
+						String nomParam=ast.getChild(i).getChild(2).getChild(j).getChild(0).getText();
+						String typeParam=ast.getChild(i).getChild(2).getChild(j).getChild(1).getText();
+						int regionFct2Param=regionFct+1;
+						int profParam=prof+1;
+						System.out.println("parametre: "+nomParam+" type: "+typeParam+" prof: "+profParam+" region : "+regionFct2Param);
+						table.add(new Symbole(nomParam,typeParam,0,regionFct2Param,profParam,0));
+					}
 					System.out.println("fonction: "+nom+" type: "+type+" parametre: "+parametre+" prof: "+prof+" region : "+regionFct2);
 					table.add(new Symbole(nom,type,parametre,0,prof,regionFct2));
 					System.out.println("------------");
@@ -75,10 +82,6 @@ public class TDS {
 			}
 		}
 	}
-	
-	
-	
-	
 	
 	void getSymboleFct(Tree ast,int prof, int regionFct,ArrayList<Symbole> table){
 		if(ast==null){
