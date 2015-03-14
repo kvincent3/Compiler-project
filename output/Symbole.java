@@ -3,6 +3,8 @@ import java.util.ArrayList;
 public class Symbole {
 	String nom;
 	String type;
+	String nature;
+	Tableau infotableau;
 	int parametre;
 	int numeroRegion;
 	int numeroImbrication;
@@ -13,11 +15,12 @@ public class Symbole {
 		
 	}
 
-	public Symbole(String nom, String type, int parametre, int numeroRegion,
-			int numeroImbrication, int deplacement) {
+	public Symbole(String nom, String nature,String type, int parametre, int numeroRegion,
+			int numeroImbrication, int deplacement,Tableau a){
 		super();
 		this.nom = nom;
 		this.type = type;
+		this.nature= nature;
 		this.parametre = parametre;
 		this.numeroRegion = numeroRegion;
 		this.numeroImbrication = numeroImbrication;
@@ -37,6 +40,10 @@ public class Symbole {
     }
 	public String getNom() {
 		return nom;
+	}
+	public String getNature()
+	{
+		return this.nature;
 	}
 
 	public void setNom(String nom) {
@@ -81,6 +88,11 @@ public class Symbole {
 
 	public void setDeplacement(int deplacement) {
 		this.deplacement = deplacement;
+	}    
+
+	public Tableau getInfoTableau() {
+		// TODO Auto-generated method stub
+		return this.infotableau;
 	}
 
 	
