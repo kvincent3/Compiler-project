@@ -2,16 +2,24 @@
 public class Symbole {
 	String nom;
 	String type;
-	String numeroRegion;
-	String numeroImbrication;
+	int parametre;
+	int numeroRegion;
+	int numeroImbrication;
+	int deplacement;
 	
-	public Symbole(String nom, String type, String numeroRegion,
-			String numeroImbrication) {
+	public Symbole(){
+		
+	}
+
+	public Symbole(String nom, String type, int parametre, int numeroRegion,
+			int numeroImbrication, int deplacement) {
 		super();
 		this.nom = nom;
 		this.type = type;
+		this.parametre = parametre;
 		this.numeroRegion = numeroRegion;
 		this.numeroImbrication = numeroImbrication;
+		this.deplacement = deplacement;
 	}
 
 	public String getNom() {
@@ -30,20 +38,37 @@ public class Symbole {
 		this.type = type;
 	}
 
-	public String getNumeroRegion() {
+	public int getParametre() {
+		return parametre;
+	}
+
+	public void setParametre(int parametre) {
+		this.parametre = parametre;
+	}
+
+	public int getNumeroRegion() {
 		return numeroRegion;
 	}
 
-	public void setNumeroRegion(String numeroRegion) {
+	public void setNumeroRegion(int numeroRegion) {
 		this.numeroRegion = numeroRegion;
 	}
 
-	public String getNumeroImbrication() {
+	public int getNumeroImbrication() {
 		return numeroImbrication;
 	}
 
-	public void setNumeroImbrication(String numeroImbrication) {
+	public void setNumeroImbrication(int numeroImbrication) {
 		this.numeroImbrication = numeroImbrication;
 	}
+
+	public int getDeplacement() {
+		return deplacement;
+	}
+
+	public void setDeplacement(int deplacement) {
+		this.deplacement = deplacement;
+	}
+
 	
 }

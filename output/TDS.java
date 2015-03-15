@@ -78,8 +78,17 @@ public class TDS {
 				}
 				else if(ast.getChild(i).getText().equals("PROCEDURE")){
 					String nom=ast.getChild(i).getChild(0).getText();
-					System.out.println("procedure: "+nom+" "+" prof: "+prof+" "+" region : "+regionFct2);
-					table.add(new Symbole(nom,"procedure",null,0,regionFct2,prof,-1,null));
+					int parametreProc = ast.getChild(i).getChild(2).getChildCount();
+					for(int j=0;j<ast.getChild(i).getChild(1).getChildCount();j++){
+						String nomParam=ast.getChild(i).getChild(1).getChild(j).getChild(0).getText();
+						String typeParam=ast.getChild(i).getChild(1).getChild(j).getChild(1).getText();
+						int regionFct2Param=regionFct+1;
+						int profParam=prof+1;
+						System.out.println("parametre: "+nomParam+" type: "+typeParam+" prof: "+profParam+" region : "+regionFct2Param);
+						table.add(new Symbole(nomParam,"param",typeParam,0,regionFct2Param,profParam,0,null));
+					}
+					System.out.println("procedure: "+nom+" "+" parametre: "+parametreProc+" prof: "+prof+" "+" region : "+regionFct2);
+					table.add(new Symbole(nom,"procedure",null,parametreProc,regionFct2,prof,-1,null));
 					System.out.println("------------");
 					
 					getSymboleFct2(ast.getChild(i).getChild(2),prof+1,++regionFct,table);
