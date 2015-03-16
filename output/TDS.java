@@ -68,20 +68,16 @@ public class TDS {
 							String typeParam=ast.getChild(i).getChild(2).getChild(j).getChild(1).getText();
 							int regionFct2Param=regionFct+1;
 							int profParam=prof+1;
-							System.out.println("parametreV: "+nomParam+" type: "+typeParam+" prof: "+profParam+" region : "+regionFct2Param);
 							table.add(new Symbole(nomParam,"parametreV",typeParam,0,regionFct2Param,profParam,0,null));
 						}else{
 							String nomParam=ast.getChild(i).getChild(2).getChild(j).getChild(1).getText();
 							String typeParam=ast.getChild(i).getChild(2).getChild(j).getChild(2).getText();
 							int regionFct2Param=regionFct+1;
 							int profParam=prof+1;
-							System.out.println("parametreA: "+nomParam+" type: "+typeParam+" prof: "+profParam+" region : "+regionFct2Param);
 							table.add(new Symbole(nomParam,"parametreA",typeParam,0,regionFct2Param,profParam,0,null));
 						}
 					}
-					System.out.println("fonction: "+nom+" type: "+type+" parametre: "+parametre+" prof: "+prof+" region : "+regionFct2);
 					table.add(new Symbole(nom,"fonction",type,parametre,regionFct2,prof,-1,null));
-					System.out.println("------------");
 					getSymboleFct2(ast.getChild(i).getChild(3),prof+1,++regionFct,table);
 					
 				}
@@ -94,22 +90,17 @@ public class TDS {
 							String typeParam=ast.getChild(i).getChild(1).getChild(j).getChild(1).getText();
 							int regionFct2Param=regionFct+1;
 							int profParam=prof+1;
-							System.out.println("parametreV: "+nomParam+" type: "+typeParam+" prof: "+profParam+" region : "+regionFct2Param);
 							table.add(new Symbole(nomParam,"parametreV",typeParam,0,regionFct2Param,profParam,0,null));
 						}else{
 							String nomParam=ast.getChild(i).getChild(1).getChild(j).getChild(1).getText();
 							String typeParam=ast.getChild(i).getChild(1).getChild(j).getChild(2).getText();
 							int regionFct2Param=regionFct+1;
 							int profParam=prof+1;
-							System.out.println("parametreA: "+nomParam+" type: "+typeParam+" prof: "+profParam+" region : "+regionFct2Param);
 							table.add(new Symbole(nomParam,"parametreA",typeParam,0,regionFct2Param,profParam,0,null));
 						}
 
 					}
-					System.out.println("procedure: "+nom+" "+" parametre: "+parametreProc+" prof: "+prof+" "+" region : "+regionFct2);
-					table.add(new Symbole(nom,"procedure",null,parametreProc,regionFct2,prof,-1,null));
-					System.out.println("------------");
-					
+					table.add(new Symbole(nom,"procedure",null,parametreProc,regionFct2,prof,-1,null));					
 					getSymboleFct2(ast.getChild(i).getChild(2),prof+1,++regionFct,table);
 					
 					//regionFct++;
@@ -149,10 +140,7 @@ public class TDS {
 					String nom=ast.getChild(i).getChild(0).getText();
 					String type=ast.getChild(i).getChild(1).getText();
 					int parametre = ast.getChild(i).getChild(2).getChildCount();
-					System.out.println("fonction: "+nom+" type: "+type+" parametre: "+parametre+" prof: "+prof+" region : "+regionFct);
 					table.add(new Symbole(nom,"fonction",type,parametre,0,prof,regionFct,null));
-					System.out.println("------------");
-
 					if(regionFct>regionRef){
 						regionRef=regionFct+1;
 					}
@@ -166,7 +154,7 @@ public class TDS {
 					String nom=ast.getChild(i).getChild(0).getText();
 					System.out.println("procedure: "+nom+" "+" prof: "+prof+" "+" region : "+regionFct);
 					table.add(new Symbole(nom,"procedure",null,0,0,prof,regionFct,null));
-					System.out.println("------------");
+
 
 					if(regionFct>regionRef){
 						regionRef=regionFct+1;
@@ -191,7 +179,6 @@ public class TDS {
 	
 	public void getSymboleVar(Tree ast,int prof,int region,ArrayList<Symbole> l)//init ast 0 0 l
 	{ 
-		//static int region=0;
 		if(ast==null)
 		{
 			System.out.println("arr");
@@ -199,10 +186,8 @@ public class TDS {
 		}
 		if(ast.getChildCount()==0)
 		{
-			//System.out.println("feuille");
 			return;
 		}
-		//System.out.print("etiquette : "+ast.getText()+" prof= "+prof+" \n");
 		if(ast.getText().equals("do"))
 		{
 			for(int i=0;i<ast.getChildCount();i++)
@@ -210,14 +195,12 @@ public class TDS {
 				
 				if(ast.getChild(i).getText().equals("DECLARATION"))
 				{
-					System.out.println("fils declaration");
-					getSymboleVar(ast.getChild(i),prof,region,l);
+					 getSymboleVar(ast.getChild(i),prof,region,l);
 					 reg=0;
-					return;//on ne traverse qu une seule fois le noeud declaration
+					 return;//on ne traverse qu une seule fois le noeud declaration
 				}
 				if(ast.getChild(i).getText().equals("INSTRUCTION"))
 				{
-					System.out.println("fils instruction");
 					getSymboleVar(ast.getChild(i),prof,region,l);
 					reg=0;
 					return;
@@ -226,23 +209,42 @@ public class TDS {
 		}
 		
 		if(ast.getText().equals("VAR") && !ast.getChild(0).getText().equals("ARRAY"))
-		{
+		{  
 			String type=ast.getChild(0).getText();
-			System.out.println("variable(s) trouvée(s)");
-			System.out.print("type: "+type+" ");
 			for(int j=1;j<ast.getChildCount();j++)
 			{
 			 String id=ast.getChild(j).getText();
-			System.out.print("id: "+id+" ");
-			l.add(new Symbole(id,"variable",type,-1,region,prof,depl,null));
-			System.out.print(" depl: "+depl+" ");
-			depl++;
+			 l.add(new Symbole(id,"variable",type,-1,region,prof,depl,null));
+			 depl++;
 			}
-			System.out.print("profondeur: "+prof);
-			System.out.print(" region: "+region);
-			System.out.print("\n\n");
 			return;
 			
+		}
+		else if (ast.getText().equals("VAR") && ast.getChild(0).getText().equals("ARRAY"))
+		{
+			String type=ast.getChild(0).getText();
+			int dimen=ast.getChild(0).getChild(0).getChildCount();
+			Tree interval = ast.getChild(0).getChild(0);
+			Tableau tab = new Tableau();
+			tab.setDimension(dimen);
+			
+			for (int i=0;i<dimen;i++)
+			{
+				Tree Case = interval.getChild(i);
+				String a = Case.getChild(0).getText();
+				String b = Case.getChild(1).getText();
+				int a1 = Integer.parseInt(a);
+				int b1 = Integer.parseInt(b);
+				int[] bounds = {a1,b1};
+				tab.getBounds().add(bounds);
+			}
+			for(int j=1;j<ast.getChildCount();j++)
+			{
+			    String id=ast.getChild(j).getText();
+			    l.add(new Symbole(id,"variable",type,-1,region,prof,depl,tab));
+			    depl++;
+			}
+			return;
 		}
 		else if(ast.getText().equals("FONCTION")||ast.getText().equals("PROCEDURE") )
 		{
@@ -261,7 +263,7 @@ public class TDS {
 		  if(child_i.getText().equals("FONCTION")||child_i.getText().equals("PROCEDURE"))
 		  {
 			  reg++;
-		  getSymboleVar(ast.getChild(i),prof,reg,l);
+		      getSymboleVar(ast.getChild(i),prof,reg,l);
 		  }
 		  else
 		  {
@@ -269,116 +271,8 @@ public class TDS {
 		  }
 		}
 		
-		
-		
-		return ;
+		 return ;
 		}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	public void getSymboleArray(Tree ast,int prof,int region,ArrayList<Symbole> l){
-		if(ast==null)
-		{
-			System.out.println("err");
-			return ;
-		}
-		if(ast.getChildCount()==0)
-		{
-			//System.out.println("feuille");
-			return;
-		}
-		//System.out.print("etiquette : "+ast.getText()+" prof= "+prof+" \n");
-		if(ast.getText().equals("do"))
-		{
-			for(int i=0;i<ast.getChildCount();i++)
-			{
-				
-				if(ast.getChild(i).getText().equals("DECLARATION"))
-				{
-					System.out.println("fils declaration");
-					getSymboleArray(ast.getChild(i),prof,region,l);
-			
-					reg=0;
-				
-					
-				if(ast.getChild(i).getChild(0).getChild(0).getText().equals("ARRAY"))	
-				{  
-					Tree ast1=ast.getChild(i).getChild(0).getChild(0);
-				    String id=ast.getChild(i).getChild(0).getChild(1).getText();
-					System.out.println("Tableau trouvé");
-					System.out.print("id: "+id+" ");			
-										System.out.print(" depl: "+depl+" ");
-					depl++;
-					Tree ast2=ast1.getChild(0);
-					int k=ast2.getChildCount();
-					System.out.println("Tableau de dimension:"+k);
-					System.out.println("profondeur: "+prof);
-					System.out.println("region: "+region);
-					for (int p=0; p<k;p++){
-						int o=p+1;
-						Tree ast3=ast2.getChild(p);
-					System.out.println("Interval "+o+" Borne inferiure="+ast3.getChild(0).getText()+ " " +"Borne superieure="+ast3.getChild(1).getText());	
-				
-				Symbole T=new Symbole(id,"Array","arrayS",0,region,prof,depl,null);
-				
-					l.add(T);
-					}
-					return;
-					}
-				}
-					
-				
-				if(ast.getChild(i).getText().equals("INSTRUCTION"))
-				{
-					System.out.println("fils instruction");
-					getSymboleArray(ast.getChild(i),prof,region,l);
-					reg=0;
-				
-					if(ast.getChild(i).getChild(0).getChild(0).getText().equals("ARRAY"))	
-					{  
-						Tree ast1=ast.getChild(i).getChild(0).getChild(0);
-					    String id=ast.getChild(i).getChild(0).getChild(1).getText();
-						System.out.println("Tableau trouvé");
-						System.out.print("id: "+id+" ");			
-											System.out.print(" depl: "+depl+" ");
-						depl++;
-						Tree ast2=ast1.getChild(0);
-						int k=ast2.getChildCount();
-						System.out.println("Tableau de dimension:"+k);
-						System.out.println("profondeur: "+prof);
-						System.out.println("region: "+region);
-						for (int p=0; p<k;p++){
-							int o=p+1;
-							Tree ast3=ast2.getChild(p);
-						System.out.println("Interval "+o+" Borne inferiure="+ast3.getChild(0).getText()+ " " +"Borne superieure="+ast3.getChild(1).getText());	
-					    Symbole T=new Symbole(id,"Array","arrayS",0,region,prof,depl,null);
-					
-						l.add(T);
-						}
-						return;
-						}
-					}
-	
-		}
-		}
-	}
-	
-	
-	
-	
-	
-	
-	
 	
 
            	public void merge(ArrayList<Symbole> sym) 
@@ -387,7 +281,6 @@ public class TDS {
 			for (int i=0;i<sym.size();i++)
 			{
 				Symbole Symbolecourant = sym.get(i);
-				System.out.println(Symbolecourant.getNom()+"   "+Symbolecourant.getNumeroRegion());
 			    boolean ispresent=false;
 				for (int j=0;j<tdsFinal.getTDSparRegion().size();j++)
 				{
@@ -407,6 +300,7 @@ public class TDS {
 				}
 			}
 			System.out.println("\n\n");
+			tdsFinal.sort();
 			tdsFinal.display();
 	       }
 

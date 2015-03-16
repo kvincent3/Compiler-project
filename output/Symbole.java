@@ -24,6 +24,7 @@ public class Symbole {
 		this.parametre = parametre;
 		this.numeroRegion = numeroRegion;
 		this.numeroImbrication = numeroImbrication;
+		this.infotableau=a;
 		this.deplacement = deplacement;
 	}
     public void addSymboleParam(Symbole sym)

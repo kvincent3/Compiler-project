@@ -1,15 +1,13 @@
+import java.util.ArrayList;
+
 
 
 public class Tableau {
 	int dimension;
-	int bounds[];
-	 
-	
-	public Tableau(int dimension,int[] bounds){
+	ArrayList<int[]> bounds = new ArrayList<int[]>();
+	public Tableau()
+	{
 		
-		
-		this.dimension=dimension;
-		this.bounds=bounds;
 	}
 
 
@@ -23,13 +21,13 @@ public class Tableau {
 	}
 
 
-	public int[] getBounds() {
+	public ArrayList<int[]> getBounds(){
 		return bounds;
 	}
 
 
-	public void setBounds(int[] bounds) {
-		this.bounds = bounds;
+	public void addBounds(int[] bounds){
+		this.bounds.add(bounds);
 	}
 	
 

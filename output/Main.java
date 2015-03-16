@@ -41,7 +41,7 @@ public class Main {
         TDS tds = new TDS();
         tds.getSymboleFct2(ast,0,0,sym);
         tds.getSymboleVar(ast, 0,0, sym);
-        tds.getSymboleArray(ast, 0, 0, sym);
+        //tds.getSymboleArray(ast, 0, 0, sym);
         tds.merge(sym);
         //System.out.println(((Tree)result.tree).toStringTree());
         
