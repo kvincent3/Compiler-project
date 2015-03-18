@@ -40,10 +40,10 @@ dec_var     :  type    IDF (','   IDF)*->^(VAR type IDF+)
 type        : 		'integer'->^('integer')  
                         | 'boolean'->^('boolean')  
                         |  array ->^(array);
-dec_func    :  ent_func  (declaration )*  ( instruction)* 'end' ->^(ent_func ^(BLOC(declaration)* (instruction)+) 'end')
+dec_func    :  ent_func  (declaration )*  ( instruction)* 'end' ->^(ent_func ^(BLOC ^(DECLARATION ( declaration)*) ^(INSTRUCTION (instruction)+)) 'end')
 //^(ent_func (declaration)* (instruction)+ 'end)
 ;
-dec_proc    :  ent_proc  (declaration )*  ( instruction)* 'end' ->^(ent_proc ^(BLOC (declaration)* (instruction)+) 'end')
+dec_proc    :  ent_proc  (declaration )*  ( instruction)* 'end' ->^(ent_proc ^(BLOC  ^(DECLARATION ( declaration)*) ^(INSTRUCTION (instruction)+)) 'end')
 ;
 ent_func    : 'function'    type   IDF   param -> ^(FONCTION IDF type  param)
 ;
@@ -70,7 +70,7 @@ affectation:    IDF   '='   exp -> ^('=' IDF exp)
                 | IDF '[' exp4 (',' exp4 )* ']' '=' exp ->^('=' IDF  ^(CASE exp4+ ) ^(VAL exp) );
 exp4      
 	:	exp;
-iteration  :   'for'   IDF   'in'   exp   '..'   exp   'do'   ( instruction )+   'end'->^('for' IDF  exp  exp  ^(BLOC instruction*))   ;
+iteration  :   'for'   IDF   'in'   exp   '..'   exp   'do'   ( instruction )+   'end'->^('for' IDF  exp  exp  ^(INSTRUCTION instruction*))   ;
 condition  :   'if'   exp   'then'   ( instruction )+ ('else'   (instruction)+) ?   'fi' ->^('if' exp ^('then' instruction) ^('else' (instruction)+)?);
 retour     :   'return' '('   exp    ')'->^(RETOUR exp) ;
 read       :   'read'    IDF ->^(READ IDF);

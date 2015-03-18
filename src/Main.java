@@ -1,4 +1,5 @@
 import java.io.*;
+import java.util.ArrayList;
 
 import org.antlr.runtime.*;
 import org.antlr.runtime.debug.DebugEventSocketProxy;
@@ -36,7 +37,14 @@ public class Main {
         StringTemplate st = gen.toDOT(tree);
         System.out.println(st);*/
         ast = (CommonTree) result.getTree();
+        ArrayList<Symbole> sym = new ArrayList<Symbole>();
+        TDS tds = new TDS();
+        tds.getSymboleFct2(ast,0,0,sym);
+        tds.getSymboleVar(ast, 0,0, sym);
+        //tds.getSymboleArray(ast, 0, 0, sym);
+        tds.merge(sym);
         System.out.println(((Tree)result.tree).toStringTree());
+        
         
         
 	}
