@@ -49,7 +49,8 @@ public class TDS {
 		}
 		if(ast.getText().equals("do")){
 			for(int i=0;i<ast.getChildCount();i++){
-				if(ast.getChild(i).getText().equals("DECLARATION")){
+				if(ast.getChild(i).getText().equals("DECLARATION"))
+				{
 					getSymboleFct2(ast.getChild(i),0,0,table);
 				}
 			}
@@ -68,17 +69,17 @@ public class TDS {
 							String typeParam=ast.getChild(i).getChild(2).getChild(j).getChild(1).getText();
 							int regionFct2Param=regionFct+1;
 							int profParam=prof+1;
-							table.add(new Symbole(nomParam,"parametreV",typeParam,0,regionFct2Param,profParam,0,null));
+							table.add(new Symbole(nomParam,"parametreV",typeParam,-1,regionFct2Param,profParam,0,null));
 						}else{
 							String nomParam=ast.getChild(i).getChild(2).getChild(j).getChild(1).getText();
 							String typeParam=ast.getChild(i).getChild(2).getChild(j).getChild(2).getText();
 							int regionFct2Param=regionFct+1;
 							int profParam=prof+1;
-							table.add(new Symbole(nomParam,"parametreA",typeParam,0,regionFct2Param,profParam,0,null));
+							table.add(new Symbole(nomParam,"parametreA",typeParam,-1,regionFct2Param,profParam,0,null));
 						}
 					}
 					table.add(new Symbole(nom,"fonction",type,parametre,regionFct2,prof,-1,null));
-					getSymboleFct2(ast.getChild(i).getChild(3),prof+1,++regionFct,table);
+					getSymboleFct2(ast.getChild(i).getChild(3).getChild(0),prof+1,++regionFct,table);
 					
 				}
 				else if(ast.getChild(i).getText().equals("PROCEDURE")){
@@ -90,18 +91,18 @@ public class TDS {
 							String typeParam=ast.getChild(i).getChild(1).getChild(j).getChild(1).getText();
 							int regionFct2Param=regionFct+1;
 							int profParam=prof+1;
-							table.add(new Symbole(nomParam,"parametreV",typeParam,0,regionFct2Param,profParam,0,null));
+							table.add(new Symbole(nomParam,"parametreV",typeParam,-1,regionFct2Param,profParam,0,null));
 						}else{
 							String nomParam=ast.getChild(i).getChild(1).getChild(j).getChild(1).getText();
 							String typeParam=ast.getChild(i).getChild(1).getChild(j).getChild(2).getText();
 							int regionFct2Param=regionFct+1;
 							int profParam=prof+1;
-							table.add(new Symbole(nomParam,"parametreA",typeParam,0,regionFct2Param,profParam,0,null));
+							table.add(new Symbole(nomParam,"parametreA",typeParam,-1,regionFct2Param,profParam,0,null));
 						}
 
 					}
 					table.add(new Symbole(nom,"procedure",null,parametreProc,regionFct2,prof,-1,null));					
-					getSymboleFct2(ast.getChild(i).getChild(2),prof+1,++regionFct,table);
+					getSymboleFct2(ast.getChild(i).getChild(2).getChild(0),prof+1,++regionFct,table);
 					
 					//regionFct++;
 				}
@@ -112,68 +113,6 @@ public class TDS {
 			}
 		}
 	}
-	
-	void getSymboleFct(Tree ast,int prof, int regionFct,ArrayList<Symbole> table){
-		if(ast==null){
-			return;
-		}
-		if(ast.getText().equals("do")){
-			for(int i=0;i<ast.getChildCount();i++){
-				if(ast.getChild(i).getText().equals("DECLARATION")){
-					getSymboleFct(ast.getChild(i),0,0,table);
-				}
-			}
-		}
-		else{
-			boolean salut=false;
-			for(int i=0;i<ast.getChildCount();i++){
-				if(prof==0){
-					regionFct=0;
-					salut=true;
-				}
-				if(ast.getChild(i).getText().equals("FONCTION")){
-					/*if(ast.getText().equals("DECLARATION")){
-					}
-					else if(regionFct<regionRef){
-						regionFct=regionRef+1;
-					}*/
-					String nom=ast.getChild(i).getChild(0).getText();
-					String type=ast.getChild(i).getChild(1).getText();
-					int parametre = ast.getChild(i).getChild(2).getChildCount();
-					table.add(new Symbole(nom,"fonction",type,parametre,0,prof,regionFct,null));
-					if(regionFct>regionRef){
-						regionRef=regionFct+1;
-					}
-					if(salut){
-						regionFct=regionRef;
-					}
-					
-					getSymboleFct(ast.getChild(i).getChild(3),prof+1,regionFct+1,table);
-				}
-				else if(ast.getChild(i).getText().equals("PROCEDURE")){
-					String nom=ast.getChild(i).getChild(0).getText();
-					System.out.println("procedure: "+nom+" "+" prof: "+prof+" "+" region : "+regionFct);
-					table.add(new Symbole(nom,"procedure",null,0,0,prof,regionFct,null));
-
-
-					if(regionFct>regionRef){
-						regionRef=regionFct+1;
-					}
-					if(salut){
-						regionFct=regionRef;
-					}
-					getSymboleFct(ast.getChild(i).getChild(2),prof+1,regionFct+1,table);
-				
-				}
-				else{
-					getSymboleFct(ast.getChild(i),prof+1,regionFct+1,table);
-				}	
-
-			}
-		}
-	}
-	
-	
 	
 	
 	

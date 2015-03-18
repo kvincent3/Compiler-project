@@ -43,7 +43,7 @@ public class Main {
         tds.getSymboleVar(ast, 0,0, sym);
         //tds.getSymboleArray(ast, 0, 0, sym);
         tds.merge(sym);
-        //System.out.println(((Tree)result.tree).toStringTree());
+        System.out.println(((Tree)result.tree).toStringTree());
         
         
         
