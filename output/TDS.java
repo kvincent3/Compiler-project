@@ -10,14 +10,15 @@ public class TDS {
 	int regionRef=0;
 	int regiontds;
 	int regionFct;
+	ArrayList<Integer> depList=new ArrayList<Integer>();
 	ArrayList<Symbole> symboles = new ArrayList<Symbole>();
 	ArrayList<TDS> tds = new ArrayList<TDS>();
 	
 	int reg=0;
-	int depl=0;
+	
 
 	public TDS(){
-		
+		depList.add(0);
 	}
 	
 	public TDS(int regiontds) 
@@ -153,9 +154,11 @@ public class TDS {
 			for(int j=1;j<ast.getChildCount();j++)
 			{
 			 String id=ast.getChild(j).getText();
-			 l.add(new Symbole(id,"variable",type,-1,region,prof,depl,null));
-			 depl++;
+			 l.add(new Symbole(id,"variable",type,-1,region,prof,depList.get(region)+j-1,null));
+			
 			}
+			depList.set(region,depList.get(region)+ast.getChildCount()-1);
+			
 			return;
 			
 		}
@@ -180,17 +183,19 @@ public class TDS {
 			for(int j=1;j<ast.getChildCount();j++)
 			{
 			    String id=ast.getChild(j).getText();
-			    l.add(new Symbole(id,"variable",type,-1,region,prof,depl,tab));
-			    depl++;
+			    l.add(new Symbole(id,"variable",type,-1,region,prof,depList.get(region)+j-1,tab));
+			    
 			}
+			depList.set(region,depList.get(region)+ast.getChildCount()-1);
 			return;
 		}
 		else if(ast.getText().equals("FONCTION")||ast.getText().equals("PROCEDURE") )
 		{
 			for(int i=0;i<ast.getChildCount();i++)
 			{
-			depl=0;
+			
 			getSymboleVar(ast.getChild(i),prof+1,region,l);
+		    
 			}
 			
 			return;
@@ -202,11 +207,15 @@ public class TDS {
 		  if(child_i.getText().equals("FONCTION")||child_i.getText().equals("PROCEDURE"))
 		  {
 			  reg++;
+			  depList.add(0);
+			 
 		      getSymboleVar(ast.getChild(i),prof,reg,l);
+		      //ltdpl=0;
 		  }
 		  else
 		  {
 			  getSymboleVar(ast.getChild(i),prof,region,l);
+			  
 		  }
 		}
 		
