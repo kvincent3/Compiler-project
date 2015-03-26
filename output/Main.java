@@ -1,5 +1,9 @@
 import java.io.*;
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Iterator;
+import java.util.List;
+import java.util.ListIterator;
 
 import org.antlr.runtime.*;
 import org.antlr.runtime.debug.DebugEventSocketProxy;
@@ -41,12 +45,12 @@ public class Main {
         TDS tds = new TDS();
         tds.getSymboleFct2(ast,0,0,sym);
         tds.getSymboleVar(ast, 0,0, sym);
+        TDSGlobal tteTds= tds.merge(sym);
         //tds.getSymboleArray(ast, 0, 0, sym);
-        tds.merge(sym);
-        System.out.println(((Tree)result.tree).toStringTree());
-        
-        
-        
+        //tteTds.addNoExistTDS();
+        Pro pile = new Pro(tteTds.addNoExistTDS());
+        pile.doPro(ast,0);
+        pile.displayPRO();
 	}
 
 }

@@ -1,0 +1,40 @@
+
+Donc lorsque l'on instancie la classe PRO, après avoir appliqué la fonction doPRO (cf classe main ) on pt récupéré la pile des region de chaque region avec la fonction getPile().
+
+Ainsi si l'on fait getPile().get(5) on obtient a pile des regions ouvertes de la region et cette pile est une arraylist<Integer> ainsi pour parcourir la pile des régions ouvertes de la région 5 il
+
+faut faire getPile().get(5).get(i).
+
+
+Répartition des tâches
+
+
+jerome -> -Taille de tableau incorrecte (autre chose qu'un entier)
+          -tableau avec appel de fonction par exemple
+           T[fmax(5,2)] -> verication du type de la fonction
+          -de même avec les variables ex: T[a]
+          -verification de la dimension du tableau 
+          ex : si le tableau est de dimension 2 on ne pt pas faire T[1]
+	  -Nombre incorrect de valeurs lors de l'initialisation d'un tableau
+          -chercher d'autres analyses sémantiques sur les tableaux
+
+ansa ->  Nombre d'arguments lors de l'appel d'une fonction
+         Contrôle des types passés à l'appel d'une fonction (attention on peut aussi passer des fonctions à des fonctions)
+         on ne peut pas déclarer deux mêmes fonctions dans la même région
+	 Retour incorrect d'une fonction
+ 	 Fonction appelée inexistante dans la pile de contextes
+
+
+oussama -> -Mauvaise assignation dans la définition d'une boucle for (min et max sont entiers)
+           -verification des expressions lors de la boucle for (pas forcément des entiers mais aussi des variables)
+	   -verifications des expressions pour le if (attention relire le projet compile pour bien comprendre la sémantiques) (plusieurs choses à faire pour le if)
+
+
+kevin -> Variable accédée inexistante dans la pile de contextes
+         Variable accédée alors qu'elle n'a pas été initialisée
+	 Utilisation d'autre chose qu'un entier dans une opération arithmétique
+	 Tentative de redéfinition d'une variable/tableau/fonction dans un même contexte
+         Avertissement si la définition d'une variable/tableau/fonction surcharge un autre symbole défini dans un contexte plus profond
+
+
+Voilà allez on bosse !!!!!!!!!!

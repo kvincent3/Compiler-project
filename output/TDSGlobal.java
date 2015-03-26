@@ -85,4 +85,50 @@ public class TDSGlobal {
 			}
 
 	}
+
+	public TDSGlobal addNoExistTDS() 
+	{
+		int max=this.TDSparRegion.get(this.TDSparRegion.size()-1).getregion();
+		System.out.println("===========>"+max);
+		TDSGlobal tdsFin = new TDSGlobal();
+		ArrayList<TDS> TDSfinal = new ArrayList<TDS>();
+		for (int i=0;i<=max;i++)
+		{
+			if (Ispresent(i))
+			{
+				for (int v=0;v<this.TDSparRegion.size();v++)
+				{
+					if (this.TDSparRegion.get(v).getregion()==i)
+					{
+						TDSfinal.add(this.TDSparRegion.get(v));
+						v=this.TDSparRegion.size();
+					}
+				}
+				
+			}
+			else
+			{
+				TDSfinal.add(new TDS(i));
+			}
+		}
+		tdsFin.setTDSparRegion(TDSfinal);
+		tdsFin.display();
+		return tdsFin;
+	}
+	
+	
+
+	private boolean Ispresent(int region) 
+	{
+		// TODO Auto-generated method stub
+		boolean res = false;
+		for (int in = 0;in<this.TDSparRegion.size();in++)
+		{
+			if (this.TDSparRegion.get(in).getregion() == region)
+			{
+				res =true;
+			}
+		}
+		return res;
+	}
 }

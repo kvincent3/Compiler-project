@@ -38,7 +38,7 @@ public class TDS {
 	{
 		return this.symboles;
 	}
-
+	
 	public int getregion()
 	{
 		return regiontds;
@@ -223,9 +223,11 @@ public class TDS {
 		}
 	
 
-           	public void merge(ArrayList<Symbole> sym) 
+           	public TDSGlobal merge(ArrayList<Symbole> sym) 
 		{
 			TDSGlobal tdsFinal = new TDSGlobal();
+			TDSGlobal tdsFinal2 = new TDSGlobal();
+			
 			for (int i=0;i<sym.size();i++)
 			{
 				Symbole Symbolecourant = sym.get(i);
@@ -250,6 +252,7 @@ public class TDS {
 			System.out.println("\n\n");
 			tdsFinal.sort();
 			tdsFinal.display();
+			return tdsFinal;
 	       }
 
 	}
