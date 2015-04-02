@@ -47,10 +47,12 @@ public class Main {
         tds.getSymboleVar(ast, 0,0, sym);
         TDSGlobal tteTds= tds.merge(sym);
         //tds.getSymboleArray(ast, 0, 0, sym);
-        //tteTds.addNoExistTDS();
-        Pro pile = new Pro(tteTds.addNoExistTDS());
+        tteTds.addNoExistTDS(ast);
+        Pro pile = new Pro(tteTds.addNoExistTDS(ast));
         pile.doPro(ast,0);
         pile.displayPRO();
+        //Semantic controle = new Semantic(pile, tteTds);
+        //controle.CheckVisibilityVariable(ast, 0);
 	}
 
 }

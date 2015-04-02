@@ -1,5 +1,7 @@
 import java.util.ArrayList;
 
+import org.antlr.runtime.tree.Tree;
+
 
 public class TDSGlobal {
 	ArrayList<TDS> TDSparRegion = new ArrayList<TDS>();
@@ -85,14 +87,16 @@ public class TDSGlobal {
 			}
 
 	}
-
-	public TDSGlobal addNoExistTDS() 
+ 
+	public TDSGlobal addNoExistTDS(Tree ast) 
 	{
-		int max=this.TDSparRegion.get(this.TDSparRegion.size()-1).getregion();
+		
+		
+		int max = this.CountRegion(ast);
 		System.out.println("===========>"+max);
 		TDSGlobal tdsFin = new TDSGlobal();
 		ArrayList<TDS> TDSfinal = new ArrayList<TDS>();
-		for (int i=0;i<=max;i++)
+		for (int i=0;i<max;i++)
 		{
 			if (Ispresent(i))
 			{
@@ -114,10 +118,25 @@ public class TDSGlobal {
 		tdsFin.setTDSparRegion(TDSfinal);
 		tdsFin.display();
 		return tdsFin;
+		
 	}
-	
-	
 
+   
+	private int CountRegion(Tree ast)
+    {
+		int sum=0;
+        for (int i=0 ;i <ast.getChild(0).getChildCount();i++)
+        {
+        	if (ast.getChild(0).getChild(i).getText().equals("FONCTION")
+        		|| ast.getChild(0).getChild(i).getText().equals("PROCEDURE"))
+        	{
+        		sum=sum+Pro.calculNbr(ast.getChild(0).getChild(i))+1;
+        	}
+        }
+        return sum+1;
+    }
+    
+    
 	private boolean Ispresent(int region) 
 	{
 		// TODO Auto-generated method stub

@@ -33,19 +33,17 @@ public class Pro
 		ArrayList<Integer> enregistrementDernier = new ArrayList<Integer>();		
 		for (int i=0;i<ast.getChildCount();i++)
 		{
-			if (ast.getChild(i).getText().equals("FONCTION")
+			if (   ast.getChild(i).getText().equals("FONCTION")
 				|| ast.getChild(i).getText().equals("PROCEDURE") )
 			{   
 				if (compteur==0)
 				{
 				  regCour= region+1;
-				  System.out.println(regCour);
 				  dernier=i;
 			    }
 				else
 				{
 				  regCour = getRegionCour(regCour,ast.getChild(dernier));
-				  System.out.println(regCour);
 				  dernier=i;
 				}
 				enregistrementRegion.add(regCour);
@@ -83,7 +81,7 @@ private void Inserte(ArrayList<ArrayList<Integer>> pile2, int regCour,int region
 
 private int getRegionCour(int regCour, Tree child) {
 	// TODO Auto-generated method stub
-	int a = regCour+calculNbr(child,0)+1;
+	int a = regCour+calculNbr(child)+1;
 	return a;
 }
 
@@ -105,7 +103,8 @@ public ArrayList<ArrayList<Integer>> getPile()
 	return this.pile;
 }
 
-public int calculNbr(Tree ast,int increment) 
+
+public static int calculNbr(Tree ast) 
 {
 	// TODO Auto-generated method stub
 	for (int i=0;i<ast.getChildCount();i++)
@@ -118,13 +117,13 @@ public int calculNbr(Tree ast,int increment)
 					ast.getChild(i).getChild(0).getChild(j).getText().equals("PROCEDURE"))
 				{
 					
-					calculNbr(ast.getChild(i).getChild(0).getChild(j),increment++);
+					return 1+calculNbr(ast.getChild(i).getChild(0).getChild(j));
 				}
 			}
 		}
 	}
 	
-	return increment;
+	return 0;
 }
   
   

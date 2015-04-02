@@ -1,4 +1,4 @@
-// $ANTLR 3.2 Sep 23, 2009 12:02:23 /home/vincent/Bureau/comp.g 2015-03-18 19:52:14
+// $ANTLR 3.2 Sep 23, 2009 12:02:23 /home/vincent/Bureau/comp.g 2015-04-02 16:56:52
 
 import org.antlr.runtime.*;
 import java.util.Stack;
@@ -199,7 +199,7 @@ public class compParser extends Parser {
 
 
             // AST REWRITE
-            // elements: instruction, 31, 32, declaration
+            // elements: instruction, 32, 31, declaration
             // token labels: 
             // rule labels: retval
             // token list labels: 
@@ -495,7 +495,7 @@ public class compParser extends Parser {
 
 
             // AST REWRITE
-            // elements: IDF, type
+            // elements: type, IDF
             // token labels: 
             // rule labels: retval
             // token list labels: 
@@ -825,7 +825,7 @@ public class compParser extends Parser {
 
 
             // AST REWRITE
-            // elements: ent_func, 32, instruction, declaration
+            // elements: ent_func, instruction, declaration, 32
             // token labels: 
             // rule labels: retval
             // token list labels: 
@@ -1010,7 +1010,7 @@ public class compParser extends Parser {
 
 
             // AST REWRITE
-            // elements: instruction, declaration, 32, ent_proc
+            // elements: 32, instruction, declaration, ent_proc
             // token labels: 
             // rule labels: retval
             // token list labels: 
@@ -1144,7 +1144,7 @@ public class compParser extends Parser {
 
 
             // AST REWRITE
-            // elements: param, type, IDF
+            // elements: IDF, param, type
             // token labels: 
             // rule labels: retval
             // token list labels: 
@@ -1233,7 +1233,7 @@ public class compParser extends Parser {
 
 
             // AST REWRITE
-            // elements: param, IDF
+            // elements: IDF, param
             // token labels: 
             // rule labels: retval
             // token list labels: 
@@ -2459,7 +2459,7 @@ public class compParser extends Parser {
 
 
                     // AST REWRITE
-                    // elements: exp, 45, IDF
+                    // elements: 45, IDF, exp
                     // token labels: 
                     // rule labels: retval
                     // token list labels: 
@@ -2550,7 +2550,7 @@ public class compParser extends Parser {
 
 
                     // AST REWRITE
-                    // elements: exp4, IDF, 45, exp
+                    // elements: 45, exp, IDF, exp4
                     // token labels: 
                     // rule labels: retval
                     // token list labels: 
@@ -2784,7 +2784,7 @@ public class compParser extends Parser {
 
 
             // AST REWRITE
-            // elements: exp, exp, instruction, 46, IDF
+            // elements: 46, exp, instruction, exp, IDF
             // token labels: 
             // rule labels: retval
             // token list labels: 
@@ -2991,7 +2991,7 @@ public class compParser extends Parser {
 
 
             // AST REWRITE
-            // elements: instruction, 48, instruction, exp, 50, 49
+            // elements: instruction, 49, instruction, exp, 50, 48
             // token labels: 
             // rule labels: retval
             // token list labels: 
@@ -3399,7 +3399,7 @@ public class compParser extends Parser {
     };
 
     // $ANTLR start "exp"
-    // /home/vincent/Bureau/comp.g:80:2: exp : ( plus ( ( '+' | '-' ) plus )* | 'true' | 'false' | exp2 );
+    // /home/vincent/Bureau/comp.g:80:2: exp : ( plus ( ( '+' | '-' ) plus )* | 'true' | 'false' );
     public final compParser.exp_return exp() throws RecognitionException {
         compParser.exp_return retval = new compParser.exp_return();
         retval.start = input.LT(1);
@@ -3413,40 +3413,21 @@ public class compParser extends Parser {
 
         compParser.plus_return plus108 = null;
 
-        compParser.exp2_return exp2111 = null;
-
 
         CommonTree set107_tree=null;
         CommonTree string_literal109_tree=null;
         CommonTree string_literal110_tree=null;
 
         try {
-            // /home/vincent/Bureau/comp.g:80:9: ( plus ( ( '+' | '-' ) plus )* | 'true' | 'false' | exp2 )
-            int alt27=4;
+            // /home/vincent/Bureau/comp.g:80:9: ( plus ( ( '+' | '-' ) plus )* | 'true' | 'false' )
+            int alt27=3;
             switch ( input.LA(1) ) {
+            case IDF:
             case CST_ENT:
             case 40:
             case 54:
                 {
                 alt27=1;
-                }
-                break;
-            case IDF:
-                {
-                int LA27_2 = input.LA(2);
-
-                if ( (LA27_2==37||LA27_2==40) ) {
-                    alt27=4;
-                }
-                else if ( ((LA27_2>=READ && LA27_2<=WRITE)||LA27_2==IDF||(LA27_2>=31 && LA27_2<=33)||(LA27_2>=38 && LA27_2<=39)||LA27_2==41||LA27_2==44||LA27_2==46||(LA27_2>=48 && LA27_2<=54)||(LA27_2>=57 && LA27_2<=64)) ) {
-                    alt27=1;
-                }
-                else {
-                    NoViableAltException nvae =
-                        new NoViableAltException("", 27, 2, input);
-
-                    throw nvae;
-                }
                 }
                 break;
             case 55:
@@ -3547,20 +3528,6 @@ public class compParser extends Parser {
 
                     }
                     break;
-                case 4 :
-                    // /home/vincent/Bureau/comp.g:83:12: exp2
-                    {
-                    root_0 = (CommonTree)adaptor.nil();
-
-                    pushFollow(FOLLOW_exp2_in_exp1287);
-                    exp2111=exp2();
-
-                    state._fsp--;
-
-                    adaptor.addChild(root_0, exp2111.getTree());
-
-                    }
-                    break;
 
             }
             retval.stop = input.LT(-1);
@@ -3594,31 +3561,31 @@ public class compParser extends Parser {
 
         CommonTree root_0 = null;
 
-        Token IDF112=null;
-        Token char_literal113=null;
-        Token char_literal115=null;
-        Token char_literal117=null;
-        Token IDF118=null;
-        Token char_literal119=null;
-        Token char_literal121=null;
-        Token char_literal123=null;
-        compParser.exp_return exp114 = null;
+        Token IDF111=null;
+        Token char_literal112=null;
+        Token char_literal114=null;
+        Token char_literal116=null;
+        Token IDF117=null;
+        Token char_literal118=null;
+        Token char_literal120=null;
+        Token char_literal122=null;
+        compParser.exp_return exp113 = null;
 
-        compParser.exp_return exp116 = null;
+        compParser.exp_return exp115 = null;
 
-        compParser.exp_return exp120 = null;
+        compParser.exp_return exp119 = null;
 
-        compParser.exp_return exp122 = null;
+        compParser.exp_return exp121 = null;
 
 
-        CommonTree IDF112_tree=null;
-        CommonTree char_literal113_tree=null;
-        CommonTree char_literal115_tree=null;
-        CommonTree char_literal117_tree=null;
-        CommonTree IDF118_tree=null;
-        CommonTree char_literal119_tree=null;
-        CommonTree char_literal121_tree=null;
-        CommonTree char_literal123_tree=null;
+        CommonTree IDF111_tree=null;
+        CommonTree char_literal112_tree=null;
+        CommonTree char_literal114_tree=null;
+        CommonTree char_literal116_tree=null;
+        CommonTree IDF117_tree=null;
+        CommonTree char_literal118_tree=null;
+        CommonTree char_literal120_tree=null;
+        CommonTree char_literal122_tree=null;
         RewriteRuleTokenStream stream_41=new RewriteRuleTokenStream(adaptor,"token 41");
         RewriteRuleTokenStream stream_IDF=new RewriteRuleTokenStream(adaptor,"token IDF");
         RewriteRuleTokenStream stream_40=new RewriteRuleTokenStream(adaptor,"token 40");
@@ -3657,11 +3624,11 @@ public class compParser extends Parser {
                 case 1 :
                     // /home/vincent/Bureau/comp.g:84:17: IDF '(' ( exp ( ',' exp )* )? ')'
                     {
-                    IDF112=(Token)match(input,IDF,FOLLOW_IDF_in_exp21303);  
-                    stream_IDF.add(IDF112);
+                    IDF111=(Token)match(input,IDF,FOLLOW_IDF_in_exp21300);  
+                    stream_IDF.add(IDF111);
 
-                    char_literal113=(Token)match(input,40,FOLLOW_40_in_exp21305);  
-                    stream_40.add(char_literal113);
+                    char_literal112=(Token)match(input,40,FOLLOW_40_in_exp21302);  
+                    stream_40.add(char_literal112);
 
                     // /home/vincent/Bureau/comp.g:84:25: ( exp ( ',' exp )* )?
                     int alt29=2;
@@ -3674,12 +3641,12 @@ public class compParser extends Parser {
                         case 1 :
                             // /home/vincent/Bureau/comp.g:84:26: exp ( ',' exp )*
                             {
-                            pushFollow(FOLLOW_exp_in_exp21308);
-                            exp114=exp();
+                            pushFollow(FOLLOW_exp_in_exp21305);
+                            exp113=exp();
 
                             state._fsp--;
 
-                            stream_exp.add(exp114.getTree());
+                            stream_exp.add(exp113.getTree());
                             // /home/vincent/Bureau/comp.g:84:30: ( ',' exp )*
                             loop28:
                             do {
@@ -3695,15 +3662,15 @@ public class compParser extends Parser {
                             	case 1 :
                             	    // /home/vincent/Bureau/comp.g:84:31: ',' exp
                             	    {
-                            	    char_literal115=(Token)match(input,33,FOLLOW_33_in_exp21311);  
-                            	    stream_33.add(char_literal115);
+                            	    char_literal114=(Token)match(input,33,FOLLOW_33_in_exp21308);  
+                            	    stream_33.add(char_literal114);
 
-                            	    pushFollow(FOLLOW_exp_in_exp21313);
-                            	    exp116=exp();
+                            	    pushFollow(FOLLOW_exp_in_exp21310);
+                            	    exp115=exp();
 
                             	    state._fsp--;
 
-                            	    stream_exp.add(exp116.getTree());
+                            	    stream_exp.add(exp115.getTree());
 
                             	    }
                             	    break;
@@ -3719,8 +3686,8 @@ public class compParser extends Parser {
 
                     }
 
-                    char_literal117=(Token)match(input,41,FOLLOW_41_in_exp21320);  
-                    stream_41.add(char_literal117);
+                    char_literal116=(Token)match(input,41,FOLLOW_41_in_exp21317);  
+                    stream_41.add(char_literal116);
 
 
 
@@ -3761,18 +3728,18 @@ public class compParser extends Parser {
                 case 2 :
                     // /home/vincent/Bureau/comp.g:85:18: IDF '[' exp ( ',' exp )* ']'
                     {
-                    IDF118=(Token)match(input,IDF,FOLLOW_IDF_in_exp21348);  
-                    stream_IDF.add(IDF118);
+                    IDF117=(Token)match(input,IDF,FOLLOW_IDF_in_exp21345);  
+                    stream_IDF.add(IDF117);
 
-                    char_literal119=(Token)match(input,37,FOLLOW_37_in_exp21350);  
-                    stream_37.add(char_literal119);
+                    char_literal118=(Token)match(input,37,FOLLOW_37_in_exp21347);  
+                    stream_37.add(char_literal118);
 
-                    pushFollow(FOLLOW_exp_in_exp21352);
-                    exp120=exp();
+                    pushFollow(FOLLOW_exp_in_exp21349);
+                    exp119=exp();
 
                     state._fsp--;
 
-                    stream_exp.add(exp120.getTree());
+                    stream_exp.add(exp119.getTree());
                     // /home/vincent/Bureau/comp.g:85:30: ( ',' exp )*
                     loop30:
                     do {
@@ -3788,15 +3755,15 @@ public class compParser extends Parser {
                     	case 1 :
                     	    // /home/vincent/Bureau/comp.g:85:31: ',' exp
                     	    {
-                    	    char_literal121=(Token)match(input,33,FOLLOW_33_in_exp21355);  
-                    	    stream_33.add(char_literal121);
+                    	    char_literal120=(Token)match(input,33,FOLLOW_33_in_exp21352);  
+                    	    stream_33.add(char_literal120);
 
-                    	    pushFollow(FOLLOW_exp_in_exp21357);
-                    	    exp122=exp();
+                    	    pushFollow(FOLLOW_exp_in_exp21354);
+                    	    exp121=exp();
 
                     	    state._fsp--;
 
-                    	    stream_exp.add(exp122.getTree());
+                    	    stream_exp.add(exp121.getTree());
 
                     	    }
                     	    break;
@@ -3806,13 +3773,13 @@ public class compParser extends Parser {
                         }
                     } while (true);
 
-                    char_literal123=(Token)match(input,38,FOLLOW_38_in_exp21362);  
-                    stream_38.add(char_literal123);
+                    char_literal122=(Token)match(input,38,FOLLOW_38_in_exp21359);  
+                    stream_38.add(char_literal122);
 
 
 
                     // AST REWRITE
-                    // elements: IDF, exp
+                    // elements: exp, IDF
                     // token labels: 
                     // rule labels: retval
                     // token list labels: 
@@ -3888,13 +3855,13 @@ public class compParser extends Parser {
 
         CommonTree root_0 = null;
 
-        Token set125=null;
-        compParser.fois_return fois124 = null;
+        Token set124=null;
+        compParser.fois_return fois123 = null;
 
-        compParser.fois_return fois126 = null;
+        compParser.fois_return fois125 = null;
 
 
-        CommonTree set125_tree=null;
+        CommonTree set124_tree=null;
 
         try {
             // /home/vincent/Bureau/comp.g:87:12: ( fois ( ( '*' | '/' ) fois )* )
@@ -3902,12 +3869,12 @@ public class compParser extends Parser {
             {
             root_0 = (CommonTree)adaptor.nil();
 
-            pushFollow(FOLLOW_fois_in_plus1407);
-            fois124=fois();
+            pushFollow(FOLLOW_fois_in_plus1404);
+            fois123=fois();
 
             state._fsp--;
 
-            adaptor.addChild(root_0, fois124.getTree());
+            adaptor.addChild(root_0, fois123.getTree());
             // /home/vincent/Bureau/comp.g:87:21: ( ( '*' | '/' ) fois )*
             loop32:
             do {
@@ -3923,11 +3890,11 @@ public class compParser extends Parser {
             	case 1 :
             	    // /home/vincent/Bureau/comp.g:87:23: ( '*' | '/' ) fois
             	    {
-            	    set125=(Token)input.LT(1);
-            	    set125=(Token)input.LT(1);
+            	    set124=(Token)input.LT(1);
+            	    set124=(Token)input.LT(1);
             	    if ( (input.LA(1)>=57 && input.LA(1)<=58) ) {
             	        input.consume();
-            	        root_0 = (CommonTree)adaptor.becomeRoot((CommonTree)adaptor.create(set125), root_0);
+            	        root_0 = (CommonTree)adaptor.becomeRoot((CommonTree)adaptor.create(set124), root_0);
             	        state.errorRecovery=false;
             	    }
             	    else {
@@ -3935,12 +3902,12 @@ public class compParser extends Parser {
             	        throw mse;
             	    }
 
-            	    pushFollow(FOLLOW_fois_in_plus1418);
-            	    fois126=fois();
+            	    pushFollow(FOLLOW_fois_in_plus1415);
+            	    fois125=fois();
 
             	    state._fsp--;
 
-            	    adaptor.addChild(root_0, fois126.getTree());
+            	    adaptor.addChild(root_0, fois125.getTree());
 
             	    }
             	    break;
@@ -3984,23 +3951,23 @@ public class compParser extends Parser {
 
         CommonTree root_0 = null;
 
+        Token string_literal127=null;
         Token string_literal128=null;
         Token string_literal129=null;
         Token string_literal130=null;
-        Token string_literal131=null;
+        Token char_literal131=null;
         Token char_literal132=null;
-        Token char_literal133=null;
-        compParser.atom_return atom127 = null;
+        compParser.atom_return atom126 = null;
 
-        compParser.atom_return atom134 = null;
+        compParser.atom_return atom133 = null;
 
 
+        CommonTree string_literal127_tree=null;
         CommonTree string_literal128_tree=null;
         CommonTree string_literal129_tree=null;
         CommonTree string_literal130_tree=null;
-        CommonTree string_literal131_tree=null;
+        CommonTree char_literal131_tree=null;
         CommonTree char_literal132_tree=null;
-        CommonTree char_literal133_tree=null;
 
         try {
             // /home/vincent/Bureau/comp.g:88:12: ( atom ( ( '==' | '!=' | '<=' | '>=' | '<' | '>' ) atom )* )
@@ -4008,12 +3975,12 @@ public class compParser extends Parser {
             {
             root_0 = (CommonTree)adaptor.nil();
 
-            pushFollow(FOLLOW_atom_in_fois1435);
-            atom127=atom();
+            pushFollow(FOLLOW_atom_in_fois1432);
+            atom126=atom();
 
             state._fsp--;
 
-            adaptor.addChild(root_0, atom127.getTree());
+            adaptor.addChild(root_0, atom126.getTree());
             // /home/vincent/Bureau/comp.g:88:21: ( ( '==' | '!=' | '<=' | '>=' | '<' | '>' ) atom )*
             loop34:
             do {
@@ -4073,9 +4040,9 @@ public class compParser extends Parser {
             	        case 1 :
             	            // /home/vincent/Bureau/comp.g:88:25: '=='
             	            {
-            	            string_literal128=(Token)match(input,59,FOLLOW_59_in_fois1441); 
-            	            string_literal128_tree = (CommonTree)adaptor.create(string_literal128);
-            	            root_0 = (CommonTree)adaptor.becomeRoot(string_literal128_tree, root_0);
+            	            string_literal127=(Token)match(input,59,FOLLOW_59_in_fois1438); 
+            	            string_literal127_tree = (CommonTree)adaptor.create(string_literal127);
+            	            root_0 = (CommonTree)adaptor.becomeRoot(string_literal127_tree, root_0);
 
 
             	            }
@@ -4083,9 +4050,9 @@ public class compParser extends Parser {
             	        case 2 :
             	            // /home/vincent/Bureau/comp.g:88:33: '!='
             	            {
-            	            string_literal129=(Token)match(input,60,FOLLOW_60_in_fois1446); 
-            	            string_literal129_tree = (CommonTree)adaptor.create(string_literal129);
-            	            root_0 = (CommonTree)adaptor.becomeRoot(string_literal129_tree, root_0);
+            	            string_literal128=(Token)match(input,60,FOLLOW_60_in_fois1443); 
+            	            string_literal128_tree = (CommonTree)adaptor.create(string_literal128);
+            	            root_0 = (CommonTree)adaptor.becomeRoot(string_literal128_tree, root_0);
 
 
             	            }
@@ -4093,9 +4060,9 @@ public class compParser extends Parser {
             	        case 3 :
             	            // /home/vincent/Bureau/comp.g:88:41: '<='
             	            {
-            	            string_literal130=(Token)match(input,61,FOLLOW_61_in_fois1451); 
-            	            string_literal130_tree = (CommonTree)adaptor.create(string_literal130);
-            	            root_0 = (CommonTree)adaptor.becomeRoot(string_literal130_tree, root_0);
+            	            string_literal129=(Token)match(input,61,FOLLOW_61_in_fois1448); 
+            	            string_literal129_tree = (CommonTree)adaptor.create(string_literal129);
+            	            root_0 = (CommonTree)adaptor.becomeRoot(string_literal129_tree, root_0);
 
 
             	            }
@@ -4103,9 +4070,9 @@ public class compParser extends Parser {
             	        case 4 :
             	            // /home/vincent/Bureau/comp.g:88:49: '>='
             	            {
-            	            string_literal131=(Token)match(input,62,FOLLOW_62_in_fois1456); 
-            	            string_literal131_tree = (CommonTree)adaptor.create(string_literal131);
-            	            root_0 = (CommonTree)adaptor.becomeRoot(string_literal131_tree, root_0);
+            	            string_literal130=(Token)match(input,62,FOLLOW_62_in_fois1453); 
+            	            string_literal130_tree = (CommonTree)adaptor.create(string_literal130);
+            	            root_0 = (CommonTree)adaptor.becomeRoot(string_literal130_tree, root_0);
 
 
             	            }
@@ -4113,9 +4080,9 @@ public class compParser extends Parser {
             	        case 5 :
             	            // /home/vincent/Bureau/comp.g:88:57: '<'
             	            {
-            	            char_literal132=(Token)match(input,63,FOLLOW_63_in_fois1461); 
-            	            char_literal132_tree = (CommonTree)adaptor.create(char_literal132);
-            	            root_0 = (CommonTree)adaptor.becomeRoot(char_literal132_tree, root_0);
+            	            char_literal131=(Token)match(input,63,FOLLOW_63_in_fois1458); 
+            	            char_literal131_tree = (CommonTree)adaptor.create(char_literal131);
+            	            root_0 = (CommonTree)adaptor.becomeRoot(char_literal131_tree, root_0);
 
 
             	            }
@@ -4123,9 +4090,9 @@ public class compParser extends Parser {
             	        case 6 :
             	            // /home/vincent/Bureau/comp.g:88:64: '>'
             	            {
-            	            char_literal133=(Token)match(input,64,FOLLOW_64_in_fois1466); 
-            	            char_literal133_tree = (CommonTree)adaptor.create(char_literal133);
-            	            root_0 = (CommonTree)adaptor.becomeRoot(char_literal133_tree, root_0);
+            	            char_literal132=(Token)match(input,64,FOLLOW_64_in_fois1463); 
+            	            char_literal132_tree = (CommonTree)adaptor.create(char_literal132);
+            	            root_0 = (CommonTree)adaptor.becomeRoot(char_literal132_tree, root_0);
 
 
             	            }
@@ -4133,12 +4100,12 @@ public class compParser extends Parser {
 
             	    }
 
-            	    pushFollow(FOLLOW_atom_in_fois1472);
-            	    atom134=atom();
+            	    pushFollow(FOLLOW_atom_in_fois1469);
+            	    atom133=atom();
 
             	    state._fsp--;
 
-            	    adaptor.addChild(root_0, atom134.getTree());
+            	    adaptor.addChild(root_0, atom133.getTree());
 
             	    }
             	    break;
@@ -4175,36 +4142,38 @@ public class compParser extends Parser {
     };
 
     // $ANTLR start "atom"
-    // /home/vincent/Bureau/comp.g:89:1: atom : ( CST_ENT | IDF | '(' exp ')' -> exp | '-' atom -> ^( '-' atom ) );
+    // /home/vincent/Bureau/comp.g:89:1: atom : ( CST_ENT | IDF | '(' exp ')' -> exp | '-' atom -> ^( '-' atom ) | exp2 );
     public final compParser.atom_return atom() throws RecognitionException {
         compParser.atom_return retval = new compParser.atom_return();
         retval.start = input.LT(1);
 
         CommonTree root_0 = null;
 
-        Token CST_ENT135=null;
-        Token IDF136=null;
-        Token char_literal137=null;
+        Token CST_ENT134=null;
+        Token IDF135=null;
+        Token char_literal136=null;
+        Token char_literal138=null;
         Token char_literal139=null;
-        Token char_literal140=null;
-        compParser.exp_return exp138 = null;
+        compParser.exp_return exp137 = null;
 
-        compParser.atom_return atom141 = null;
+        compParser.atom_return atom140 = null;
+
+        compParser.exp2_return exp2141 = null;
 
 
-        CommonTree CST_ENT135_tree=null;
-        CommonTree IDF136_tree=null;
-        CommonTree char_literal137_tree=null;
+        CommonTree CST_ENT134_tree=null;
+        CommonTree IDF135_tree=null;
+        CommonTree char_literal136_tree=null;
+        CommonTree char_literal138_tree=null;
         CommonTree char_literal139_tree=null;
-        CommonTree char_literal140_tree=null;
         RewriteRuleTokenStream stream_41=new RewriteRuleTokenStream(adaptor,"token 41");
         RewriteRuleTokenStream stream_40=new RewriteRuleTokenStream(adaptor,"token 40");
         RewriteRuleTokenStream stream_54=new RewriteRuleTokenStream(adaptor,"token 54");
         RewriteRuleSubtreeStream stream_atom=new RewriteRuleSubtreeStream(adaptor,"rule atom");
         RewriteRuleSubtreeStream stream_exp=new RewriteRuleSubtreeStream(adaptor,"rule exp");
         try {
-            // /home/vincent/Bureau/comp.g:89:12: ( CST_ENT | IDF | '(' exp ')' -> exp | '-' atom -> ^( '-' atom ) )
-            int alt35=4;
+            // /home/vincent/Bureau/comp.g:89:12: ( CST_ENT | IDF | '(' exp ')' -> exp | '-' atom -> ^( '-' atom ) | exp2 )
+            int alt35=5;
             switch ( input.LA(1) ) {
             case CST_ENT:
                 {
@@ -4213,7 +4182,20 @@ public class compParser extends Parser {
                 break;
             case IDF:
                 {
-                alt35=2;
+                int LA35_2 = input.LA(2);
+
+                if ( (LA35_2==37||LA35_2==40) ) {
+                    alt35=5;
+                }
+                else if ( ((LA35_2>=READ && LA35_2<=WRITE)||LA35_2==IDF||(LA35_2>=31 && LA35_2<=33)||(LA35_2>=38 && LA35_2<=39)||LA35_2==41||LA35_2==44||LA35_2==46||(LA35_2>=48 && LA35_2<=54)||(LA35_2>=57 && LA35_2<=64)) ) {
+                    alt35=2;
+                }
+                else {
+                    NoViableAltException nvae =
+                        new NoViableAltException("", 35, 2, input);
+
+                    throw nvae;
+                }
                 }
                 break;
             case 40:
@@ -4239,9 +4221,9 @@ public class compParser extends Parser {
                     {
                     root_0 = (CommonTree)adaptor.nil();
 
-                    CST_ENT135=(Token)match(input,CST_ENT,FOLLOW_CST_ENT_in_atom1490); 
-                    CST_ENT135_tree = (CommonTree)adaptor.create(CST_ENT135);
-                    adaptor.addChild(root_0, CST_ENT135_tree);
+                    CST_ENT134=(Token)match(input,CST_ENT,FOLLOW_CST_ENT_in_atom1487); 
+                    CST_ENT134_tree = (CommonTree)adaptor.create(CST_ENT134);
+                    adaptor.addChild(root_0, CST_ENT134_tree);
 
 
                     }
@@ -4251,9 +4233,9 @@ public class compParser extends Parser {
                     {
                     root_0 = (CommonTree)adaptor.nil();
 
-                    IDF136=(Token)match(input,IDF,FOLLOW_IDF_in_atom1497); 
-                    IDF136_tree = (CommonTree)adaptor.create(IDF136);
-                    adaptor.addChild(root_0, IDF136_tree);
+                    IDF135=(Token)match(input,IDF,FOLLOW_IDF_in_atom1494); 
+                    IDF135_tree = (CommonTree)adaptor.create(IDF135);
+                    adaptor.addChild(root_0, IDF135_tree);
 
 
                     }
@@ -4261,17 +4243,17 @@ public class compParser extends Parser {
                 case 3 :
                     // /home/vincent/Bureau/comp.g:91:5: '(' exp ')'
                     {
-                    char_literal137=(Token)match(input,40,FOLLOW_40_in_atom1504);  
-                    stream_40.add(char_literal137);
+                    char_literal136=(Token)match(input,40,FOLLOW_40_in_atom1501);  
+                    stream_40.add(char_literal136);
 
-                    pushFollow(FOLLOW_exp_in_atom1506);
-                    exp138=exp();
+                    pushFollow(FOLLOW_exp_in_atom1503);
+                    exp137=exp();
 
                     state._fsp--;
 
-                    stream_exp.add(exp138.getTree());
-                    char_literal139=(Token)match(input,41,FOLLOW_41_in_atom1508);  
-                    stream_41.add(char_literal139);
+                    stream_exp.add(exp137.getTree());
+                    char_literal138=(Token)match(input,41,FOLLOW_41_in_atom1505);  
+                    stream_41.add(char_literal138);
 
 
 
@@ -4298,19 +4280,19 @@ public class compParser extends Parser {
                 case 4 :
                     // /home/vincent/Bureau/comp.g:92:5: '-' atom
                     {
-                    char_literal140=(Token)match(input,54,FOLLOW_54_in_atom1518);  
-                    stream_54.add(char_literal140);
+                    char_literal139=(Token)match(input,54,FOLLOW_54_in_atom1515);  
+                    stream_54.add(char_literal139);
 
-                    pushFollow(FOLLOW_atom_in_atom1520);
-                    atom141=atom();
+                    pushFollow(FOLLOW_atom_in_atom1517);
+                    atom140=atom();
 
                     state._fsp--;
 
-                    stream_atom.add(atom141.getTree());
+                    stream_atom.add(atom140.getTree());
 
 
                     // AST REWRITE
-                    // elements: 54, atom
+                    // elements: atom, 54
                     // token labels: 
                     // rule labels: retval
                     // token list labels: 
@@ -4335,6 +4317,20 @@ public class compParser extends Parser {
                     }
 
                     retval.tree = root_0;
+                    }
+                    break;
+                case 5 :
+                    // /home/vincent/Bureau/comp.g:93:5: exp2
+                    {
+                    root_0 = (CommonTree)adaptor.nil();
+
+                    pushFollow(FOLLOW_exp2_in_atom1531);
+                    exp2141=exp2();
+
+                    state._fsp--;
+
+                    adaptor.addChild(root_0, exp2141.getTree());
+
                     }
                     break;
 
@@ -4532,36 +4528,36 @@ public class compParser extends Parser {
     public static final BitSet FOLLOW_plus_in_exp1246 = new BitSet(new long[]{0x0060000000000002L});
     public static final BitSet FOLLOW_55_in_exp1261 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_56_in_exp1274 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_exp2_in_exp1287 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_IDF_in_exp21303 = new BitSet(new long[]{0x0000010000000000L});
-    public static final BitSet FOLLOW_40_in_exp21305 = new BitSet(new long[]{0x01C0030018000000L});
-    public static final BitSet FOLLOW_exp_in_exp21308 = new BitSet(new long[]{0x0000020200000000L});
-    public static final BitSet FOLLOW_33_in_exp21311 = new BitSet(new long[]{0x01C0010018000000L});
-    public static final BitSet FOLLOW_exp_in_exp21313 = new BitSet(new long[]{0x0000020200000000L});
-    public static final BitSet FOLLOW_41_in_exp21320 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_IDF_in_exp21348 = new BitSet(new long[]{0x0000002000000000L});
-    public static final BitSet FOLLOW_37_in_exp21350 = new BitSet(new long[]{0x01C0010018000000L});
-    public static final BitSet FOLLOW_exp_in_exp21352 = new BitSet(new long[]{0x0000004200000000L});
-    public static final BitSet FOLLOW_33_in_exp21355 = new BitSet(new long[]{0x01C0010018000000L});
-    public static final BitSet FOLLOW_exp_in_exp21357 = new BitSet(new long[]{0x0000004200000000L});
-    public static final BitSet FOLLOW_38_in_exp21362 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_fois_in_plus1407 = new BitSet(new long[]{0x0600000000000002L});
-    public static final BitSet FOLLOW_set_in_plus1411 = new BitSet(new long[]{0x0040010018000000L});
-    public static final BitSet FOLLOW_fois_in_plus1418 = new BitSet(new long[]{0x0600000000000002L});
-    public static final BitSet FOLLOW_atom_in_fois1435 = new BitSet(new long[]{0xF800000000000002L,0x0000000000000001L});
-    public static final BitSet FOLLOW_59_in_fois1441 = new BitSet(new long[]{0x0040010018000000L});
-    public static final BitSet FOLLOW_60_in_fois1446 = new BitSet(new long[]{0x0040010018000000L});
-    public static final BitSet FOLLOW_61_in_fois1451 = new BitSet(new long[]{0x0040010018000000L});
-    public static final BitSet FOLLOW_62_in_fois1456 = new BitSet(new long[]{0x0040010018000000L});
-    public static final BitSet FOLLOW_63_in_fois1461 = new BitSet(new long[]{0x0040010018000000L});
-    public static final BitSet FOLLOW_64_in_fois1466 = new BitSet(new long[]{0x0040010018000000L});
-    public static final BitSet FOLLOW_atom_in_fois1472 = new BitSet(new long[]{0xF800000000000002L,0x0000000000000001L});
-    public static final BitSet FOLLOW_CST_ENT_in_atom1490 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_IDF_in_atom1497 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_40_in_atom1504 = new BitSet(new long[]{0x01C0010018000000L});
-    public static final BitSet FOLLOW_exp_in_atom1506 = new BitSet(new long[]{0x0000020000000000L});
-    public static final BitSet FOLLOW_41_in_atom1508 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_54_in_atom1518 = new BitSet(new long[]{0x0040010018000000L});
-    public static final BitSet FOLLOW_atom_in_atom1520 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_IDF_in_exp21300 = new BitSet(new long[]{0x0000010000000000L});
+    public static final BitSet FOLLOW_40_in_exp21302 = new BitSet(new long[]{0x01C0030018000000L});
+    public static final BitSet FOLLOW_exp_in_exp21305 = new BitSet(new long[]{0x0000020200000000L});
+    public static final BitSet FOLLOW_33_in_exp21308 = new BitSet(new long[]{0x01C0010018000000L});
+    public static final BitSet FOLLOW_exp_in_exp21310 = new BitSet(new long[]{0x0000020200000000L});
+    public static final BitSet FOLLOW_41_in_exp21317 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_IDF_in_exp21345 = new BitSet(new long[]{0x0000002000000000L});
+    public static final BitSet FOLLOW_37_in_exp21347 = new BitSet(new long[]{0x01C0010018000000L});
+    public static final BitSet FOLLOW_exp_in_exp21349 = new BitSet(new long[]{0x0000004200000000L});
+    public static final BitSet FOLLOW_33_in_exp21352 = new BitSet(new long[]{0x01C0010018000000L});
+    public static final BitSet FOLLOW_exp_in_exp21354 = new BitSet(new long[]{0x0000004200000000L});
+    public static final BitSet FOLLOW_38_in_exp21359 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_fois_in_plus1404 = new BitSet(new long[]{0x0600000000000002L});
+    public static final BitSet FOLLOW_set_in_plus1408 = new BitSet(new long[]{0x0040010018000000L});
+    public static final BitSet FOLLOW_fois_in_plus1415 = new BitSet(new long[]{0x0600000000000002L});
+    public static final BitSet FOLLOW_atom_in_fois1432 = new BitSet(new long[]{0xF800000000000002L,0x0000000000000001L});
+    public static final BitSet FOLLOW_59_in_fois1438 = new BitSet(new long[]{0x0040010018000000L});
+    public static final BitSet FOLLOW_60_in_fois1443 = new BitSet(new long[]{0x0040010018000000L});
+    public static final BitSet FOLLOW_61_in_fois1448 = new BitSet(new long[]{0x0040010018000000L});
+    public static final BitSet FOLLOW_62_in_fois1453 = new BitSet(new long[]{0x0040010018000000L});
+    public static final BitSet FOLLOW_63_in_fois1458 = new BitSet(new long[]{0x0040010018000000L});
+    public static final BitSet FOLLOW_64_in_fois1463 = new BitSet(new long[]{0x0040010018000000L});
+    public static final BitSet FOLLOW_atom_in_fois1469 = new BitSet(new long[]{0xF800000000000002L,0x0000000000000001L});
+    public static final BitSet FOLLOW_CST_ENT_in_atom1487 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_IDF_in_atom1494 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_40_in_atom1501 = new BitSet(new long[]{0x01C0010018000000L});
+    public static final BitSet FOLLOW_exp_in_atom1503 = new BitSet(new long[]{0x0000020000000000L});
+    public static final BitSet FOLLOW_41_in_atom1505 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_54_in_atom1515 = new BitSet(new long[]{0x0040010018000000L});
+    public static final BitSet FOLLOW_atom_in_atom1517 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_exp2_in_atom1531 = new BitSet(new long[]{0x0000000000000002L});
 
 }

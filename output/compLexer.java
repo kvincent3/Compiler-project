@@ -1,4 +1,4 @@
-// $ANTLR 3.2 Sep 23, 2009 12:02:23 /home/vincent/Bureau/comp.g 2015-03-18 19:52:14
+// $ANTLR 3.2 Sep 23, 2009 12:02:23 /home/vincent/Bureau/comp.g 2015-04-02 16:56:52
 
 import org.antlr.runtime.*;
 import java.util.Stack;
@@ -977,10 +977,10 @@ public class compLexer extends Lexer {
         try {
             int _type = CST_ENT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /home/vincent/Bureau/comp.g:94:12: ( ( '0' .. '9' )+ )
-            // /home/vincent/Bureau/comp.g:94:16: ( '0' .. '9' )+
+            // /home/vincent/Bureau/comp.g:96:12: ( ( '0' .. '9' )+ )
+            // /home/vincent/Bureau/comp.g:96:16: ( '0' .. '9' )+
             {
-            // /home/vincent/Bureau/comp.g:94:16: ( '0' .. '9' )+
+            // /home/vincent/Bureau/comp.g:96:16: ( '0' .. '9' )+
             int cnt1=0;
             loop1:
             do {
@@ -994,7 +994,7 @@ public class compLexer extends Lexer {
 
                 switch (alt1) {
             	case 1 :
-            	    // /home/vincent/Bureau/comp.g:94:17: '0' .. '9'
+            	    // /home/vincent/Bureau/comp.g:96:17: '0' .. '9'
             	    {
             	    matchRange('0','9'); 
 
@@ -1026,14 +1026,14 @@ public class compLexer extends Lexer {
         try {
             int _type = CSTE_CHAINE;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /home/vincent/Bureau/comp.g:95:12: ( ( '\"' (~ '\"' )* '\"' ) )
-            // /home/vincent/Bureau/comp.g:95:16: ( '\"' (~ '\"' )* '\"' )
+            // /home/vincent/Bureau/comp.g:97:12: ( ( '\"' (~ '\"' )* '\"' ) )
+            // /home/vincent/Bureau/comp.g:97:16: ( '\"' (~ '\"' )* '\"' )
             {
-            // /home/vincent/Bureau/comp.g:95:16: ( '\"' (~ '\"' )* '\"' )
-            // /home/vincent/Bureau/comp.g:95:17: '\"' (~ '\"' )* '\"'
+            // /home/vincent/Bureau/comp.g:97:16: ( '\"' (~ '\"' )* '\"' )
+            // /home/vincent/Bureau/comp.g:97:17: '\"' (~ '\"' )* '\"'
             {
             match('\"'); 
-            // /home/vincent/Bureau/comp.g:95:20: (~ '\"' )*
+            // /home/vincent/Bureau/comp.g:97:20: (~ '\"' )*
             loop2:
             do {
                 int alt2=2;
@@ -1046,7 +1046,7 @@ public class compLexer extends Lexer {
 
                 switch (alt2) {
             	case 1 :
-            	    // /home/vincent/Bureau/comp.g:95:21: ~ '\"'
+            	    // /home/vincent/Bureau/comp.g:97:21: ~ '\"'
             	    {
             	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='!')||(input.LA(1)>='#' && input.LA(1)<='\uFFFF') ) {
             	        input.consume();
@@ -1086,8 +1086,8 @@ public class compLexer extends Lexer {
         try {
             int _type = IDF;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /home/vincent/Bureau/comp.g:96:12: ( ( 'a' .. 'z' | 'A' .. 'Z' ) ( 'a' .. 'z' | 'A' .. 'Z' | '0' .. '9' )* )
-            // /home/vincent/Bureau/comp.g:96:15: ( 'a' .. 'z' | 'A' .. 'Z' ) ( 'a' .. 'z' | 'A' .. 'Z' | '0' .. '9' )*
+            // /home/vincent/Bureau/comp.g:98:12: ( ( 'a' .. 'z' | 'A' .. 'Z' ) ( 'a' .. 'z' | 'A' .. 'Z' | '0' .. '9' )* )
+            // /home/vincent/Bureau/comp.g:98:15: ( 'a' .. 'z' | 'A' .. 'Z' ) ( 'a' .. 'z' | 'A' .. 'Z' | '0' .. '9' )*
             {
             if ( (input.LA(1)>='A' && input.LA(1)<='Z')||(input.LA(1)>='a' && input.LA(1)<='z') ) {
                 input.consume();
@@ -1098,7 +1098,7 @@ public class compLexer extends Lexer {
                 recover(mse);
                 throw mse;}
 
-            // /home/vincent/Bureau/comp.g:96:35: ( 'a' .. 'z' | 'A' .. 'Z' | '0' .. '9' )*
+            // /home/vincent/Bureau/comp.g:98:35: ( 'a' .. 'z' | 'A' .. 'Z' | '0' .. '9' )*
             loop3:
             do {
                 int alt3=2;
@@ -1147,10 +1147,10 @@ public class compLexer extends Lexer {
         try {
             int _type = WS;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /home/vincent/Bureau/comp.g:97:12: ( ( '/*' ( . )* '*/' | ' ' | '\\t' | '\\n' )+ )
-            // /home/vincent/Bureau/comp.g:97:16: ( '/*' ( . )* '*/' | ' ' | '\\t' | '\\n' )+
+            // /home/vincent/Bureau/comp.g:99:12: ( ( '/*' ( . )* '*/' | ' ' | '\\t' | '\\n' )+ )
+            // /home/vincent/Bureau/comp.g:99:16: ( '/*' ( . )* '*/' | ' ' | '\\t' | '\\n' )+
             {
-            // /home/vincent/Bureau/comp.g:97:16: ( '/*' ( . )* '*/' | ' ' | '\\t' | '\\n' )+
+            // /home/vincent/Bureau/comp.g:99:16: ( '/*' ( . )* '*/' | ' ' | '\\t' | '\\n' )+
             int cnt5=0;
             loop5:
             do {
@@ -1181,11 +1181,11 @@ public class compLexer extends Lexer {
 
                 switch (alt5) {
             	case 1 :
-            	    // /home/vincent/Bureau/comp.g:97:17: '/*' ( . )* '*/'
+            	    // /home/vincent/Bureau/comp.g:99:17: '/*' ( . )* '*/'
             	    {
             	    match("/*"); 
 
-            	    // /home/vincent/Bureau/comp.g:97:21: ( . )*
+            	    // /home/vincent/Bureau/comp.g:99:21: ( . )*
             	    loop4:
             	    do {
             	        int alt4=2;
@@ -1210,7 +1210,7 @@ public class compLexer extends Lexer {
 
             	        switch (alt4) {
             	    	case 1 :
-            	    	    // /home/vincent/Bureau/comp.g:97:21: .
+            	    	    // /home/vincent/Bureau/comp.g:99:21: .
             	    	    {
             	    	    matchAny(); 
 
@@ -1228,21 +1228,21 @@ public class compLexer extends Lexer {
             	    }
             	    break;
             	case 2 :
-            	    // /home/vincent/Bureau/comp.g:97:28: ' '
+            	    // /home/vincent/Bureau/comp.g:99:28: ' '
             	    {
             	    match(' '); 
 
             	    }
             	    break;
             	case 3 :
-            	    // /home/vincent/Bureau/comp.g:97:32: '\\t'
+            	    // /home/vincent/Bureau/comp.g:99:32: '\\t'
             	    {
             	    match('\t'); 
 
             	    }
             	    break;
             	case 4 :
-            	    // /home/vincent/Bureau/comp.g:97:37: '\\n'
+            	    // /home/vincent/Bureau/comp.g:99:37: '\\n'
             	    {
             	    match('\n'); 
 
