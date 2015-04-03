@@ -1,3 +1,4 @@
+
 import java.util.ArrayList;
 
 import org.antlr.runtime.tree.Tree;
@@ -116,7 +117,7 @@ public class TDSGlobal {
 			}
 		}
 		tdsFin.setTDSparRegion(TDSfinal);
-		tdsFin.display();
+		//tdsFin.display();
 		return tdsFin;
 		
 	}

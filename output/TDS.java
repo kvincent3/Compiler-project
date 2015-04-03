@@ -3,6 +3,10 @@ import java.util.ArrayList;
 
 import org.antlr.runtime.tree.Tree;
 
+import java.util.ArrayList;
+
+import org.antlr.runtime.tree.Tree;
+
 
 public class TDS {
 	String nom;
@@ -183,7 +187,7 @@ public class TDS {
 			for(int j=1;j<ast.getChildCount();j++)
 			{
 			    String id=ast.getChild(j).getText();
-			    l.add(new Symbole(id,"variable",type,-1,region,prof,depList.get(region)+j-1,tab));
+			    l.add(new Symbole(id,"array",type,-1,region,prof,depList.get(region)+j-1,tab));
 			    
 			}
 			depList.set(region,depList.get(region)+ast.getChildCount()-1);
@@ -251,7 +255,7 @@ public class TDS {
 			}
 			System.out.println("\n\n");
 			tdsFinal.sort();
-			tdsFinal.display();
+			//tdsFinal.display();
 			return tdsFinal;
 	       }
 

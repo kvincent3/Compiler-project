@@ -1,3 +1,4 @@
+
 import java.io.*;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -48,9 +49,16 @@ public class Main {
         TDSGlobal tteTds= tds.merge(sym);
         //tds.getSymboleArray(ast, 0, 0, sym);
         tteTds.addNoExistTDS(ast);
+        tteTds.display();
         Pro pile = new Pro(tteTds.addNoExistTDS(ast));
         pile.doPro(ast,0);
         pile.displayPRO();
+        SemanticsTab sem=new SemanticsTab();
+        sem.printSemanticsErrorDecl(tteTds);
+        sem.printSemanticsBound(tteTds);
+        sem.printSemanticsAffect(ast);
+        sem.printSemanticDecl(ast, tteTds);
+        		
         //Semantic controle = new Semantic(pile, tteTds);
         //controle.CheckVisibilityVariable(ast, 0);
 	}
