@@ -1,0 +1,43 @@
+do
+  integer i,j
+  function integer fMax (x:integer , y:integer)
+    integer result
+    function integer sisi (adr x:integer)
+    	    function integer sii (x:integer)
+			return (2)
+   			end
+			procedure the (x:integer,adr pp:integer,adr ux:integer)
+		      integer p
+		      write "thats'all"
+		    end
+		 	procedure th (x:integer)
+		 	  integer p
+		      write "thats'all"
+		    end
+	  return (1)
+	  end
+	   if x+--1 == y then 
+	         result =x
+	   else result=y
+	   fi
+  return (result)
+  end
+integer a,b
+ procedure theEnd ()
+ integer p
+
+ 	 	 procedure p ()
+  	write "thats'all"
+ 	end
+ 	 	 procedure b ()
+  	write "thats'all"
+ 	end
+  write "thats'all"
+ end
+
+ i=-3
+ j=0
+ maximum = fMax(i,j)
+ write maximum
+ theEnd()
+end
