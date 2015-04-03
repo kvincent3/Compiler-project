@@ -23,6 +23,22 @@ public class Semantic
 			{
 				GetIntoInstruction(ast.getChild(i),region);
 			}
+
+		}
+		for (int i=0;i<ast.getChildCount();i++)
+		{
+			 if (ast.getChild(i).getText().equals("DECLARATION"))
+			{
+				CheckVisibilityVariable(ast.getChild(i),region);
+			}
+			else if (ast.getChild(i).getText().equals("FONCTION") || ast.getChild(i).getText().equals("PROCEDURE"))
+			{
+				CheckVisibilityVariable(ast.getChild(i),++region);
+			}
+			else if (ast.getChild(i).getText().equals("BLOC"))
+			{
+				CheckVisibilityVariable(ast.getChild(i),region);
+			}
 		}
 	}
 
@@ -36,57 +52,107 @@ public class Semantic
 			{
 			    	String var = ast.getChild(j).getChild(0).getText();
 			    	String type = SearchTypeIntoTds(var,region);
-			    	if (!type.equals(""))
+			    	if (type.equals(""))
 			    	{
-			    		System.out.println("la variable "+var+" est visible");
-			    		if (this.Checkexpression(ast.getChild(j).getChild(1),type))
-			    		{
-			    			System.out.println("l'expression associé à la variable "+var+" renvoi :"+type);
-			    		}
-			    		else
-			    		{
-			    			System.out.println("l'expression associé à la variable "+var+" est complètement incorrect");
-			    		}
+			    		System.err.println("Dans la région "+region+" La variable \""+var+"\" n'est pas déclarée ou n'est pas visible");
+				    	ArrayList<Boolean> bool = new ArrayList<Boolean>();
+				    	this.Checkexpression(ast.getChild(j).getChild(1),type,region,bool);
+				    	System.err.println("Dans la région "+region+" l'expression associé à la variable \""+var+"\" est complètement incorrect");
 			    	}
-			    	/*if (this.IsInteger(ast.getChild(j).getChild(1).getText()))
+			    	else
 			    	{
-			    		System.out.println(var);
-			    		if (CheckIntoTds(var,"integer",region))
-			    		{
-			    			System.out.println("pas de probleme pour la variable "+var);
-			    		}
-			    		else
-			    		{
-			    			System.out.println("Ooups il y un petit problème dans la variable "+var+" : pas déclaré ou pas visible");
-			    		}
-			    	}*/
-			}
+			    	   System.out.println("Dans la région "+region+" la variable "+var+" est visible");
+				       ArrayList<Boolean> bool = new ArrayList<Boolean>();
+				       this.Checkexpression(ast.getChild(j).getChild(1),type,region,bool);
+				       if (this.semantiqueEstCorrect(bool))
+				       {
+				    	   System.out.println("Dans la région "+region+" l'expression associé à la variable "+var+" est correct et type de renvoi :"+type);
+				       }
+				       else
+				       {
+				    	   System.err.println("Dans la région "+region+" l'expression associé à la variable \""+var+"\" est complètement incorrect");
+				       }
+			    	}
+
+
+			  }
 		}
 	}
 	
-	private boolean Checkexpression(Tree ast, String type) 
+	private boolean semantiqueEstCorrect(ArrayList<Boolean> bool) {
+		for (int i=0;i<bool.size();i++)
+		{
+			if (!bool.get(i))
+			{
+				return false;
+			}
+		}
+		return true;
+	}
+
+
+	private void Checkexpression(Tree ast, String type,int region,ArrayList<Boolean> b) 
 	{
 	    if (   ast.getText().equals("+")
 	    	|| ast.getText().equals("-")
 	    	|| ast.getText().equals("*")
 	    	|| ast.getText().equals("/"))
 	    {
-	    	return Checkexpression( ast.getChild(0), type) && Checkexpression(ast.getChild(1), type);
+	    	Checkexpression( ast.getChild(0), type,region,b);
+	    	Checkexpression(ast.getChild(1), type,region,b);
 	    }
 	    else if (this.IsInteger(ast.getText()))
 	    {
-	    	if (type.equals("integer"))
+	    	if (type.equals(type))
 	    	{
-	    		return true;
+	    		b.add(true);
 	    	}
 	    	else
 	    	{
-	    		return false;
+	    		b.add(false);
 	    	}
 	    }
-	    //else if ()
-		//return iscorrect;
-	    return false;
+	    else if (ast.getText().equals("APPEL"))
+	    {
+	    	String app =ast.getChild(0).getText();
+	    	String app_type = this.SearchTypeIntoTds(app, region);
+	    	if (app_type.equals(type))
+	    	{
+	    		b.add(true);
+	    	}
+	    	else
+	    	{
+	    		b.add(false);
+	    	}
+	    }
+	    else if (ast.getText().equals("TABLEAU")) // les tableaux sont forcément des entiers on verifie juste qu'il est visible
+	    {
+	    	String app =ast.getChild(0).getText();
+	    	String app_type = this.SearchTypeIntoTds(app, region);
+	    	if (!app_type.equals(""))
+	    	{
+	    		b.add(true);
+	    	}
+	    	else
+	    	{
+	    		System.err.println("Dans la région "+region+" le tableau "+ app + " n'est pas déclaré");
+	    		b.add(false);
+	    	}
+	    }
+	    else //c'est une variable
+	    {
+	    	String app =ast.getText();
+	    	String app_type = this.SearchTypeIntoTds(app, region);
+	    	if (!app_type.equals(""))
+	    	{
+	    		b.add(true);
+	    	}
+	    	else
+	    	{
+	    		System.err.println("Dans la région "+region+" la variable "+ app + " n'est pas déclarée");
+	    		b.add(false);
+	    	}
+	    }
 	}
 
 

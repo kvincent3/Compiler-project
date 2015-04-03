@@ -26,11 +26,11 @@ integer a,b
  procedure theEnd ()
  integer p
 
- 	 	 procedure p ()
-  	write "thats'all"
+ 	procedure p ()
+  		write "thats'all"
  	end
- 	 	 procedure b ()
-  	write "thats'all"
+ 	procedure b ()
+  		write "thats'all"
  	end
   write "thats'all"
  end
