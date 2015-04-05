@@ -107,6 +107,8 @@ public ArrayList<ArrayList<Integer>> getPile()
 public static int calculNbr(Tree ast) 
 {
 	// TODO Auto-generated method stub
+	
+	ArrayList<Integer> enre = new ArrayList<Integer>();
 	for (int i=0;i<ast.getChildCount();i++)
 	{
 		if (ast.getChild(i).getText().equals("BLOC"))
@@ -117,13 +119,20 @@ public static int calculNbr(Tree ast)
 					ast.getChild(i).getChild(0).getChild(j).getText().equals("PROCEDURE"))
 				{
 					
-					return 1+calculNbr(ast.getChild(i).getChild(0).getChild(j));
+					enre.add(1+calculNbr(ast.getChild(i).getChild(0).getChild(j)));
 				}
 			}
+			int v=0;
+			for (int h=0;h<enre.size();h++)
+			{
+				v=v+enre.get(h);
+			}
+			return v;
 		}
+
 	}
 	
-	return 0;
+	return 1;
 }
   
   

@@ -1,4 +1,7 @@
+
 import java.util.ArrayList;
+
+import org.antlr.runtime.tree.Tree;
 
 
 public class TDSGlobal {
@@ -7,7 +10,7 @@ public class TDSGlobal {
 	public TDSGlobal(){
 		
 	}
-	
+
 	public TDSGlobal(ArrayList<TDS> tDSparRegion) {
 		super();
 		TDSparRegion = tDSparRegion;
@@ -84,5 +87,68 @@ public class TDSGlobal {
 				}
 			}
 
+	}
+ 
+	public TDSGlobal addNoExistTDS(Tree ast) 
+	{
+		
+		
+		int max = this.CountRegion(ast);
+		//System.out.println("===========>"+max);
+		TDSGlobal tdsFin = new TDSGlobal();
+		ArrayList<TDS> TDSfinal = new ArrayList<TDS>();
+		for (int i=0;i<max;i++)
+		{
+			if (Ispresent(i))
+			{
+				for (int v=0;v<this.TDSparRegion.size();v++)
+				{
+					if (this.TDSparRegion.get(v).getregion()==i)
+					{
+						TDSfinal.add(this.TDSparRegion.get(v));
+						v=this.TDSparRegion.size();
+					}
+				}
+				
+			}
+			else
+			{
+				TDSfinal.add(new TDS(i));
+			}
+		}
+		tdsFin.setTDSparRegion(TDSfinal);
+		//tdsFin.display();
+		return tdsFin;
+		
+	}
+
+   
+	private int CountRegion(Tree ast)
+    {
+		int sum=0;
+        for (int i=0 ;i <ast.getChild(0).getChildCount();i++)
+        {
+        	if (ast.getChild(0).getChild(i).getText().equals("FONCTION")
+        		|| ast.getChild(0).getChild(i).getText().equals("PROCEDURE"))
+        	{
+        		sum=sum+Pro.calculNbr(ast.getChild(0).getChild(i))+1;
+        	}
+        }
+        return sum+1;
+    }
+    
+    
+	private boolean Ispresent(int region) 
+	{
+		// TODO Auto-generated method stub
+		boolean res = false;
+		for (int in = 0;in<this.TDSparRegion.size();in++)
+		{
+			if (this.TDSparRegion.get(in).getregion() == region)
+			{
+				res =true;
+			}
+		}
+		return res;
 	}
 }

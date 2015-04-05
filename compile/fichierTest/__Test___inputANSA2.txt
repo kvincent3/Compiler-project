@@ -6,26 +6,31 @@ do
          result =x
     else result=y
     fi
+     maximum = fMax(fMax(i,j),j,p)
    return (result)
   end
 
  procedure theEnd ()
   integer x
-    
   write "thats'all"
+   maximum = f1(i,j)
  end
+ 
   integer i,j
+  
  procedure theEnd2 ()
   write "thats'all"
  end
  
  procedure theEnd3 ()
   write "thats'all"
+   maximum = f3(i,j,F55(5))
+  
  end
  
  i=-3
  j=0
- maximum = fMax(i,j)
+ maximum = fbOSS(i,j)
  write maximum
  theEnd()
 end
