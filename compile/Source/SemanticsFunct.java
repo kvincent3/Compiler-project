@@ -441,31 +441,55 @@ public class SemanticsFunct {
 					
 					String nom=ast.getChild(i).getChild(0).getText();
 					String type=ast.getChild(i).getChild(1).getText();
-					int p = ast.getChild(i).getChild(3).getChild(1).getChildCount()-1;
+					int p;
+					boolean a=true;
 					String ret;
-					//System.out.println(ast.getChild(i).getChild(3).getChild(1).getChild(p).getChild(0).getText());;
-					if(ast.getChild(i).getChild(3).getChild(1).getChild(p).getChild(0).getText().equals("true")||ast.getChild(i).getChild(3).getChild(1).getChild(p).getChild(0).getText().equals("false")){
-						ret="boolean";
-					}
-					else if(estUnEntier(ast.getChild(i).getChild(3).getChild(1).getChild(p).getChild(0).getText())){
-						ret="integer";
-					}
-					else{
-						ret=SearchTypeIntoTds(ast.getChild(i).getChild(3).getChild(1).getChild(p).getChild(0).getText(),regionFct+1);
-					}
-					//System.out.println(ret);
-					//System.out.println(nom+" "+ast.getChild(i).getChild(3).getChild(1).getChild(p).getChild(0).getText());
-					//System.out.println(ret+"et att : "+type+" reg : "+(regionFct+1));
-					if(!type.equals(ret)){
-						if((ret.equals(""))){
-							System.err.println("Erreur "+ast.getChild(i).getChild(3).getChild(1).getChild(p).getChild(0).getText()+" n'a pas été initialisé");
-						}else{
-							System.err.println("Erreur sur le type de retour dans la fonction "+nom+" : "+type+" attendu mais "+ret+" trouvé");
+					//System.out.println(ast.getChild(i).getChild(3).getChild(1).getChild(p).getText()+nom);
+
+					for(int y=0;y<ast.getChild(i).getChild(3).getChild(1).getChildCount();y++){
+						//System.out.println(ast.getChild(i).getChild(3).getChild(1).getChild(y)+" "+y);
+						if(ast.getChild(i).getChild(3).getChild(1).getChild(y).getText().equals("RETOUR")){
+							a=false;
+							p=y;
+							//System.out.println(ast.getChild(i).getChild(3).getChild(1).getChild(p).getChild(0).getText());
+							if(ast.getChild(i).getChild(3).getChild(1).getChild(p).getChild(0).getText().equals("true")||ast.getChild(i).getChild(3).getChild(1).getChild(p).getChild(0).getText().equals("false")){
+								ret="boolean";
+							}
+							else if(estUnEntier(ast.getChild(i).getChild(3).getChild(1).getChild(p).getChild(0).getText())){
+								ret="integer";
+							}
+							else{
+								ret=SearchTypeIntoTds(ast.getChild(i).getChild(3).getChild(1).getChild(p).getChild(0).getText(),regionFct+1);
+							}
+							//System.out.println(ret);
+							//System.out.println(nom+" "+ast.getChild(i).getChild(3).getChild(1).getChild(p).getChild(0).getText());
+							//System.out.println(ret+"et att : "+type+" reg : "+(regionFct+1));
+							if(!type.equals(ret)){
+								if((ret.equals(""))){
+									System.err.println("Erreur "+ast.getChild(i).getChild(3).getChild(1).getChild(p).getChild(0).getText()+" n'a pas été initialisé");
+								}else{
+									System.err.println("Erreur sur le type de retour dans la fonction "+nom+" : "+type+" attendu mais "+ret+" trouvé");
+								}
+							}
 						}
 					}
+					if(a){
+						System.err.println("Le fonction "+nom+" ne renvoie rien, elle doit renvoyer un "+type);
+					}
+					
 					CheckRetourFonct(ast.getChild(i).getChild(3).getChild(0),prof+1,++regionFct);
 					
 				}	else if(ast.getChild(i).getText().equals("PROCEDURE")){
+					boolean a =true;
+					for(int y=0;y<ast.getChild(i).getChild(2).getChild(1).getChildCount();y++){
+						//System.out.println(ast.getChild(i).getChild(3).getChild(1).getChild(y)+" "+y);
+						if(ast.getChild(i).getChild(2).getChild(1).getChild(y).getText().equals("RETOUR")){
+							a=false;							
+						}
+					}
+					if(!a){
+						System.err.println("Erreur procedure "+ast.getChild(i).getChild(0).getText()+" : une procedure ne doit rien renvoyer voyons !");
+					}
 					CheckRetourFonct(ast.getChild(i).getChild(2).getChild(0),prof+1,++regionFct);					
 					//regionFct++;
 				}
