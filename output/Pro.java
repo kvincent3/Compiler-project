@@ -108,7 +108,7 @@ public static int calculNbr(Tree ast)
 {
 	// TODO Auto-generated method stub
 	
-	ArrayList<Integer> enre = new ArrayList<>();
+	ArrayList<Integer> enre = new ArrayList<Integer>();
 	for (int i=0;i<ast.getChildCount();i++)
 	{
 		if (ast.getChild(i).getText().equals("BLOC"))

@@ -9,14 +9,14 @@ public class Symbole {
 	int numeroRegion;
 	int numeroImbrication;
 	int deplacement;
-	private ArrayList<Symbole> params=null;
+	ArrayList<Symbole> params=new ArrayList<Symbole>();
 	
 	public Symbole(){
 		
 	}
 
 	public Symbole(String nom, String nature,String type, int parametre, int numeroRegion,
-			int numeroImbrication, int deplacement,Tableau a){
+			int numeroImbrication, int deplacement,Tableau a,ArrayList<Symbole> par){
 		super();
 		this.nom = nom;
 		this.type = type;
@@ -26,6 +26,7 @@ public class Symbole {
 		this.numeroImbrication = numeroImbrication;
 		this.infotableau=a;
 		this.deplacement = deplacement;
+		this.params=par;
 	}
     public void addSymboleParam(Symbole sym)
     {

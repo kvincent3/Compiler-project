@@ -10,7 +10,7 @@ public class TDSGlobal {
 	public TDSGlobal(){
 		
 	}
-	
+
 	public TDSGlobal(ArrayList<TDS> tDSparRegion) {
 		super();
 		TDSparRegion = tDSparRegion;

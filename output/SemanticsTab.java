@@ -1,5 +1,3 @@
-package compile;
-
 import java.util.ArrayList;
 
 import org.antlr.runtime.tree.Tree;

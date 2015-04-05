@@ -68,45 +68,51 @@ public class TDS {
 					String nom=ast.getChild(i).getChild(0).getText();
 					String type=ast.getChild(i).getChild(1).getText();
 					int parametre = ast.getChild(i).getChild(2).getChildCount();
+					ArrayList<Symbole> params = new ArrayList<Symbole>();
 					for(int j=0;j<ast.getChild(i).getChild(2).getChildCount();j++){
 						if(!ast.getChild(i).getChild(2).getChild(j).getChild(0).getText().equals("adr")){
 							String nomParam=ast.getChild(i).getChild(2).getChild(j).getChild(0).getText();
 							String typeParam=ast.getChild(i).getChild(2).getChild(j).getChild(1).getText();
 							int regionFct2Param=regionFct+1;
 							int profParam=prof+1;
-							table.add(new Symbole(nomParam,"parametreV",typeParam,-1,regionFct2Param,profParam,0,null));
+							table.add(new Symbole(nomParam,"parametreV",typeParam,-1,regionFct2Param,profParam,0,null,null));
+							params.add(new Symbole(nomParam,"parametreV",typeParam,-1,regionFct2Param,profParam,0,null,null));
 						}else{
 							String nomParam=ast.getChild(i).getChild(2).getChild(j).getChild(1).getText();
 							String typeParam=ast.getChild(i).getChild(2).getChild(j).getChild(2).getText();
 							int regionFct2Param=regionFct+1;
 							int profParam=prof+1;
-							table.add(new Symbole(nomParam,"parametreA",typeParam,-1,regionFct2Param,profParam,0,null));
+							table.add(new Symbole(nomParam,"parametreA",typeParam,-1,regionFct2Param,profParam,0,null,null));
+							params.add(new Symbole(nomParam,"parametreA",typeParam,-1,regionFct2Param,profParam,0,null,null));
 						}
 					}
-					table.add(new Symbole(nom,"fonction",type,parametre,regionFct2,prof,-1,null));
+					table.add(new Symbole(nom,"fonction",type,parametre,regionFct2,prof,-1,null,params));
 					getSymboleFct2(ast.getChild(i).getChild(3).getChild(0),prof+1,++regionFct,table);
 					
 				}
 				else if(ast.getChild(i).getText().equals("PROCEDURE")){
 					String nom=ast.getChild(i).getChild(0).getText();
 					int parametreProc = ast.getChild(i).getChild(1).getChildCount();
+					ArrayList<Symbole> params = new ArrayList<Symbole>();
 					for(int j=0;j<ast.getChild(i).getChild(1).getChildCount();j++){
 						if(!ast.getChild(i).getChild(1).getChild(j).getChild(0).getText().equals("adr")){
 							String nomParam=ast.getChild(i).getChild(1).getChild(j).getChild(0).getText();
 							String typeParam=ast.getChild(i).getChild(1).getChild(j).getChild(1).getText();
 							int regionFct2Param=regionFct+1;
 							int profParam=prof+1;
-							table.add(new Symbole(nomParam,"parametreV",typeParam,-1,regionFct2Param,profParam,0,null));
+							table.add(new Symbole(nomParam,"parametreV",typeParam,-1,regionFct2Param,profParam,0,null,null));
+							params.add(new Symbole(nomParam,"parametreV",typeParam,-1,regionFct2Param,profParam,0,null,null));
 						}else{
 							String nomParam=ast.getChild(i).getChild(1).getChild(j).getChild(1).getText();
 							String typeParam=ast.getChild(i).getChild(1).getChild(j).getChild(2).getText();
 							int regionFct2Param=regionFct+1;
 							int profParam=prof+1;
-							table.add(new Symbole(nomParam,"parametreA",typeParam,-1,regionFct2Param,profParam,0,null));
+							table.add(new Symbole(nomParam,"parametreA",typeParam,-1,regionFct2Param,profParam,0,null,null));
+							params.add(new Symbole(nomParam,"parametreA",typeParam,-1,regionFct2Param,profParam,0,null,null));
 						}
 
 					}
-					table.add(new Symbole(nom,"procedure",null,parametreProc,regionFct2,prof,-1,null));					
+					table.add(new Symbole(nom,"procedure",null,parametreProc,regionFct2,prof,-1,null,params));					
 					getSymboleFct2(ast.getChild(i).getChild(2).getChild(0),prof+1,++regionFct,table);
 					
 					//regionFct++;
@@ -158,7 +164,7 @@ public class TDS {
 			for(int j=1;j<ast.getChildCount();j++)
 			{
 			 String id=ast.getChild(j).getText();
-			 l.add(new Symbole(id,"variable",type,-1,region,prof,depList.get(region)+j-1,null));
+			 l.add(new Symbole(id,"variable",type,-1,region,prof,depList.get(region)+j-1,null,null));
 			
 			}
 			depList.set(region,depList.get(region)+ast.getChildCount()-1);
@@ -187,7 +193,7 @@ public class TDS {
 			for(int j=1;j<ast.getChildCount();j++)
 			{
 			    String id=ast.getChild(j).getText();
-			    l.add(new Symbole(id,"array",type,-1,region,prof,depList.get(region)+j-1,tab));
+			    l.add(new Symbole(id,"array",type,-1,region,prof,depList.get(region)+j-1,tab,null));
 			    
 			}
 			depList.set(region,depList.get(region)+ast.getChildCount()-1);
