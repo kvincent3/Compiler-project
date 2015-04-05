@@ -69,21 +69,24 @@ public class TDS {
 					String type=ast.getChild(i).getChild(1).getText();
 					int parametre = ast.getChild(i).getChild(2).getChildCount();
 					ArrayList<Symbole> params = new ArrayList<Symbole>();
+					int deplParam=0;
 					for(int j=0;j<ast.getChild(i).getChild(2).getChildCount();j++){
 						if(!ast.getChild(i).getChild(2).getChild(j).getChild(0).getText().equals("adr")){
 							String nomParam=ast.getChild(i).getChild(2).getChild(j).getChild(0).getText();
 							String typeParam=ast.getChild(i).getChild(2).getChild(j).getChild(1).getText();
 							int regionFct2Param=regionFct+1;
 							int profParam=prof+1;
-							table.add(new Symbole(nomParam,"parametreV",typeParam,-1,regionFct2Param,profParam,0,null,null));
-							params.add(new Symbole(nomParam,"parametreV",typeParam,-1,regionFct2Param,profParam,0,null,null));
+							deplParam--;
+							table.add(new Symbole(nomParam,"parametreV",typeParam,-1,regionFct2Param,profParam,deplParam,null,null));
+							params.add(new Symbole(nomParam,"parametreV",typeParam,-1,regionFct2Param,profParam,deplParam,null,null));
 						}else{
 							String nomParam=ast.getChild(i).getChild(2).getChild(j).getChild(1).getText();
 							String typeParam=ast.getChild(i).getChild(2).getChild(j).getChild(2).getText();
 							int regionFct2Param=regionFct+1;
 							int profParam=prof+1;
-							table.add(new Symbole(nomParam,"parametreA",typeParam,-1,regionFct2Param,profParam,0,null,null));
-							params.add(new Symbole(nomParam,"parametreA",typeParam,-1,regionFct2Param,profParam,0,null,null));
+							deplParam--;
+							table.add(new Symbole(nomParam,"parametreA",typeParam,-1,regionFct2Param,profParam,deplParam,null,null));
+							params.add(new Symbole(nomParam,"parametreA",typeParam,-1,regionFct2Param,profParam,deplParam,null,null));
 						}
 					}
 					table.add(new Symbole(nom,"fonction",type,parametre,regionFct2,prof,-1,null,params));
@@ -94,21 +97,24 @@ public class TDS {
 					String nom=ast.getChild(i).getChild(0).getText();
 					int parametreProc = ast.getChild(i).getChild(1).getChildCount();
 					ArrayList<Symbole> params = new ArrayList<Symbole>();
+					int deplParamProc = 0 ;
 					for(int j=0;j<ast.getChild(i).getChild(1).getChildCount();j++){
 						if(!ast.getChild(i).getChild(1).getChild(j).getChild(0).getText().equals("adr")){
 							String nomParam=ast.getChild(i).getChild(1).getChild(j).getChild(0).getText();
 							String typeParam=ast.getChild(i).getChild(1).getChild(j).getChild(1).getText();
 							int regionFct2Param=regionFct+1;
 							int profParam=prof+1;
-							table.add(new Symbole(nomParam,"parametreV",typeParam,-1,regionFct2Param,profParam,0,null,null));
-							params.add(new Symbole(nomParam,"parametreV",typeParam,-1,regionFct2Param,profParam,0,null,null));
+							deplParamProc--;
+							table.add(new Symbole(nomParam,"parametreV",typeParam,-1,regionFct2Param,profParam,deplParamProc,null,null));
+							params.add(new Symbole(nomParam,"parametreV",typeParam,-1,regionFct2Param,profParam,deplParamProc,null,null));
 						}else{
 							String nomParam=ast.getChild(i).getChild(1).getChild(j).getChild(1).getText();
 							String typeParam=ast.getChild(i).getChild(1).getChild(j).getChild(2).getText();
 							int regionFct2Param=regionFct+1;
 							int profParam=prof+1;
-							table.add(new Symbole(nomParam,"parametreA",typeParam,-1,regionFct2Param,profParam,0,null,null));
-							params.add(new Symbole(nomParam,"parametreA",typeParam,-1,regionFct2Param,profParam,0,null,null));
+							deplParamProc--;
+							table.add(new Symbole(nomParam,"parametreA",typeParam,-1,regionFct2Param,profParam,deplParamProc,null,null));
+							params.add(new Symbole(nomParam,"parametreA",typeParam,-1,regionFct2Param,profParam,deplParamProc,null,null));
 						}
 
 					}

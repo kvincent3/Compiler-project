@@ -52,7 +52,7 @@ public class Main {
         Pro pile = new Pro(tdsFinal);
         pile.doPro(ast,0);
         pile.displayPRO();
-        // ===> partie kevin et oussama
+        /*// ===> partie kevin et oussama
         Semantic controle = new Semantic(pile, tdsFinal,ast);
         controle.CheckVisibilityVariable(ast, 0);
         controle.checkOccur(tdsFinal);
@@ -63,7 +63,7 @@ public class Main {
         controlef.CheckRetourFonct(ast, 0, 0);
         controlef.CheckSameFonct();
         controlef.CheckSameFonct();
-        /////
+        /////*/
         ///gerome
         SemanticsTab sem=new SemanticsTab();
         sem.printSemanticsErrorDecl(tdsFinal);
