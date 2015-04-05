@@ -94,7 +94,7 @@ public class TDSGlobal {
 		
 		
 		int max = this.CountRegion(ast);
-		System.out.println("===========>"+max);
+		//System.out.println("===========>"+max);
 		TDSGlobal tdsFin = new TDSGlobal();
 		ArrayList<TDS> TDSfinal = new ArrayList<TDS>();
 		for (int i=0;i<max;i++)

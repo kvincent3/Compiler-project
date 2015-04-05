@@ -1,4 +1,3 @@
-package compile;
 
 import java.util.ArrayList;
 
@@ -7,12 +6,28 @@ import org.antlr.runtime.tree.Tree;
 public class SemanticsTab {
 
 	int reg=0;
-	public SemanticsTab()
+	private ArrayList<String> tokens;
+	private ArrayList<String> tokens1;
+ 	public SemanticsTab()
 	{
+ 		
+ 		tokens=new ArrayList<String>();
+ 		tokens1=new ArrayList<String>();
+ 		tokens.add("+");
+ 		tokens.add("-");
+ 		tokens.add("*");
+ 		tokens.add("+");
+ 		tokens1.add("==");
+ 		tokens1.add("!=");
+ 		tokens1.add("<==");
+ 		tokens1.add("=>");
+ 		tokens1.add(">");
+ 		tokens1.add("<");
 		
 	}
 	//ctrls 1
-	public void printSemanticsErrorDecl(TDSGlobal tdsSorted)
+ 	//FONCTIO A UTILISER ----> PrintArraySemanticError
+	private void printSemanticsErrorDecl(TDSGlobal tdsSorted)
 	{
 		if(tdsSorted==null)
 			{
@@ -66,6 +81,7 @@ public class SemanticsTab {
 			
 	}
 	//ctrls 2
+	/*
 	public void printSemanticsBound(TDSGlobal tdsSorted)
 	{
 		if(tdsSorted==null)
@@ -104,90 +120,159 @@ public class SemanticsTab {
 	}
 		
 	}
-	
-	private void printSemanticsAffect2(Tree ast,boolean ent,String name)
+
+*/	
+	public void checkBounds(Symbole s)
 	{
-		if(ast==null)
+		if(s.getType()!=null &&s.getType().equals("ARRAY"))
 		{
-			System.out.println("arr");
-			return ;
-		}
-		if(ast.getChildCount()==0)
-		{
-			return;
-		}
-		if(ast.getText().equals("do"))
-		{
-			for(int i=0;i<ast.getChildCount();i++)
+			ArrayList<int[]> bounds=s.getInfoTableau().getBounds();
+			for(int k=0;k<bounds.size();k++)
 			{
-				
-				if(ast.getChild(i).getText().equals("DECLARATION"))
+				int bound_k[]=bounds.get(k);
+				if(bound_k[0]>bound_k[1])
 				{
-					printSemanticsAffect2(ast.getChild(i),false,name);
-					 
-					 return;//on ne traverse qu une seule fois le noeud declaration
-				}
-				if(ast.getChild(i).getText().equals("INSTRUCTION"))
-				{
-					printSemanticsAffect2(ast.getChild(i),false,name);
-					
-					return;
+				  System.out.println("les frontieres de l'array "+s.getNom()+" ne sont pas correctes");
+				  System.out.println("--->"+bound_k[0]+" > "+bound_k[1]);
 				}
 			
+			}
 		}
-	  }
 		
-		if(ast.getText().equals("="))
+	}
+	
+
+	private void getSymbole(Tree ast,ArrayList<String> l)
+	{
+		if(ast==null)
 		{
-			 //boolean tab=false;
-				if(ast.getChildCount()==3)
+			System.out.println("arr");
+			return ;
+		}
+		if(ast.getText().equals("CASE")||ast.getText().equals("VAL"))
+		{
+			for(int h=0;h<ast.getChildCount();h++)
+    		{
+				getSymbole(ast.getChild(h),l);
+    		}
+		}
+		if(ast.getChildCount()==0)
+		{
+			if(ast.getText().equals("true")||ast.getText().equals("false"))
 				{
-					    String id=ast.getChild(0).getText();
-					    //System.out.println("yoo2 "+id);
-					    //System.out.println("yoo2 "+ast.getChild(1).getText());
-					    //System.out.println("yoo2 "+ast.getChild(2).getText());
-						//tab=true;
-						printSemanticsAffect2(ast.getChild(1),true,id);//CASE
-						printSemanticsAffect2(ast.getChild(2),true,id);//VAL
+				l.add("erreur bool");
+				return ;
 				}
-				//System.out.println("yolooooo ");
-				return;
+			else if(!l.contains(ast.getText()))
+			   {   
+				l.add(ast.getText());
+			     return;
+			   }
 		}
 		
-		
-		for(int i=0;i<ast.getChildCount();i++)
+		if(tokens.contains(ast.getText()))
 		{
-			if(ent==false)
-			printSemanticsAffect2(ast.getChild(i),ent,name);
-			else if((ast.getChild(i).getText().equals("false")||ast.getChild(i).getText().equals("true")) && (ent==true))
-		 {
-			System.out.println("l'affectation du tableau "+name+" est incorrecte");
-			if(ast.getText().equals("VAL"))
-			{
-				System.out.println("vous ne pouvez pas assigner un boolean a un tableau d'entier");
-			}
-			if(ast.getText().equals("CASE"))
-			{
-				System.out.println("vous ne pouvez pas mettre comme indice un boolean ");
-			}
+			l.add(ast.getChild(0).getText());
+			getSymbole(ast.getChild(1),l);
+		}
+		else if(tokens1.contains(ast.getText()))
+		{
+			l.add("erreur bool2");
+			l.add(ast.getChild(0).getText());
+			getSymbole(ast.getChild(1),l);
+		}
+		
+	}
+
+	private void checkExprBr(Tree ast,TDSGlobal tdsSorted,ArrayList<String> l,int region,String name)
+	{
+		if(l.contains("erreur bool"))
+		{
+			System.out.println("vous ne pouvez pas mettre comme indice du tableau "+name+" un booleen ");
 			return;
 		}
+		if(l.contains("erreur bool2"))
+		{
+			System.out.println("vous ne pouvez pas mettre comme indice du tableau "+name+" un booleen (expression booleene) ");
+			return;
 		}
-		return;
-		//if(ast.)
+		Pro pile = new Pro(tdsSorted.addNoExistTDS(ast));
+        pile.doPro(ast,0);
+        ArrayList<Integer>m=pile.getPile().get(region);
+        //System.out.println("region= "+region);
+        int decl=0;
+        for(int i=0;i<m.size();i++)
+        {
+        	
+        	TDS tds_i=tdsSorted.getTDSparRegion().get(i);
+        	ArrayList<Symbole> syml=tds_i.getSymboles();
+        	for(int j=0;j<syml.size();j++)
+        	{
+        		Symbole s=syml.get(j);
+        		//indice de la region
+        		if(l.contains(s.getNom()) && s.getType()!=null&&s.getType().equals("boolean"))
+        		{
+        			//une variable dans l expression est boolean
+        			System.out.println("erreur la variable "+s.getNom()+" utilisée pour les indices de "+name+" est booleene");
+        	
+        		}
+        		/*
+        		else if(!l.contains(s.getNom()))
+        		{
+        		System.out.println("erreur la variable "+s.getNom()+" utilisée pour les indices n a pas ete declaree");
+        		}
+        		*/
+        	}
+        }
 		
 		
 	}
 	
-	
-	public void printSemanticsAffect(Tree ast)
+	private void checkExprAff(Tree ast,TDSGlobal tdsSorted,ArrayList<String> l,int region,String name)
 	{
-		printSemanticsAffect2(ast,false,"");
+		if(l.contains("erreur bool"))
+		{
+			System.out.println("vous ne pouvez pas assigner un boolean au tableau d'entier "+name);
+			return;
+		}
+		if(l.contains("erreur bool2"))
+		{
+			System.out.println("vous ne pouvez pas assigner un boolean(expression booleene) au tableau d'entier "+name);
+			return;
+		}
+		Pro pile = new Pro(tdsSorted.addNoExistTDS(ast));
+        pile.doPro(ast,0);
+        ArrayList<Integer>m=pile.getPile().get(region);
+        //System.out.println("region= "+region);
+        int decl=0;
+        for(int i=0;i<m.size();i++)
+        {
+        	
+        	TDS tds_i=tdsSorted.getTDSparRegion().get(i);
+        	ArrayList<Symbole> syml=tds_i.getSymboles();
+        	for(int j=0;j<syml.size();j++)
+        	{
+        		Symbole s=syml.get(j);
+        		//indice de la region
+        		if(l.contains(s.getNom()) && s.getType()!=null&&s.getType().equals("boolean"))
+        		{
+        			//une variable dans l expression est boolean
+        			System.out.println("erreur la variable "+s.getNom()+" utilisée pour l affectation du tableau "+name+" est booleene");
+        	
+        		}
+        		/*else if(!l.contains(s.getNom()))
+        		{
+        		System.out.println("erreur la variable "+s.getNom()+" utilisée pour l affectation n a pas ete declaree");
+        		}
+        		*/
+        	}
+        }
+		
+		
 	}
 	
 	
-	
-	public void checkDecl(Tree ast,int region,Tree astInit,TDSGlobal tdsSorted)
+	private void checkDecl(Tree ast,int region,Tree astInit,TDSGlobal tdsSorted,boolean verbose,ArrayList<String>l)
 	{
 		if(ast==null)
 		{
@@ -205,13 +290,13 @@ public class SemanticsTab {
 				
 				if(ast.getChild(i).getText().equals("DECLARATION"))
 				{
-					 checkDecl(ast.getChild(i),region,astInit,tdsSorted);
+					 checkDecl(ast.getChild(i),region,astInit,tdsSorted,verbose,l);
 					 reg=0;
 					 return;//on ne traverse qu une seule fois le noeud declaration
 				}
 				if(ast.getChild(i).getText().equals("INSTRUCTION"))
 				{
-					checkDecl(ast.getChild(i),region,astInit,tdsSorted);
+					checkDecl(ast.getChild(i),region,astInit,tdsSorted,verbose,l);
 					reg=0;
 					return;
 				}
@@ -224,7 +309,7 @@ public class SemanticsTab {
 			for(int i=0;i<ast.getChildCount();i++)
 			{
 			
-			checkDecl(ast.getChild(i),region,astInit,tdsSorted);
+			checkDecl(ast.getChild(i),region,astInit,tdsSorted,verbose,l);
 		    
 			}
 			
@@ -239,7 +324,7 @@ public class SemanticsTab {
 			  reg++;
 			  //depList.add(0);
 			 
-		      checkDecl(ast.getChild(i),reg,astInit,tdsSorted);
+		      checkDecl(ast.getChild(i),reg,astInit,tdsSorted,verbose,l);
 		      //ltdpl=0;
 		  }
 		  else
@@ -255,7 +340,38 @@ public class SemanticsTab {
 							    //System.out.println("yoor "+region);
 							    //System.out.println("yoo2 "+ast.getChild(2).getText());
 								//tab=true;
-							    checkArray(astInit,tdsSorted,region,id);
+							    System.out.println("==================");
+							    Integer wRegion[]={0,0};//contient le numero de region et l'indice du symbole de l'id
+							                          //à l endroit ou il a été déclaré
+							    boolean check=checkArray(astInit,tdsSorted,region,id,verbose,wRegion);
+							    if(check==false)
+							    	l.add(id);
+							    else
+							    {
+							    	if(wRegion[0]!=-1)
+							    	{
+							    		Symbole symbole_array=tdsSorted.getTDSparRegion().get(wRegion[0]).getSymboles().get(wRegion[1]);
+
+							    		ArrayList<String> lAff=new ArrayList<String>();
+							    		ArrayList<String> lBr=new ArrayList<String>();
+							    		Tree child_Val=ast.getChild(2);
+							    		Tree child_Case=ast.getChild(1);
+							    		
+							    			getSymbole(child_Case,lBr);
+							    			getSymbole(child_Val,lAff);
+							    		
+							    			checkExprBr(astInit,tdsSorted,lBr,region,symbole_array.getNom());
+							    			checkExprAff(astInit,tdsSorted,lAff,region,symbole_array.getNom());
+							    		int dimension=symbole_array.getInfoTableau().getBounds().size();
+							    		int dim_used=ast.getChild(1).getChildCount();
+							    		checkBounds(symbole_array);
+							    		if(dimension!=dim_used)
+							    		{
+							    			System.out.println("le tableau "+id+" declare a "+dimension+" dimension cependant vous en utilisez "+dim_used);
+							    		}
+							    	}
+							    	
+							    }
 								
 						}
 						//System.out.println("yolooooo ");
@@ -263,7 +379,7 @@ public class SemanticsTab {
 				}
 			  else
 			  {
-				  checkDecl(ast.getChild(i),region,astInit,tdsSorted);
+				  checkDecl(ast.getChild(i),region,astInit,tdsSorted,verbose,l);
 			  }
 				
 		  }
@@ -271,7 +387,7 @@ public class SemanticsTab {
 		
 	}
 	
-	public void checkArray(Tree ast,TDSGlobal tdsSorted,int region,String name)
+	private boolean checkArray(Tree ast,TDSGlobal tdsSorted,int region,String name,boolean verbose,Integer wRegion[])
 	{
 		Pro pile = new Pro(tdsSorted.addNoExistTDS(ast));
         pile.doPro(ast,0);
@@ -286,10 +402,14 @@ public class SemanticsTab {
         	for(int j=0;j<syml.size();j++)
         	{
         		Symbole s=syml.get(j);
-        		
+        		//indice de la region
         		if(s.getNom().equals(name) && s.getType().equals("ARRAY"))
         		{
         			decl++;
+        			//indice du symbole
+        			wRegion[1]=j;
+        			wRegion[0]=i;
+        			
         		}
         	}
         }
@@ -297,13 +417,37 @@ public class SemanticsTab {
 
     	if(decl==0)
     	{
+    		if(verbose)
     		System.out.println("l'array "+name+" est utilisé mais n est pas déclaré");
+    		wRegion[0]=-1;
+    		return false;
     	}
+    	/*else if(decl>1)
+    	{
+    		wRegion[0]=-1;
+    	}*/
+    	return true;
 	}
 	
-	public void printSemanticDecl(Tree ast,TDSGlobal tdsSorted)
+	private ArrayList<String> printSemanticDecl(Tree ast,TDSGlobal tdsSorted)
 	{
-		checkDecl(ast,0,ast,tdsSorted);
+		ArrayList<String> res=new ArrayList<String>();
+		checkDecl(ast,0,ast,tdsSorted,true,res);
+		return res;
 	}
+	private ArrayList<String> getIdErrSemanticDecl(Tree ast,TDSGlobal tdsSorted)
+	{
+		ArrayList<String> res=new ArrayList<String>();
+		checkDecl(ast,0,ast,tdsSorted,false,res);
+		return res;
+	 }
+	
+	public void PrintArraySemanticError(Tree ast,TDSGlobal tdsSorted)
+	{
+		printSemanticDecl(ast,tdsSorted);
+		printSemanticsErrorDecl(tdsSorted);
+		reg=0;
+	}
+	
 	
 }
