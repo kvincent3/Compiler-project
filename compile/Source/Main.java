@@ -25,7 +25,7 @@ public class Main {
 		CommonTree ast;
 		
 		compParser.prog_return result = null;
-		compLexer lex = new compLexer(new ANTLRFileStream("__Test___input.txt", "UTF8"));
+		compLexer lex = new compLexer(new ANTLRFileStream("test25.txt", "UTF8"));
         CommonTokenStream tokens = new CommonTokenStream(lex);
         tokens.setTokenSource(lex);
         compParser g = new compParser(tokens);
@@ -52,7 +52,7 @@ public class Main {
         Pro pile = new Pro(tdsFinal);
         pile.doPro(ast,0);
         pile.displayPRO();
-        /*// ===> partie kevin et oussama
+        // ===> partie kevin et oussama
         Semantic controle = new Semantic(pile, tdsFinal,ast);
         controle.CheckVisibilityVariable(ast, 0);
         controle.checkOccur(tdsFinal);

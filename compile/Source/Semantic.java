@@ -133,58 +133,154 @@ public class Semantic
                                        }
                                     }
                           }
-                           else if (ast.getChild(j).getText().equals("for"))
-                           {
-                                Tree ast2=ast.getChild(j);
-                                String var = ast2.getChild(1).getText();
-                                String type = "";
-                                String var2 = ast2.getChild(2).getText();
-                                String type2 = "";
-                                ArrayList<Integer> pile_reg_ouv = new ArrayList<Integer>();
-                                pile_reg_ouv=this.pro.getPile().get(region);
-                                for(int k=0;k<pile_reg_ouv.size();k++)
-                                {
-	                             TDS courant = this.tdsglobale.TDSparRegion.get(pile_reg_ouv.get(k));
-	                             for (int p=0;p<courant.getSymboles().size();p++)
-	                             {
-	                                   if (courant.getSymboles().get(p).getNom().equals(var))
-	                                    {
-	                                          type = courant.getSymboles().get(p).getType();
-	                                    }
-	                                     if(courant.getSymboles().get(p).getNom().equals(var2))
-	                                     {
-	                                        type2 = courant.getSymboles().get(p).getType();
-	                                     }
-	
-	                                     if (type.equals("")) //pas de type = pas déclaré
-	                                     {
-	                                        System.err.println("Dans la région "+region+" La variable \""+var+"\" n'est pas déclarée ou n'est pas visible");
-	                                        ArrayList<Boolean> bool = new ArrayList<Boolean>();
-	                                        this.Checkexpression(ast.getChild(j).getChild(1),type,region,bool);
-	                                        System.err.println("Dans la région "+region+" l'expression associé à la variable \""+var+"\" est complètement incorrect");
-	                                     }
-	                                     if(type2.equals(""))
-	                                     {
-	                                        System.err.println("Dans la région "+region+" La variable \""+var2+"\" n'est pas déclarée ou n'est pas visible");
-	                                        ArrayList<Boolean> bool = new ArrayList<Boolean>();
-	                                        this.Checkexpression(ast.getChild(j).getChild(1),type2,region,bool);
-	                                        System.err.println("Dans la région "+region+" l'expression associé à la variable \""+var2+"\" est complètement incorrect");
-	                                     }
-	                                     else if(!type.equals(type2))
-	                                     {
-	                                    	 System.err.println("Les variables"+var+" et "+var2+" ne sont pas du même type.");
-	                                     }
-	                                     else if(!type.equals("integer")) 
-	                                     {
-	                                        System.err.println("La variable "+var+" n'est pas un entier");
-	                                     }
-	                                     else if(!type2.equals("integer")) 
-	                                     {
-	                                        System.err.println("La variable "+var2+" n'est pas un entier");
-	                                     }
-	                      }
-	                    }
-                        }
+                        else if (ast.getChild(j).getText().equals("for"))
+                        	
+            			{
+            			Tree	ast3=ast.getChild(j);
+            			System.out.println(ast3);
+            			String type = "";
+            			String type2 = "";
+            			
+            			String var = ast3.getChild(1).getText();
+            			
+            			 String var2= ast3.getChild(2).getText();
+            		
+            			if(IsInteger(var)&&IsInteger(var2))
+            			{
+            				if(Integer.parseInt(var)>Integer.parseInt(var2)){
+            					System.err.println(var+" est sup�rieur � "+var2);
+            				}
+            				else{}
+            			}
+            			 
+            			 if (var.equals("APPEL")){
+            			var=ast3.getChild(1).getChild(0).getText();
+            			 }
+            			 if(var2.equals("APPEL")){
+            				var2=ast3.getChild(2).getChild(0).getText();
+            				System.out.println(var2);
+            				
+            				}	
+            		
+            				ArrayList<Integer> pile_reg_ouv = new ArrayList<Integer>();
+            				pile_reg_ouv=this.pro.getPile().get(region);
+            				for(int k=0;k<pile_reg_ouv.size();k++){
+            					TDS courant = this.tdsglobale.TDSparRegion.get(pile_reg_ouv.get(k));
+
+            					for (int p=0;p<courant.getSymboles().size();p++)
+
+            					{
+            						if (courant.getSymboles().get(p).getNom().equals(var)){
+            							type = courant.getSymboles().get(p).getType();
+            						}
+            					}
+
+            					
+            					for (int u=0;u<courant.getSymboles().size();u++){
+            						if(courant.getSymboles().get(u).getNom().equals(var2)){
+            							type2 = courant.getSymboles().get(u).getType();
+            						}
+            					
+            					}
+            				}
+            				if(type!=null && type2!=null){
+            						if (type.equals("")&&!IsInteger(var)) //pas de type = pas d�clar�
+
+            								{
+
+            							System.err.println("Dans la r�gion "+region+" La variable \""+var+"\" n'est pas d�clar�e ou n'est pas visible");
+
+            							ArrayList<Boolean> bool = new ArrayList<Boolean>();
+
+            							//this.Checkexpression(ast.getChild(j).getChild(1),type,region,bool);
+
+            							//System.err.println("Dans la r�gion "+region+" l'expression associ� � la variable \""+var+"\" est compl�tement incorrect");
+
+            								}
+            					if(type2.equals("")&&!IsInteger(var2))
+            						{
+            							System.err.println("Dans la r�gion "+region+" La variable \""+var2+"\" n'est pas d�clar�e ou n'est pas visible");
+
+            							ArrayList<Boolean> bool = new ArrayList<Boolean>();
+
+            							//this.Checkexpression(ast.getChild(j).getChild(1),type2,region,bool);
+
+            							//System.err.println("Dans la r�gion "+region+" l'expression associ� � la	 variable \""+var2+"\" est compl�tement incorrect");
+
+            						}
+
+            					 if(!type.equals("integer")&& !IsInteger(var)) {
+            							System.err.println("La variable "+var+" n'est pas un entier");
+            						}
+            					 if(!type2.equals("integer")&& !IsInteger(var2)) {
+            							System.err.println("La variable "+var2+" n'est pas un entier");
+            						}
+            				}
+            					 else{
+            						 System.err.println("For mal formé");
+            					 }
+            			 GetIntoInstruction(ast.getChild(j).getChild(3), region);
+            			}
+            				
+            		else if (ast.getText().equals("==")||ast.getText().equals("!=")||ast.getText().equals(">=")||ast.getText().equals("<=")||ast.getText().equals("<")||ast.getText().equals(">"))
+            			{
+            			Tree	ast3=ast.getChild(j);
+            			String var1=ast.getChild(0).getText();
+            			String var2=ast.getChild(1).getText();
+            			String type1="";
+            			String type2="";
+            			String nature1="";
+            			String nature2="";
+            			int param1=0;
+            			int param2=0;
+            			 if (var1.equals("APPEL")){
+            					var1=ast3.getChild(1).getChild(0).getText();
+            					System.out.println(var1);
+            					 }
+            					 if(var2.equals("APPEL")){
+            						var2=ast3.getChild(2).getChild(0).getText();
+            						System.out.println(var2);
+            						
+            						}	
+            			ArrayList<Integer> pile_reg_ouv = new ArrayList<Integer>();
+            			pile_reg_ouv=this.pro.getPile().get(region);
+            			for(int k=0;k<pile_reg_ouv.size();k++){
+            				TDS courant = this.tdsglobale.TDSparRegion.get(pile_reg_ouv.get(k));
+
+            				for (int p=0;p<courant.getSymboles().size();p++)
+
+            				{
+            					if (courant.getSymboles().get(p).getNom().equals(var1)){
+
+            						type1 = courant.getSymboles().get(p).getType();
+            						nature1=courant.getSymboles().get(p).getNature();
+            						param1=courant.getSymboles().get(p).getParametre();
+            					}
+            					}
+            				for (int u=0;u<courant.getSymboles().size();u++)
+            					if(courant.getSymboles().get(u).getNom().equals(var2)){
+            						type2 = courant.getSymboles().get(u).getType();
+            						nature2=courant.getSymboles().get(u).getNature();
+            						param2=courant.getSymboles().get(u).getParametre();
+            					}
+            				}
+            			
+            				
+            			if(!type1.equals(type2))
+            				System.err.println("Les expressions ne sont pas de meme type");
+            			else if(!nature1.equals(nature2))
+            					System.err.println("Les expressions ne sont pas de meme nature");
+            			else if(param1!=param2)
+            				System.err.println("Les expressions n'ont pas le meme nombre de parametres");
+            				}
+            			
+            			 
+            				
+            				
+            				
+
+            							
+            			
                         else
                         {
                                 GetIntoInstruction(ast.getChild(j), region);
