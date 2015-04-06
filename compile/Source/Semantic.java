@@ -277,8 +277,9 @@ public class Semantic
             			 
                         else if (ast.getChild(j).getText().equals("if")){
                         	//System.out.println(ast);
-                        	Tree ast2=ast.getChild(j).getChild(0);
-                        //	System.out.println(ast2);
+                        	
+                        	Tree ast2=ast.getChild(j);
+                      	System.out.println(ast2);
                         	ArrayList<String> A = IsGood(ast2,region);
                         	System.out.println(A);
                         	for (String s : A){
@@ -288,7 +289,9 @@ public class Semantic
                         			}
                         		}
                         	}
-                        	 GetIntoInstruction(ast.getChild(j).getChild(3), region);
+                        	for(int o=0;o<ast.getChild(j).getChildCount();o++){
+                        		if (ast.getChild(j).getChild(o).getText().equals("then"))
+                        	 GetIntoInstruction(ast.getChild(j).getChild(o), region);}
                         }
                         
                 		
