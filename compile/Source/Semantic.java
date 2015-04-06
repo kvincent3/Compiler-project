@@ -222,7 +222,7 @@ public class Semantic
             			 GetIntoInstruction(ast.getChild(j).getChild(3), region);
             			}
             				
-            		else if (ast.getText().equals("==")||ast.getText().equals("!=")||ast.getText().equals(">=")||ast.getText().equals("<=")||ast.getText().equals("<")||ast.getText().equals(">"))
+            	/*	else if (ast.getText().equals("==")||ast.getText().equals("!=")||ast.getText().equals(">=")||ast.getText().equals("<=")||ast.getText().equals("<")||ast.getText().equals(">"))
             			{
             			Tree	ast3=ast.getChild(j);
             			String var1=ast.getChild(0).getText();
@@ -272,10 +272,26 @@ public class Semantic
             					System.err.println("Les expressions ne sont pas de meme nature");
             			else if(param1!=param2)
             				System.err.println("Les expressions n'ont pas le meme nombre de parametres");
-            				}
+            				}*/
             			
             			 
-            				
+                        else if (ast.getChild(j).getText().equals("if")){
+                        	//System.out.println(ast);
+                        	Tree ast2=ast.getChild(j).getChild(0);
+                        //	System.out.println(ast2);
+                        	ArrayList<String> A = IsGood(ast2,region);
+                        	System.out.println(A);
+                        	for (String s : A){
+                        		for (String c:A){
+                        			if (!s.equals(c)){
+                        				System.err.println("La condition du if n'est pas un boolean");
+                        			}
+                        		}
+                        	}
+                        	 GetIntoInstruction(ast.getChild(j).getChild(3), region);
+                        }
+                        
+                		
             				
             				
 
@@ -712,5 +728,57 @@ public class Semantic
                 }
 
         }
-}
+        public boolean IsNotOp(Tree ast){
+        	boolean b=false;
+        		if(!ast.getText().equals("==")&& !ast.getText().equals("!=")&& !ast.getText().equals(">=")&&!ast.getText().equals("<=")&&!ast.getText().equals("<")&&!ast.getText().equals(">")&&!ast.getText().equals("+")&&!ast.getText().equals("-")&&!ast.getText().equals("*")&&!ast.getText().equals("/"))
+        		{
+        		b=true;	
+        		}
+        		
+        	return b;
+        }
+        
+        public ArrayList<String> IsGood(Tree ast,int region){
+        	ArrayList<String>  types=new ArrayList<String>();
+        	if(IsNotOp(ast)){
+        	String var=ast.getText();
+        	String type;
+        	ArrayList<Integer> pile_reg_ouv = new ArrayList<Integer>();
+        	pile_reg_ouv=this.pro.getPile().get(region);
+			if(IsInteger(var)){
+				types.add("integer");
+			}
+			else{
+        	for(int k=0;k<pile_reg_ouv.size();k++){
+				TDS courant = this.tdsglobale.TDSparRegion.get(pile_reg_ouv.get(k));
 
+				for (int p=0;p<courant.getSymboles().size();p++)
+
+				{
+					if (courant.getSymboles().get(p).getNom().equals(var)){
+
+						type = courant.getSymboles().get(p).getType();
+						if(!type.equals("") && type!=null ){			
+						types.add(type);}
+						else{
+							System.err.println("Il y a un probleme de types avec le if");
+						}
+						
+					}else{
+						System.err.println("La variable "+var+" n'est pas declaree");
+					}
+				}
+			}
+			
+			}
+        	}
+        	else{
+			 	for ( int z =0;z<ast.getChildCount();z++){
+			 		IsGood(ast.getChild(z),region);
+			 	}
+        	}
+			return types;
+			
+        
+}
+}
