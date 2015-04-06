@@ -10,7 +10,8 @@ public class Semantic
         TDSGlobal tdsglobale;
         Tree ast;
         boolean check;
-        
+        int place;//Donnera la place de l'analyse
+        int region_declarant;
         public Semantic(Pro p,TDSGlobal tdsg,Tree ast)
         {
                 this.pro=p;
@@ -55,6 +56,7 @@ public class Semantic
                 {
                         if (ast.getChild(j).getText().equals("="))
                         {
+                        			this.place=j;
                                     String var = ast.getChild(j).getChild(0).getText();
                                     String type = SearchTypeIntoTds(var,region);
                                     if (type.equals("")) //pas de type = pas déclaré
@@ -216,13 +218,32 @@ public class Semantic
             							System.err.println("La variable "+var2+" n'est pas un entier");
             						}
             				}
+                            /*else if (ast.getChild(j).getText().equals("if"))
+                            {
+                            	//System.out.println(ast);
+                            	
+                            	Tree ast2=ast.getChild(j);
+                            	System.out.println(ast2);
+                            	ArrayList<String> A = IsGood(ast2,region);
+                            	System.out.println(A);
+                            	for (String s : A){
+                            		for (String c:A){
+                            			if (!s.equals(c)){
+                            				System.err.println("La condition du if n'est pas un boolean");
+                            			}
+                            		}
+                            	}
+                            	for(int o=0;o<ast.getChild(j).getChildCount();o++){
+                            		if (ast.getChild(j).getChild(o).getText().equals("then"))
+                            	 GetIntoInstruction(ast.getChild(j).getChild(o), region);}
+                            }*/
             					 else{
             						 System.err.println("For mal formé");
             					 }
             			 GetIntoInstruction(ast.getChild(j).getChild(3), region);
             			}
             				
-            	/*	else if (ast.getText().equals("==")||ast.getText().equals("!=")||ast.getText().equals(">=")||ast.getText().equals("<=")||ast.getText().equals("<")||ast.getText().equals(">"))
+            		else if (ast.getText().equals("==")||ast.getText().equals("!=")||ast.getText().equals(">=")||ast.getText().equals("<=")||ast.getText().equals("<")||ast.getText().equals(">"))
             			{
             			Tree	ast3=ast.getChild(j);
             			String var1=ast.getChild(0).getText();
@@ -272,29 +293,10 @@ public class Semantic
             					System.err.println("Les expressions ne sont pas de meme nature");
             			else if(param1!=param2)
             				System.err.println("Les expressions n'ont pas le meme nombre de parametres");
-            				}*/
+            				}
             			
             			 
-                        else if (ast.getChild(j).getText().equals("if")){
-                        	//System.out.println(ast);
-                        	
-                        	Tree ast2=ast.getChild(j);
-                      	System.out.println(ast2);
-                        	ArrayList<String> A = IsGood(ast2,region);
-                        	System.out.println(A);
-                        	for (String s : A){
-                        		for (String c:A){
-                        			if (!s.equals(c)){
-                        				System.err.println("La condition du if n'est pas un boolean");
-                        			}
-                        		}
-                        	}
-                        	for(int o=0;o<ast.getChild(j).getChildCount();o++){
-                        		if (ast.getChild(j).getChild(o).getText().equals("then"))
-                        	 GetIntoInstruction(ast.getChild(j).getChild(o), region);}
-                        }
-                        
-                		
+            				
             				
             				
 
@@ -613,20 +615,24 @@ public class Semantic
         {
                 ArrayList<Integer> pile_reg_ouv = new ArrayList<Integer>();
                 pile_reg_ouv=this.pro.getPile().get(region);
-                for (int p=pile_reg_ouv.size()-1;p>=0;p--)
+                this.region_declarant=pile_reg_ouv.get(pile_reg_ouv.size()-1);
+                for (int p=0;p<pile_reg_ouv.size();p++)
                 {
                         SearchRegionInAST(ast,idf,pile_reg_ouv.get(p),0);
                         if (check)
                         {
-                                System.out.println("la variable "+idf+ " a bien été initialisée");
-                                p=0;
+                                p=pile_reg_ouv.size();
                         }
+                }
+                if (check)
+                {
+                        System.out.println("Dans la région "+region+" la variable "+idf+ " a bien été initialisée");
                 }
                 if (!IsParameter(idf,region))
                 {
 	                if (!check)
 	                {
-	                        System.err.println("la variable "+ idf+" n'as pas été initialisée");
+	                        System.err.println("Dans la région "+region+" la variable "+ idf+" n'as pas été initialisée");
 	                }
                 }
         }
@@ -669,7 +675,7 @@ public class Semantic
                                 {
                                         if (a.getChild(p).getText().equals("INSTRUCTION"))
                                         {
-                                            SearchAffectationVariable(a.getChild(p),idf);
+                                            SearchAffectationVariable(a.getChild(p),idf,region_ast);
                                         }
                                 }
                         }
@@ -683,7 +689,7 @@ public class Semantic
                                                 {
                                                         if (a.getChild(v).getChild(p).getText().equals("INSTRUCTION"))
                                                         {
-                                                            SearchAffectationVariable(a.getChild(v).getChild(p),idf);
+                                                            SearchAffectationVariable(a.getChild(v).getChild(p),idf,region_ast);
                                                         }
                                                 }
                                         }
@@ -710,19 +716,32 @@ public class Semantic
                 }
         }
        
-        private void SearchAffectationVariable(Tree a, String idf) 
+        private void SearchAffectationVariable(Tree a, String idf,int region) 
         {
                 int trouve=0;
+                int var=0;
                 for (int i=0;i<a.getChildCount();i++)
                 {
                         if (a.getChild(i).getText().equals("="))
                         {
+                        	if (region != this.region_declarant)
+                        	{
                                 if (a.getChild(i).getChild(0).getText().equals(idf))
                                 {
                                         this.check=true;
                                         trouve=1;
                                         i=a.getChildCount();
                                 }
+                        	}
+                        	else
+                        	{
+                                if (a.getChild(i).getChild(0).getText().equals(idf) && i<this.place)
+                                {
+                                        this.check=true;
+                                        trouve=1;
+                                        i=a.getChildCount();
+                                }    		
+                        	}
                         }
                 }
                 if (trouve==0)
@@ -731,11 +750,12 @@ public class Semantic
                 }
 
         }
+        
         public boolean IsNotOp(Tree ast){
         	boolean b=false;
         		if(!ast.getText().equals("==")&& !ast.getText().equals("!=")&& !ast.getText().equals(">=")&&!ast.getText().equals("<=")&&!ast.getText().equals("<")&&!ast.getText().equals(">")&&!ast.getText().equals("+")&&!ast.getText().equals("-")&&!ast.getText().equals("*")&&!ast.getText().equals("/"))
         		{
-        		b=true;	
+        			b=true;	
         		}
         		
         	return b;
@@ -785,3 +805,4 @@ public class Semantic
         
 }
 }
+

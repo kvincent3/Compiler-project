@@ -118,7 +118,6 @@ public static int calculNbr(Tree ast)
 				if (ast.getChild(i).getChild(0).getChild(j).getText().equals("FONCTION") ||
 					ast.getChild(i).getChild(0).getChild(j).getText().equals("PROCEDURE"))
 				{
-					
 					enre.add(1+calculNbr(ast.getChild(i).getChild(0).getChild(j)));
 				}
 			}

@@ -292,13 +292,14 @@ public class SemanticsTab {
 				{
 					 checkDecl(ast.getChild(i),region,astInit,tdsSorted,verbose,l);
 					 reg=0;
-					 return;//on ne traverse qu une seule fois le noeud declaration
+					 //return;//on ne traverse qu une seule fois le noeud declaration
 				}
-				if(ast.getChild(i).getText().equals("INSTRUCTION"))
+			    if(ast.getChild(i).getText().equals("INSTRUCTION"))
 				{
+					System.out.println(ast.getText());
 					checkDecl(ast.getChild(i),region,astInit,tdsSorted,verbose,l);
 					reg=0;
-					return;
+					//return;
 				}
 			}
 		}
@@ -329,9 +330,8 @@ public class SemanticsTab {
 		  }
 		  else
 		  {
-			  
 			  if(ast.getText().equals("="))
-				{
+				{    
 					 //boolean tab=false;
 						if(ast.getChildCount()==3)
 						{
