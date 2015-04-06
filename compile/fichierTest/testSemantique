@@ -1,0 +1,27 @@
+do
+integer i,j,h
+ procedure integer theEnd (x: integer)
+      procedure integer theEnd (x: integer)
+ 	  	return (h)
+ 	  end
+ 	  j=i
+ 	  i=i+1
+ return (i)
+ end
+
+end
+
+/////
+
+do
+integer i,j,h
+ procedure integer theEnd (x: integer)
+      procedure integer theEnd (x: integer)
+ 	  	return (h)
+ 	  end
+ 	  j=i
+ 	  i=i+1
+ return (i)
+ end
+i=i+theEnd()
+end

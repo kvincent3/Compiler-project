@@ -60,15 +60,16 @@ public class Main {
         controle.checkOccur(tdsFinal);
         //////
         ////Ansa
-        /*SemanticsFunct controlef = new SemanticsFunct(pile, tdsFinal);
+        SemanticsFunct controlef = new SemanticsFunct(pile, tdsFinal);
         controlef.CheckVisibilityFunct(ast, 0);
         controlef.CheckRetourFonct(ast, 0, 0);
         controlef.CheckSameFonct();
         controlef.CheckSameFonct();
         /////*/
         ///jerome
-        //SemanticsTab sem=new SemanticsTab();
-        //sem.PrintArraySemanticError(ast, tteTds);
+        //System.out.println(ast.toStringTree());
+        SemanticsTab sem=new SemanticsTab();
+        sem.PrintArraySemanticError(ast, tdsFinal);
         //sem.printSemanticsBound(tteTds);
 	}
 

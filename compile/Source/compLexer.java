@@ -1,4 +1,4 @@
-// $ANTLR 3.2 Sep 23, 2009 12:02:23 /home/vincent/Bureau/comp.g 2015-04-02 16:56:52
+// $ANTLR 3.2 Sep 23, 2009 12:02:23 /home/vincent/Bureau/comp.g 2015-04-06 19:38:43
 
 import org.antlr.runtime.*;
 import java.util.Stack;
@@ -9,33 +9,34 @@ public class compLexer extends Lexer {
     public static final int INSTRUCTION=9;
     public static final int T__64=64;
     public static final int T__62=62;
-    public static final int IDF=27;
+    public static final int IDF=28;
     public static final int T__63=63;
-    public static final int CASE=24;
+    public static final int CASE=25;
     public static final int CONDITION=12;
-    public static final int PARAM=18;
+    public static final int PARAM=19;
     public static final int T__61=61;
     public static final int T__60=60;
-    public static final int CSTE_CHAINE=29;
+    public static final int CSTE_CHAINE=30;
     public static final int EOF=-1;
     public static final int DECLARATION=8;
-    public static final int INTERVAL=22;
-    public static final int LISTPARAM=19;
-    public static final int CST_ENT=28;
+    public static final int INTERVAL=23;
+    public static final int LISTPARAM=20;
+    public static final int CST_ENT=29;
     public static final int T__55=55;
     public static final int T__56=56;
     public static final int T__57=57;
     public static final int T__58=58;
     public static final int T__51=51;
+    public static final int THEN=13;
     public static final int T__52=52;
     public static final int T__53=53;
     public static final int T__54=54;
     public static final int T__59=59;
-    public static final int VAL=25;
-    public static final int APPEL=16;
+    public static final int VAL=26;
+    public static final int APPEL=17;
     public static final int VAR=4;
     public static final int T__50=50;
-    public static final int ARRAY=21;
+    public static final int ARRAY=22;
     public static final int ITERATION=11;
     public static final int T__42=42;
     public static final int T__43=43;
@@ -45,29 +46,28 @@ public class compLexer extends Lexer {
     public static final int T__47=47;
     public static final int T__44=44;
     public static final int FONCTION=5;
-    public static final int BLOC=10;
     public static final int T__45=45;
+    public static final int BLOC=10;
     public static final int T__48=48;
     public static final int T__49=49;
-    public static final int TABLEAU=26;
+    public static final int TABLEAU=27;
     public static final int PROCEDURE=6;
-    public static final int WRITE=15;
-    public static final int RETOUR=13;
-    public static final int T__31=31;
+    public static final int WRITE=16;
+    public static final int RETOUR=14;
     public static final int T__32=32;
     public static final int T__33=33;
-    public static final int WS=30;
+    public static final int WS=31;
     public static final int T__34=34;
     public static final int T__35=35;
     public static final int T__36=36;
     public static final int T__37=37;
-    public static final int BOUNDS=23;
+    public static final int BOUNDS=24;
     public static final int T__38=38;
-    public static final int READ=14;
+    public static final int READ=15;
     public static final int T__39=39;
     public static final int AFFECTATION=7;
-    public static final int CALL=17;
-    public static final int DEC_VAR=20;
+    public static final int CALL=18;
+    public static final int DEC_VAR=21;
 
     // delegates
     // delegators
@@ -187,13 +187,34 @@ public class compLexer extends Lexer {
     }
     // $ANTLR end "INSTRUCTION"
 
+    // $ANTLR start "THEN"
+    public final void mTHEN() throws RecognitionException {
+        try {
+            int _type = THEN;
+            int _channel = DEFAULT_TOKEN_CHANNEL;
+            // /home/vincent/Bureau/comp.g:8:6: ( 'then' )
+            // /home/vincent/Bureau/comp.g:8:8: 'then'
+            {
+            match("then"); 
+
+
+            }
+
+            state.type = _type;
+            state.channel = _channel;
+        }
+        finally {
+        }
+    }
+    // $ANTLR end "THEN"
+
     // $ANTLR start "RETOUR"
     public final void mRETOUR() throws RecognitionException {
         try {
             int _type = RETOUR;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /home/vincent/Bureau/comp.g:8:8: ( 'retour' )
-            // /home/vincent/Bureau/comp.g:8:10: 'retour'
+            // /home/vincent/Bureau/comp.g:9:8: ( 'retour' )
+            // /home/vincent/Bureau/comp.g:9:10: 'retour'
             {
             match("retour"); 
 
@@ -213,8 +234,8 @@ public class compLexer extends Lexer {
         try {
             int _type = READ;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /home/vincent/Bureau/comp.g:9:6: ( 'read' )
-            // /home/vincent/Bureau/comp.g:9:8: 'read'
+            // /home/vincent/Bureau/comp.g:10:6: ( 'read' )
+            // /home/vincent/Bureau/comp.g:10:8: 'read'
             {
             match("read"); 
 
@@ -234,8 +255,8 @@ public class compLexer extends Lexer {
         try {
             int _type = WRITE;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /home/vincent/Bureau/comp.g:10:7: ( 'write' )
-            // /home/vincent/Bureau/comp.g:10:9: 'write'
+            // /home/vincent/Bureau/comp.g:11:7: ( 'write' )
+            // /home/vincent/Bureau/comp.g:11:9: 'write'
             {
             match("write"); 
 
@@ -255,8 +276,8 @@ public class compLexer extends Lexer {
         try {
             int _type = APPEL;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /home/vincent/Bureau/comp.g:11:7: ( 'Appel' )
-            // /home/vincent/Bureau/comp.g:11:9: 'Appel'
+            // /home/vincent/Bureau/comp.g:12:7: ( 'Appel' )
+            // /home/vincent/Bureau/comp.g:12:9: 'Appel'
             {
             match("Appel"); 
 
@@ -271,36 +292,15 @@ public class compLexer extends Lexer {
     }
     // $ANTLR end "APPEL"
 
-    // $ANTLR start "T__31"
-    public final void mT__31() throws RecognitionException {
-        try {
-            int _type = T__31;
-            int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /home/vincent/Bureau/comp.g:12:7: ( 'do' )
-            // /home/vincent/Bureau/comp.g:12:9: 'do'
-            {
-            match("do"); 
-
-
-            }
-
-            state.type = _type;
-            state.channel = _channel;
-        }
-        finally {
-        }
-    }
-    // $ANTLR end "T__31"
-
     // $ANTLR start "T__32"
     public final void mT__32() throws RecognitionException {
         try {
             int _type = T__32;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /home/vincent/Bureau/comp.g:13:7: ( 'end' )
-            // /home/vincent/Bureau/comp.g:13:9: 'end'
+            // /home/vincent/Bureau/comp.g:13:7: ( 'do' )
+            // /home/vincent/Bureau/comp.g:13:9: 'do'
             {
-            match("end"); 
+            match("do"); 
 
 
             }
@@ -318,10 +318,11 @@ public class compLexer extends Lexer {
         try {
             int _type = T__33;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /home/vincent/Bureau/comp.g:14:7: ( ',' )
-            // /home/vincent/Bureau/comp.g:14:9: ','
+            // /home/vincent/Bureau/comp.g:14:7: ( 'end' )
+            // /home/vincent/Bureau/comp.g:14:9: 'end'
             {
-            match(','); 
+            match("end"); 
+
 
             }
 
@@ -338,11 +339,10 @@ public class compLexer extends Lexer {
         try {
             int _type = T__34;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /home/vincent/Bureau/comp.g:15:7: ( 'integer' )
-            // /home/vincent/Bureau/comp.g:15:9: 'integer'
+            // /home/vincent/Bureau/comp.g:15:7: ( ',' )
+            // /home/vincent/Bureau/comp.g:15:9: ','
             {
-            match("integer"); 
-
+            match(','); 
 
             }
 
@@ -359,10 +359,10 @@ public class compLexer extends Lexer {
         try {
             int _type = T__35;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /home/vincent/Bureau/comp.g:16:7: ( 'boolean' )
-            // /home/vincent/Bureau/comp.g:16:9: 'boolean'
+            // /home/vincent/Bureau/comp.g:16:7: ( 'integer' )
+            // /home/vincent/Bureau/comp.g:16:9: 'integer'
             {
-            match("boolean"); 
+            match("integer"); 
 
 
             }
@@ -380,10 +380,10 @@ public class compLexer extends Lexer {
         try {
             int _type = T__36;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /home/vincent/Bureau/comp.g:17:7: ( 'array' )
-            // /home/vincent/Bureau/comp.g:17:9: 'array'
+            // /home/vincent/Bureau/comp.g:17:7: ( 'boolean' )
+            // /home/vincent/Bureau/comp.g:17:9: 'boolean'
             {
-            match("array"); 
+            match("boolean"); 
 
 
             }
@@ -401,10 +401,11 @@ public class compLexer extends Lexer {
         try {
             int _type = T__37;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /home/vincent/Bureau/comp.g:18:7: ( '[' )
-            // /home/vincent/Bureau/comp.g:18:9: '['
+            // /home/vincent/Bureau/comp.g:18:7: ( 'array' )
+            // /home/vincent/Bureau/comp.g:18:9: 'array'
             {
-            match('['); 
+            match("array"); 
+
 
             }
 
@@ -421,10 +422,10 @@ public class compLexer extends Lexer {
         try {
             int _type = T__38;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /home/vincent/Bureau/comp.g:19:7: ( ']' )
-            // /home/vincent/Bureau/comp.g:19:9: ']'
+            // /home/vincent/Bureau/comp.g:19:7: ( '[' )
+            // /home/vincent/Bureau/comp.g:19:9: '['
             {
-            match(']'); 
+            match('['); 
 
             }
 
@@ -441,11 +442,10 @@ public class compLexer extends Lexer {
         try {
             int _type = T__39;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /home/vincent/Bureau/comp.g:20:7: ( '..' )
-            // /home/vincent/Bureau/comp.g:20:9: '..'
+            // /home/vincent/Bureau/comp.g:20:7: ( ']' )
+            // /home/vincent/Bureau/comp.g:20:9: ']'
             {
-            match(".."); 
-
+            match(']'); 
 
             }
 
@@ -462,10 +462,11 @@ public class compLexer extends Lexer {
         try {
             int _type = T__40;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /home/vincent/Bureau/comp.g:21:7: ( '(' )
-            // /home/vincent/Bureau/comp.g:21:9: '('
+            // /home/vincent/Bureau/comp.g:21:7: ( '..' )
+            // /home/vincent/Bureau/comp.g:21:9: '..'
             {
-            match('('); 
+            match(".."); 
+
 
             }
 
@@ -482,10 +483,10 @@ public class compLexer extends Lexer {
         try {
             int _type = T__41;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /home/vincent/Bureau/comp.g:22:7: ( ')' )
-            // /home/vincent/Bureau/comp.g:22:9: ')'
+            // /home/vincent/Bureau/comp.g:22:7: ( '(' )
+            // /home/vincent/Bureau/comp.g:22:9: '('
             {
-            match(')'); 
+            match('('); 
 
             }
 
@@ -502,11 +503,10 @@ public class compLexer extends Lexer {
         try {
             int _type = T__42;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /home/vincent/Bureau/comp.g:23:7: ( 'adr' )
-            // /home/vincent/Bureau/comp.g:23:9: 'adr'
+            // /home/vincent/Bureau/comp.g:23:7: ( ')' )
+            // /home/vincent/Bureau/comp.g:23:9: ')'
             {
-            match("adr"); 
-
+            match(')'); 
 
             }
 
@@ -523,10 +523,11 @@ public class compLexer extends Lexer {
         try {
             int _type = T__43;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /home/vincent/Bureau/comp.g:24:7: ( ':' )
-            // /home/vincent/Bureau/comp.g:24:9: ':'
+            // /home/vincent/Bureau/comp.g:24:7: ( 'adr' )
+            // /home/vincent/Bureau/comp.g:24:9: 'adr'
             {
-            match(':'); 
+            match("adr"); 
+
 
             }
 
@@ -543,11 +544,10 @@ public class compLexer extends Lexer {
         try {
             int _type = T__44;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /home/vincent/Bureau/comp.g:25:7: ( 'begin' )
-            // /home/vincent/Bureau/comp.g:25:9: 'begin'
+            // /home/vincent/Bureau/comp.g:25:7: ( ':' )
+            // /home/vincent/Bureau/comp.g:25:9: ':'
             {
-            match("begin"); 
-
+            match(':'); 
 
             }
 
@@ -564,10 +564,11 @@ public class compLexer extends Lexer {
         try {
             int _type = T__45;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /home/vincent/Bureau/comp.g:26:7: ( '=' )
-            // /home/vincent/Bureau/comp.g:26:9: '='
+            // /home/vincent/Bureau/comp.g:26:7: ( 'begin' )
+            // /home/vincent/Bureau/comp.g:26:9: 'begin'
             {
-            match('='); 
+            match("begin"); 
+
 
             }
 
@@ -584,11 +585,10 @@ public class compLexer extends Lexer {
         try {
             int _type = T__46;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /home/vincent/Bureau/comp.g:27:7: ( 'for' )
-            // /home/vincent/Bureau/comp.g:27:9: 'for'
+            // /home/vincent/Bureau/comp.g:27:7: ( '=' )
+            // /home/vincent/Bureau/comp.g:27:9: '='
             {
-            match("for"); 
-
+            match('='); 
 
             }
 
@@ -605,10 +605,10 @@ public class compLexer extends Lexer {
         try {
             int _type = T__47;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /home/vincent/Bureau/comp.g:28:7: ( 'in' )
-            // /home/vincent/Bureau/comp.g:28:9: 'in'
+            // /home/vincent/Bureau/comp.g:28:7: ( 'for' )
+            // /home/vincent/Bureau/comp.g:28:9: 'for'
             {
-            match("in"); 
+            match("for"); 
 
 
             }
@@ -626,10 +626,10 @@ public class compLexer extends Lexer {
         try {
             int _type = T__48;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /home/vincent/Bureau/comp.g:29:7: ( 'if' )
-            // /home/vincent/Bureau/comp.g:29:9: 'if'
+            // /home/vincent/Bureau/comp.g:29:7: ( 'in' )
+            // /home/vincent/Bureau/comp.g:29:9: 'in'
             {
-            match("if"); 
+            match("in"); 
 
 
             }
@@ -647,10 +647,10 @@ public class compLexer extends Lexer {
         try {
             int _type = T__49;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /home/vincent/Bureau/comp.g:30:7: ( 'then' )
-            // /home/vincent/Bureau/comp.g:30:9: 'then'
+            // /home/vincent/Bureau/comp.g:30:7: ( 'if' )
+            // /home/vincent/Bureau/comp.g:30:9: 'if'
             {
-            match("then"); 
+            match("if"); 
 
 
             }
@@ -771,11 +771,10 @@ public class compLexer extends Lexer {
         try {
             int _type = T__55;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /home/vincent/Bureau/comp.g:36:7: ( 'true' )
-            // /home/vincent/Bureau/comp.g:36:9: 'true'
+            // /home/vincent/Bureau/comp.g:36:7: ( '*' )
+            // /home/vincent/Bureau/comp.g:36:9: '*'
             {
-            match("true"); 
-
+            match('*'); 
 
             }
 
@@ -792,11 +791,10 @@ public class compLexer extends Lexer {
         try {
             int _type = T__56;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /home/vincent/Bureau/comp.g:37:7: ( 'false' )
-            // /home/vincent/Bureau/comp.g:37:9: 'false'
+            // /home/vincent/Bureau/comp.g:37:7: ( '/' )
+            // /home/vincent/Bureau/comp.g:37:9: '/'
             {
-            match("false"); 
-
+            match('/'); 
 
             }
 
@@ -813,10 +811,11 @@ public class compLexer extends Lexer {
         try {
             int _type = T__57;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /home/vincent/Bureau/comp.g:38:7: ( '*' )
-            // /home/vincent/Bureau/comp.g:38:9: '*'
+            // /home/vincent/Bureau/comp.g:38:7: ( '==' )
+            // /home/vincent/Bureau/comp.g:38:9: '=='
             {
-            match('*'); 
+            match("=="); 
+
 
             }
 
@@ -833,10 +832,11 @@ public class compLexer extends Lexer {
         try {
             int _type = T__58;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /home/vincent/Bureau/comp.g:39:7: ( '/' )
-            // /home/vincent/Bureau/comp.g:39:9: '/'
+            // /home/vincent/Bureau/comp.g:39:7: ( '!=' )
+            // /home/vincent/Bureau/comp.g:39:9: '!='
             {
-            match('/'); 
+            match("!="); 
+
 
             }
 
@@ -853,10 +853,10 @@ public class compLexer extends Lexer {
         try {
             int _type = T__59;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /home/vincent/Bureau/comp.g:40:7: ( '==' )
-            // /home/vincent/Bureau/comp.g:40:9: '=='
+            // /home/vincent/Bureau/comp.g:40:7: ( '<=' )
+            // /home/vincent/Bureau/comp.g:40:9: '<='
             {
-            match("=="); 
+            match("<="); 
 
 
             }
@@ -874,10 +874,10 @@ public class compLexer extends Lexer {
         try {
             int _type = T__60;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /home/vincent/Bureau/comp.g:41:7: ( '!=' )
-            // /home/vincent/Bureau/comp.g:41:9: '!='
+            // /home/vincent/Bureau/comp.g:41:7: ( '>=' )
+            // /home/vincent/Bureau/comp.g:41:9: '>='
             {
-            match("!="); 
+            match(">="); 
 
 
             }
@@ -895,11 +895,10 @@ public class compLexer extends Lexer {
         try {
             int _type = T__61;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /home/vincent/Bureau/comp.g:42:7: ( '<=' )
-            // /home/vincent/Bureau/comp.g:42:9: '<='
+            // /home/vincent/Bureau/comp.g:42:7: ( '<' )
+            // /home/vincent/Bureau/comp.g:42:9: '<'
             {
-            match("<="); 
-
+            match('<'); 
 
             }
 
@@ -916,11 +915,10 @@ public class compLexer extends Lexer {
         try {
             int _type = T__62;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /home/vincent/Bureau/comp.g:43:7: ( '>=' )
-            // /home/vincent/Bureau/comp.g:43:9: '>='
+            // /home/vincent/Bureau/comp.g:43:7: ( '>' )
+            // /home/vincent/Bureau/comp.g:43:9: '>'
             {
-            match(">="); 
-
+            match('>'); 
 
             }
 
@@ -937,10 +935,11 @@ public class compLexer extends Lexer {
         try {
             int _type = T__63;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /home/vincent/Bureau/comp.g:44:7: ( '<' )
-            // /home/vincent/Bureau/comp.g:44:9: '<'
+            // /home/vincent/Bureau/comp.g:44:7: ( 'true' )
+            // /home/vincent/Bureau/comp.g:44:9: 'true'
             {
-            match('<'); 
+            match("true"); 
+
 
             }
 
@@ -957,10 +956,11 @@ public class compLexer extends Lexer {
         try {
             int _type = T__64;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /home/vincent/Bureau/comp.g:45:7: ( '>' )
-            // /home/vincent/Bureau/comp.g:45:9: '>'
+            // /home/vincent/Bureau/comp.g:45:7: ( 'false' )
+            // /home/vincent/Bureau/comp.g:45:9: 'false'
             {
-            match('>'); 
+            match("false"); 
+
 
             }
 
@@ -977,10 +977,10 @@ public class compLexer extends Lexer {
         try {
             int _type = CST_ENT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /home/vincent/Bureau/comp.g:96:12: ( ( '0' .. '9' )+ )
-            // /home/vincent/Bureau/comp.g:96:16: ( '0' .. '9' )+
+            // /home/vincent/Bureau/comp.g:98:12: ( ( '0' .. '9' )+ )
+            // /home/vincent/Bureau/comp.g:98:16: ( '0' .. '9' )+
             {
-            // /home/vincent/Bureau/comp.g:96:16: ( '0' .. '9' )+
+            // /home/vincent/Bureau/comp.g:98:16: ( '0' .. '9' )+
             int cnt1=0;
             loop1:
             do {
@@ -994,7 +994,7 @@ public class compLexer extends Lexer {
 
                 switch (alt1) {
             	case 1 :
-            	    // /home/vincent/Bureau/comp.g:96:17: '0' .. '9'
+            	    // /home/vincent/Bureau/comp.g:98:17: '0' .. '9'
             	    {
             	    matchRange('0','9'); 
 
@@ -1026,14 +1026,14 @@ public class compLexer extends Lexer {
         try {
             int _type = CSTE_CHAINE;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /home/vincent/Bureau/comp.g:97:12: ( ( '\"' (~ '\"' )* '\"' ) )
-            // /home/vincent/Bureau/comp.g:97:16: ( '\"' (~ '\"' )* '\"' )
+            // /home/vincent/Bureau/comp.g:99:12: ( ( '\"' (~ '\"' )* '\"' ) )
+            // /home/vincent/Bureau/comp.g:99:16: ( '\"' (~ '\"' )* '\"' )
             {
-            // /home/vincent/Bureau/comp.g:97:16: ( '\"' (~ '\"' )* '\"' )
-            // /home/vincent/Bureau/comp.g:97:17: '\"' (~ '\"' )* '\"'
+            // /home/vincent/Bureau/comp.g:99:16: ( '\"' (~ '\"' )* '\"' )
+            // /home/vincent/Bureau/comp.g:99:17: '\"' (~ '\"' )* '\"'
             {
             match('\"'); 
-            // /home/vincent/Bureau/comp.g:97:20: (~ '\"' )*
+            // /home/vincent/Bureau/comp.g:99:20: (~ '\"' )*
             loop2:
             do {
                 int alt2=2;
@@ -1046,7 +1046,7 @@ public class compLexer extends Lexer {
 
                 switch (alt2) {
             	case 1 :
-            	    // /home/vincent/Bureau/comp.g:97:21: ~ '\"'
+            	    // /home/vincent/Bureau/comp.g:99:21: ~ '\"'
             	    {
             	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='!')||(input.LA(1)>='#' && input.LA(1)<='\uFFFF') ) {
             	        input.consume();
@@ -1086,8 +1086,8 @@ public class compLexer extends Lexer {
         try {
             int _type = IDF;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /home/vincent/Bureau/comp.g:98:12: ( ( 'a' .. 'z' | 'A' .. 'Z' ) ( 'a' .. 'z' | 'A' .. 'Z' | '0' .. '9' )* )
-            // /home/vincent/Bureau/comp.g:98:15: ( 'a' .. 'z' | 'A' .. 'Z' ) ( 'a' .. 'z' | 'A' .. 'Z' | '0' .. '9' )*
+            // /home/vincent/Bureau/comp.g:100:12: ( ( 'a' .. 'z' | 'A' .. 'Z' ) ( 'a' .. 'z' | 'A' .. 'Z' | '0' .. '9' )* )
+            // /home/vincent/Bureau/comp.g:100:15: ( 'a' .. 'z' | 'A' .. 'Z' ) ( 'a' .. 'z' | 'A' .. 'Z' | '0' .. '9' )*
             {
             if ( (input.LA(1)>='A' && input.LA(1)<='Z')||(input.LA(1)>='a' && input.LA(1)<='z') ) {
                 input.consume();
@@ -1098,7 +1098,7 @@ public class compLexer extends Lexer {
                 recover(mse);
                 throw mse;}
 
-            // /home/vincent/Bureau/comp.g:98:35: ( 'a' .. 'z' | 'A' .. 'Z' | '0' .. '9' )*
+            // /home/vincent/Bureau/comp.g:100:35: ( 'a' .. 'z' | 'A' .. 'Z' | '0' .. '9' )*
             loop3:
             do {
                 int alt3=2;
@@ -1147,10 +1147,10 @@ public class compLexer extends Lexer {
         try {
             int _type = WS;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /home/vincent/Bureau/comp.g:99:12: ( ( '/*' ( . )* '*/' | ' ' | '\\t' | '\\n' )+ )
-            // /home/vincent/Bureau/comp.g:99:16: ( '/*' ( . )* '*/' | ' ' | '\\t' | '\\n' )+
+            // /home/vincent/Bureau/comp.g:101:12: ( ( '/*' ( . )* '*/' | ' ' | '\\t' | '\\n' )+ )
+            // /home/vincent/Bureau/comp.g:101:16: ( '/*' ( . )* '*/' | ' ' | '\\t' | '\\n' )+
             {
-            // /home/vincent/Bureau/comp.g:99:16: ( '/*' ( . )* '*/' | ' ' | '\\t' | '\\n' )+
+            // /home/vincent/Bureau/comp.g:101:16: ( '/*' ( . )* '*/' | ' ' | '\\t' | '\\n' )+
             int cnt5=0;
             loop5:
             do {
@@ -1181,11 +1181,11 @@ public class compLexer extends Lexer {
 
                 switch (alt5) {
             	case 1 :
-            	    // /home/vincent/Bureau/comp.g:99:17: '/*' ( . )* '*/'
+            	    // /home/vincent/Bureau/comp.g:101:17: '/*' ( . )* '*/'
             	    {
             	    match("/*"); 
 
-            	    // /home/vincent/Bureau/comp.g:99:21: ( . )*
+            	    // /home/vincent/Bureau/comp.g:101:21: ( . )*
             	    loop4:
             	    do {
             	        int alt4=2;
@@ -1210,7 +1210,7 @@ public class compLexer extends Lexer {
 
             	        switch (alt4) {
             	    	case 1 :
-            	    	    // /home/vincent/Bureau/comp.g:99:21: .
+            	    	    // /home/vincent/Bureau/comp.g:101:21: .
             	    	    {
             	    	    matchAny(); 
 
@@ -1228,21 +1228,21 @@ public class compLexer extends Lexer {
             	    }
             	    break;
             	case 2 :
-            	    // /home/vincent/Bureau/comp.g:99:28: ' '
+            	    // /home/vincent/Bureau/comp.g:101:28: ' '
             	    {
             	    match(' '); 
 
             	    }
             	    break;
             	case 3 :
-            	    // /home/vincent/Bureau/comp.g:99:32: '\\t'
+            	    // /home/vincent/Bureau/comp.g:101:32: '\\t'
             	    {
             	    match('\t'); 
 
             	    }
             	    break;
             	case 4 :
-            	    // /home/vincent/Bureau/comp.g:99:37: '\\n'
+            	    // /home/vincent/Bureau/comp.g:101:37: '\\n'
             	    {
             	    match('\n'); 
 
@@ -1271,7 +1271,7 @@ public class compLexer extends Lexer {
     // $ANTLR end "WS"
 
     public void mTokens() throws RecognitionException {
-        // /home/vincent/Bureau/comp.g:1:8: ( FONCTION | PROCEDURE | AFFECTATION | DECLARATION | INSTRUCTION | RETOUR | READ | WRITE | APPEL | T__31 | T__32 | T__33 | T__34 | T__35 | T__36 | T__37 | T__38 | T__39 | T__40 | T__41 | T__42 | T__43 | T__44 | T__45 | T__46 | T__47 | T__48 | T__49 | T__50 | T__51 | T__52 | T__53 | T__54 | T__55 | T__56 | T__57 | T__58 | T__59 | T__60 | T__61 | T__62 | T__63 | T__64 | CST_ENT | CSTE_CHAINE | IDF | WS )
+        // /home/vincent/Bureau/comp.g:1:8: ( FONCTION | PROCEDURE | AFFECTATION | DECLARATION | INSTRUCTION | THEN | RETOUR | READ | WRITE | APPEL | T__32 | T__33 | T__34 | T__35 | T__36 | T__37 | T__38 | T__39 | T__40 | T__41 | T__42 | T__43 | T__44 | T__45 | T__46 | T__47 | T__48 | T__49 | T__50 | T__51 | T__52 | T__53 | T__54 | T__55 | T__56 | T__57 | T__58 | T__59 | T__60 | T__61 | T__62 | T__63 | T__64 | CST_ENT | CSTE_CHAINE | IDF | WS )
         int alt6=47;
         alt6 = dfa6.predict(input);
         switch (alt6) {
@@ -1311,294 +1311,294 @@ public class compLexer extends Lexer {
                 }
                 break;
             case 6 :
-                // /home/vincent/Bureau/comp.g:1:65: RETOUR
+                // /home/vincent/Bureau/comp.g:1:65: THEN
+                {
+                mTHEN(); 
+
+                }
+                break;
+            case 7 :
+                // /home/vincent/Bureau/comp.g:1:70: RETOUR
                 {
                 mRETOUR(); 
 
                 }
                 break;
-            case 7 :
-                // /home/vincent/Bureau/comp.g:1:72: READ
+            case 8 :
+                // /home/vincent/Bureau/comp.g:1:77: READ
                 {
                 mREAD(); 
 
                 }
                 break;
-            case 8 :
-                // /home/vincent/Bureau/comp.g:1:77: WRITE
+            case 9 :
+                // /home/vincent/Bureau/comp.g:1:82: WRITE
                 {
                 mWRITE(); 
 
                 }
                 break;
-            case 9 :
-                // /home/vincent/Bureau/comp.g:1:83: APPEL
+            case 10 :
+                // /home/vincent/Bureau/comp.g:1:88: APPEL
                 {
                 mAPPEL(); 
 
                 }
                 break;
-            case 10 :
-                // /home/vincent/Bureau/comp.g:1:89: T__31
-                {
-                mT__31(); 
-
-                }
-                break;
             case 11 :
-                // /home/vincent/Bureau/comp.g:1:95: T__32
+                // /home/vincent/Bureau/comp.g:1:94: T__32
                 {
                 mT__32(); 
 
                 }
                 break;
             case 12 :
-                // /home/vincent/Bureau/comp.g:1:101: T__33
+                // /home/vincent/Bureau/comp.g:1:100: T__33
                 {
                 mT__33(); 
 
                 }
                 break;
             case 13 :
-                // /home/vincent/Bureau/comp.g:1:107: T__34
+                // /home/vincent/Bureau/comp.g:1:106: T__34
                 {
                 mT__34(); 
 
                 }
                 break;
             case 14 :
-                // /home/vincent/Bureau/comp.g:1:113: T__35
+                // /home/vincent/Bureau/comp.g:1:112: T__35
                 {
                 mT__35(); 
 
                 }
                 break;
             case 15 :
-                // /home/vincent/Bureau/comp.g:1:119: T__36
+                // /home/vincent/Bureau/comp.g:1:118: T__36
                 {
                 mT__36(); 
 
                 }
                 break;
             case 16 :
-                // /home/vincent/Bureau/comp.g:1:125: T__37
+                // /home/vincent/Bureau/comp.g:1:124: T__37
                 {
                 mT__37(); 
 
                 }
                 break;
             case 17 :
-                // /home/vincent/Bureau/comp.g:1:131: T__38
+                // /home/vincent/Bureau/comp.g:1:130: T__38
                 {
                 mT__38(); 
 
                 }
                 break;
             case 18 :
-                // /home/vincent/Bureau/comp.g:1:137: T__39
+                // /home/vincent/Bureau/comp.g:1:136: T__39
                 {
                 mT__39(); 
 
                 }
                 break;
             case 19 :
-                // /home/vincent/Bureau/comp.g:1:143: T__40
+                // /home/vincent/Bureau/comp.g:1:142: T__40
                 {
                 mT__40(); 
 
                 }
                 break;
             case 20 :
-                // /home/vincent/Bureau/comp.g:1:149: T__41
+                // /home/vincent/Bureau/comp.g:1:148: T__41
                 {
                 mT__41(); 
 
                 }
                 break;
             case 21 :
-                // /home/vincent/Bureau/comp.g:1:155: T__42
+                // /home/vincent/Bureau/comp.g:1:154: T__42
                 {
                 mT__42(); 
 
                 }
                 break;
             case 22 :
-                // /home/vincent/Bureau/comp.g:1:161: T__43
+                // /home/vincent/Bureau/comp.g:1:160: T__43
                 {
                 mT__43(); 
 
                 }
                 break;
             case 23 :
-                // /home/vincent/Bureau/comp.g:1:167: T__44
+                // /home/vincent/Bureau/comp.g:1:166: T__44
                 {
                 mT__44(); 
 
                 }
                 break;
             case 24 :
-                // /home/vincent/Bureau/comp.g:1:173: T__45
+                // /home/vincent/Bureau/comp.g:1:172: T__45
                 {
                 mT__45(); 
 
                 }
                 break;
             case 25 :
-                // /home/vincent/Bureau/comp.g:1:179: T__46
+                // /home/vincent/Bureau/comp.g:1:178: T__46
                 {
                 mT__46(); 
 
                 }
                 break;
             case 26 :
-                // /home/vincent/Bureau/comp.g:1:185: T__47
+                // /home/vincent/Bureau/comp.g:1:184: T__47
                 {
                 mT__47(); 
 
                 }
                 break;
             case 27 :
-                // /home/vincent/Bureau/comp.g:1:191: T__48
+                // /home/vincent/Bureau/comp.g:1:190: T__48
                 {
                 mT__48(); 
 
                 }
                 break;
             case 28 :
-                // /home/vincent/Bureau/comp.g:1:197: T__49
+                // /home/vincent/Bureau/comp.g:1:196: T__49
                 {
                 mT__49(); 
 
                 }
                 break;
             case 29 :
-                // /home/vincent/Bureau/comp.g:1:203: T__50
+                // /home/vincent/Bureau/comp.g:1:202: T__50
                 {
                 mT__50(); 
 
                 }
                 break;
             case 30 :
-                // /home/vincent/Bureau/comp.g:1:209: T__51
+                // /home/vincent/Bureau/comp.g:1:208: T__51
                 {
                 mT__51(); 
 
                 }
                 break;
             case 31 :
-                // /home/vincent/Bureau/comp.g:1:215: T__52
+                // /home/vincent/Bureau/comp.g:1:214: T__52
                 {
                 mT__52(); 
 
                 }
                 break;
             case 32 :
-                // /home/vincent/Bureau/comp.g:1:221: T__53
+                // /home/vincent/Bureau/comp.g:1:220: T__53
                 {
                 mT__53(); 
 
                 }
                 break;
             case 33 :
-                // /home/vincent/Bureau/comp.g:1:227: T__54
+                // /home/vincent/Bureau/comp.g:1:226: T__54
                 {
                 mT__54(); 
 
                 }
                 break;
             case 34 :
-                // /home/vincent/Bureau/comp.g:1:233: T__55
+                // /home/vincent/Bureau/comp.g:1:232: T__55
                 {
                 mT__55(); 
 
                 }
                 break;
             case 35 :
-                // /home/vincent/Bureau/comp.g:1:239: T__56
+                // /home/vincent/Bureau/comp.g:1:238: T__56
                 {
                 mT__56(); 
 
                 }
                 break;
             case 36 :
-                // /home/vincent/Bureau/comp.g:1:245: T__57
+                // /home/vincent/Bureau/comp.g:1:244: T__57
                 {
                 mT__57(); 
 
                 }
                 break;
             case 37 :
-                // /home/vincent/Bureau/comp.g:1:251: T__58
+                // /home/vincent/Bureau/comp.g:1:250: T__58
                 {
                 mT__58(); 
 
                 }
                 break;
             case 38 :
-                // /home/vincent/Bureau/comp.g:1:257: T__59
+                // /home/vincent/Bureau/comp.g:1:256: T__59
                 {
                 mT__59(); 
 
                 }
                 break;
             case 39 :
-                // /home/vincent/Bureau/comp.g:1:263: T__60
+                // /home/vincent/Bureau/comp.g:1:262: T__60
                 {
                 mT__60(); 
 
                 }
                 break;
             case 40 :
-                // /home/vincent/Bureau/comp.g:1:269: T__61
+                // /home/vincent/Bureau/comp.g:1:268: T__61
                 {
                 mT__61(); 
 
                 }
                 break;
             case 41 :
-                // /home/vincent/Bureau/comp.g:1:275: T__62
+                // /home/vincent/Bureau/comp.g:1:274: T__62
                 {
                 mT__62(); 
 
                 }
                 break;
             case 42 :
-                // /home/vincent/Bureau/comp.g:1:281: T__63
+                // /home/vincent/Bureau/comp.g:1:280: T__63
                 {
                 mT__63(); 
 
                 }
                 break;
             case 43 :
-                // /home/vincent/Bureau/comp.g:1:287: T__64
+                // /home/vincent/Bureau/comp.g:1:286: T__64
                 {
                 mT__64(); 
 
                 }
                 break;
             case 44 :
-                // /home/vincent/Bureau/comp.g:1:293: CST_ENT
+                // /home/vincent/Bureau/comp.g:1:292: CST_ENT
                 {
                 mCST_ENT(); 
 
                 }
                 break;
             case 45 :
-                // /home/vincent/Bureau/comp.g:1:301: CSTE_CHAINE
+                // /home/vincent/Bureau/comp.g:1:300: CSTE_CHAINE
                 {
                 mCSTE_CHAINE(); 
 
                 }
                 break;
             case 46 :
-                // /home/vincent/Bureau/comp.g:1:313: IDF
+                // /home/vincent/Bureau/comp.g:1:312: IDF
                 {
                 mIDF(); 
 
                 }
                 break;
             case 47 :
-                // /home/vincent/Bureau/comp.g:1:317: WS
+                // /home/vincent/Bureau/comp.g:1:316: WS
                 {
                 mWS(); 
 
@@ -1612,79 +1612,77 @@ public class compLexer extends Lexer {
 
     protected DFA6 dfa6 = new DFA6(this);
     static final String DFA6_eotS =
-        "\1\uffff\11\35\1\uffff\1\35\6\uffff\1\63\1\35\3\uffff\1\66\1\uffff"+
-        "\1\70\1\72\4\uffff\2\35\1\75\6\35\1\104\1\107\1\110\7\35\2\uffff"+
-        "\2\35\5\uffff\1\35\1\124\1\uffff\4\35\1\131\1\35\1\uffff\2\35\2"+
-        "\uffff\4\35\1\142\6\35\1\uffff\4\35\1\uffff\5\35\1\162\2\35\1\uffff"+
-        "\1\165\2\35\1\170\1\171\1\35\1\173\2\35\1\176\5\35\1\uffff\1\u0084"+
-        "\1\u0085\1\uffff\1\35\1\u0087\2\uffff\1\35\1\uffff\2\35\1\uffff"+
-        "\3\35\1\u008e\1\u008f\2\uffff\1\35\1\uffff\5\35\1\u0096\2\uffff"+
-        "\1\u0097\1\u0098\4\35\3\uffff\1\u009d\3\35\1\uffff\3\35\1\u00a4"+
-        "\1\u00a5\1\u00a6\3\uffff";
+        "\1\uffff\12\35\1\uffff\1\35\6\uffff\1\65\3\uffff\1\66\1\uffff\1"+
+        "\70\1\72\4\uffff\2\35\1\75\6\35\1\104\1\107\1\110\11\35\7\uffff"+
+        "\1\35\1\124\1\uffff\4\35\1\131\1\35\1\uffff\2\35\2\uffff\6\35\1"+
+        "\144\4\35\1\uffff\4\35\1\uffff\3\35\1\160\1\161\2\35\1\164\2\35"+
+        "\1\uffff\1\167\3\35\1\173\2\35\1\176\3\35\2\uffff\2\35\1\uffff\1"+
+        "\u0084\1\u0085\1\uffff\1\35\1\u0087\1\35\1\uffff\2\35\1\uffff\3"+
+        "\35\1\u008e\1\u008f\2\uffff\1\35\1\uffff\5\35\1\u0096\2\uffff\1"+
+        "\u0097\1\u0098\4\35\3\uffff\1\u009d\3\35\1\uffff\3\35\1\u00a4\1"+
+        "\u00a5\1\u00a6\3\uffff";
     static final String DFA6_eofS =
         "\u00a7\uffff";
     static final String DFA6_minS =
-        "\1\11\1\141\1\162\1\144\1\145\1\146\1\145\1\162\1\160\1\154\1\uffff"+
-        "\1\145\6\uffff\1\75\1\150\3\uffff\1\52\1\uffff\2\75\4\uffff\1\156"+
-        "\1\162\1\60\1\154\1\157\1\146\2\162\1\143\3\60\1\141\1\151\1\160"+
-        "\1\144\1\163\1\157\1\147\2\uffff\1\145\1\165\5\uffff\1\143\1\60"+
-        "\1\uffff\1\163\1\143\1\145\1\141\1\60\1\154\1\uffff\1\164\1\145"+
-        "\2\uffff\1\157\1\144\1\164\1\145\1\60\1\145\1\154\1\151\1\156\1"+
-        "\145\1\164\1\uffff\2\145\1\143\1\171\1\uffff\1\141\1\162\1\147\1"+
-        "\165\1\162\1\60\1\145\1\154\1\uffff\1\60\1\145\1\156\2\60\1\151"+
-        "\1\60\1\144\1\164\1\60\1\162\1\165\1\145\1\162\1\156\1\uffff\2\60"+
-        "\1\uffff\1\141\1\60\2\uffff\1\157\1\uffff\1\165\1\141\1\uffff\1"+
-        "\141\1\143\1\162\2\60\2\uffff\1\156\1\uffff\1\156\1\162\3\164\1"+
-        "\60\2\uffff\2\60\1\145\3\151\3\uffff\1\60\3\157\1\uffff\3\156\3"+
-        "\60\3\uffff";
+        "\1\11\1\141\1\162\1\144\1\145\1\146\1\150\1\145\1\162\1\160\1\154"+
+        "\1\uffff\1\145\6\uffff\1\75\3\uffff\1\52\1\uffff\2\75\4\uffff\1"+
+        "\156\1\162\1\60\1\154\1\157\1\146\2\162\1\143\3\60\1\145\1\165\1"+
+        "\141\1\151\1\160\1\144\1\163\1\157\1\147\7\uffff\1\143\1\60\1\uffff"+
+        "\1\163\1\143\1\145\1\141\1\60\1\154\1\uffff\1\164\1\145\2\uffff"+
+        "\1\156\1\145\1\157\1\144\1\164\1\145\1\60\1\145\1\154\1\151\1\164"+
+        "\1\uffff\2\145\1\143\1\171\1\uffff\1\141\1\162\1\147\2\60\1\165"+
+        "\1\162\1\60\1\145\1\154\1\uffff\1\60\1\145\1\156\1\151\1\60\1\144"+
+        "\1\164\1\60\1\162\1\165\1\145\2\uffff\1\162\1\156\1\uffff\2\60\1"+
+        "\uffff\1\141\1\60\1\157\1\uffff\1\165\1\141\1\uffff\1\141\1\143"+
+        "\1\162\2\60\2\uffff\1\156\1\uffff\1\156\1\162\3\164\1\60\2\uffff"+
+        "\2\60\1\145\3\151\3\uffff\1\60\3\157\1\uffff\3\156\3\60\3\uffff";
     static final String DFA6_maxS =
-        "\1\172\1\165\2\162\1\157\1\156\1\145\1\162\1\160\1\156\1\uffff\1"+
-        "\157\6\uffff\1\75\1\162\3\uffff\1\52\1\uffff\2\75\4\uffff\1\156"+
-        "\1\162\1\172\1\154\1\157\1\146\2\162\1\143\3\172\1\164\1\151\1\160"+
-        "\1\144\1\163\1\157\1\147\2\uffff\1\145\1\165\5\uffff\1\143\1\172"+
-        "\1\uffff\1\163\1\143\1\145\1\141\1\172\1\154\1\uffff\1\164\1\145"+
-        "\2\uffff\1\165\1\144\1\164\1\145\1\172\1\145\1\154\1\151\1\156\1"+
-        "\145\1\164\1\uffff\2\145\1\143\1\171\1\uffff\1\141\1\162\1\147\1"+
-        "\165\1\162\1\172\1\145\1\154\1\uffff\1\172\1\145\1\156\2\172\1\151"+
-        "\1\172\1\144\1\164\1\172\1\162\1\165\1\145\1\162\1\156\1\uffff\2"+
-        "\172\1\uffff\1\141\1\172\2\uffff\1\157\1\uffff\1\165\1\141\1\uffff"+
-        "\1\141\1\143\1\162\2\172\2\uffff\1\156\1\uffff\1\156\1\162\3\164"+
-        "\1\172\2\uffff\2\172\1\145\3\151\3\uffff\1\172\3\157\1\uffff\3\156"+
-        "\3\172\3\uffff";
+        "\1\172\1\165\2\162\1\157\1\156\1\162\1\145\1\162\1\160\1\156\1\uffff"+
+        "\1\157\6\uffff\1\75\3\uffff\1\52\1\uffff\2\75\4\uffff\1\156\1\162"+
+        "\1\172\1\154\1\157\1\146\2\162\1\143\3\172\1\145\1\165\1\164\1\151"+
+        "\1\160\1\144\1\163\1\157\1\147\7\uffff\1\143\1\172\1\uffff\1\163"+
+        "\1\143\1\145\1\141\1\172\1\154\1\uffff\1\164\1\145\2\uffff\1\156"+
+        "\1\145\1\165\1\144\1\164\1\145\1\172\1\145\1\154\1\151\1\164\1\uffff"+
+        "\2\145\1\143\1\171\1\uffff\1\141\1\162\1\147\2\172\1\165\1\162\1"+
+        "\172\1\145\1\154\1\uffff\1\172\1\145\1\156\1\151\1\172\1\144\1\164"+
+        "\1\172\1\162\1\165\1\145\2\uffff\1\162\1\156\1\uffff\2\172\1\uffff"+
+        "\1\141\1\172\1\157\1\uffff\1\165\1\141\1\uffff\1\141\1\143\1\162"+
+        "\2\172\2\uffff\1\156\1\uffff\1\156\1\162\3\164\1\172\2\uffff\2\172"+
+        "\1\145\3\151\3\uffff\1\172\3\157\1\uffff\3\156\3\172\3\uffff";
     static final String DFA6_acceptS =
-        "\12\uffff\1\14\1\uffff\1\20\1\21\1\22\1\23\1\24\1\26\2\uffff\1\40"+
-        "\1\41\1\44\1\uffff\1\47\2\uffff\1\54\1\55\1\56\1\57\23\uffff\1\46"+
-        "\1\30\2\uffff\1\45\1\50\1\52\1\51\1\53\2\uffff\1\36\6\uffff\1\12"+
-        "\2\uffff\1\32\1\33\13\uffff\1\31\4\uffff\1\25\10\uffff\1\13\17\uffff"+
-        "\1\7\2\uffff\1\35\2\uffff\1\34\1\42\1\uffff\1\43\2\uffff\1\17\5"+
-        "\uffff\1\10\1\11\1\uffff\1\27\6\uffff\1\6\1\37\6\uffff\1\15\1\16"+
-        "\1\1\4\uffff\1\2\6\uffff\1\3\1\4\1\5";
+        "\13\uffff\1\15\1\uffff\1\21\1\22\1\23\1\24\1\25\1\27\1\uffff\1\40"+
+        "\1\41\1\42\1\uffff\1\45\2\uffff\1\54\1\55\1\56\1\57\25\uffff\1\44"+
+        "\1\31\1\43\1\46\1\50\1\47\1\51\2\uffff\1\36\6\uffff\1\13\2\uffff"+
+        "\1\33\1\34\13\uffff\1\32\4\uffff\1\26\12\uffff\1\14\13\uffff\1\6"+
+        "\1\52\2\uffff\1\10\2\uffff\1\35\3\uffff\1\53\2\uffff\1\20\5\uffff"+
+        "\1\11\1\12\1\uffff\1\30\6\uffff\1\7\1\37\6\uffff\1\16\1\17\1\1\4"+
+        "\uffff\1\2\6\uffff\1\3\1\4\1\5";
     static final String DFA6_specialS =
         "\u00a7\uffff}>";
     static final String[] DFA6_transitionS = {
-            "\2\36\25\uffff\1\36\1\30\1\34\5\uffff\1\17\1\20\1\26\1\24\1"+
-            "\12\1\25\1\16\1\27\12\33\1\21\1\uffff\1\31\1\22\1\32\2\uffff"+
-            "\1\10\31\35\1\14\1\uffff\1\15\3\uffff\1\3\1\13\1\35\1\4\1\11"+
-            "\1\1\2\35\1\5\6\35\1\2\1\35\1\6\1\35\1\23\2\35\1\7\3\35",
+            "\2\36\25\uffff\1\36\1\30\1\34\5\uffff\1\20\1\21\1\26\1\24\1"+
+            "\13\1\25\1\17\1\27\12\33\1\22\1\uffff\1\31\1\23\1\32\2\uffff"+
+            "\1\11\31\35\1\15\1\uffff\1\16\3\uffff\1\3\1\14\1\35\1\4\1\12"+
+            "\1\1\2\35\1\5\6\35\1\2\1\35\1\7\1\35\1\6\2\35\1\10\3\35",
             "\1\42\7\uffff\1\41\5\uffff\1\40\5\uffff\1\37",
             "\1\43",
             "\1\46\1\uffff\1\44\13\uffff\1\45",
             "\1\47\11\uffff\1\50",
             "\1\52\7\uffff\1\51",
-            "\1\53",
-            "\1\54",
+            "\1\53\11\uffff\1\54",
             "\1\55",
-            "\1\57\1\uffff\1\56",
+            "\1\56",
+            "\1\57",
+            "\1\61\1\uffff\1\60",
             "",
-            "\1\61\11\uffff\1\60",
-            "",
-            "",
-            "",
-            "",
+            "\1\63\11\uffff\1\62",
             "",
             "",
-            "\1\62",
-            "\1\64\11\uffff\1\65",
+            "",
+            "",
+            "",
+            "",
+            "\1\64",
             "",
             "",
             "",
@@ -1708,17 +1706,17 @@ public class compLexer extends Lexer {
             "\12\35\7\uffff\32\35\6\uffff\32\35",
             "\12\35\7\uffff\32\35\6\uffff\22\35\1\105\1\106\6\35",
             "\12\35\7\uffff\32\35\6\uffff\32\35",
-            "\1\112\22\uffff\1\111",
-            "\1\113",
-            "\1\114",
+            "\1\111",
+            "\1\112",
+            "\1\114\22\uffff\1\113",
             "\1\115",
             "\1\116",
             "\1\117",
             "\1\120",
-            "",
-            "",
             "\1\121",
             "\1\122",
+            "",
+            "",
             "",
             "",
             "",
@@ -1738,13 +1736,13 @@ public class compLexer extends Lexer {
             "\1\134",
             "",
             "",
-            "\1\135\5\uffff\1\136",
-            "\1\137",
-            "\1\140",
+            "\1\135",
+            "\1\136",
+            "\1\137\5\uffff\1\140",
             "\1\141",
-            "\12\35\7\uffff\32\35\6\uffff\32\35",
+            "\1\142",
             "\1\143",
-            "\1\144",
+            "\12\35\7\uffff\32\35\6\uffff\32\35",
             "\1\145",
             "\1\146",
             "\1\147",
@@ -1758,17 +1756,17 @@ public class compLexer extends Lexer {
             "\1\155",
             "\1\156",
             "\1\157",
-            "\1\160",
-            "\1\161",
             "\12\35\7\uffff\32\35\6\uffff\32\35",
+            "\12\35\7\uffff\32\35\6\uffff\32\35",
+            "\1\162",
             "\1\163",
-            "\1\164",
+            "\12\35\7\uffff\32\35\6\uffff\32\35",
+            "\1\165",
+            "\1\166",
             "",
             "\12\35\7\uffff\32\35\6\uffff\32\35",
-            "\1\166",
-            "\1\167",
-            "\12\35\7\uffff\32\35\6\uffff\32\35",
-            "\12\35\7\uffff\32\35\6\uffff\32\35",
+            "\1\170",
+            "\1\171",
             "\1\172",
             "\12\35\7\uffff\32\35\6\uffff\32\35",
             "\1\174",
@@ -1777,6 +1775,8 @@ public class compLexer extends Lexer {
             "\1\177",
             "\1\u0080",
             "\1\u0081",
+            "",
+            "",
             "\1\u0082",
             "\1\u0083",
             "",
@@ -1785,8 +1785,6 @@ public class compLexer extends Lexer {
             "",
             "\1\u0086",
             "\12\35\7\uffff\32\35\6\uffff\32\35",
-            "",
-            "",
             "\1\u0088",
             "",
             "\1\u0089",
@@ -1864,7 +1862,7 @@ public class compLexer extends Lexer {
             this.transition = DFA6_transition;
         }
         public String getDescription() {
-            return "1:1: Tokens : ( FONCTION | PROCEDURE | AFFECTATION | DECLARATION | INSTRUCTION | RETOUR | READ | WRITE | APPEL | T__31 | T__32 | T__33 | T__34 | T__35 | T__36 | T__37 | T__38 | T__39 | T__40 | T__41 | T__42 | T__43 | T__44 | T__45 | T__46 | T__47 | T__48 | T__49 | T__50 | T__51 | T__52 | T__53 | T__54 | T__55 | T__56 | T__57 | T__58 | T__59 | T__60 | T__61 | T__62 | T__63 | T__64 | CST_ENT | CSTE_CHAINE | IDF | WS );";
+            return "1:1: Tokens : ( FONCTION | PROCEDURE | AFFECTATION | DECLARATION | INSTRUCTION | THEN | RETOUR | READ | WRITE | APPEL | T__32 | T__33 | T__34 | T__35 | T__36 | T__37 | T__38 | T__39 | T__40 | T__41 | T__42 | T__43 | T__44 | T__45 | T__46 | T__47 | T__48 | T__49 | T__50 | T__51 | T__52 | T__53 | T__54 | T__55 | T__56 | T__57 | T__58 | T__59 | T__60 | T__61 | T__62 | T__63 | T__64 | CST_ENT | CSTE_CHAINE | IDF | WS );";
         }
     }
  

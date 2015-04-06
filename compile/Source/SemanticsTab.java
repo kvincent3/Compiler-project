@@ -31,7 +31,7 @@ public class SemanticsTab {
 	{
 		if(tdsSorted==null)
 			{
-			System.out.print("erreur la tds est nulle\n");
+			System.err.print("erreur la tds est nulle\n");
 			return;
 			}
 		ArrayList<TDS> TDSparRegion=tdsSorted.getTDSparRegion();
@@ -76,7 +76,7 @@ public class SemanticsTab {
 			return;
 		for(int i=0;i<names.size();i++)
 		{
-			System.out.print("l'array : "+ names.get(i)+" a été declaré plusieurs fois\n");
+			System.err.print("l'array : "+ names.get(i)+" a été declaré plusieurs fois\n");
 		}
 			
 	}
@@ -132,8 +132,8 @@ public class SemanticsTab {
 				int bound_k[]=bounds.get(k);
 				if(bound_k[0]>bound_k[1])
 				{
-				  System.out.println("les frontieres de l'array "+s.getNom()+" ne sont pas correctes");
-				  System.out.println("--->"+bound_k[0]+" > "+bound_k[1]);
+				  System.err.println("les frontieres de l'array "+s.getNom()+" ne sont pas correctes");
+				  System.err.println("--->"+bound_k[0]+" > "+bound_k[1]);
 				}
 			
 			}
@@ -148,6 +148,10 @@ public class SemanticsTab {
 		{
 			System.out.println("arr");
 			return ;
+		}
+		if(ast.getText().equals("APPEL"))
+		{
+			l.add(ast.getChild(0).getText());
 		}
 		if(ast.getText().equals("CASE")||ast.getText().equals("VAL"))
 		{
@@ -165,6 +169,7 @@ public class SemanticsTab {
 				}
 			else if(!l.contains(ast.getText()))
 			   {   
+				//System.out.println(ast.getText());
 				l.add(ast.getText());
 			     return;
 			   }
@@ -188,12 +193,12 @@ public class SemanticsTab {
 	{
 		if(l.contains("erreur bool"))
 		{
-			System.out.println("vous ne pouvez pas mettre comme indice du tableau "+name+" un booleen ");
+			System.err.println("vous ne pouvez pas mettre comme indice du tableau "+name+" un booleen ");
 			return;
 		}
 		if(l.contains("erreur bool2"))
 		{
-			System.out.println("vous ne pouvez pas mettre comme indice du tableau "+name+" un booleen (expression booleene) ");
+			System.err.println("vous ne pouvez pas mettre comme indice du tableau "+name+" un booleen (expression booleene) ");
 			return;
 		}
 		Pro pile = new Pro(tdsSorted.addNoExistTDS(ast));
@@ -210,11 +215,16 @@ public class SemanticsTab {
         	{
         		Symbole s=syml.get(j);
         		//indice de la region
-        		if(l.contains(s.getNom()) && s.getType()!=null&&s.getType().equals("boolean"))
+        		if(l.contains(s.getNom()) && (s.getType()!=null && s.getType().equals("boolean")))
         		{
         			//une variable dans l expression est boolean
-        			System.out.println("erreur la variable "+s.getNom()+" utilisée pour les indices de "+name+" est booleene");
+        			//System.out.println("saluttttttttttttttt");
+        			System.err.println("erreur la variable "+s.getNom()+" utilisée pour les indices de "+name+" est booleene");
         	
+        		}
+        		else
+        		{
+        			//System.out.println("okokokoko"+s.getNom()+" type:"+s.get);
         		}
         		/*
         		else if(!l.contains(s.getNom()))
@@ -232,12 +242,12 @@ public class SemanticsTab {
 	{
 		if(l.contains("erreur bool"))
 		{
-			System.out.println("vous ne pouvez pas assigner un boolean au tableau d'entier "+name);
+			System.err.println("vous ne pouvez pas assigner un boolean au tableau d'entier "+name);
 			return;
 		}
 		if(l.contains("erreur bool2"))
 		{
-			System.out.println("vous ne pouvez pas assigner un boolean(expression booleene) au tableau d'entier "+name);
+			System.err.println("vous ne pouvez pas assigner un boolean(expression booleene) au tableau d'entier "+name);
 			return;
 		}
 		Pro pile = new Pro(tdsSorted.addNoExistTDS(ast));
@@ -257,7 +267,7 @@ public class SemanticsTab {
         		if(l.contains(s.getNom()) && s.getType()!=null&&s.getType().equals("boolean"))
         		{
         			//une variable dans l expression est boolean
-        			System.out.println("erreur la variable "+s.getNom()+" utilisée pour l affectation du tableau "+name+" est booleene");
+        			System.err.println("erreur la variable "+s.getNom()+" utilisée pour l affectation du tableau "+name+" est booleene");
         	
         		}
         		/*else if(!l.contains(s.getNom()))
@@ -285,22 +295,23 @@ public class SemanticsTab {
 		}
 		if(ast.getText().equals("do"))
 		{
+
 			for(int i=0;i<ast.getChildCount();i++)
 			{
-				
 				if(ast.getChild(i).getText().equals("DECLARATION"))
 				{
 					 checkDecl(ast.getChild(i),region,astInit,tdsSorted,verbose,l);
 					 reg=0;
 					 //return;//on ne traverse qu une seule fois le noeud declaration
 				}
-			    if(ast.getChild(i).getText().equals("INSTRUCTION"))
+				else if(ast.getChild(i).getText().equals("INSTRUCTION"))
 				{
-					System.out.println(ast.getText());
+
 					checkDecl(ast.getChild(i),region,astInit,tdsSorted,verbose,l);
 					reg=0;
 					//return;
 				}
+				
 			}
 		}
 		
@@ -362,12 +373,13 @@ public class SemanticsTab {
 							    		
 							    			checkExprBr(astInit,tdsSorted,lBr,region,symbole_array.getNom());
 							    			checkExprAff(astInit,tdsSorted,lAff,region,symbole_array.getNom());
+							    			System.out.println(symbole_array.getNom());
 							    		int dimension=symbole_array.getInfoTableau().getBounds().size();
 							    		int dim_used=ast.getChild(1).getChildCount();
 							    		checkBounds(symbole_array);
 							    		if(dimension!=dim_used)
 							    		{
-							    			System.out.println("le tableau "+id+" declare a "+dimension+" dimension cependant vous en utilisez "+dim_used);
+							    			System.err.println("le tableau "+id+" declare a "+dimension+" dimension cependant vous en utilisez "+dim_used);
 							    		}
 							    	}
 							    	
@@ -418,7 +430,7 @@ public class SemanticsTab {
     	if(decl==0)
     	{
     		if(verbose)
-    		System.out.println("l'array "+name+" est utilisé mais n est pas déclaré");
+    		System.err.println("l'array "+name+" est utilisé mais n est pas déclaré");
     		wRegion[0]=-1;
     		return false;
     	}
