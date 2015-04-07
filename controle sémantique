@@ -38,3 +38,13 @@ Nombre d'arguments lors de l'appel d'une fonction
 Verif return dans fonction 
 
 Verif pas de return dans procedure
+
+FOR:
+-verifificatio si les deux fils sont des integer
+-verification que fils min<max
+-verification que les fils ne sont pas vides
+-verification que les fils ne sont pas des procedures
+-verification que si les fils sont des fonctions le type de retour est integer
+
+IF:
+-L'expression est bien un boolean 
