@@ -1,0 +1,4 @@
+do
+ m=1+fmax()+T[i] 
+
+end

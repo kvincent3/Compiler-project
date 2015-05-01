@@ -224,23 +224,15 @@ public class Semantic
             			}
                         else if (ast.getChild(j).getText().equals("if"))
                         {
-                            	//System.out.println(ast);
-                            	Tree ast2=ast.getChild(j);
-                            	System.out.println(ast2);
-                            	ArrayList<String> A = IsGood(ast2,region);
-                            	System.out.println(A);
-                            	for (String s : A){
-                            		for (String c:A){
-                            			if (!s.equals(c)){
-                            				System.err.println("La condition du if n'est pas un boolean");
-                            			}
-                            		}
+                            	Tree ast2=ast.getChild(j).getChild(0);
+                        			IsGood(ast2,region);
+                        	
                             	}
                             	for(int o=0;o<ast.getChild(j).getChildCount();o++){
                             		if (ast.getChild(j).getChild(o).getText().equals("then"))
                             	 GetIntoInstruction(ast.getChild(j).getChild(o), region);}
                          }	
-                        else if (ast.getText().equals("==")||ast.getText().equals("!=")||ast.getText().equals(">=")||ast.getText().equals("<=")||ast.getText().equals("<")||ast.getText().equals(">"))
+                       /* else if (ast.getText().equals("==")||ast.getText().equals("!=")||ast.getText().equals(">=")||ast.getText().equals("<=")||ast.getText().equals("<")||ast.getText().equals(">"))
             			{
 		            			Tree	ast3=ast.getChild(j);
 		            			String var1=ast.getChild(0).getText();
@@ -290,7 +282,7 @@ public class Semantic
 		            					System.err.println("Les expressions ne sont pas de meme nature");
 		            			else if(param1!=param2)
 		            				System.err.println("Les expressions n'ont pas le meme nombre de parametres");
-            				}
+            				}*/
                             else
                             {
                                 GetIntoInstruction(ast.getChild(j), region);
@@ -738,19 +730,17 @@ public class Semantic
                         this.check=false;
                 }
 
-        }
-        
-        public boolean IsNotOp(Tree ast){
+        }   public boolean IsNotOp(Tree ast){
         	boolean b=false;
         		if(!ast.getText().equals("==")&& !ast.getText().equals("!=")&& !ast.getText().equals(">=")&&!ast.getText().equals("<=")&&!ast.getText().equals("<")&&!ast.getText().equals(">")&&!ast.getText().equals("+")&&!ast.getText().equals("-")&&!ast.getText().equals("*")&&!ast.getText().equals("/"))
         		{
-        			b=true;	
+        		b=true;	
         		}
         		
         	return b;
         }
         
-        public ArrayList<String> IsGood(Tree ast,int region){
+        public void IsGood(Tree ast,int region){
         	ArrayList<String>  types=new ArrayList<String>();
         	if(IsNotOp(ast)){
         	String var=ast.getText();
@@ -758,7 +748,7 @@ public class Semantic
         	ArrayList<Integer> pile_reg_ouv = new ArrayList<Integer>();
         	pile_reg_ouv=this.pro.getPile().get(region);
 			if(IsInteger(var)){
-				types.add("integer");
+		types.add("integer");
 			}
 			else{
         	for(int k=0;k<pile_reg_ouv.size();k++){
@@ -771,27 +761,45 @@ public class Semantic
 
 						type = courant.getSymboles().get(p).getType();
 						if(!type.equals("") && type!=null ){			
-						types.add(type);}
-						else{
-							System.err.println("Il y a un probleme de types avec le if");
+						types.add(type);
+					
 						}
 						
-					}else{
-						System.err.println("La variable "+var+" n'est pas declaree");
+						else{
+							System.err.println("La variable "+var+" n'est pas declaree");
+						}
 					}
+					
 				}
 			}
 			
 			}
         	}
-        	else{
+        	
+        	
 			 	for ( int z =0;z<ast.getChildCount();z++){
 			 		IsGood(ast.getChild(z),region);
 			 	}
-        	}
-			return types;
+        	
+			System.out.println(types);
+        	String s = "";
+        	String c = "";
+			for (int l=0;l<types.size();l++){
+				
+	        	 s = types.get(l);
+              for (int m=0;m<types.size();m++){
+            
+              	
+            	  c =types.get(m);
+              }
+			}
+        			if (!s.equals(c)){
+        				System.err.println("La condition du if n'est pas un boolean");
+        			}
+        		
 			
         
-}
+
+        }
 }
 

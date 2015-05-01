@@ -1,0 +1,26 @@
+-visibilité des variables, fonction, tableau
+-cohérence de type au cours des affectations (également les moins unaire)
+   -vérification des tableaux
+     ex : array [0..6] a,b
+          a = b[5] -> interdit
+     
+     ex:
+  	integer i,j
+  	integer T
+  	i[3]=-T[0]+5+9 -> incorrect
+
+     ex:
+	boolean i,j
+  	integer T
+  	i=-T[0]+5->incorrect
+- un seul espace des noms
+- verification de variable initialisé
+
+
+
+
+array[5..2] <-erreur dimension
+controle sur les dimensions a l'affectation
+declaration multiple
+verification de l expression
+controle dimension

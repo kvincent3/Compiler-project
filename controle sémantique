@@ -24,3 +24,27 @@ controle sur les dimensions a l'affectation
 declaration multiple
 verification de l expression
 controle dimension
+
+Nombre d'arguments lors de l'appel d'une fonction
+
+         Contrôle des types passés à l'appel d'une fonction (attention on peut aussi passer des fonctions à des fonctions)
+
+         on ne peut pas déclarer deux mêmes fonctions dans la même région
+
+	 Retour incorrect d'une fonction
+
+ 	 Fonction appelée inexistante dans la pile de contextes
+
+Verif return dans fonction 
+
+Verif pas de return dans procedure
+
+FOR:
+-verifificatio si les deux fils sont des integer
+-verification que fils min<max
+-verification que les fils ne sont pas vides
+-verification que les fils ne sont pas des procedures
+-verification que si les fils sont des fonctions le type de retour est integer
+
+IF:
+-L'expression est bien un boolean 
