@@ -71,7 +71,7 @@ public class Main {
         SemanticsTab sem=new SemanticsTab();
         sem.PrintArraySemanticError(ast, tdsFinal);
         //sem.printSemanticsBound(tteTds);
-        new GenerateCode(ast,pile);
+        new GenerateCode(ast);
 	}
 
 }

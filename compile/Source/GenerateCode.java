@@ -12,46 +12,33 @@ public class GenerateCode
 {
 	Tree astree;
 	String nameFile;
-	Pro pile;
-	TDSGlobal tteTds;
-    TDSGlobal tdsFinal;
-	private ArrayList<FonctionRegion> fonctions = new ArrayList<FonctionRegion>();
-	boolean trouver;
-	String codeFunction="";
-	public GenerateCode(Tree ast,Pro pile) {
-		ArrayList<Symbole> sym = new ArrayList<Symbole>();
-        TDS tds = new TDS();
-        tds.getSymboleFct2(ast,0,0,sym);
-        tds.getSymboleVar(ast, 0,0, sym);
-		TDSGlobal tteTds= tds.merge(sym);
-        TDSGlobal tdsFinal = tteTds.addNoExistTDS(ast);
-		pile = new Pro(tdsFinal);
-        pile.doPro(ast,0);
-        this.pile=pile;
+	private int increment=0;
+	public GenerateCode(Tree ast)
+	{
 		this.astree=ast;
 		this.createFile();
-		this.generate(this.astree,0,0);
+		this.generate(this.astree,0);
 	}
 
-	private void generate(Tree ast ,int region,int mode) 
+	private void generate(Tree ast ,int region) 
 	{
 		if (ast.getText().equals("do"))
 		{
-			this.WriteInFile("sp          equ r15\nwr          equ r14\nbp          equ r13", mode);
-			this.WriteInFile("SP          equ r15\nWR          equ r14\nBP          equ r13", mode);
-			this.WriteInFile("D1    	  equ r1\n", mode);
-			this.WriteInFile("EXIT_EXC   EQU   64 \nREAD_EXC   EQU   65\nWRITE_EXC  EQU   66", mode );
-			this.WriteInFile("\n", mode);
-			this.WriteInFile("NUL         equ  0\nNULL        equ  0 \nNIL         equ  0  ", mode);
-			this.WriteInFile("\n", mode);
-			this.WriteInFile("STACK_ADRS  equ 0x1000 \nLOAD_ADRS   equ 0xFE00  \norg LOAD_ADRS\nstart do\n", mode);
-			this.WriteInFile("do ldw SP, #STACK_ADRS", mode);
-			this.WriteInFile("ldw bp, #NIL", mode);
-			this.WriteInFile("stw BP, -(SP)", mode);
-			this.WriteInFile("ldw BP, SP", mode);
-			generate(ast.getChild(0),0,0);
-			generate(ast.getChild(1),0,0);
-			generate(ast.getChild(2), 0,0);
+			this.WriteInFile("sp          equ r15\nwr          equ r14\nbp          equ r13");
+			this.WriteInFile("SP          equ r15\nWR          equ r14\nBP          equ r13");
+			this.WriteInFile("D1    	  equ r1\n");
+			this.WriteInFile("EXIT_EXC   EQU   64 \nREAD_EXC   EQU   65\nWRITE_EXC  EQU   66");
+			this.WriteInFile("\n");
+			this.WriteInFile("NUL         equ  0\nNULL        equ  0 \nNIL         equ  0  ");
+			this.WriteInFile("\n");
+			this.WriteInFile("STACK_ADRS  equ 0x1000 \nLOAD_ADRS   equ 0xFE00  \norg LOAD_ADRS\nstart do\n");
+			this.WriteInFile("do ldw SP, #STACK_ADRS");
+			this.WriteInFile("ldw bp, #NIL");
+			this.WriteInFile("stw BP, -(SP)");
+			this.WriteInFile("ldw BP, SP");
+			generate(ast.getChild(0),0);
+			generate(ast.getChild(1),0);
+			generate(ast.getChild(2), 0);
 		}
 		else
 		{
@@ -64,7 +51,7 @@ public class GenerateCode
 					{
 						if (ast.getChild(i).getChild(0).getText().equals("integer"))// on donne deux octets pour les entier
 						{
-							this.WriteInFile("adi sp, sp, #-2", mode);				
+							this.WriteInFile("adi sp, sp, #-2");				
 						}
 
 					}
@@ -77,7 +64,7 @@ public class GenerateCode
 				{
 					if (ast.getChild(i).getText().equals("="))
 					{
-						this.operate(ast.getChild(i).getChild(1),null, mode);
+						this.operate(ast.getChild(i).getChild(1),null);
 						//int entier = Integer.parseInt(ast.getChild(i).getChild(1).getText());
 						//this.WriteInFile("ldw r0, #"+entier);
 						///this.WriteInFile("stw r0, (bp)-2");
@@ -94,54 +81,70 @@ public class GenerateCode
 					}
 					else if (ast.getChild(i).getText().equals("APPEL"))
 					{
-						function(ast.getChild(i),region, mode);
+						function(ast.getChild(i),region);
 					}
 				}
 			}
 			if (ast.getText().equals("BLOC"))
 			{
-				generate(ast.getChild(0),region,mode);//pour les déclarations d'une fonction
-				generate(ast.getChild(1),region,mode);//pour les intructions d'une fonction
+				generate(ast.getChild(0),region);//pour les déclarations d'une fonction
+				generate(ast.getChild(1),region);//pour les intructions d'une fonction
 			}
 			if (ast.getText().equals("end"))
 			{
-				this.WriteInFile("ldw sp, bp \n ldw bp, (sp)+\ntrp #EXIT_EXC\n", mode);
-				this.WriteInFile("\n\n", mode);
-				for (int i=0;i<this.fonctions.size();i++)
+				this.WriteInFile("ldw sp, bp \n ldw bp, (sp)+\ntrp #EXIT_EXC\n");
+				this.WriteInFile("\n\n\n\n");
+				/*for (int i=0;i<this.fonctions.size();i++)
 				{
 					this.WriteInFile(fonctions.get(i).getCodeFonction(), 0);
 					this.WriteInFile("\n\n\n",0);
 					System.out.println(i+"\n");
 					System.out.println(fonctions.get(i).getCodeFonction());
-				}
+				}*/
+				// on va aller dans chaque fonction pour générer le code
+			   generateAllFunction(this.astree);
 			}
 		}
 
 	}
 
-	private void function(Tree ast,int regionAppelant,int mode) 
+	
+	
+	private void generateAllFunction(Tree a) 
+	{
+		// TODO Auto-generated method stub
+        for (int i = 0; i<a.getChildCount();i++)
+        {
+                 	    if (a.getChild(i).getText().equals("DECLARATION"))
+                        {
+                 	    	generateAllFunction(a.getChild(i));
+                        }
+                        else if (a.getChild(i).getText().equals("FONCTION"))
+                        {
+                        	//generate(a.getChild(i), ++region_ast,0);
+							this.WriteInFile(a.getChild(i).getChild(0).getText()+"_ STW BP, -(SP)");
+							this.WriteInFile("      LDW BP, SP");
+							this.WriteInFile("      STW r2, -(SP)");
+							this.generate(a.getChild(i).getChild(3), ++increment);
+                        	System.out.println("fonction"+a.getChild(i).getChild(0).getText()+" c'est la region "+increment);
+							this.WriteInFile("      ldw sp,bp");
+							this.WriteInFile("      LDW BP, (SP)+");
+							this.WriteInFile("      RTS\n\n");
+                        	generateAllFunction(a.getChild(i).getChild(3));
+                        }
+                        else if (a.getChild(i).getText().equals("BLOC"))
+                        {
+                        	//SearchInAst(a.getChild(i), region_a_trouver,region_ast,fonc);
+                        	generateAllFunction(a.getChild(i).getChild(0));
+                        }
+                 	   
+        }
+	}
+
+	private void function(Tree ast,int regionAppelant) 
 	{
 		//pour l'instant on ne gère que les entiers
 		String nomFonction= ast.getChild(0).getText();
-		FonctionRegion a = new FonctionRegion(nomFonction,regionAppelant);
-		ArrayList<Integer> region_ouvertes=this.pile.getPile().get(regionAppelant);
-		this.trouver=false;//cette variable dit si on a trouvé ou pas la fonction
-		//on doit chercher le code de cette fonction
-		for(int j=region_ouvertes.size()-1;j>=0;j--)
-		{
-			
-			if (!this.trouver)
-			{
-			  SearchInAst(this.astree,0,region_ouvertes.get(j),a);
-			}
-			else
-			{
-				break;
-			}
-		}
-		a.setCodeFonction(this.codeFunction);
-		this.fonctions.add(a);
-		this.codeFunction="";// on remet a jour codefunction pour pouvoir l'utiliser pour une autre 
 		// on empile les paramètres
 		if (ast.getChildCount()>1)// si la fonction à des paramètres
 		{	//on met chaque paramètre dans r0 puis on empile
@@ -149,92 +152,35 @@ public class GenerateCode
 			{
 				if (isNumeric(ast.getChild(i).getText()))//si le paramètre est un entier
 				{
-					this.WriteInFile("ldw r0, #"+ast.getChild(i).getText(), mode);//on met dans r0
-					this.WriteInFile("stw r0, -(sp)", mode);//on empile
+					this.WriteInFile("ldw r0, #"+ast.getChild(i).getText());//on met dans r0
+					this.WriteInFile("stw r0, -(sp)");//on empile
 				}
 			}
 			//maintenant on calcul le chainage statique que l'on range dans r2
 			//on charge Bp dans r1
-			this.WriteInFile("ldw r1,bp", mode);
+			this.WriteInFile("ldw r1,bp");
 			//on soustrait 4 à r1 pour retrouver notre chainage statique
-			this.WriteInFile("adq -4, r1", mode);
+			this.WriteInFile("adq -4, r1");
 			// on prend le chainage statique associé pouis on le stock dans r2
-			this.WriteInFile("ldw r2,(r1)", mode);
+			this.WriteInFile("ldw r2,(r1)");
 			//on fait le jsr
-			this.WriteInFile("jsr @"+nomFonction+"_", mode);
+			this.WriteInFile("jsr @"+nomFonction+"_");
 			//après l'appel on dépile les paramètres
-			this.WriteInFile("adi sp, sp, #"+(ast.getChildCount()-1)*2, mode);
+			this.WriteInFile("adi sp, sp, #"+(ast.getChildCount()-1)*2);
 		}
 	}
 
-	private void SearchInAst(Tree a,int region_ast/*region que l'on incrémente pour le parcours*/,int region_a_trouver, FonctionRegion fonc)//on va chercher dans l'ast -> regionAppelant 
-	{
-		if (region_a_trouver==region_ast)
-		{
-			//chercher a.getNomfonction dans la declaration
-			if (region_a_trouver==0)
-			{
-				int calculNextRegion=1;
-				for (int i=0;i<a.getChild(0).getChildCount();i++)
-				{
-					//System.out.println(a.getChild(0).getChild(i));
-					
-					//System.out.println(calculNextRegion);
-					if (a.getChild(0).getChild(i).getText().equals("FONCTION")
-						/*on verra pour les procédures après || a.getChild(0).getChild(i).getText().equals("Procedure")*/)
-					{
 
-						if(fonc.getNomFonction().equals(a.getChild(0).getChild(i).getChild(0).getText()))// on a trouvé la bonne fonction
-						{
-							
-							/*mise en place du point d'entré de la fo,ction*/
-							this.WriteInFile(fonc.getNomFonction()+"_ STW BP, -(SP)", 1);
-							this.WriteInFile("      LDW BP, SP", 1);
-							this.WriteInFile("      STW r2, -(SP)", 1);
-							this.generate(a.getChild(0).getChild(i).getChild(3), calculNextRegion, 1);// pour l'instant on gère que pour une fonction dans la région 1
-							//mais il faudra par la suite déterminer dans quelle région on est grace à la fonction utilisé dans l'analyse sémantique
-							this.WriteInFile("      ldw sp,bp", 1);
-							this.WriteInFile("      LDW BP, (SP)+", 1);
-							this.WriteInFile("      RTS", 1);
-							this.trouver=true;
-						}
-						calculNextRegion+=Pro.calculNbr(a.getChild(0).getChild(i))+1;
-						System.out.println(calculNextRegion);
-					}
-				}
-			}
-		}
-		else
-		{
-            for (int i = 0; i<a.getChildCount();i++)
-            {
-                     	    if (a.getChild(i).getText().equals("DECLARATION"))
-                            {
-                     	    	SearchInAst(a.getChild(i), region_a_trouver,region_ast,fonc);
-                            }
-                            else if (a.getChild(i).getText().equals("FONCTION") || a.getChild(i).getText().equals("PROCEDURE"))
-                            {
-                            	SearchInAst(a.getChild(i), region_a_trouver,++region_ast,fonc);
-                            }
-                            else if (a.getChild(i).getText().equals("BLOC"))
-                            {
-                            	SearchInAst(a.getChild(i), region_a_trouver,region_ast,fonc);
-                            }
-                     	    System.out.println(region_ast);
-            }
-		}
-	}
-
-	private void operate(Tree child,String s,int mode) 
+	private void operate(Tree child,String s) 
 	{
 		// TODO Auto-generated method stub
 		if (child.getText().equals("+"))
 		{
-			operateAdd(child.getChild(0), mode);
-			WriteInFile("LDW D1,-(SP)", mode);
-			operateAdd(child.getChild(1), mode);
-			WriteInFile("LDW R2,(SP)+", mode);
-			WriteInFile("ADD R2,D1,D1", mode);
+			operateAdd(child.getChild(0));
+			WriteInFile("LDW D1,-(SP)");
+			operateAdd(child.getChild(1));
+			WriteInFile("LDW R2,(SP)+");
+			WriteInFile("ADD R2,D1,D1");
 		}
 	}
 	public static boolean isNumeric(String str)  
@@ -250,7 +196,7 @@ public class GenerateCode
 		return true;  
 	}
 	
-	private int operateAdd(Tree child,int mode)
+	private int operateAdd(Tree child)
 	{
 		if(child.getChildCount()==2)
 		{
@@ -259,22 +205,22 @@ public class GenerateCode
 
 		if(isNumeric(opg.getText()))
 		{
-			operateAdd(opg, mode);
+			operateAdd(opg);
 			if(!isNumeric(opd.getText()))// og numeric et opd non numeri
 			{
 				//il y a un expresion pour opd
 				if(opd.getText().equals("+")||opd.getText().equals("-")||opd.getText().equals("*")||opd.getText().equals("/"))
 				{
-					operate(opd,null, mode);
+					operate(opd,null);
 				}
 				else // c'est un idf
 				{
-					operateAdd(opd, mode);	
+					operateAdd(opd);	
 				}
 			}
 			else
 			{
-				WriteInFile("ADD "+opg.getText()+","+opd.getText()+",D1", mode);
+				WriteInFile("ADD "+opg.getText()+","+opd.getText()+",D1");
 			}
 			
 		}
@@ -285,29 +231,29 @@ public class GenerateCode
 				//il y a un expresion pour opg
 				if(opg.getText().equals("+")||opg.getText().equals("-")||opg.getText().equals("*")||opg.getText().equals("/"))
 				{
-					operate(opg,null, mode);
+					operate(opg,null);
 				}
 				else // c'est un idf
 				{
-				operateAdd(opg, mode);
+				operateAdd(opg);
 				
 				}
 			}
 			else
 			{
-				operate(opg,null, mode);
-				operate(opd,null, mode);
+				operate(opg,null);
+				operate(opd,null);
 				
 			}
-			operateAdd(opd, mode);
-			WriteInFile("ADD "+opg.getText()+",D1", mode);
+			operateAdd(opd);
+			WriteInFile("ADD "+opg.getText()+",D1");
 		}
 		}
 		else if (child.getChildCount()==0)
 		{
 			if(isNumeric(child.getText()))//on tombe sur une feuille numerique
 			{
-				WriteInFile("LDQ "+child.getText()+",D1", mode);
+				WriteInFile("LDQ "+child.getText()+",D1");
 			}
 			else//on tombe sur une feuille associée à id
 			{
@@ -337,11 +283,9 @@ public class GenerateCode
 
 	}
 
-	public void WriteInFile(String texte,int mode)
+	public void WriteInFile(String texte)
 	{
 		FileWriter writer = null;
-		if (mode==0)
-		{
 		try
 		{
 			writer = new FileWriter(this.nameFile, true);
@@ -352,155 +296,7 @@ public class GenerateCode
 		{
 			ex.printStackTrace();
 		}
-		}
-		else if (mode==1)
-		{
-			this.codeFunction+=texte+"\n";
-		}
 	}
-public String produire_code_affectation_global(String id,int valeur,TDSGlobal tdsSorted)
-{
-	TDS root=tdsSorted.getTDSparRegion().get(0);
-	ArrayList<Symbole>list=root.getSymboles();
-    for(int i=0;i<list.size();i++)
-    {
-    	if(list.get(i).getNom().equals(id))//si on a un symbole qui a le meme nom que celui recherché
-    	{
-    		Symbole sym=list.get(i);
-    		//on produit le code
-    		String res="";
-    		int dep=2*sym.getDeplacement();
-    		res+="LDW R2, #"+dep+"\n";
-    		res+="LDW R3,BP \n";
-    		res+="ADD R2,R3,R2 \n";//R2<-BP+depl
-    		res+="LDW R3, #"+valeur+"\n";//R3<-valeur
-    		res+="STW R3,(R2) \n"; //met à l adresse dans R2 la valeur de R3
-    		return res;
-    	}
-    }
+
 	
-	
-	return null;
 }
-public String produire_code_retrouver_valeur_variable(String idf,int region)
-{
-	ArrayList<Integer>regions= pile.getPile().get(region);
-	TDS tds_reg=tdsFinal.getTDSparRegion().get(region);//TDS de la region regions[i]
-	ArrayList<Symbole> symb1=tds_reg.getSymboles();
-	int imbriq2=symb1.get(0).getNumeroImbrication();
-	for(int i=0;i<regions.size();i++)
-	{
-		TDS tds_reg_i=tdsFinal.getTDSparRegion().get(regions.get(i));//TDS de la region regions[i]
-		ArrayList<Symbole> symb=tds_reg_i.getSymboles();
-		for(int j=0;j<symb.size();j++)
-		{
-		   if(symb.get(j).getNom().equals(idf))
-		   {
-			   //
-			   String res="";
-			   Symbole symbol=symb.get(j);
-			   int imbriq=symbol.getNumeroImbrication();
-			   int nbDepl=imbriq2-imbriq; //nombre de region a sauter pour aller à la region de idf
-			   res+="LDW R6,BP\n";//R6<-BP
-			   res+="LDQ 0, R5\n";
-			   res+="LDW R7,#"+nbDepl+"\n";//R7<-nbDepl
-			   res+="boucle_search_idf: \n\n";
-			   res+="CMP R7,R5\n" ;//if R7>R5
-			   res+="JE fin\n";		   
-			   res+="ADQ -4,R6\n";//R6<-R6-4
-			   res+="LDW R6,(R6)\n";//R6<- valeur à l'adresse de R6 (c'est à dire BP)			   
-			   res+="ADQ -1,R7\n";//R7<-R7-1 
-			   res+="JMP boucle_search_idf\n";
-			   
-			   res+="fin:\n\n";
-			   //on est dans la region voulue en chainage statique (R6)
-			   if(symbol.getDeplacement()>=0)//si c'est une variable
-			   {
-			   res+="LDW R7,#"+symbol.getDeplacement()*2+"\n";
-			   res+="ADD R7,R6,R6\n";//R6<-depl+BP_region_cherchée
-			   res+="LDW R6,(R6)\n";
-			   }
-			   else // si c'est un parametre
-			   {
-				   res+="LDW R7,#"+symbol.getDeplacement()*2+"\n";
-				   res+="ADQ 8,R6\n";
-				   res+="ADD R7,R6,R6\n";//R6<-depl+BP_region_cherchée  //adresse variable cherchée
-				   res+="LDW R6,(R6)\n";
-			   }
-			   
-			   
-			   return res;
-		   }
-		}
-	}
-	
-	return null;
-}
-
-
-public String produire_code_stocker_valeur_variable(String idf,int valeur,int region)
-{
-	ArrayList<Integer>regions= pile.getPile().get(region);
-	TDS tds_reg=tdsFinal.getTDSparRegion().get(region);//TDS de la region regions[i]
-	ArrayList<Symbole> symb1=tds_reg.getSymboles();
-	int imbriq2=symb1.get(0).getNumeroImbrication();
-	for(int i=0;i<regions.size();i++)
-	{
-		TDS tds_reg_i=tdsFinal.getTDSparRegion().get(regions.get(i));//TDS de la region regions[i]
-		ArrayList<Symbole> symb=tds_reg_i.getSymboles();
-		for(int j=0;j<symb.size();j++)
-		{
-		   if(symb.get(j).getNom().equals(idf))
-		   {
-			   //
-			   String res="";
-			   Symbole symbol=symb.get(j);
-			   int imbriq=symbol.getNumeroImbrication();
-			   int nbDepl=imbriq2-imbriq; //nombre de region a sauter pour aller à la region de idf
-			   res+="LDW R6,BP\n";//R6<-BP
-			   res+="LDQ 0, R5\n";
-			   res+="LDW R7,#"+nbDepl+"\n";//R7<-nbDepl
-			   res+="boucle_search_idf: \n\n";
-			   res+="CMP R7,R5\n" ;//compare R7-R5
-			   res+="JE fin\n";	// verifie si le resultat est equal a zero	   
-			   res+="ADQ -4,R6\n";//R6<-R6-4
-			   res+="LDW R6,(R6)\n";//R6<- valeur à l'adresse de R6 (c'est à dire BP)			   
-			   res+="ADQ -1,R7\n";//R7<-R7-1 
-			   res+="JMP boucle_search_idf\n";			   
-			   res+="fin:\n\n";
-			   //on est dans la region voulue en chainage statique (R6)
-			   if(symbol.getDeplacement()>=0)//si c'est une variable
-			   {
-			   res+="LDW R7,#"+symbol.getDeplacement()*2+"\n";
-			   res+="ADD R7,R6,R6\n";//R6<-depl+BP_region_cherchée
-			   res+="LDW R8,#"+valeur+"\n";
-			   res+="STW R8,(R6)\n";
-			   }
-			   else // si c'est un parametre
-			   {
-				   res+="LDW R7,#"+symbol.getDeplacement()*2+"\n";
-				   res+="ADQ 8,R6\n";
-				   res+="ADD R7,R6,R6\n";//R6<-depl+BP_region_cherchée  //adresse variable cherchée
-				   res+="LDW R8,#"+valeur+"\n";
-				   res+="STW R8,(R6)\n";
-			   }
-			   
-			   
-			   return res;
-		   }
-		}
-	}
-	
-	return null;
-}
-
-
-
-
-
-}
-
-
-
-
-
