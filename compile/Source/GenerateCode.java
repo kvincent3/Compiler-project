@@ -1,5 +1,9 @@
+import java.io.BufferedReader;
+import java.io.FileInputStream;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 
 import org.antlr.runtime.tree.CommonTree;
@@ -110,6 +114,21 @@ public class GenerateCode
 			{
 				this.WriteInFile("ldw sp, bp \n ldw bp, (sp)+\ntrp #EXIT_EXC\n");
 				this.WriteInFile("\n\n\n\n");
+				String fichier ="FonctionsAssembleurs";
+				//lecture du fichier texte	
+				try{
+					InputStream ips=new FileInputStream(fichier); 
+					InputStreamReader ipsr=new InputStreamReader(ips);
+					BufferedReader br=new BufferedReader(ipsr);
+					String ligne;
+					while ((ligne=br.readLine())!=null){
+						this.WriteInFile(ligne);
+					}
+					br.close(); 
+				}		
+				catch (Exception e){
+					System.out.println(e.toString());
+				}
 				/*for (int i=0;i<this.fonctions.size();i++)
 				{
 					this.WriteInFile(fonctions.get(i).getCodeFonction(), 0);
