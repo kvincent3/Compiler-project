@@ -64,14 +64,14 @@ public class Main {
         controlef.CheckVisibilityFunct(ast, 0);
         controlef.CheckRetourFonct(ast, 0, 0);
         controlef.CheckSameFonct();
-        controlef.CheckSameFonct();
+        controlef.CheckSameFonct(); 
         /////*/
         ///jerome
         //System.out.println(ast.toStringTree());
         SemanticsTab sem=new SemanticsTab();
         sem.PrintArraySemanticError(ast, tdsFinal);
         //sem.printSemanticsBound(tteTds);
-        new GenerateCode(ast);
+        new GenerateCode(ast,pile);
 	}
 
 }

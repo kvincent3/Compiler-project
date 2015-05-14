@@ -104,7 +104,7 @@ public ArrayList<ArrayList<Integer>> getPile()
 }
 
 
-public static int calculNbr(Tree ast) 
+public static int calculNbr(Tree ast) //calcul toute les régions
 {
 	// TODO Auto-generated method stub
 	
