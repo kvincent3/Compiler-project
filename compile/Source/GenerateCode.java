@@ -481,7 +481,8 @@ public String produire_code_stocker_valeur_variable(String idf,int valeur,int re
 				   res+="LDW R7,#"+symbol.getDeplacement()*2+"\n";
 				   res+="ADQ 8,R6\n";
 				   res+="ADD R7,R6,R6\n";//R6<-depl+BP_region_cherchée  //adresse variable cherchée
-				   res+="LDW R6,(R6)\n";
+				   res+="LDW R8,#"+valeur+"\n";
+				   res+="STW R8,(R6)\n";
 			   }
 			   
 			   
