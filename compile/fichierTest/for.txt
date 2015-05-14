@@ -1,0 +1,5 @@
+do
+for a in 0..10
+   i=a+1
+end
+end
