@@ -1,3 +1,4 @@
+package compile;
 import java.io.BufferedReader;
 import java.io.FileInputStream;
 import java.io.FileWriter;
@@ -16,14 +17,29 @@ public class GenerateCode
 {
 	Tree astree;
 	String nameFile;
+	Pro pile;
 	private int increment=0;
-	public GenerateCode(Tree ast)
-	{
+	private int el_label=0;
+	private TDSGlobal tteTds;
+    private TDSGlobal tdsFinal;
+	private ArrayList<FonctionRegion> fonctions = new ArrayList<FonctionRegion>();
+	boolean trouver;
+	String codeFunction="";
+	public GenerateCode(Tree ast,Pro pile) {
+		ArrayList<Symbole> sym = new ArrayList<Symbole>();
+        TDS tds = new TDS();
+        tds.getSymboleFct2(ast,0,0,sym);
+        tds.getSymboleVar(ast, 0,0, sym);
+		 tteTds= tds.merge(sym);
+         tdsFinal = tteTds.addNoExistTDS(ast);
+		pile = new Pro(tdsFinal);
+        pile.doPro(ast,0);
+        this.pile=pile;
 		this.astree=ast;
 		this.createFile();
 		this.generate(this.astree,0);
 	}
-
+	
 	private void generate(Tree ast ,int region) 
 	{
 		if (ast.getText().equals("do"))
@@ -68,6 +84,10 @@ public class GenerateCode
 				{
 					if (ast.getChild(i).getText().equals("="))
 					{
+						String idf=ast.getChild(i).getChild(0).getText();//identifiant
+						Integer val=Integer.parseInt(ast.getChild(i).getChild(1).getText());//valeur
+						String cmd=produire_code_stocker_valeur_variable(idf,val,region);
+						this.WriteInFile(cmd);
 						this.operate(ast.getChild(i).getChild(1),null);
 						//int entier = Integer.parseInt(ast.getChild(i).getChild(1).getText());
 						//this.WriteInFile("ldw r0, #"+entier);
@@ -142,7 +162,6 @@ public class GenerateCode
 		}
 
 	}
-
 	private void boucleFor(Tree ast){
 		String nomVariable= ast.getChild(0).getText();
 		int valIni = Integer.parseInt(ast.getChild(1).getText());
@@ -314,7 +333,6 @@ public class GenerateCode
 		return 0;
 	}
 
-
 	private void createFile() 
 	{
 		try
@@ -350,4 +368,219 @@ public class GenerateCode
 	}
 
 	
+public String produire_code_affectation_global(String id,int valeur,TDSGlobal tdsSorted)
+{
+	el_label++;
+	TDS root=tdsSorted.getTDSparRegion().get(0);
+	ArrayList<Symbole>list=root.getSymboles();
+    for(int i=0;i<list.size();i++)
+    {
+    	if(list.get(i).getNom().equals(id))//si on a un symbole qui a le meme nom que celui recherché
+    	{
+    		Symbole sym=list.get(i);
+    		//on produit le code
+    		String res="";
+    		int dep=2*sym.getDeplacement();
+    		res+="LDW R2, #"+dep+"\n";
+    		res+="LDW R3,BP \n";
+    		res+="ADD R2,R3,R2 \n";//R2<-BP+depl
+    		res+="LDW R3, #"+valeur+"\n";//R3<-valeur
+    		res+="STW R3,(R2) \n"; //met à l adresse dans R2 la valeur de R3
+    		return res;
+    	}
+    }
+	
+	
+	return null;
 }
+public String produire_code_retrouver_valeur_variable(String idf,int region)
+{
+	el_label++;
+	ArrayList<Integer>regions= pile.getPile().get(region);
+	TDS tds_reg=tdsFinal.getTDSparRegion().get(region);//TDS de la region regions[i]
+	ArrayList<Symbole> symb1=tds_reg.getSymboles();
+	int imbriq2=symb1.get(0).getNumeroImbrication();
+	for(int i=0;i<regions.size();i++)
+	{
+		TDS tds_reg_i=tdsFinal.getTDSparRegion().get(regions.get(i));//TDS de la region regions[i]
+		ArrayList<Symbole> symb=tds_reg_i.getSymboles();
+		for(int j=0;j<symb.size();j++)
+		{
+		   if(symb.get(j).getNom().equals(idf))
+		   {
+			   //
+			   String res="";
+			   Symbole symbol=symb.get(j);
+			   int imbriq=symbol.getNumeroImbrication();
+			   int nbDepl=imbriq2-imbriq; //nombre de region a sauter pour aller à la region de idf
+			   
+				   
+			   res+="LDW R6,BP\n";//R6<-BP
+			   if(nbDepl==0)
+			     res+="ADQ -4,R6\n";   
+				   
+			   res+="LDQ 0, R5\n";
+			   res+="LDW R7,#"+nbDepl+"\n";//R7<-nbDepl
+			   res+="boucle_search_idf"+el_label+" ";
+			   res+="CMP R7,R5\n" ;//compare R7-R5
+			   res+="BEQ FIN"+el_label+"-$-2\n";	// verifie si le resultat est equal a zero	   
+			   res+="ADQ -4,R6\n";//R6<-R6-4
+			   res+="LDW R6,(R6)\n";//R6<- valeur à l'adresse de R6 (c'est à dire BP)			   
+			   res+="ADQ -1,R7\n";//R7<-R7-1 
+			   res+="JEA @boucle_search_idf\n\n";			   
+			   res+="FIN"+el_label+" ";
+			   //on est dans la region voulue en chainage statique (R6)
+			   if(symbol.getDeplacement()>=0)//si c'est une variable
+			   {
+			   res+="LDW R7,#"+symbol.getDeplacement()*2+"\n";
+			   res+="ADD R7,R6,R6\n";//R6<-depl+BP_region_cherchée
+			   res+="LDW R6,(R6)\n";
+			   }
+			   else // si c'est un parametre
+			   {
+				   res+="LDW R7,#"+symbol.getDeplacement()*2+"\n";
+				   res+="ADQ 8,R6\n";
+				   res+="ADD R7,R6,R6\n";//R6<-depl+BP_region_cherchée  //adresse variable cherchée
+				   res+="LDW R6,(R6)\n";
+			   }
+			   
+			   
+			   return res;
+		   }
+		}
+	}
+	
+	return null;
+}
+
+
+public String produire_code_stocker_valeur_variable(String idf,int valeur,int region)
+{
+	el_label++;
+	ArrayList<Integer>regions= pile.getPile().get(region);
+	TDS tds_reg=tdsFinal.getTDSparRegion().get(region);//TDS de la region regions[i]
+	ArrayList<Symbole> symb1=tds_reg.getSymboles();
+	int imbriq2=symb1.get(0).getNumeroImbrication();
+	for(int i=0;i<regions.size();i++)
+	{
+		TDS tds_reg_i=tdsFinal.getTDSparRegion().get(regions.get(i));//TDS de la region regions[i]
+		ArrayList<Symbole> symb=tds_reg_i.getSymboles();
+		for(int j=0;j<symb.size();j++)
+		{
+		   if(symb.get(j).getNom().equals(idf))
+		   {
+			   //
+			   String res="";
+			   Symbole symbol=symb.get(j);
+			   int imbriq=symbol.getNumeroImbrication();
+			   int nbDepl=imbriq2-imbriq; //nombre de region a sauter pour aller à la region de idf
+			   
+				   
+			   res+="LDW R6,BP\n";//R6<-BP
+			   if(nbDepl==0)
+			     res+="ADQ -4,R6\n";   
+				   
+			   res+="LDQ 0, R5\n";
+			   res+="LDW R7,#"+nbDepl+"\n";//R7<-nbDepl
+			   res+="boucle_search_idf"+el_label+" ";
+			   res+="CMP R7,R5\n" ;//compare R7-R5
+			   res+="BEQ FIN"+el_label+"-$-2\n";	// verifie si le resultat est equal a zero	   
+			   res+="ADQ -4,R6\n";//R6<-R6-4
+			   res+="LDW R6,(R6)\n";//R6<- valeur à l'adresse de R6 (c'est à dire BP)			   
+			   res+="ADQ -1,R7\n";//R7<-R7-1 
+			   res+="JEA @boucle_search_idf"+el_label+"\n\n";			   
+			   res+="FIN"+el_label+" ";
+			   //on est dans la region voulue en chainage statique (R6)
+			   if(symbol.getDeplacement()>=0)//si c'est une variable
+			   {
+			   res+="LDW R7,#"+symbol.getDeplacement()*2+"\n";
+			   res+="ADD R7,R6,R6\n";//R6<-depl+BP_region_cherchée
+			   res+=print_asm(5);
+			   res+="LDW R8,#"+valeur+"\n";
+			   res+="STW R8,(R6)\n";
+			   res+=print_asm(5);
+			   }
+			   else // si c'est un parametre
+			   {
+				   res+="LDW R7,#"+symbol.getDeplacement()*2+"\n";
+				   res+="ADQ 8,R6\n";
+				   res+="ADD R7,R6,R6\n";//R6<-depl+BP_region_cherchée  //adresse variable cherchée
+				   res+="LDW R8,#"+valeur+"\n";
+				   res+="STW R8,(R6)\n";
+			   }
+			   
+			   
+			   return res;
+		   }
+		}
+	}
+	
+	return null;
+}
+
+private String print_asm(int num_registre)
+{
+	String res="\n";
+	
+	
+	
+    res+="stw bp, -(sp)\n";
+    res+="ldw bp, sp\n";
+
+//char toto[7];
+// réserve 7+1 = 8 caractères en pile
+// (entier pair supérieur à 7 demandé pour pas désaligner pile)
+    res+="adi sp, sp, #-8 \n";  // réserve place pour text sur pile (8 octets); 
+                      // déplacement du début du tableau est -8
+
+//int value;
+    res+="adi sp, sp, #-2\n";  // réserve place pour variable value;
+                      // déplacement de value est -10
+
+//value = -23; 
+    res+="ldw r0,(R"+num_registre+")\n";      // charge r0 avec -23 = C2(23) = FFE9
+    res+="stw r0, (bp)-10\n" ;  // sauve r0 à l'adresse bp-10       
+
+//itoa(value, text, 10); // appelle itoa avec i = value, p = text, b = 10
+
+	res+="ldw r0, #10 \n ";   // charge 10 (pour base décimale) dans r0
+    res+="stw r0, -(sp)\n" ;   // empile contenu de r0 (paramètre b)
+
+    res+= "adi bp, r0, #-8\n";   // r0 = bp - 8 = adresse du tableau text
+    res+="stw r0, -(sp)\n";    // empile contenu de r0 (paramètre p)
+
+    res+="ldw r0, (bp)-10\n ";  // charge r0 avec value
+    res+="stw r0, -(sp) \n" ;   // empile contenu de r0 (paramètre i)
+
+    res+="jsr @itoa_ \n" ;      // appelle fonction itoa d'adresse itoa_
+
+    res+="adi sp, sp, #6 \n" ;  // nettoie la pile des paramètres 
+                      // de taille totale 6 octets
+
+//print(text);
+
+    res+="adi bp, r0, #-8  \n";// r0 = bp - 8 = adresse du tableau text
+    res+="stw r0, -(sp)\n";     // empile contenu de r0 (paramètre p)
+    
+    res+="jsr @print_ \n";      // appelle fonction print d'adresse print_
+
+    res+="adi sp, sp, #2\n  " ; // nettoie la pile des paramètres
+                      // de taille totale 2 octets
+
+//}  // fermeture du bloc englobant de main
+    res+="ldw sp, bp \n";       // abandonne variables locales de main
+    res+="ldw bp, (sp)+\n";     // dépile ancien bp dans bp
+    res+="trp #EXIT_EXC\n\n" ;    // lance trappe EXIT
+	
+	return res;
+}
+
+
+
+
+}
+
+
+
+
+
