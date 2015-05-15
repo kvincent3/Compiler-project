@@ -1,4 +1,4 @@
-package compile;
+
 import java.io.BufferedReader;
 import java.io.FileInputStream;
 import java.io.FileWriter;
@@ -22,7 +22,7 @@ public class GenerateCode
 	private int el_label=0;
 	private TDSGlobal tteTds;
     private TDSGlobal tdsFinal;
-	private ArrayList<FonctionRegion> fonctions = new ArrayList<FonctionRegion>();
+	//private ArrayList<FonctionRegion> fonctions = new ArrayList<FonctionRegion>();
 	boolean trouver;
 	String codeFunction="";
 	public GenerateCode(Tree ast,Pro pile) {
@@ -95,7 +95,11 @@ public class GenerateCode
 					}
 					else if(ast.getChild(i).getText().equals("WRITE"))
 					{
-						this.WriteInFile("adi sp, sp, #-8");
+						String idf=ast.getChild(i).getChild(0).getText();
+						String res=produire_code_retrouver_valeur_variable(idf,region);
+						res+=this.print_asm(6,0);
+						this.WriteInFile(res);
+						/*this.WriteInFile("adi sp, sp, #-8");
 						this.WriteInFile("adi sp, sp, #-2");
 						this.WriteInFile("ldw r0, #"+Integer.parseInt(ast.getChild(i).getChild(0).getText()));
 						this.WriteInFile("stw r0, (bp)-10");
@@ -114,6 +118,7 @@ public class GenerateCode
 						this.WriteInFile("stw r0, -(sp)");
 						this.WriteInFile("jsr @print_");
 						this.WriteInFile("adi sp, sp, #2");
+						*/
 					}
 					else if (ast.getChild(i).getText().equals("APPEL"))
 					{
@@ -416,25 +421,28 @@ public String produire_code_retrouver_valeur_variable(String idf,int region)
 			   
 				   
 			   res+="LDW R6,BP\n";//R6<-BP
-			   if(nbDepl==0)
-			     res+="ADQ -4,R6\n";   
+			   /*if(nbDepl==0)
+			     res+="ADQ -4,R6\n";   */
 				   
 			   res+="LDQ 0, R5\n";
 			   res+="LDW R7,#"+nbDepl+"\n";//R7<-nbDepl
 			   res+="boucle_search_idf"+el_label+" ";
 			   res+="CMP R7,R5\n" ;//compare R7-R5
 			   res+="BEQ FIN"+el_label+"-$-2\n";	// verifie si le resultat est equal a zero	   
-			   res+="ADQ -4,R6\n";//R6<-R6-4
+			   res+="ADQ -8,R6\n";//R6<-R6-4
 			   res+="LDW R6,(R6)\n";//R6<- valeur à l'adresse de R6 (c'est à dire BP)			   
 			   res+="ADQ -1,R7\n";//R7<-R7-1 
-			   res+="JEA @boucle_search_idf\n\n";			   
+			   res+="JEA @boucle_search_idf"+el_label+"\n\n";			   
 			   res+="FIN"+el_label+" ";
 			   //on est dans la region voulue en chainage statique (R6)
 			   if(symbol.getDeplacement()>=0)//si c'est une variable
 			   {
 			   res+="LDW R7,#"+symbol.getDeplacement()*2+"\n";
+			   res+="ADQ -8,R6\n";//R6<-R6-4
 			   res+="ADD R7,R6,R6\n";//R6<-depl+BP_region_cherchée
+			   //res+=this.print_asm(6);
 			   res+="LDW R6,(R6)\n";
+			   
 			   }
 			   else // si c'est un parametre
 			   {
@@ -444,7 +452,7 @@ public String produire_code_retrouver_valeur_variable(String idf,int region)
 				   res+="LDW R6,(R6)\n";
 			   }
 			   
-			   
+			   res+="ldw r7,#0\n";
 			   return res;
 		   }
 		}
@@ -477,15 +485,15 @@ public String produire_code_stocker_valeur_variable(String idf,int valeur,int re
 			   
 				   
 			   res+="LDW R6,BP\n";//R6<-BP
-			   if(nbDepl==0)
-			     res+="ADQ -4,R6\n";   
+			   /*if(nbDepl==0)
+			     res+="ADQ -4,R6\n";   */
 				   
 			   res+="LDQ 0, R5\n";
 			   res+="LDW R7,#"+nbDepl+"\n";//R7<-nbDepl
 			   res+="boucle_search_idf"+el_label+" ";
 			   res+="CMP R7,R5\n" ;//compare R7-R5
 			   res+="BEQ FIN"+el_label+"-$-2\n";	// verifie si le resultat est equal a zero	   
-			   res+="ADQ -4,R6\n";//R6<-R6-4
+			   res+="ADQ -8,R6\n";//R6<-R6-4
 			   res+="LDW R6,(R6)\n";//R6<- valeur à l'adresse de R6 (c'est à dire BP)			   
 			   res+="ADQ -1,R7\n";//R7<-R7-1 
 			   res+="JEA @boucle_search_idf"+el_label+"\n\n";			   
@@ -494,11 +502,12 @@ public String produire_code_stocker_valeur_variable(String idf,int valeur,int re
 			   if(symbol.getDeplacement()>=0)//si c'est une variable
 			   {
 			   res+="LDW R7,#"+symbol.getDeplacement()*2+"\n";
+			   res+="ADQ -8,R6\n";//R6<-R6-4
 			   res+="ADD R7,R6,R6\n";//R6<-depl+BP_region_cherchée
-			   res+=print_asm(5);
+			   //res+=print_asm(6);
 			   res+="LDW R8,#"+valeur+"\n";
 			   res+="STW R8,(R6)\n";
-			   res+=print_asm(5);
+			   //res+=print_asm(6,1);
 			   }
 			   else // si c'est un parametre
 			   {
@@ -509,7 +518,7 @@ public String produire_code_stocker_valeur_variable(String idf,int valeur,int re
 				   res+="STW R8,(R6)\n";
 			   }
 			   
-			   
+			   res+="ldw r7,#0\n";
 			   return res;
 		   }
 		}
@@ -518,7 +527,7 @@ public String produire_code_stocker_valeur_variable(String idf,int valeur,int re
 	return null;
 }
 
-private String print_asm(int num_registre)
+private String print_asm(int num_registre,int mode)// 0 mode direct 1 mode indirect
 {
 	String res="\n";
 	
@@ -538,7 +547,15 @@ private String print_asm(int num_registre)
                       // déplacement de value est -10
 
 //value = -23; 
+    if(mode==1)
+    {
     res+="ldw r0,(R"+num_registre+")\n";      // charge r0 avec -23 = C2(23) = FFE9
+    }
+    else
+    {
+    	res+="ldw r0,R"+num_registre+"\n";
+    }
+    	
     res+="stw r0, (bp)-10\n" ;  // sauve r0 à l'adresse bp-10       
 
 //itoa(value, text, 10); // appelle itoa avec i = value, p = text, b = 10
@@ -570,7 +587,7 @@ private String print_asm(int num_registre)
 //}  // fermeture du bloc englobant de main
     res+="ldw sp, bp \n";       // abandonne variables locales de main
     res+="ldw bp, (sp)+\n";     // dépile ancien bp dans bp
-    res+="trp #EXIT_EXC\n\n" ;    // lance trappe EXIT
+    //res+="trp #EXIT_EXC\n\n" ;    // lance trappe EXIT
 	
 	return res;
 }
