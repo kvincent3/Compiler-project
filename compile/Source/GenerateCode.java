@@ -199,7 +199,7 @@ public class GenerateCode
                         	//generate(a.getChild(i), ++region_ast,0);
 							this.WriteInFile(a.getChild(i).getChild(0).getText()+"_ STW BP, -(SP)");
 							this.WriteInFile("      LDW BP, SP");
-							this.WriteInFile("      STW r2, -(SP)");
+							//this.WriteInFile("      STW r2, -(SP)");
 							this.generate(a.getChild(i).getChild(3), ++increment);
                         	System.out.println("fonction"+a.getChild(i).getChild(0).getText()+" c'est la region "+increment);
 							this.WriteInFile("      ldw sp,bp");
@@ -235,9 +235,9 @@ public class GenerateCode
 			//on charge Bp dans r1
 			this.WriteInFile("ldw r1,bp");
 			//on soustrait 4 à r1 pour retrouver notre chainage statique
-			this.WriteInFile("adq -4, r1");
+			//this.WriteInFile("adq -4, r1");
 			// on prend le chainage statique associé pouis on le stock dans r2
-			this.WriteInFile("ldw r2,(r1)");
+			//this.WriteInFile("ldw r2,r1");
 			//on fait le jsr
 			this.WriteInFile("jsr @"+nomFonction+"_");
 			//après l'appel on dépile les paramètres
@@ -429,7 +429,7 @@ public String produire_code_retrouver_valeur_variable(String idf,int region)
 			   res+="boucle_search_idf"+el_label+" ";
 			   res+="CMP R7,R5\n" ;//compare R7-R5
 			   res+="BEQ FIN"+el_label+"-$-2\n";	// verifie si le resultat est equal a zero	   
-			   res+="ADQ -8,R6\n";//R6<-R6-4
+			   //res+="ADQ -2,R6\n";//R6<-R6-4
 			   res+="LDW R6,(R6)\n";//R6<- valeur à l'adresse de R6 (c'est à dire BP)			   
 			   res+="ADQ -1,R7\n";//R7<-R7-1 
 			   res+="JEA @boucle_search_idf"+el_label+"\n\n";			   
@@ -438,7 +438,7 @@ public String produire_code_retrouver_valeur_variable(String idf,int region)
 			   if(symbol.getDeplacement()>=0)//si c'est une variable
 			   {
 			   res+="LDW R7,#"+symbol.getDeplacement()*2+"\n";
-			   res+="ADQ -8,R6\n";//R6<-R6-4
+			   res+="ADQ -2,R6\n";//R6<-R6-4
 			   res+="ADD R7,R6,R6\n";//R6<-depl+BP_region_cherchée
 			   //res+=this.print_asm(6);
 			   res+="LDW R6,(R6)\n";
@@ -493,7 +493,7 @@ public String produire_code_stocker_valeur_variable(String idf,int valeur,int re
 			   res+="boucle_search_idf"+el_label+" ";
 			   res+="CMP R7,R5\n" ;//compare R7-R5
 			   res+="BEQ FIN"+el_label+"-$-2\n";	// verifie si le resultat est equal a zero	   
-			   res+="ADQ -8,R6\n";//R6<-R6-4
+			   //res+="ADQ -2,R6\n";//R6<-R6-4
 			   res+="LDW R6,(R6)\n";//R6<- valeur à l'adresse de R6 (c'est à dire BP)			   
 			   res+="ADQ -1,R7\n";//R7<-R7-1 
 			   res+="JEA @boucle_search_idf"+el_label+"\n\n";			   
@@ -502,7 +502,7 @@ public String produire_code_stocker_valeur_variable(String idf,int valeur,int re
 			   if(symbol.getDeplacement()>=0)//si c'est une variable
 			   {
 			   res+="LDW R7,#"+symbol.getDeplacement()*2+"\n";
-			   res+="ADQ -8,R6\n";//R6<-R6-4
+			   res+="ADQ -2,R6\n";//R6<-R6-4
 			   res+="ADD R7,R6,R6\n";//R6<-depl+BP_region_cherchée
 			   //res+=print_asm(6);
 			   res+="LDW R8,#"+valeur+"\n";
@@ -596,7 +596,6 @@ private String print_asm(int num_registre,int mode)// 0 mode direct 1 mode indir
 
 
 }
-
 
 
 
