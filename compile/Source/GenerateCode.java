@@ -96,29 +96,31 @@ public class GenerateCode
 					else if(ast.getChild(i).getText().equals("WRITE"))
 					{
 						String idf=ast.getChild(i).getChild(0).getText();
-						String res=produire_code_retrouver_valeur_variable(idf,region);
-						res+=this.print_asm(6,0);
-						this.WriteInFile(res);
-						/*this.WriteInFile("adi sp, sp, #-8");
-						this.WriteInFile("adi sp, sp, #-2");
-						this.WriteInFile("ldw r0, #"+Integer.parseInt(ast.getChild(i).getChild(0).getText()));
-						this.WriteInFile("stw r0, (bp)-10");
-						
-						this.WriteInFile("stw r0, (bp)-10");
-						this.WriteInFile("ldw r0, #10");
-						this.WriteInFile("stw r0, -(sp)");
-						this.WriteInFile("adi bp, r0, #-8");
-						this.WriteInFile("stw r0, -(sp)");
-						this.WriteInFile("ldw r0, (bp)-10");
-						this.WriteInFile("stw r0, -(sp)");
-						this.WriteInFile("jsr @itoa_");
-						this.WriteInFile("adi sp, sp, #6");
-						
-						this.WriteInFile("adi bp, r0, #-8");
-						this.WriteInFile("stw r0, -(sp)");
-						this.WriteInFile("jsr @print_");
-						this.WriteInFile("adi sp, sp, #2");
-						*/
+						if(!isNumeric(idf)){
+							String res=produire_code_retrouver_valeur_variable(idf,region);
+							res+=this.print_asm(6,0);
+							this.WriteInFile(res);
+						}else{
+							this.WriteInFile("adi sp, sp, #-8");
+							this.WriteInFile("adi sp, sp, #-2");
+							this.WriteInFile("ldw r0, #"+Integer.parseInt(idf));
+							this.WriteInFile("stw r0, (bp)-10");
+							
+							this.WriteInFile("stw r0, (bp)-10");
+							this.WriteInFile("ldw r0, #10");
+							this.WriteInFile("stw r0, -(sp)");
+							this.WriteInFile("adi bp, r0, #-8");
+							this.WriteInFile("stw r0, -(sp)");
+							this.WriteInFile("ldw r0, (bp)-10");
+							this.WriteInFile("stw r0, -(sp)");
+							this.WriteInFile("jsr @itoa_");
+							this.WriteInFile("adi sp, sp, #6");
+							
+							this.WriteInFile("adi bp, r0, #-8");
+							this.WriteInFile("stw r0, -(sp)");
+							this.WriteInFile("jsr @print_");
+							this.WriteInFile("adi sp, sp, #2");
+						}
 					}
 					else if (ast.getChild(i).getText().equals("APPEL"))
 					{
@@ -126,7 +128,7 @@ public class GenerateCode
 					}
 					else if (ast.getChild(i).getText().equals("for"))
 					{
-						boucleFor(ast.getChild(i));
+						boucleFor(ast.getChild(i),region);
 					}
 				}
 			}
@@ -167,22 +169,22 @@ public class GenerateCode
 		}
 
 	}
-	private void boucleFor(Tree ast){
+	private void boucleFor(Tree ast, int region){
 		String nomVariable= ast.getChild(0).getText();
 		int valIni = Integer.parseInt(ast.getChild(1).getText());
 		int valFin = Integer.parseInt(ast.getChild(2).getText());
 		int valDiff = valFin - valIni;
-		//this.WriteInFile("      STW R5, -(SP)");
-		//this.WriteInFile("      STW R6, -(SP)");
+		this.WriteInFile("      STW R5, -(SP)");
+		this.WriteInFile("      STW R6, -(SP)");
 		this.WriteInFile("      LDQ "+valIni+", R5");
 		this.WriteInFile("      LDQ "+valFin+", R6");
 		this.WriteInFile("LOOPF ADQ 1, R5");
 		//this.WriteInFile("      ADQ  1, R0");
-		generate(ast.getChild(3),0);
+		generate(ast.getChild(3),region);
 		this.WriteInFile("      CMP R6, R5");
 		this.WriteInFile("      JGT #LOOPF-$-2");
-		//this.WriteInFile("      LDW R6, (SP)");
-		//this.WriteInFile("      LDW R5, (SP)");
+		this.WriteInFile("      LDW R6, (SP)");
+		this.WriteInFile("      LDW R5, (SP)");
 	}
 	
 	private void generateAllFunction(Tree a) 
