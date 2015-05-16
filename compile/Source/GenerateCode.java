@@ -171,20 +171,23 @@ public class GenerateCode
 	}
 	private void boucleFor(Tree ast, int region){
 		String nomVariable= ast.getChild(0).getText();
-		int valIni = Integer.parseInt(ast.getChild(1).getText());
+		int valIni = Integer.parseInt(ast.getChild(1).getText())-1;
 		int valFin = Integer.parseInt(ast.getChild(2).getText());
 		int valDiff = valFin - valIni;
-		this.WriteInFile("      STW R5, -(SP)");
-		this.WriteInFile("      STW R6, -(SP)");
-		this.WriteInFile("      LDQ "+valIni+", R5");
-		this.WriteInFile("      LDQ "+valFin+", R6");
-		this.WriteInFile("LOOPF ADQ 1, R5");
+		this.WriteInFile("      STW R10, -(SP)");
+		this.WriteInFile("      STW R11, -(SP)");
+		this.WriteInFile("      LDQ "+valIni+", R10");
+		this.WriteInFile("      LDQ "+valFin+", R11");
+		this.WriteInFile("LOOPF ADQ 1, R10");
+		String cmd=produire_code_stocker_valeur_variable(nomVariable,valFin,region);// a changer
+		this.WriteInFile(cmd);// a changer
+		this.operate(ast.getChild(2),null);// a changer
 		//this.WriteInFile("      ADQ  1, R0");
 		generate(ast.getChild(3),region);
-		this.WriteInFile("      CMP R6, R5");
+		this.WriteInFile("      CMP R11, R10");
 		this.WriteInFile("      JGT #LOOPF-$-2");
-		this.WriteInFile("      LDW R6, (SP)");
-		this.WriteInFile("      LDW R5, (SP)");
+		this.WriteInFile("      LDW R11, (SP)");
+		this.WriteInFile("      LDW R10, (SP)");
 	}
 	
 	private void generateAllFunction(Tree a) 
