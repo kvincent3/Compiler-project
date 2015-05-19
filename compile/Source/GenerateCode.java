@@ -82,13 +82,14 @@ public class GenerateCode
 
 				for (int i=0;i<ast.getChildCount();i++)
 				{
-					if (ast.getChild(i).getText().equals("="))
+					if (ast.getChild(i).getText().equals("="))// une affectation
 					{
 						String idf=ast.getChild(i).getChild(0).getText();//identifiant
-						Integer val=Integer.parseInt(ast.getChild(i).getChild(1).getText());//valeur
-						String cmd=produire_code_stocker_valeur_variable(idf,val,region);
-						this.WriteInFile(cmd);
 						this.operate(ast.getChild(i).getChild(1),null);
+						//Integer val=Integer.parseInt(ast.getChild(i).getChild(1).getText());//valeur
+						//String cmd=produire_code_stocker_valeur_variable(idf,val,region);
+						//this.WriteInFile(cmd);
+						
 						//int entier = Integer.parseInt(ast.getChild(i).getChild(1).getText());
 						//this.WriteInFile("ldw r0, #"+entier);
 						///this.WriteInFile("stw r0, (bp)-2");
@@ -254,14 +255,30 @@ public class GenerateCode
 	private void operate(Tree child,String s) 
 	{
 		// TODO Auto-generated method stub
-		if (child.getText().equals("+"))
+		if (child.getText().equals("+")||child.getText().equals("-")||child.getText().equals("*"))
 		{
-			operateAdd(child.getChild(0));
-			WriteInFile("LDW D1,-(SP)");
-			operateAdd(child.getChild(1));
-			WriteInFile("LDW R2,(SP)+");
-			WriteInFile("ADD R2,D1,D1");
+				operateAdd(child.getChild(0));//on traite le fils gauche
+				WriteInFile("STW D1,-(SP)");// on empile la valeur
+				operateAdd(child.getChild(1));// on traite le fils droit
+				WriteInFile("STW D1,-(SP)");
+				WriteInFile("LDW R2,(SP)+");// on fait l'addition que l'on stock dans D1 / dépiler droite
+				WriteInFile("LDW R3,(SP)+");//dépiler gauche
+				if (child.getText().equals("+"))
+				{
+				   WriteInFile("ADD R3,R2,D1");
+				}
+				else if (child.getText().equals("-"))
+				{
+					WriteInFile("SUB R3,R2,D1");
+				}
+				else if (child.getText().equals("*"))
+				{
+					WriteInFile("MUL R3,R2,D1");
+				}
+				WriteInFile("STW D1,-(SP)");
+			//}
 		}
+
 	}
 	public static boolean isNumeric(String str)  
 	{  
@@ -278,59 +295,119 @@ public class GenerateCode
 	
 	private int operateAdd(Tree child)
 	{
-		if(child.getChildCount()==2)
+		if(child.getText().equals("+") || child.getText().equals("-")||child.getText().equals("*"))//on ne traite que l'addition et soustraction pour le moment 
 		{
-		Tree opg=child.getChild(0);
+		Tree opg=child.getChild(0);	
 		Tree opd=child.getChild(1);
-
 		if(isNumeric(opg.getText()))
 		{
 			operateAdd(opg);
+			WriteInFile("STW D1,-(SP)");
 			if(!isNumeric(opd.getText()))// og numeric et opd non numeri
 			{
 				//il y a un expresion pour opd
 				if(opd.getText().equals("+")||opd.getText().equals("-")||opd.getText().equals("*")||opd.getText().equals("/"))
 				{
 					operate(opd,null);
+					WriteInFile("LDW R2,(SP)+");// on fait l'addition que l'on stock dans D1
+					WriteInFile("LDW R3,(SP)+");
+					if (child.getText().equals("+"))
+					{
+					  WriteInFile("ADD R3,R2,D1");
+					}
+					else if (child.getText().equals("-"))
+					{
+					  WriteInFile("SUB R3,R2,D1");
+					}
+					else if (child.getText().equals("*"))
+					{
+					  WriteInFile("MUL R3,R2,D1");
+					}
 				}
 				else // c'est un idf
-				{
-					operateAdd(opd);	
+				{			
+					operateAdd(opd);
 				}
+
 			}
 			else
 			{
-				WriteInFile("ADD "+opg.getText()+","+opd.getText()+",D1");
+				operateAdd(opd);
+				WriteInFile("STW D1,-(SP)");
+				WriteInFile("LDW R2,(SP)+");// on fait l'addition que l'on stock dans D1
+				WriteInFile("LDW R3,(SP)+");
+				if (child.getText().equals("+"))
+				{
+				  WriteInFile("ADD R3,R2,D1");
+				}
+				else if (child.getText().equals("-"))
+				{
+				  WriteInFile("SUB R3,R2,D1");
+				}
+				else if (child.getText().equals("*"))
+				{
+				  WriteInFile("MUL R3,R2,D1");
+				}
+				//WriteInFile("STW D1,-(SP)");
 			}
 			
 		}
 		else //opg nn num
 		{
+			
 			if(isNumeric(opd.getText())) //opg non num et opd num
 			{
+				
 				//il y a un expresion pour opg
 				if(opg.getText().equals("+")||opg.getText().equals("-")||opg.getText().equals("*")||opg.getText().equals("/"))
-				{
+				{	
 					operate(opg,null);
 				}
 				else // c'est un idf
 				{
-				operateAdd(opg);
-				
+				 operateAdd(opg);
+				}
+				operateAdd(opd);
+				WriteInFile("STW D1,-(SP)");
+				WriteInFile("LDW R2,(SP)+");// on fait l'addition que l'on stock dans D1
+				WriteInFile("LDW R3,(SP)+");
+				if (child.getText().equals("+"))
+				{
+				  WriteInFile("ADD R3,R2,D1");
+				}
+				else if (child.getText().equals("-"))
+				{
+				  WriteInFile("SUB R3,R2,D1");
+				}
+				else if (child.getText().equals("*"))
+				{
+				  WriteInFile("MUL R3,R2,D1");
 				}
 			}
 			else
 			{
 				operate(opg,null);
 				operate(opd,null);
-				
-			}
-			operateAdd(opd);
-			WriteInFile("ADD "+opg.getText()+",D1");
+				WriteInFile("LDW R2,(SP)+");
+				WriteInFile("LDW R3,(SP)+");
+				if (child.getText().equals("+"))
+				{
+				  WriteInFile("ADD R3,R2,D1");
+				}
+				else if (child.getText().equals("-"))
+				{
+				  WriteInFile("SUB R3,R2,D1");
+				}
+				else if (child.getText().equals("*"))
+				{
+				  WriteInFile("MUL R3,R2,D1");
+				}
+			}		
 		}
 		}
 		else if (child.getChildCount()==0)
 		{
+
 			if(isNumeric(child.getText()))//on tombe sur une feuille numerique
 			{
 				WriteInFile("LDQ "+child.getText()+",D1");
