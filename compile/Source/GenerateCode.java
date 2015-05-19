@@ -252,9 +252,9 @@ public class GenerateCode
 		this.WriteInFile("      LDQ "+valIni+", R10");
 		this.WriteInFile("      LDQ "+valFin+", R11");
 		this.WriteInFile("LOOPF ADQ 1, R10");
-		String cmd=produire_code_stocker_valeur_variable(nomVariable,valFin,region);// a changer
+		String cmd=produire_code_stocker_valeur_variable_registre(nomVariable,"R10",region);// a changer
 		this.WriteInFile(cmd);// a changer
-		this.operate(ast.getChild(2),null);// a changer
+		//this.operate(ast.getChild(2),null);// a changer
 		//this.WriteInFile("      ADQ  1, R0");
 		generate(ast.getChild(3),region);
 		this.WriteInFile("      CMP R11, R10");
@@ -669,6 +669,71 @@ public String produire_code_stocker_valeur_variable(String idf,int valeur,int re
 				   res+="ADQ 8,R6\n";
 				   res+="ADD R7,R6,R6\n";//R6<-depl+BP_region_cherchée  //adresse variable cherchée
 				   res+="LDW R8,#"+valeur+"\n";
+				   res+="STW R8,(R6)\n";
+			   }
+			   
+			   res+="ldw r7,#0\n";
+			   return res;
+		   }
+		}
+	}
+	
+	return null;
+}
+
+public String produire_code_stocker_valeur_variable_registre(String idf,String registre,int region)
+{
+	el_label++;
+	ArrayList<Integer>regions= pile.getPile().get(region);
+	TDS tds_reg=tdsFinal.getTDSparRegion().get(region);//TDS de la region regions[i]
+	ArrayList<Symbole> symb1=tds_reg.getSymboles();
+	int imbriq2=symb1.get(0).getNumeroImbrication();
+	for(int i=0;i<regions.size();i++)
+	{
+		TDS tds_reg_i=tdsFinal.getTDSparRegion().get(regions.get(i));//TDS de la region regions[i]
+		ArrayList<Symbole> symb=tds_reg_i.getSymboles();
+		for(int j=0;j<symb.size();j++)
+		{
+		   if(symb.get(j).getNom().equals(idf))
+		   {
+			   //
+			   String res="";
+			   Symbole symbol=symb.get(j);
+			   int imbriq=symbol.getNumeroImbrication();
+			   int nbDepl=imbriq2-imbriq; //nombre de region a sauter pour aller à la region de idf
+			   
+				   
+			   res+="LDW R6,BP\n";//R6<-BP
+			   /*if(nbDepl==0)
+			     res+="ADQ -4,R6\n";   */
+				   
+			   res+="LDQ 0, R5\n";
+			   res+="LDW R7,#"+nbDepl+"\n";//R7<-nbDepl
+			   res+="boucle_search_idf"+el_label+" ";
+			   res+="CMP R7,R5\n" ;//compare R7-R5
+			   res+="BEQ FIN"+el_label+"-$-2\n";	// verifie si le resultat est equal a zero	   
+			   //res+="ADQ -2,R6\n";//R6<-R6-4
+			   res+="LDW R6,(R6)\n";//R6<- valeur à l'adresse de R6 (c'est à dire BP)			   
+			   res+="ADQ -1,R7\n";//R7<-R7-1 
+			   res+="JEA @boucle_search_idf"+el_label+"\n\n";			   
+			   res+="FIN"+el_label+" ";
+			   //on est dans la region voulue en chainage statique (R6)
+			   if(symbol.getDeplacement()>=0)//si c'est une variable
+			   {
+			   res+="LDW R7,#"+symbol.getDeplacement()*2+"\n";
+			   res+="ADQ -2,R6\n";//R6<-R6-4
+			   res+="ADD R7,R6,R6\n";//R6<-depl+BP_region_cherchée
+			   //res+=print_asm(6);
+			   res+="LDW R8,"+registre+"\n";
+			   res+="STW R8,(R6)\n";
+			   //res+=print_asm(6,1);
+			   }
+			   else // si c'est un parametre
+			   {
+				   res+="LDW R7,#"+symbol.getDeplacement()*2+"\n";
+				   res+="ADQ 8,R6\n";
+				   res+="ADD R7,R6,R6\n";//R6<-depl+BP_region_cherchée  //adresse variable cherchée
+				   res+="LDW R8,"+registre+"\n";
 				   res+="STW R8,(R6)\n";
 			   }
 			   
