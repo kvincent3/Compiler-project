@@ -25,6 +25,7 @@ public class GenerateCode
     private TDSGlobal tdsFinal;
 	//private ArrayList<FonctionRegion> fonctions = new ArrayList<FonctionRegion>();
 	boolean trouver;
+	private int num=0;
 	String codeFunction="";
 	public GenerateCode(Tree ast,Pro pile) {
 		ArrayList<Symbole> sym = new ArrayList<Symbole>();
@@ -241,6 +242,60 @@ public class GenerateCode
 		
 		return null;
 	}
+	//if 
+private void ifToken(Tree t,int region) 
+{
+	String compar1="";
+	String compar2="";
+	String outil_comparaison="";
+	int n = num;
+	num ++;
+
+	Tree condition=t.getChild(0);
+	compar1=condition.getChild(0).getText();
+	compar2=condition.getChild(1).getText();
+	outil_comparaison=condition.getText();
+
+	if (!isNumeric(compar1)){
+		WriteInFile("\tLDW WR, BP\n");
+		WriteInFile("\tADQ "+ produire_code_retrouver_valeur_variable(compar1,region)+", WR\n");
+		WriteInFile("\tLDW R2, (WR)\n");
+	}
+	else{
+		WriteInFile("\tLDW R2, #"+compar1+"\n");
+	}
+	if(!isNumeric(compar2)){
+		WriteInFile("\tLDW WR, BP\n");
+	WriteInFile("\tADQ "+produire_code_retrouver_valeur_variable(compar2,region)+", WR\n");
+		WriteInFile("\tLDW R3, (WR)\n");
+	}
+	else{
+		WriteInFile("\tLDW R3, #"+compar2+"\n");
+	}
+		WriteInFile("\tCMP R2, R3\n");
+		
+		if (outil_comparaison.equals("==")){
+			WriteInFile("\tJNE #Else"+num+"_-$-2\n\n");
+		}else if (outil_comparaison.equals("!=")){
+			WriteInFile("\tJEQ #Else"+num+"_-$-2\n\n");
+		}else if (outil_comparaison.equals("<")){
+			WriteInFile("\tJGE #Else"+num+"_-$-2\n\n");
+		}else if(outil_comparaison.equals("<=")){
+			WriteInFile("\tJGT #Else"+num+"_-$-2\n\n");
+		}else if(outil_comparaison.equals(">")){
+			WriteInFile("\tJLE #Else"+num+"_-$-2\n\n");
+		}else if (outil_comparaison.equals(">=")){
+			WriteInFile("\tJLW #Else"+num+"_-$-2\n\n");
+		}
+		
+		
+		WriteInFile("\tJMP #finif"+n+"_-$-2\n");
+		WriteInFile("Else"+n+"_\n");
+		WriteInFile("finif"+n+"_");
+	
+}
+
+
 
 	private void boucleFor(Tree ast, int region){
 		String nomVariable= ast.getChild(0).getText();
@@ -815,7 +870,6 @@ private String print_asm(int num_registre,int mode)// 0 mode direct 1 mode indir
 
 
 }
-
 
 
 
