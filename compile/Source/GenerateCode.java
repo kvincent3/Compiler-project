@@ -20,7 +20,7 @@ public class GenerateCode
 	Pro pile;
 	private int increment=0;
 	private int el_label=0;
-	private int el_label2=0;
+	private int el_label2=1000;
 	private TDSGlobal tteTds;
     private TDSGlobal tdsFinal;
 	//private ArrayList<FonctionRegion> fonctions = new ArrayList<FonctionRegion>();
@@ -206,14 +206,14 @@ public class GenerateCode
 					   
 				   res+="LDQ 0, R5\n";
 				   res+="LDW R7,#"+nbDepl+"\n";//R7<-nbDepl
-				   res+="boucle_search_idf"+el_label+" ";
+				   res+="boucle_search_idf"+el_label2+" ";
 				   res+="CMP R7,R5\n" ;//compare R7-R5
-				   res+="BEQ FIN"+el_label+"-$-2\n";	// verifie si le resultat est equal a zero	   
+				   res+="BEQ FIN"+el_label2+"-$-2\n";	// verifie si le resultat est equal a zero	   
 				   //res+="ADQ -2,R6\n";//R6<-R6-4
 				   res+="LDW R6,(R6)\n";//R6<- valeur à l'adresse de R6 (c'est à dire BP)			   
 				   res+="ADQ -1,R7\n";//R7<-R7-1 
-				   res+="JEA @boucle_search_idf"+el_label+"\n\n";			   
-				   res+="FIN"+el_label+" ";
+				   res+="JEA @boucle_search_idf"+el_label2+"\n\n";			   
+				   res+="FIN"+el_label2+" ";
 				   res+="LDW R2,(SP)+\n";//on dépile ce qui a été calculé
 				   //on est dans la region voulue en chainage statique (R6)
 				   if(symbol.getDeplacement()>=0)//si c'est une variable
