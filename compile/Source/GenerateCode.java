@@ -144,6 +144,7 @@ public class GenerateCode
 					{
 						boucleFor(ast.getChild(i),region);
 					}
+
 					else if (ast.getChild(i).getText().equals("RETOUR"));
 					{
 						if(this.isNumeric(ast.getChild(i).getChild(0).getText()))//le fils de retour est un chiffre
@@ -159,6 +160,7 @@ public class GenerateCode
 							asm+="LDW R9,R6";//R9<-R6
 							this.WriteInFile(asm);
 						}
+
 					}
 				}
 			}
@@ -275,11 +277,11 @@ private void ifToken(Tree t,int region)
 	Tree condition=t.getChild(0);
 	compar1=condition.getChild(0).getText();
 	compar2=condition.getChild(1).getText();
-	outil_comparaison=condition.getText();
-
+	outil_comparaison=t.getChild(0).getText();
+   System.out.println(outil_comparaison);
 	if (!isNumeric(compar1)){
 		WriteInFile("\tLDW WR, BP\n");
-		WriteInFile("\tADQ "+ produire_code_retrouver_valeur_variable(compar1,region)+", WR\n");
+		WriteInFile("\tADQ "+ getDeplacement(compar1,region)*2+", WR\n");
 		WriteInFile("\tLDW R2, (WR)\n");
 	}
 	else{
@@ -287,7 +289,8 @@ private void ifToken(Tree t,int region)
 	}
 	if(!isNumeric(compar2)){
 		WriteInFile("\tLDW WR, BP\n");
-	WriteInFile("\tADQ "+produire_code_retrouver_valeur_variable(compar2,region)+", WR\n");
+	    WriteInFile("\tADQ "+getDeplacement(compar2,region)*2+", WR\n");
+	
 		WriteInFile("\tLDW R3, (WR)\n");
 	}
 	else{
@@ -309,13 +312,13 @@ private void ifToken(Tree t,int region)
 			WriteInFile("\tJLW #Else"+num+"_-$-2\n\n");
 		}
 		
-		
-		WriteInFile("\tJMP #finif"+n+"_-$-2\n");
+		generate(t.getChild(1),region);
+		System.out.println(t.getChild(1));
+		WriteInFile("\tJMP #finif."+n+"_-$-2\n");
 		WriteInFile("Else"+n+"_\n");
 		WriteInFile("finif"+n+"_");
 	
 }
-
 
 
 	private void boucleFor(Tree ast, int region){
@@ -845,7 +848,33 @@ public String produire_code_stocker_valeur_variable_registre(String idf,String r
 	
 	return null;
 }
-
+public int getDeplacement(String idf,int region)
+{
+	el_label++;
+	ArrayList<Integer>regions= pile.getPile().get(region);
+	TDS tds_reg=tdsFinal.getTDSparRegion().get(region);//TDS de la region regions[i]
+	ArrayList<Symbole> symb1=tds_reg.getSymboles();
+	int imbriq2=symb1.get(0).getNumeroImbrication();
+	int nbDepl=0;
+	int depl=0;
+	for(int i=0;i<regions.size();i++)
+	{
+		TDS tds_reg_i=tdsFinal.getTDSparRegion().get(regions.get(i));//TDS de la region regions[i]
+		ArrayList<Symbole> symb=tds_reg_i.getSymboles();
+		for(int j=0;j<symb.size();j++)
+		{
+		   if(symb.get(j).getNom().equals(idf))
+		   {
+			   
+			   Symbole symbol=symb.get(j);
+			   int imbriq=symbol.getNumeroImbrication();
+			   nbDepl=imbriq2-imbriq; //n
+			   depl=symbol.getDeplacement();
+		   }
+		}
+	}
+	return depl;
+}
 private String print_asm(int num_registre,int mode)// 0 mode direct 1 mode indirect
 {
 	String res="\n";
