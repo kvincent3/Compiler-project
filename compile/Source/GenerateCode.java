@@ -156,6 +156,22 @@ public class GenerateCode
 				this.WriteInFile("FIFF"+fifi+" CMP R1,R10");
 				fifi=fifi+10;
 			}
+            else if (ast.getChild(i).getText().equals("RETOUR"));
+            {
+                    if(this.isNumeric(ast.getChild(i).getChild(0).getText()))//le fils de retour est un chiffre
+                      {
+                            String asm="";
+                            asm+="LDW R9,#"+ast.getChild(i).getChild(0).getText()+"\n";
+                            this.WriteInFile(asm);
+                      }
+                    else
+                    {
+                            String asm="";
+                            asm+=this.produire_code_retrouver_valeur_variable(ast.getChild(i).getChild(0).getText(), region);
+                            asm+="LDW R9,R6";//R9<-R6
+                            this.WriteInFile(asm);
+                    }
+            }
 		}
 	}
 	
@@ -170,7 +186,7 @@ public class GenerateCode
 			this.WriteInFile("\n");
 			this.WriteInFile("NUL         equ  0\nNULL        equ  0 \nNIL         equ  0  ");
 			this.WriteInFile("\n");
-			this.WriteInFile("STACK_ADRS  equ 0x1000 \nLOAD_ADRS   equ 0xFE00  \norg LOAD_ADRS\nstart do\n");
+			this.WriteInFile("STACK_ADRS  equ 0x1000 \nLOAD_ADRS   equ 0x2000  \norg LOAD_ADRS\nstart do\n");
 			this.WriteInFile("do ldw SP, #STACK_ADRS");
 			this.WriteInFile("ldw bp, #NIL");
 			this.WriteInFile("stw BP, -(SP)");
