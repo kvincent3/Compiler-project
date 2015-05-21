@@ -54,7 +54,7 @@ public class GenerateCode
 			this.WriteInFile("\n");
 			this.WriteInFile("NUL         equ  0\nNULL        equ  0 \nNIL         equ  0  ");
 			this.WriteInFile("\n");
-			this.WriteInFile("STACK_ADRS  equ 0x1000 \nLOAD_ADRS   equ 0xFE00  \norg LOAD_ADRS\nstart do\n");
+			this.WriteInFile("STACK_ADRS  equ 0x1000 \nLOAD_ADRS   equ 0x2000  \norg LOAD_ADRS\nstart do\n");
 			this.WriteInFile("do ldw SP, #STACK_ADRS");
 			this.WriteInFile("ldw bp, #NIL");
 			this.WriteInFile("stw BP, -(SP)");
@@ -98,7 +98,7 @@ public class GenerateCode
 						}
 						else
 						{
-							this.operate(ast.getChild(i).getChild(1),null);
+							this.operate(ast.getChild(i).getChild(1),null,region);
 						}
 						String cmd=produire_code_stocker_valeur_variable2(idf,region);
 						this.WriteInFile(cmd);
@@ -144,6 +144,22 @@ public class GenerateCode
 					{
 						boucleFor(ast.getChild(i),region);
 					}
+					else if (ast.getChild(i).getText().equals("RETOUR"));
+					{
+						if(this.isNumeric(ast.getChild(i).getChild(0).getText()))//le fils de retour est un chiffre
+						  {
+							String asm="";
+							asm+="LDW R9,#"+ast.getChild(i).getChild(0).getText()+"\n";
+							this.WriteInFile(asm);
+						  }
+						else
+						{
+							String asm="";
+							asm+=this.produire_code_retrouver_valeur_variable(ast.getChild(i).getChild(0).getText(), region);
+							asm+="LDW R9,R6";//R9<-R6
+							this.WriteInFile(asm);
+						}
+					}
 				}
 			}
 			if (ast.getText().equals("BLOC"))
@@ -183,6 +199,8 @@ public class GenerateCode
 		}
 
 	}
+	
+	
 	private String produire_code_stocker_valeur_variable2(String idf, int region) {
 		el_label2++;
 		ArrayList<Integer>regions= pile.getPile().get(region);
@@ -382,14 +400,14 @@ private void ifToken(Tree t,int region)
 	}
 
 
-	private void operate(Tree child,String s) 
+	private void operate(Tree child,String s, int region) 
 	{
 		// TODO Auto-generated method stub
 		if (child.getText().equals("+")||child.getText().equals("-")||child.getText().equals("*"))
 		{
-				operateAdd(child.getChild(0));//on traite le fils gauche
+				operateAdd(child.getChild(0),region);//on traite le fils gauche
 				WriteInFile("STW D1,-(SP)");// on empile la valeur
-				operateAdd(child.getChild(1));// on traite le fils droit
+				operateAdd(child.getChild(1),region);// on traite le fils droit
 				WriteInFile("STW D1,-(SP)");
 				WriteInFile("LDW R2,(SP)+");// on fait l'addition que l'on stock dans D1 / dépiler droite
 				WriteInFile("LDW R3,(SP)+");//dépiler gauche
@@ -411,11 +429,22 @@ private void ifToken(Tree t,int region)
 		else // on a un idf
 		{
 			//System.out.println("on y est");
-			
-			String code=produire_code_retrouver_valeur_variable(child.getText(), regionCourante);
+
+			if(!child.getText().equals("APPEL"))
+			{
+			String code=produire_code_retrouver_valeur_variable(child.getText(), region);
 			WriteInFile(code);
-			WriteInFile("LDW D1,(R6)");
+			WriteInFile("LDW D1,R6");
 			WriteInFile("STW D1,-(SP)");
+			}
+			else 
+			{
+				this.function(child, region);
+				String code="LDW D1,R9\n";//R9 contient le resultat de la fonction
+				code+="STW D1,-(SP)\n";//on empile D1
+				this.WriteInFile(code);
+			}
+			 
 		}
 
 	}
@@ -432,7 +461,7 @@ private void ifToken(Tree t,int region)
 		return true;  
 	}
 	
-	private int operateAdd(Tree child)
+	private int operateAdd(Tree child,int region)
 	{
 		if(child.getText().equals("+") || child.getText().equals("-")||child.getText().equals("*"))//on ne traite que l'addition et soustraction pour le moment 
 		{
@@ -440,14 +469,14 @@ private void ifToken(Tree t,int region)
 		Tree opd=child.getChild(1);
 		if(isNumeric(opg.getText()))
 		{
-			operateAdd(opg);
+			operateAdd(opg,region);
 			WriteInFile("STW D1,-(SP)");
 			if(!isNumeric(opd.getText()))// og numeric et opd non numeri
 			{
 				//il y a un expresion pour opd
 				if(opd.getText().equals("+")||opd.getText().equals("-")||opd.getText().equals("*")||opd.getText().equals("/"))
 				{
-					operate(opd,null);
+					operate(opd,null,region);
 					WriteInFile("LDW R2,(SP)+");// on fait l'addition que l'on stock dans D1
 					WriteInFile("LDW R3,(SP)+");
 					if (child.getText().equals("+"))
@@ -465,13 +494,13 @@ private void ifToken(Tree t,int region)
 				}
 				else // c'est un idf
 				{			
-					operateAdd(opd);
+					operateAdd(opd,region);
 				}
 
 			}
 			else
 			{
-				operateAdd(opd);
+				operateAdd(opd,region);
 				WriteInFile("STW D1,-(SP)");
 				WriteInFile("LDW R2,(SP)+");// on fait l'addition que l'on stock dans D1
 				WriteInFile("LDW R3,(SP)+");
@@ -500,13 +529,13 @@ private void ifToken(Tree t,int region)
 				//il y a un expresion pour opg
 				if(opg.getText().equals("+")||opg.getText().equals("-")||opg.getText().equals("*")||opg.getText().equals("/"))
 				{	
-					operate(opg,null);
+					operate(opg,null,region);
 				}
 				else // c'est un idf
 				{
-				 operateAdd(opg);
+				 operateAdd(opg,region);
 				}
-				operateAdd(opd);
+				operateAdd(opd,region);
 				WriteInFile("STW D1,-(SP)");
 				WriteInFile("LDW R2,(SP)+");// on fait l'addition que l'on stock dans D1
 				WriteInFile("LDW R3,(SP)+");
@@ -525,8 +554,8 @@ private void ifToken(Tree t,int region)
 			}
 			else
 			{
-				operate(opg,null);
-				operate(opd,null);
+				operate(opg,null,region);
+				operate(opd,null,region);
 				WriteInFile("LDW R2,(SP)+");
 				WriteInFile("LDW R3,(SP)+");
 				if (child.getText().equals("+"))
@@ -554,8 +583,10 @@ private void ifToken(Tree t,int region)
 			else//on tombe sur une feuille associée à id
 			{
 				//on genere le code qui retrouve la valeur de l'id et on le met dans D1
-				produire_code_retrouver_valeur_variable(child.getText(), regionCourante);
-				WriteInFile("LDW D1,(R6)");
+				System.out.println(child.getText());
+				String code=produire_code_retrouver_valeur_variable(child.getText(), regionCourante);
+				WriteInFile(code);
+				WriteInFile("LDW D1,R6");
 			}
 		}
 		return 0;
@@ -659,7 +690,8 @@ public String produire_code_retrouver_valeur_variable(String idf,int region)
 			   //on est dans la region voulue en chainage statique (R6)
 			   if(symbol.getDeplacement()>=0)//si c'est une variable
 			   {
-			   res+="LDW R7,#"+symbol.getDeplacement()*2+"\n";
+				   System.out.println(idf+":"+symbol.getDeplacement()*2);
+			   res+="LDW R7,#"+symbol.getDeplacement()*2+"// iciiiiiiiiiiiiiiiiiiiii\n";
 			   res+="ADQ -2,R6\n";//R6<-R6-4
 			   res+="SUB R6,R7,R6\n";//R6<-depl+BP_region_cherchée
 			   //res+=this.print_asm(6);
@@ -790,7 +822,7 @@ public String produire_code_stocker_valeur_variable_registre(String idf,String r
 			   {
 			   res+="LDW R7,#"+symbol.getDeplacement()*2+"\n";
 			   res+="ADQ -2,R6\n";//R6<-R6-4
-			   res+="ADD R7,R6,R6\n";//R6<-depl+BP_region_cherchée
+			   res+="SUB R6,R7,R6\n";//R6<-depl+BP_region_cherchée
 			   //res+=print_asm(6);
 			   res+="LDW R8,"+registre+"\n";
 			   res+="STW R8,(R6)\n";
