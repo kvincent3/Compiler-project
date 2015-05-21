@@ -168,7 +168,7 @@ public class GenerateCode
                     {
                             String asm="";
                             asm+=this.produire_code_retrouver_valeur_variable(ast.getChild(i).getChild(0).getText(), region);
-                            asm+="LDW R9,R6";//R9<-R6
+                            asm+="\nLDW R9,R6";//R9<-R6
                             this.WriteInFile(asm);
                     }
             }
@@ -1209,7 +1209,7 @@ public String produire_code_retrouver_valeur_variable(String idf,int region)
 		}
 	}
 	
-	return null;
+	return "";
 }
 
 
