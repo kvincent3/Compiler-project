@@ -384,6 +384,12 @@ private void ifToken(Tree t,int region)
 					this.WriteInFile("ldw r0, #"+ast.getChild(i).getText());//on met dans r0
 					this.WriteInFile("stw r0, -(sp)");//on empile
 				}
+				else if (ast.getChild(i).getChildCount()>0)
+				{
+					operate(ast.getChild(i),null, regionAppelant);
+					this.WriteInFile("LDW R2,(SP)+");
+					this.WriteInFile("stw R2, -(sp)");
+				}
 				else // c'est un idf
 				{
 					String code = produire_code_retrouver_valeur_variable(ast.getChild(i).getText(), regionAppelant);
