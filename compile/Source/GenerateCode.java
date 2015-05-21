@@ -802,7 +802,7 @@ private void ifToken(Tree t,int region)
                         {
                  	    	generateAllFunction(a.getChild(i));
                         }
-                        else if (a.getChild(i).getText().equals("FONCTION") || a.getChild(i).getText().equals("PROCEDURE"))
+                        else if (a.getChild(i).getText().equals("FONCTION"))
                         {
                         	//generate(a.getChild(i), ++region_ast,0);
 							this.WriteInFile(a.getChild(i).getChild(0).getText()+"_ STW BP, -(SP)");
@@ -813,14 +813,21 @@ private void ifToken(Tree t,int region)
 							this.WriteInFile("      ldw sp,bp");
 							this.WriteInFile("      LDW BP, (SP)+");
 							this.WriteInFile("      RTS\n\n");
-							if (a.getChild(i).getText().equals("FONCTION"))
-							{
-								generateAllFunction(a.getChild(i).getChild(3));
-							}
-							else
-							{
-								generateAllFunction(a.getChild(i).getChild(2));
-							}
+							generateAllFunction(a.getChild(i).getChild(3));
+
+                        }
+                        else if (a.getChild(i).getText().equals("PROCEDURE"))
+                        {
+                        	//generate(a.getChild(i), ++region_ast,0);
+							this.WriteInFile(a.getChild(i).getChild(0).getText()+"_ STW BP, -(SP)");
+							this.WriteInFile("      LDW BP, SP");
+							//this.WriteInFile("      STW r2, -(SP)");
+							this.generate(a.getChild(i).getChild(2), ++increment);
+                        	System.out.println("procedure"+a.getChild(i).getChild(0).getText()+" c'est la region "+increment);
+							this.WriteInFile("      ldw sp,bp");
+							this.WriteInFile("      LDW BP, (SP)+");
+							this.WriteInFile("      RTS\n\n");
+							generateAllFunction(a.getChild(i).getChild(2));
                         }
                         else if (a.getChild(i).getText().equals("BLOC"))
                         {
@@ -1132,8 +1139,9 @@ public String produire_code_retrouver_valeur_variable(String idf,int region)
 	TDS tds_reg=tdsFinal.getTDSparRegion().get(region);//TDS de la region regions[i]
 	ArrayList<Symbole> symb1=tds_reg.getSymboles();
 	int imbriq2=symb1.get(0).getNumeroImbrication();
-	for(int i=regions.size()-1;i>=0;i++)
+	for(int i=regions.size()-1;i>=0;i--)
 	{
+		System.out.println(i);
 		TDS tds_reg_i=tdsFinal.getTDSparRegion().get(regions.get(i));//TDS de la region regions[i]
 		ArrayList<Symbole> symb=tds_reg_i.getSymboles();
 		for(int j=0;j<symb.size();j++)
@@ -1196,7 +1204,7 @@ public String produire_code_stocker_valeur_variable(String idf,int valeur,int re
 	TDS tds_reg=tdsFinal.getTDSparRegion().get(region);//TDS de la region regions[i]
 	ArrayList<Symbole> symb1=tds_reg.getSymboles();
 	int imbriq2=symb1.get(0).getNumeroImbrication();
-	for(int i=regions.size()-1;i>=0;i++)
+	for(int i=regions.size()-1;i>=0;i--)
 	{
 		TDS tds_reg_i=tdsFinal.getTDSparRegion().get(regions.get(i));//TDS de la region regions[i]
 		ArrayList<Symbole> symb=tds_reg_i.getSymboles();
