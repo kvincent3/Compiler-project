@@ -18,8 +18,6 @@ public class GenerateCode
 	Tree astree;
 	String nameFile;
 	Pro pile;
-	private int iff=0;
-	private int fifi=0;
 	private int increment=0;
 	private int el_label=0;
 	private int el_label2=1000;
@@ -45,117 +43,6 @@ public class GenerateCode
 		this.generate(this.astree,0);
 	}
 	
-	private void lancer_instruction(Tree ast,int region){
-
-
-		for (int i=0;i<ast.getChildCount();i++)
-		{
-			if (ast.getChild(i).getText().equals("="))// une affectation
-			{
-				String idf=ast.getChild(i).getChild(0).getText();//identifiant
-				this.regionCourante=region;
-
-				if (ast.getChild(i).getChild(1).getChildCount()==0 && isNumeric(ast.getChild(i).getChild(1).getText()))
-				{
-					String val=ast.getChild(i).getChild(1).getText();
-					WriteInFile("LDQ "+val+",D1");
-					WriteInFile("STW D1,-(SP)");
-				}
-				else
-				{
-					this.operate(ast.getChild(i).getChild(1),null);
-				}
-				String cmd=produire_code_stocker_valeur_variable2(idf,region);
-				this.WriteInFile(cmd);
-				
-				//int entier = Integer.parseInt(ast.getChild(i).getChild(1).getText());
-				//this.WriteInFile("ldw r0, #"+entier);
-				///this.WriteInFile("stw r0, (bp)-2");
-			}
-			else if(ast.getChild(i).getText().equals("WRITE"))
-			{
-				String idf=ast.getChild(i).getChild(0).getText();
-				if(!isNumeric(idf)){
-					String res=produire_code_retrouver_valeur_variable(idf,region);
-					res+=this.print_asm(6,0);
-					this.WriteInFile(res);
-				}else{
-					this.WriteInFile("adi sp, sp, #-8");
-					this.WriteInFile("adi sp, sp, #-2");
-					this.WriteInFile("ldw r0, #"+Integer.parseInt(idf));
-					this.WriteInFile("stw r0, (bp)-10");
-					
-					this.WriteInFile("stw r0, (bp)-10");
-					this.WriteInFile("ldw r0, #10");
-					this.WriteInFile("stw r0, -(sp)");
-					this.WriteInFile("adi bp, r0, #-8");
-					this.WriteInFile("stw r0, -(sp)");
-					this.WriteInFile("ldw r0, (bp)-10");
-					this.WriteInFile("stw r0, -(sp)");
-					this.WriteInFile("jsr @itoa_");
-					this.WriteInFile("adi sp, sp, #6");
-					
-					this.WriteInFile("adi bp, r0, #-8");
-					this.WriteInFile("stw r0, -(sp)");
-					this.WriteInFile("jsr @print_");
-					this.WriteInFile("adi sp, sp, #2");
-				}
-			}
-			else if (ast.getChild(i).getText().equals("APPEL"))
-			{
-				function(ast.getChild(i),region);
-			}
-			else if (ast.getChild(i).getText().equals("for"))
-			{
-				boucleFor(ast.getChild(i),region);
-			}
-/*else if(ast.getChild(i).getChild(0).getText().equals("==")||ast.getChild(i).getChild(0).getText().equals("!=")||ast.getChild(i).getChild(0).getText().equals(">=")||ast.getChild(i).getChild(0).getText().equals("<=")||ast.getChild(i).getChild(0).getText().equals("<")||ast.getChild(i).getChild(0).getText().equals(">")){
-				ifToken(ast.getChild(i),region);
-			
-				
-				
-			}*/
-			else if (ast.getChild(i).getText().equals("if"))// une affectation
-			{
-				fifi++;
-				System.out.println("OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO");
-				System.out.println(ast.getChild(i).getChild(1).getText());
-				this.operateIf(ast.getChild(i).getChild(0),null,region);
-				/*this.WriteInFile("adi sp, sp, #-8");
-				this.WriteInFile("adi sp, sp, #-2");
-				this.WriteInFile("ldw r0, D1");
-				this.WriteInFile("stw r0, (bp)-10");
-				
-				this.WriteInFile("stw r0, (bp)-10");
-				this.WriteInFile("ldw r0, #10");
-				this.WriteInFile("stw r0, -(sp)");
-				this.WriteInFile("adi bp, r0, #-8");
-				this.WriteInFile("stw r0, -(sp)");
-				this.WriteInFile("ldw r0, (bp)-10");
-				this.WriteInFile("stw r0, -(sp)");
-				this.WriteInFile("jsr @itoa_");
-				this.WriteInFile("adi sp, sp, #6");
-				
-				this.WriteInFile("adi bp, r0, #-8");
-				this.WriteInFile("stw r0, -(sp)");
-				this.WriteInFile("jsr @print_");
-				this.WriteInFile("adi sp, sp, #2");*/
-				WriteInFile("LDW D1,(SP)+");
-				WriteInFile("LDW R10,#0");
-				WriteInFile("CMP D1,R10");
-				WriteInFile("JNE #4");
-				WriteInFile("JEA @FIF"+fifi);
-				lancer_instruction(ast.getChild(i).getChild(1), region);
-				WriteInFile("JEA @FIF2"+fifi);
-				this.WriteInFile("FIF"+fifi+" CMP R1,R10");
-				if(ast.getChild(i).getChildCount()>2){
-					lancer_instruction(ast.getChild(i).getChild(2), region);
-				}
-				this.WriteInFile("FIF2"+fifi+" CMP R1,R10");
-			}
-		}
-	}
-	
 	private void generate(Tree ast ,int region) 
 	{
 		if (ast.getText().equals("do"))
@@ -167,7 +54,7 @@ public class GenerateCode
 			this.WriteInFile("\n");
 			this.WriteInFile("NUL         equ  0\nNULL        equ  0 \nNIL         equ  0  ");
 			this.WriteInFile("\n");
-			this.WriteInFile("STACK_ADRS  equ 0x1000 \nLOAD_ADRS   equ 0xFE00  \norg LOAD_ADRS\nstart do\n");
+			this.WriteInFile("STACK_ADRS  equ 0x1000 \nLOAD_ADRS   equ 0x2000  \norg LOAD_ADRS\nstart do\n");
 			this.WriteInFile("do ldw SP, #STACK_ADRS");
 			this.WriteInFile("ldw bp, #NIL");
 			this.WriteInFile("stw BP, -(SP)");
@@ -195,7 +82,85 @@ public class GenerateCode
 			}
 			if (ast.getText().equals("INSTRUCTION"))
 			{
-				lancer_instruction(ast, region);
+
+				for (int i=0;i<ast.getChildCount();i++)
+				{
+					if (ast.getChild(i).getText().equals("="))// une affectation
+					{
+						String idf=ast.getChild(i).getChild(0).getText();//identifiant
+						this.regionCourante=region;
+
+						if (ast.getChild(i).getChild(1).getChildCount()==0 && isNumeric(ast.getChild(i).getChild(1).getText()))
+						{
+							String val=ast.getChild(i).getChild(1).getText();
+							WriteInFile("LDQ "+val+",D1");
+							WriteInFile("STW D1,-(SP)");
+						}
+						else
+						{
+							this.operate(ast.getChild(i).getChild(1),null,region);
+						}
+						String cmd=produire_code_stocker_valeur_variable2(idf,region);
+						this.WriteInFile(cmd);
+						
+						//int entier = Integer.parseInt(ast.getChild(i).getChild(1).getText());
+						//this.WriteInFile("ldw r0, #"+entier);
+						///this.WriteInFile("stw r0, (bp)-2");
+					}
+					else if(ast.getChild(i).getText().equals("WRITE"))
+					{
+						String idf=ast.getChild(i).getChild(0).getText();
+						if(!isNumeric(idf)){
+							String res=produire_code_retrouver_valeur_variable(idf,region);
+							res+=this.print_asm(6,0);
+							this.WriteInFile(res);
+						}else{
+							this.WriteInFile("adi sp, sp, #-8");
+							this.WriteInFile("adi sp, sp, #-2");
+							this.WriteInFile("ldw r0, #"+Integer.parseInt(idf));
+							this.WriteInFile("stw r0, (bp)-10");
+							
+							this.WriteInFile("stw r0, (bp)-10");
+							this.WriteInFile("ldw r0, #10");
+							this.WriteInFile("stw r0, -(sp)");
+							this.WriteInFile("adi bp, r0, #-8");
+							this.WriteInFile("stw r0, -(sp)");
+							this.WriteInFile("ldw r0, (bp)-10");
+							this.WriteInFile("stw r0, -(sp)");
+							this.WriteInFile("jsr @itoa_");
+							this.WriteInFile("adi sp, sp, #6");
+							
+							this.WriteInFile("adi bp, r0, #-8");
+							this.WriteInFile("stw r0, -(sp)");
+							this.WriteInFile("jsr @print_");
+							this.WriteInFile("adi sp, sp, #2");
+						}
+					}
+					else if (ast.getChild(i).getText().equals("APPEL"))
+					{
+						function(ast.getChild(i),region);
+					}
+					else if (ast.getChild(i).getText().equals("for"))
+					{
+						boucleFor(ast.getChild(i),region);
+					}
+					else if (ast.getChild(i).getText().equals("RETOUR"));
+					{
+						if(this.isNumeric(ast.getChild(i).getChild(0).getText()))//le fils de retour est un chiffre
+						  {
+							String asm="";
+							asm+="LDW R9,#"+ast.getChild(i).getChild(0).getText()+"\n";
+							this.WriteInFile(asm);
+						  }
+						else
+						{
+							String asm="";
+							asm+=this.produire_code_retrouver_valeur_variable(ast.getChild(i).getChild(0).getText(), region);
+							asm+="LDW R9,R6";//R9<-R6
+							this.WriteInFile(asm);
+						}
+					}
+				}
 			}
 			if (ast.getText().equals("BLOC"))
 			{
@@ -234,432 +199,15 @@ public class GenerateCode
 		}
 
 	}
-	private void operateIf(Tree child,String s, int region) 
-	{
-		iff++;
-		// TODO Auto-generated method stub
-		if (child.getText().equals("+")||child.getText().equals("-")||child.getText().equals("*")||child.getText().equals("<")||child.getText().equals(">")||child.getText().equals("==")||child.getText().equals(">=")||child.getText().equals("<=")||child.getText().equals("!="))
-		{
-				operateAddIf(child.getChild(0),region);//on traite le fils gauche
-				WriteInFile("STW D1,-(SP)");// on empile la valeur
-				operateAddIf(child.getChild(1),region);// on traite le fils droit
-				WriteInFile("STW D1,-(SP)");
-				WriteInFile("LDW R2,(SP)+");// on fait l'addition que l'on stock dans D1 / dépiler droite
-				WriteInFile("LDW R3,(SP)+");//dépiler gauche
-				if (child.getText().equals("+"))
-				{
-				   WriteInFile("ADD R3,R2,D1");
-				}
-				else if (child.getText().equals("-"))
-				{
-					WriteInFile("SUB R3,R2,D1");
-				}
-				else if (child.getText().equals("*"))
-				{
-					WriteInFile("MUL R3,R2,D1");
-				}
-				else if (child.getText().equals("<="))
-				{
-					this.WriteInFile("LDW D1,#0");
-					WriteInFile("CMP R3,R2");
-					WriteInFile("JGT #4");
-					this.WriteInFile("ADQ 1, D1");
-					this.WriteInFile("CMP R3,R2");
-				}
-				else if (child.getText().equals("<"))
-				{
-					this.WriteInFile("LDW D1,#0");
-					WriteInFile("CMP R3,R2");
-					WriteInFile("JGE #4");
-					this.WriteInFile("ADQ 1, D1");
-					this.WriteInFile("CMP R3,R2");
-				}
-				else if (child.getText().equals(">"))
-				{
-					this.WriteInFile("LDW D1,#0");
-					WriteInFile("CMP R3,R2");
-					WriteInFile("JLE #4");
-					this.WriteInFile("ADQ 1, D1");
-					this.WriteInFile("CMP R3,R2");
-				}
-				else if (child.getText().equals(">="))
-				{
-					this.WriteInFile("LDW D1,#0");
-					WriteInFile("CMP R3,R2");
-					WriteInFile("JLW #4");
-					this.WriteInFile("ADQ 1, D1");
-					this.WriteInFile("CMP R3,R2");
-				}
-				else if (child.getText().equals("!="))
-				{
-					this.WriteInFile("LDW D1,#0");
-					WriteInFile("CMP R3,R2");
-					WriteInFile("JEQ #4");
-					this.WriteInFile("ADQ 1, D1");
-					this.WriteInFile("CMP R3,R2");
-				}
-				else if (child.getText().equals("=="))
-				{
-					this.WriteInFile("LDW D1,#0");
-					WriteInFile("CMP R3,R2");
-					WriteInFile("JNE #4");
-					this.WriteInFile("ADQ 1, D1");
-					this.WriteInFile("CMP R3,R2");
-				}
-				WriteInFile("STW D1,-(SP)");
-			//}
-		}
-		else // on a un idf
-		{
-			//System.out.println("on y est");
-
-			if(!child.getText().equals("APPEL"))
-			{
-			String code=produire_code_retrouver_valeur_variable(child.getText(), region);
-			WriteInFile(code);
-			WriteInFile("LDW D1,R6");
-			WriteInFile("STW D1,-(SP)");
-			}
-			else 
-			{
-				this.function(child, region);
-				String code="LDW D1,R9\n";//R9 contient le resultat de la fonction
-				code+="STW D1,-(SP)\n";//on empile D1
-				this.WriteInFile(code);
-			}
-			 
-		}
-	}
-	private int operateAddIf(Tree child,int region)
-	{
-		if(child.getText().equals("+") ||child.getText().equals("*")||child.getText().equals("<")||child.getText().equals("-"))//on ne traite que l'addition et soustraction pour le moment 
-		{
-		Tree opg=child.getChild(0);	
-		Tree opd=child.getChild(1);
-		if(isNumeric(opg.getText()))
-		{
-			operateAddIf(opg,region);
-			WriteInFile("STW D1,-(SP)");
-			if(!isNumeric(opd.getText()))// og numeric et opd non numeri
-			{
-				//il y a un expresion pour opd
-				if(opd.getText().equals("+")||opd.getText().equals("*")||opd.getText().equals("<")||opd.getText().equals("-")||opd.getText().equals(">")||opd.getText().equals("==")||opd.getText().equals("!=")||opd.getText().equals(">=")||opd.getText().equals("<="))
-				{
-					operateIf(opd,null,region);
-					WriteInFile("LDW R2,(SP)+");// on fait l'addition que l'on stock dans D1
-					WriteInFile("LDW R3,(SP)+");
-					if (child.getText().equals("+"))
-					{
-					   WriteInFile("ADD R3,R2,D1");
-					}
-					else if (child.getText().equals("-"))
-					{
-						WriteInFile("SUB R3,R2,D1");
-					}
-					else if (child.getText().equals("*"))
-					{
-						WriteInFile("MUL R3,R2,D1");
-					}
-					else if (child.getText().equals("<="))
-					{
-						this.WriteInFile("LDW D1,#0");
-						WriteInFile("CMP R3,R2");
-						WriteInFile("JGT #4");
-						this.WriteInFile("ADQ 1, D1");
-						this.WriteInFile("CMP R3,R2");
-					}
-					else if (child.getText().equals("<"))
-					{
-						this.WriteInFile("LDW D1,#0");
-						WriteInFile("CMP R3,R2");
-						WriteInFile("JGE #4");
-						this.WriteInFile("ADQ 1, D1");
-						this.WriteInFile("CMP R3,R2");
-					}
-					else if (child.getText().equals(">"))
-					{
-						this.WriteInFile("LDW D1,#0");
-						WriteInFile("CMP R3,R2");
-						WriteInFile("JLE #4");
-						this.WriteInFile("ADQ 1, D1");
-						this.WriteInFile("CMP R3,R2");
-					}
-					else if (child.getText().equals(">="))
-					{
-						this.WriteInFile("LDW D1,#0");
-						WriteInFile("CMP R3,R2");
-						WriteInFile("JLW #4");
-						this.WriteInFile("ADQ 1, D1");
-						this.WriteInFile("CMP R3,R2");
-					}
-					else if (child.getText().equals("!="))
-					{
-						this.WriteInFile("LDW D1,#0");
-						WriteInFile("CMP R3,R2");
-						WriteInFile("JEQ #4");
-						this.WriteInFile("ADQ 1, D1");
-						this.WriteInFile("CMP R3,R2");
-					}
-					else if (child.getText().equals("=="))
-					{
-						this.WriteInFile("LDW D1,#0");
-						WriteInFile("CMP R3,R2");
-						WriteInFile("JNE #4");
-						this.WriteInFile("ADQ 1, D1");
-						this.WriteInFile("CMP R3,R2");
-					}
-				}
-				else // c'est un idf
-				{			
-					operateAddIf(opd,region);
-				}
-
-			}
-			else
-			{
-				operateAddIf(opd,region);
-				WriteInFile("STW D1,-(SP)");
-				WriteInFile("LDW R2,(SP)+");// on fait l'addition que l'on stock dans D1
-				WriteInFile("LDW R3,(SP)+");
-				if (child.getText().equals("+"))
-				{
-				   WriteInFile("ADD R3,R2,D1");
-				}
-				else if (child.getText().equals("-"))
-				{
-					WriteInFile("SUB R3,R2,D1");
-				}
-				else if (child.getText().equals("*"))
-				{
-					WriteInFile("MUL R3,R2,D1");
-				}
-				else if (child.getText().equals("<="))
-				{
-					this.WriteInFile("LDW D1,#0");
-					WriteInFile("CMP R3,R2");
-					WriteInFile("JGT #4");
-					this.WriteInFile("ADQ 1, D1");
-					this.WriteInFile("CMP R3,R2");
-				}
-				else if (child.getText().equals("<"))
-				{
-					this.WriteInFile("LDW D1,#0");
-					WriteInFile("CMP R3,R2");
-					WriteInFile("JGE #4");
-					this.WriteInFile("ADQ 1, D1");
-					this.WriteInFile("CMP R3,R2");
-				}
-				else if (child.getText().equals(">"))
-				{
-					this.WriteInFile("LDW D1,#0");
-					WriteInFile("CMP R3,R2");
-					WriteInFile("JLE #4");
-					this.WriteInFile("ADQ 1, D1");
-					this.WriteInFile("CMP R3,R2");
-				}
-				else if (child.getText().equals(">="))
-				{
-					this.WriteInFile("LDW D1,#0");
-					WriteInFile("CMP R3,R2");
-					WriteInFile("JLW #4");
-					this.WriteInFile("ADQ 1, D1");
-					this.WriteInFile("CMP R3,R2");
-				}
-				else if (child.getText().equals("!="))
-				{
-					this.WriteInFile("LDW D1,#0");
-					WriteInFile("CMP R3,R2");
-					WriteInFile("JEQ #4");
-					this.WriteInFile("ADQ 1, D1");
-					this.WriteInFile("CMP R3,R2");
-				}
-				else if (child.getText().equals("=="))
-				{
-					this.WriteInFile("LDW D1,#0");
-					WriteInFile("CMP R3,R2");
-					WriteInFile("JNE #4");
-					this.WriteInFile("ADQ 1, D1");
-					this.WriteInFile("CMP R3,R2");
-				}
-				//WriteInFile("STW D1,-(SP)");
-			}
-			
-		}
-		else //opg nn num
-		{
-			
-			if(isNumeric(opd.getText())) //opg non num et opd num
-			{
-				
-				//il y a un expresion pour opg
-				if(opg.getText().equals("+")||opg.getText().equals("*")||opg.getText().equals("<")||opg.getText().equals("-")||opg.getText().equals(">")||opg.getText().equals("==")||opg.getText().equals("!=")||opg.getText().equals(">=")||opg.getText().equals("<="))
-				{	
-					operateIf(opg,null,region);
-				}
-				else // c'est un idf
-				{
-				 operateAddIf(opg,region);
-				}
-				operateAddIf(opd,region);
-				WriteInFile("STW D1,-(SP)");
-				WriteInFile("LDW R2,(SP)+");// on fait l'addition que l'on stock dans D1
-				WriteInFile("LDW R3,(SP)+");
-				if (child.getText().equals("+"))
-				{
-				   WriteInFile("ADD R3,R2,D1");
-				}
-				else if (child.getText().equals("-"))
-				{
-					WriteInFile("SUB R3,R2,D1");
-				}
-				else if (child.getText().equals("*"))
-				{
-					WriteInFile("MUL R3,R2,D1");
-				}
-				else if (child.getText().equals("<="))
-				{
-					this.WriteInFile("LDW D1,#0");
-					WriteInFile("CMP R3,R2");
-					WriteInFile("JGT #4");
-					this.WriteInFile("ADQ 1, D1");
-					this.WriteInFile("CMP R3,R2");
-				}
-				else if (child.getText().equals("<"))
-				{
-					this.WriteInFile("LDW D1,#0");
-					WriteInFile("CMP R3,R2");
-					WriteInFile("JGE #4");
-					this.WriteInFile("ADQ 1, D1");
-					this.WriteInFile("CMP R3,R2");
-				}
-				else if (child.getText().equals(">"))
-				{
-					this.WriteInFile("LDW D1,#0");
-					WriteInFile("CMP R3,R2");
-					WriteInFile("JLE #4");
-					this.WriteInFile("ADQ 1, D1");
-					this.WriteInFile("CMP R3,R2");
-				}
-				else if (child.getText().equals(">="))
-				{
-					this.WriteInFile("LDW D1,#0");
-					WriteInFile("CMP R3,R2");
-					WriteInFile("JLW #4");
-					this.WriteInFile("ADQ 1, D1");
-					this.WriteInFile("CMP R3,R2");
-				}
-				else if (child.getText().equals("!="))
-				{
-					this.WriteInFile("LDW D1,#0");
-					WriteInFile("CMP R3,R2");
-					WriteInFile("JEQ #4");
-					this.WriteInFile("ADQ 1, D1");
-					this.WriteInFile("CMP R3,R2");
-				}
-				else if (child.getText().equals("=="))
-				{
-					this.WriteInFile("LDW D1,#0");
-					WriteInFile("CMP R3,R2");
-					WriteInFile("JNE #4");
-					this.WriteInFile("ADQ 1, D1");
-					this.WriteInFile("CMP R3,R2");
-				}
-			}
-			else
-			{
-				operateIf(opg,null,region);
-				operateIf(opd,null,region);
-				WriteInFile("LDW R2,(SP)+");
-				WriteInFile("LDW R3,(SP)+");
-				if (child.getText().equals("+"))
-				{
-				   WriteInFile("ADD R3,R2,D1");
-				}
-				else if (child.getText().equals("-"))
-				{
-					WriteInFile("SUB R3,R2,D1");
-				}
-				else if (child.getText().equals("*"))
-				{
-					WriteInFile("MUL R3,R2,D1");
-				}
-				else if (child.getText().equals("<="))
-				{
-					this.WriteInFile("LDW D1,#0");
-					WriteInFile("CMP R3,R2");
-					WriteInFile("JGT #4");
-					this.WriteInFile("ADQ 1, D1");
-					this.WriteInFile("CMP R3,R2");
-				}
-				else if (child.getText().equals("<"))
-				{
-					this.WriteInFile("LDW D1,#0");
-					WriteInFile("CMP R3,R2");
-					WriteInFile("JGE #4");
-					this.WriteInFile("ADQ 1, D1");
-					this.WriteInFile("CMP R3,R2");
-				}
-				else if (child.getText().equals(">"))
-				{
-					this.WriteInFile("LDW D1,#0");
-					WriteInFile("CMP R3,R2");
-					WriteInFile("JLE #4");
-					this.WriteInFile("ADQ 1, D1");
-					this.WriteInFile("CMP R3,R2");
-				}
-				else if (child.getText().equals(">="))
-				{
-					this.WriteInFile("LDW D1,#0");
-					WriteInFile("CMP R3,R2");
-					WriteInFile("JLW #4");
-					this.WriteInFile("ADQ 1, D1");
-					this.WriteInFile("CMP R3,R2");
-				}
-				else if (child.getText().equals("!="))
-				{
-					this.WriteInFile("LDW D1,#0");
-					WriteInFile("CMP R3,R2");
-					WriteInFile("JEQ #4");
-					this.WriteInFile("ADQ 1, D1");
-					this.WriteInFile("CMP R3,R2");
-				}
-				else if (child.getText().equals("=="))
-				{
-					this.WriteInFile("LDW D1,#0");
-					WriteInFile("CMP R3,R2");
-					WriteInFile("JNE #4");
-					this.WriteInFile("ADQ 1, D1");
-					this.WriteInFile("CMP R3,R2");
-				}
-			}		
-		}
-		}
-		else if (child.getChildCount()==0)
-		{
-
-			if(isNumeric(child.getText()))//on tombe sur une feuille numerique
-			{
-				WriteInFile("LDQ "+child.getText()+",D1");
-			}
-			else//on tombe sur une feuille associée à id
-			{
-				//on genere le code qui retrouve la valeur de l'id et on le met dans D1
-				System.out.println(child.getText());
-				String code=produire_code_retrouver_valeur_variable(child.getText(), regionCourante);
-				WriteInFile(code);
-				WriteInFile("LDW D1,R6");
-			}
-		}
-		return 0;
-	}
-
+	
+	
 	private String produire_code_stocker_valeur_variable2(String idf, int region) {
 		el_label2++;
 		ArrayList<Integer>regions= pile.getPile().get(region);
 		TDS tds_reg=tdsFinal.getTDSparRegion().get(region);//TDS de la region regions[i]
 		ArrayList<Symbole> symb1=tds_reg.getSymboles();
 		int imbriq2=symb1.get(0).getNumeroImbrication();
-		for(int i=0;i<regions.size();i++)
+		for(int i=regions.size()-1;i>=0;i++)
 		{
 			TDS tds_reg_i=tdsFinal.getTDSparRegion().get(regions.get(i));//TDS de la region regions[i]
 			ArrayList<Symbole> symb=tds_reg_i.getSymboles();
@@ -700,11 +248,11 @@ public class GenerateCode
 				   //res+=print_asm(6,1);
 				   }
 				   else // si c'est un parametre
-				   {
-					   res+="LDW R7,#"+symbol.getDeplacement()*2+"\n";
-					   res+="ADQ 8,R6\n";
+				   {   
+					   res+="LDW R7,#"+(-symbol.getDeplacement())*2+"\n";
+					   res+="ADQ 2,R6\n";
 					   res+="ADD R7,R6,R6\n";//R6<-depl+BP_region_cherchée  //adresse variable cherchée
-					   res+="STW R2,(R6)\n";
+					   res+="LDW R6,(R6)\n";
 				   }
 				   
 				   res+="ldw r7,#0\n";
@@ -716,7 +264,6 @@ public class GenerateCode
 		return null;
 	}
 	//if 
-	/*
 private void ifToken(Tree t,int region) 
 {
 	String compar1="";
@@ -728,11 +275,11 @@ private void ifToken(Tree t,int region)
 	Tree condition=t.getChild(0);
 	compar1=condition.getChild(0).getText();
 	compar2=condition.getChild(1).getText();
-	outil_comparaison=t.getChild(0).getText();
-   System.out.println(outil_comparaison);
+	outil_comparaison=condition.getText();
+
 	if (!isNumeric(compar1)){
 		WriteInFile("\tLDW WR, BP\n");
-		WriteInFile("\tADQ "+ getDeplacement(compar1,region)*2+", WR\n");
+		WriteInFile("\tADQ "+ produire_code_retrouver_valeur_variable(compar1,region)+", WR\n");
 		WriteInFile("\tLDW R2, (WR)\n");
 	}
 	else{
@@ -740,8 +287,7 @@ private void ifToken(Tree t,int region)
 	}
 	if(!isNumeric(compar2)){
 		WriteInFile("\tLDW WR, BP\n");
-	    WriteInFile("\tADQ "+getDeplacement(compar2,region)*2+", WR\n");
-	
+	WriteInFile("\tADQ "+produire_code_retrouver_valeur_variable(compar2,region)+", WR\n");
 		WriteInFile("\tLDW R3, (WR)\n");
 	}
 	else{
@@ -763,14 +309,13 @@ private void ifToken(Tree t,int region)
 			WriteInFile("\tJLW #Else"+num+"_-$-2\n\n");
 		}
 		
-		generate(t.getChild(1),region);
-		System.out.println(t.getChild(1));
-		WriteInFile("\tJMP #finif."+n+"_-$-2\n");
+		
+		WriteInFile("\tJMP #finif"+n+"_-$-2\n");
 		WriteInFile("Else"+n+"_\n");
 		WriteInFile("finif"+n+"_");
 	
 }
-*/
+
 
 
 	private void boucleFor(Tree ast, int region){
@@ -803,7 +348,7 @@ private void ifToken(Tree t,int region)
                         {
                  	    	generateAllFunction(a.getChild(i));
                         }
-                        else if (a.getChild(i).getText().equals("FONCTION"))
+                        else if (a.getChild(i).getText().equals("FONCTION") || a.getChild(i).getText().equals("PROCEDURE"))
                         {
                         	//generate(a.getChild(i), ++region_ast,0);
 							this.WriteInFile(a.getChild(i).getChild(0).getText()+"_ STW BP, -(SP)");
@@ -814,7 +359,14 @@ private void ifToken(Tree t,int region)
 							this.WriteInFile("      ldw sp,bp");
 							this.WriteInFile("      LDW BP, (SP)+");
 							this.WriteInFile("      RTS\n\n");
-                        	generateAllFunction(a.getChild(i).getChild(3));
+							if (a.getChild(i).getText().equals("FONCTION"))
+							{
+								generateAllFunction(a.getChild(i).getChild(3));
+							}
+							else
+							{
+								generateAllFunction(a.getChild(i).getChild(2));
+							}
                         }
                         else if (a.getChild(i).getText().equals("BLOC"))
                         {
@@ -839,6 +391,18 @@ private void ifToken(Tree t,int region)
 					this.WriteInFile("ldw r0, #"+ast.getChild(i).getText());//on met dans r0
 					this.WriteInFile("stw r0, -(sp)");//on empile
 				}
+				else if (ast.getChild(i).getChildCount()>0)
+				{
+					operate(ast.getChild(i),null, regionAppelant);
+					this.WriteInFile("LDW R2,(SP)+");
+					this.WriteInFile("stw R2, -(sp)");
+				}
+				else // c'est un idf
+				{
+					String code = produire_code_retrouver_valeur_variable(ast.getChild(i).getText(), regionAppelant);
+					this.WriteInFile(code);
+					this.WriteInFile("stw r6,-(sp)");
+				}
 			}
 			//maintenant on calcul le chainage statique que l'on range dans r2
 			//on charge Bp dans r1
@@ -855,14 +419,14 @@ private void ifToken(Tree t,int region)
 	}
 
 
-	private void operate(Tree child,String s) 
+	private void operate(Tree child,String s, int region) 
 	{
 		// TODO Auto-generated method stub
 		if (child.getText().equals("+")||child.getText().equals("-")||child.getText().equals("*"))
 		{
-				operateAdd(child.getChild(0));//on traite le fils gauche
+				operateAdd(child.getChild(0),region);//on traite le fils gauche
 				WriteInFile("STW D1,-(SP)");// on empile la valeur
-				operateAdd(child.getChild(1));// on traite le fils droit
+				operateAdd(child.getChild(1),region);// on traite le fils droit
 				WriteInFile("STW D1,-(SP)");
 				WriteInFile("LDW R2,(SP)+");// on fait l'addition que l'on stock dans D1 / dépiler droite
 				WriteInFile("LDW R3,(SP)+");//dépiler gauche
@@ -884,11 +448,22 @@ private void ifToken(Tree t,int region)
 		else // on a un idf
 		{
 			//System.out.println("on y est");
-			
-			String code=produire_code_retrouver_valeur_variable(child.getText(), regionCourante);
+
+			if(!child.getText().equals("APPEL"))
+			{
+			String code=produire_code_retrouver_valeur_variable(child.getText(), region);
 			WriteInFile(code);
-			WriteInFile("LDW D1,(R6)");
+			WriteInFile("LDW D1,R6");
 			WriteInFile("STW D1,-(SP)");
+			}
+			else 
+			{
+				this.function(child, region);
+				String code="LDW D1,R9\n";//R9 contient le resultat de la fonction
+				code+="STW D1,-(SP)\n";//on empile D1
+				this.WriteInFile(code);
+			}
+			 
 		}
 
 	}
@@ -905,7 +480,7 @@ private void ifToken(Tree t,int region)
 		return true;  
 	}
 	
-	private int operateAdd(Tree child)
+	private int operateAdd(Tree child,int region)
 	{
 		if(child.getText().equals("+") || child.getText().equals("-")||child.getText().equals("*"))//on ne traite que l'addition et soustraction pour le moment 
 		{
@@ -913,14 +488,14 @@ private void ifToken(Tree t,int region)
 		Tree opd=child.getChild(1);
 		if(isNumeric(opg.getText()))
 		{
-			operateAdd(opg);
+			operateAdd(opg,region);
 			WriteInFile("STW D1,-(SP)");
 			if(!isNumeric(opd.getText()))// og numeric et opd non numeri
 			{
 				//il y a un expresion pour opd
 				if(opd.getText().equals("+")||opd.getText().equals("-")||opd.getText().equals("*")||opd.getText().equals("/"))
 				{
-					operate(opd,null);
+					operate(opd,null,region);
 					WriteInFile("LDW R2,(SP)+");// on fait l'addition que l'on stock dans D1
 					WriteInFile("LDW R3,(SP)+");
 					if (child.getText().equals("+"))
@@ -938,13 +513,13 @@ private void ifToken(Tree t,int region)
 				}
 				else // c'est un idf
 				{			
-					operateAdd(opd);
+					operateAdd(opd,region);
 				}
 
 			}
 			else
 			{
-				operateAdd(opd);
+				operateAdd(opd,region);
 				WriteInFile("STW D1,-(SP)");
 				WriteInFile("LDW R2,(SP)+");// on fait l'addition que l'on stock dans D1
 				WriteInFile("LDW R3,(SP)+");
@@ -973,13 +548,13 @@ private void ifToken(Tree t,int region)
 				//il y a un expresion pour opg
 				if(opg.getText().equals("+")||opg.getText().equals("-")||opg.getText().equals("*")||opg.getText().equals("/"))
 				{	
-					operate(opg,null);
+					operate(opg,null,region);
 				}
 				else // c'est un idf
 				{
-				 operateAdd(opg);
+				 operateAdd(opg,region);
 				}
-				operateAdd(opd);
+				operateAdd(opd,region);
 				WriteInFile("STW D1,-(SP)");
 				WriteInFile("LDW R2,(SP)+");// on fait l'addition que l'on stock dans D1
 				WriteInFile("LDW R3,(SP)+");
@@ -998,8 +573,8 @@ private void ifToken(Tree t,int region)
 			}
 			else
 			{
-				operate(opg,null);
-				operate(opd,null);
+				operate(opg,null,region);
+				operate(opd,null,region);
 				WriteInFile("LDW R2,(SP)+");
 				WriteInFile("LDW R3,(SP)+");
 				if (child.getText().equals("+"))
@@ -1027,8 +602,10 @@ private void ifToken(Tree t,int region)
 			else//on tombe sur une feuille associée à id
 			{
 				//on genere le code qui retrouve la valeur de l'id et on le met dans D1
-				produire_code_retrouver_valeur_variable(child.getText(), regionCourante);
-				WriteInFile("LDW D1,(R6)");
+				System.out.println(child.getText());
+				String code=produire_code_retrouver_valeur_variable(child.getText(), regionCourante);
+				WriteInFile(code);
+				WriteInFile("LDW D1,R6");
 			}
 		}
 		return 0;
@@ -1101,7 +678,7 @@ public String produire_code_retrouver_valeur_variable(String idf,int region)
 	TDS tds_reg=tdsFinal.getTDSparRegion().get(region);//TDS de la region regions[i]
 	ArrayList<Symbole> symb1=tds_reg.getSymboles();
 	int imbriq2=symb1.get(0).getNumeroImbrication();
-	for(int i=0;i<regions.size();i++)
+	for(int i=regions.size()-1;i>=0;i++)
 	{
 		TDS tds_reg_i=tdsFinal.getTDSparRegion().get(regions.get(i));//TDS de la region regions[i]
 		ArrayList<Symbole> symb=tds_reg_i.getSymboles();
@@ -1132,7 +709,8 @@ public String produire_code_retrouver_valeur_variable(String idf,int region)
 			   //on est dans la region voulue en chainage statique (R6)
 			   if(symbol.getDeplacement()>=0)//si c'est une variable
 			   {
-			   res+="LDW R7,#"+symbol.getDeplacement()*2+"\n";
+				   System.out.println(idf+":"+symbol.getDeplacement()*2);
+			   res+="LDW R7,#"+symbol.getDeplacement()*2+"// iciiiiiiiiiiiiiiiiiiiii\n";
 			   res+="ADQ -2,R6\n";//R6<-R6-4
 			   res+="SUB R6,R7,R6\n";//R6<-depl+BP_region_cherchée
 			   //res+=this.print_asm(6);
@@ -1141,8 +719,8 @@ public String produire_code_retrouver_valeur_variable(String idf,int region)
 			   }
 			   else // si c'est un parametre
 			   {
-				   res+="LDW R7,#"+symbol.getDeplacement()*2+"\n";
-				   res+="ADQ 8,R6\n";
+				   res+="LDW R7,#"+(-symbol.getDeplacement())*2+"\n";
+				   res+="ADQ 2,R6\n";
 				   res+="ADD R7,R6,R6\n";//R6<-depl+BP_region_cherchée  //adresse variable cherchée
 				   res+="LDW R6,(R6)\n";
 			   }
@@ -1164,7 +742,7 @@ public String produire_code_stocker_valeur_variable(String idf,int valeur,int re
 	TDS tds_reg=tdsFinal.getTDSparRegion().get(region);//TDS de la region regions[i]
 	ArrayList<Symbole> symb1=tds_reg.getSymboles();
 	int imbriq2=symb1.get(0).getNumeroImbrication();
-	for(int i=0;i<regions.size();i++)
+	for(int i=regions.size()-1;i>=0;i++)
 	{
 		TDS tds_reg_i=tdsFinal.getTDSparRegion().get(regions.get(i));//TDS de la region regions[i]
 		ArrayList<Symbole> symb=tds_reg_i.getSymboles();
@@ -1206,11 +784,10 @@ public String produire_code_stocker_valeur_variable(String idf,int valeur,int re
 			   }
 			   else // si c'est un parametre
 			   {
-				   res+="LDW R7,#"+symbol.getDeplacement()*2+"\n";
-				   res+="ADQ 8,R6\n";
+				   res+="LDW R7,#"+(-symbol.getDeplacement())*2+"\n";
+				   res+="ADQ 2,R6\n";
 				   res+="ADD R7,R6,R6\n";//R6<-depl+BP_region_cherchée  //adresse variable cherchée
-				   res+="LDW R8,#"+valeur+"\n";
-				   res+="STW R8,(R6)\n";
+				   res+="LDW R6,(R6)\n";
 			   }
 			   
 			   res+="ldw r7,#0\n";
@@ -1263,7 +840,7 @@ public String produire_code_stocker_valeur_variable_registre(String idf,String r
 			   {
 			   res+="LDW R7,#"+symbol.getDeplacement()*2+"\n";
 			   res+="ADQ -2,R6\n";//R6<-R6-4
-			   res+="ADD R7,R6,R6\n";//R6<-depl+BP_region_cherchée
+			   res+="SUB R6,R7,R6\n";//R6<-depl+BP_region_cherchée
 			   //res+=print_asm(6);
 			   res+="LDW R8,"+registre+"\n";
 			   res+="STW R8,(R6)\n";
@@ -1286,33 +863,7 @@ public String produire_code_stocker_valeur_variable_registre(String idf,String r
 	
 	return null;
 }
-public int getDeplacement(String idf,int region)
-{
-	el_label++;
-	ArrayList<Integer>regions= pile.getPile().get(region);
-	TDS tds_reg=tdsFinal.getTDSparRegion().get(region);//TDS de la region regions[i]
-	ArrayList<Symbole> symb1=tds_reg.getSymboles();
-	int imbriq2=symb1.get(0).getNumeroImbrication();
-	int nbDepl=0;
-	int depl=0;
-	for(int i=0;i<regions.size();i++)
-	{
-		TDS tds_reg_i=tdsFinal.getTDSparRegion().get(regions.get(i));//TDS de la region regions[i]
-		ArrayList<Symbole> symb=tds_reg_i.getSymboles();
-		for(int j=0;j<symb.size();j++)
-		{
-		   if(symb.get(j).getNom().equals(idf))
-		   {
-			   
-			   Symbole symbol=symb.get(j);
-			   int imbriq=symbol.getNumeroImbrication();
-			   nbDepl=imbriq2-imbriq; //n
-			   depl=symbol.getDeplacement();
-		   }
-		}
-	}
-	return depl;
-}
+
 private String print_asm(int num_registre,int mode)// 0 mode direct 1 mode indirect
 {
 	String res="\n";
