@@ -1085,6 +1085,14 @@ private void ifToken(Tree t,int region)
 				WriteInFile("LDW D1,R6");
 			}
 		}
+		else if (child.getText().equals("APPEL"))
+		{
+			this.function(child, region);
+			String code="LDW D1,R9\n";//R9 contient le resultat de la fonction
+			this.WriteInFile(code);
+			//code+="STW D1,-(SP)\n";//on empile D1
+			
+		}
 		return 0;
 	}
 
