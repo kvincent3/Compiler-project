@@ -159,7 +159,6 @@ public class GenerateCode
 							asm+="LDW R9,R6";//R9<-R6
 							this.WriteInFile(asm);
 						}
-
 					}
 				}
 			}
@@ -208,7 +207,7 @@ public class GenerateCode
 		TDS tds_reg=tdsFinal.getTDSparRegion().get(region);//TDS de la region regions[i]
 		ArrayList<Symbole> symb1=tds_reg.getSymboles();
 		int imbriq2=symb1.get(0).getNumeroImbrication();
-		for(int i=0;i<regions.size();i++)
+		for(int i=regions.size()-1;i>=0;i++)
 		{
 			TDS tds_reg_i=tdsFinal.getTDSparRegion().get(regions.get(i));//TDS de la region regions[i]
 			ArrayList<Symbole> symb=tds_reg_i.getSymboles();
@@ -249,11 +248,11 @@ public class GenerateCode
 				   //res+=print_asm(6,1);
 				   }
 				   else // si c'est un parametre
-				   {
-					   res+="LDW R7,#"+symbol.getDeplacement()*2+"\n";
-					   res+="ADQ 8,R6\n";
+				   {   
+					   res+="LDW R7,#"+(-symbol.getDeplacement())*2+"\n";
+					   res+="ADQ 2,R6\n";
 					   res+="ADD R7,R6,R6\n";//R6<-depl+BP_region_cherchée  //adresse variable cherchée
-					   res+="STW R2,(R6)\n";
+					   res+="LDW R6,(R6)\n";
 				   }
 				   
 				   res+="ldw r7,#0\n";
@@ -276,11 +275,11 @@ private void ifToken(Tree t,int region)
 	Tree condition=t.getChild(0);
 	compar1=condition.getChild(0).getText();
 	compar2=condition.getChild(1).getText();
-	outil_comparaison=t.getChild(0).getText();
-   System.out.println(outil_comparaison);
+	outil_comparaison=condition.getText();
+
 	if (!isNumeric(compar1)){
 		WriteInFile("\tLDW WR, BP\n");
-		WriteInFile("\tADQ "+ getDeplacement(compar1,region)*2+", WR\n");
+		WriteInFile("\tADQ "+ produire_code_retrouver_valeur_variable(compar1,region)+", WR\n");
 		WriteInFile("\tLDW R2, (WR)\n");
 	}
 	else{
@@ -288,8 +287,7 @@ private void ifToken(Tree t,int region)
 	}
 	if(!isNumeric(compar2)){
 		WriteInFile("\tLDW WR, BP\n");
-	    WriteInFile("\tADQ "+getDeplacement(compar2,region)*2+", WR\n");
-	
+	WriteInFile("\tADQ "+produire_code_retrouver_valeur_variable(compar2,region)+", WR\n");
 		WriteInFile("\tLDW R3, (WR)\n");
 	}
 	else{
@@ -311,13 +309,13 @@ private void ifToken(Tree t,int region)
 			WriteInFile("\tJLW #Else"+num+"_-$-2\n\n");
 		}
 		
-		generate(t.getChild(1),region);
-		System.out.println(t.getChild(1));
-		WriteInFile("\tJMP #finif."+n+"_-$-2\n");
+		
+		WriteInFile("\tJMP #finif"+n+"_-$-2\n");
 		WriteInFile("Else"+n+"_\n");
 		WriteInFile("finif"+n+"_");
 	
 }
+
 
 
 	private void boucleFor(Tree ast, int region){
@@ -385,6 +383,10 @@ private void ifToken(Tree t,int region)
 				{
 					this.WriteInFile("ldw r0, #"+ast.getChild(i).getText());//on met dans r0
 					this.WriteInFile("stw r0, -(sp)");//on empile
+				}
+				else // c'est un idf
+				{
+					
 				}
 			}
 			//maintenant on calcul le chainage statique que l'on range dans r2
@@ -661,7 +663,7 @@ public String produire_code_retrouver_valeur_variable(String idf,int region)
 	TDS tds_reg=tdsFinal.getTDSparRegion().get(region);//TDS de la region regions[i]
 	ArrayList<Symbole> symb1=tds_reg.getSymboles();
 	int imbriq2=symb1.get(0).getNumeroImbrication();
-	for(int i=0;i<regions.size();i++)
+	for(int i=regions.size()-1;i>=0;i++)
 	{
 		TDS tds_reg_i=tdsFinal.getTDSparRegion().get(regions.get(i));//TDS de la region regions[i]
 		ArrayList<Symbole> symb=tds_reg_i.getSymboles();
@@ -702,8 +704,8 @@ public String produire_code_retrouver_valeur_variable(String idf,int region)
 			   }
 			   else // si c'est un parametre
 			   {
-				   res+="LDW R7,#"+symbol.getDeplacement()*2+"\n";
-				   res+="ADQ 8,R6\n";
+				   res+="LDW R7,#"+(-symbol.getDeplacement())*2+"\n";
+				   res+="ADQ 2,R6\n";
 				   res+="ADD R7,R6,R6\n";//R6<-depl+BP_region_cherchée  //adresse variable cherchée
 				   res+="LDW R6,(R6)\n";
 			   }
@@ -725,7 +727,7 @@ public String produire_code_stocker_valeur_variable(String idf,int valeur,int re
 	TDS tds_reg=tdsFinal.getTDSparRegion().get(region);//TDS de la region regions[i]
 	ArrayList<Symbole> symb1=tds_reg.getSymboles();
 	int imbriq2=symb1.get(0).getNumeroImbrication();
-	for(int i=0;i<regions.size();i++)
+	for(int i=regions.size()-1;i>=0;i++)
 	{
 		TDS tds_reg_i=tdsFinal.getTDSparRegion().get(regions.get(i));//TDS de la region regions[i]
 		ArrayList<Symbole> symb=tds_reg_i.getSymboles();
@@ -767,11 +769,10 @@ public String produire_code_stocker_valeur_variable(String idf,int valeur,int re
 			   }
 			   else // si c'est un parametre
 			   {
-				   res+="LDW R7,#"+symbol.getDeplacement()*2+"\n";
-				   res+="ADQ 8,R6\n";
+				   res+="LDW R7,#"+(-symbol.getDeplacement())*2+"\n";
+				   res+="ADQ 2,R6\n";
 				   res+="ADD R7,R6,R6\n";//R6<-depl+BP_region_cherchée  //adresse variable cherchée
-				   res+="LDW R8,#"+valeur+"\n";
-				   res+="STW R8,(R6)\n";
+				   res+="LDW R6,(R6)\n";
 			   }
 			   
 			   res+="ldw r7,#0\n";
@@ -847,33 +848,7 @@ public String produire_code_stocker_valeur_variable_registre(String idf,String r
 	
 	return null;
 }
-public int getDeplacement(String idf,int region)
-{
-	el_label++;
-	ArrayList<Integer>regions= pile.getPile().get(region);
-	TDS tds_reg=tdsFinal.getTDSparRegion().get(region);//TDS de la region regions[i]
-	ArrayList<Symbole> symb1=tds_reg.getSymboles();
-	int imbriq2=symb1.get(0).getNumeroImbrication();
-	int nbDepl=0;
-	int depl=0;
-	for(int i=0;i<regions.size();i++)
-	{
-		TDS tds_reg_i=tdsFinal.getTDSparRegion().get(regions.get(i));//TDS de la region regions[i]
-		ArrayList<Symbole> symb=tds_reg_i.getSymboles();
-		for(int j=0;j<symb.size();j++)
-		{
-		   if(symb.get(j).getNom().equals(idf))
-		   {
-			   
-			   Symbole symbol=symb.get(j);
-			   int imbriq=symbol.getNumeroImbrication();
-			   nbDepl=imbriq2-imbriq; //n
-			   depl=symbol.getDeplacement();
-		   }
-		}
-	}
-	return depl;
-}
+
 private String print_asm(int num_registre,int mode)// 0 mode direct 1 mode indirect
 {
 	String res="\n";
