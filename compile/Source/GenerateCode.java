@@ -386,7 +386,9 @@ private void ifToken(Tree t,int region)
 				}
 				else // c'est un idf
 				{
-					
+					String code = produire_code_retrouver_valeur_variable(ast.getChild(i).getText(), regionAppelant);
+					this.WriteInFile(code);
+					this.WriteInFile("stw r6,-(sp)");
 				}
 			}
 			//maintenant on calcul le chainage statique que l'on range dans r2
