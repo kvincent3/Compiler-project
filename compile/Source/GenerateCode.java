@@ -23,6 +23,7 @@ public class GenerateCode
 	private int el_label2=1000;
 	private TDSGlobal tteTds;
     private TDSGlobal tdsFinal;
+    int regionCourante=0;
 	//private ArrayList<FonctionRegion> fonctions = new ArrayList<FonctionRegion>();
 	boolean trouver;
 	private int num=0;
@@ -87,7 +88,9 @@ public class GenerateCode
 					if (ast.getChild(i).getText().equals("="))// une affectation
 					{
 						String idf=ast.getChild(i).getChild(0).getText();//identifiant
-						if (ast.getChild(i).getChild(1).getChildCount()==0)
+						this.regionCourante=region;
+
+						if (ast.getChild(i).getChild(1).getChildCount()==0 && isNumeric(ast.getChild(i).getChild(1).getText()))
 						{
 							String val=ast.getChild(i).getChild(1).getText();
 							WriteInFile("LDQ "+val+",D1");
@@ -207,7 +210,7 @@ public class GenerateCode
 					   
 				   res+="LDQ 0, R5\n";
 				   res+="LDW R7,#"+nbDepl+"\n";//R7<-nbDepl
-				   res+="boucle_search_idf"+el_label2+" ";
+				   res+="boucle_search_idf"+el_label2+"\n";
 				   res+="CMP R7,R5\n" ;//compare R7-R5
 				   res+="BEQ FIN"+el_label2+"-$-2\n";	// verifie si le resultat est equal a zero	   
 				   //res+="ADQ -2,R6\n";//R6<-R6-4
@@ -221,7 +224,7 @@ public class GenerateCode
 				   {
 				   res+="LDW R7,#"+symbol.getDeplacement()*2+"\n";
 				   res+="ADQ -2,R6\n";//R6<-R6-4
-				   res+="ADD R7,R6,R6\n";//R6<-depl+BP_region_cherchée
+				   res+="SUB R6,R7,R6\n";//R6<-depl+BP_region_cherchée
 				   //res+=print_asm(6);
 				   res+="STW R2,(R6)\n";
 				   //res+=print_asm(6,1);
@@ -405,6 +408,15 @@ private void ifToken(Tree t,int region)
 				WriteInFile("STW D1,-(SP)");
 			//}
 		}
+		else // on a un idf
+		{
+			//System.out.println("on y est");
+			
+			String code=produire_code_retrouver_valeur_variable(child.getText(), regionCourante);
+			WriteInFile(code);
+			WriteInFile("LDW D1,(R6)");
+			WriteInFile("STW D1,-(SP)");
+		}
 
 	}
 	public static boolean isNumeric(String str)  
@@ -542,6 +554,8 @@ private void ifToken(Tree t,int region)
 			else//on tombe sur une feuille associée à id
 			{
 				//on genere le code qui retrouve la valeur de l'id et on le met dans D1
+				produire_code_retrouver_valeur_variable(child.getText(), regionCourante);
+				WriteInFile("LDW D1,(R6)");
 			}
 		}
 		return 0;
@@ -632,23 +646,22 @@ public String produire_code_retrouver_valeur_variable(String idf,int region)
 			   res+="LDW R6,BP\n";//R6<-BP
 			   /*if(nbDepl==0)
 			     res+="ADQ -4,R6\n";   */
-				   
 			   res+="LDQ 0, R5\n";
 			   res+="LDW R7,#"+nbDepl+"\n";//R7<-nbDepl
-			   res+="boucle_search_idf"+el_label+" ";
+			   res+="boucle_search_idf"+el_label+"\n";
 			   res+="CMP R7,R5\n" ;//compare R7-R5
 			   res+="BEQ FIN"+el_label+"-$-2\n";	// verifie si le resultat est equal a zero	   
 			   //res+="ADQ -2,R6\n";//R6<-R6-4
 			   res+="LDW R6,(R6)\n";//R6<- valeur à l'adresse de R6 (c'est à dire BP)			   
 			   res+="ADQ -1,R7\n";//R7<-R7-1 
 			   res+="JEA @boucle_search_idf"+el_label+"\n\n";			   
-			   res+="FIN"+el_label+" ";
+			   res+="FIN"+el_label+"\n";
 			   //on est dans la region voulue en chainage statique (R6)
 			   if(symbol.getDeplacement()>=0)//si c'est une variable
 			   {
 			   res+="LDW R7,#"+symbol.getDeplacement()*2+"\n";
 			   res+="ADQ -2,R6\n";//R6<-R6-4
-			   res+="ADD R7,R6,R6\n";//R6<-depl+BP_region_cherchée
+			   res+="SUB R6,R7,R6\n";//R6<-depl+BP_region_cherchée
 			   //res+=this.print_asm(6);
 			   res+="LDW R6,(R6)\n";
 			   
@@ -699,7 +712,7 @@ public String produire_code_stocker_valeur_variable(String idf,int valeur,int re
 				   
 			   res+="LDQ 0, R5\n";
 			   res+="LDW R7,#"+nbDepl+"\n";//R7<-nbDepl
-			   res+="boucle_search_idf"+el_label+" ";
+			   res+="boucle_search_idf"+el_label+"\n";
 			   res+="CMP R7,R5\n" ;//compare R7-R5
 			   res+="BEQ FIN"+el_label+"-$-2\n";	// verifie si le resultat est equal a zero	   
 			   //res+="ADQ -2,R6\n";//R6<-R6-4
@@ -764,7 +777,7 @@ public String produire_code_stocker_valeur_variable_registre(String idf,String r
 				   
 			   res+="LDQ 0, R5\n";
 			   res+="LDW R7,#"+nbDepl+"\n";//R7<-nbDepl
-			   res+="boucle_search_idf"+el_label+" ";
+			   res+="boucle_search_idf"+el_label+"\n";
 			   res+="CMP R7,R5\n" ;//compare R7-R5
 			   res+="BEQ FIN"+el_label+"-$-2\n";	// verifie si le resultat est equal a zero	   
 			   //res+="ADQ -2,R6\n";//R6<-R6-4
