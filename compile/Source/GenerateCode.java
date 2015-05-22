@@ -350,7 +350,7 @@ public class GenerateCode
 	}
 	private int operateAddIf(Tree child,int region)
 	{
-		if(child.getText().equals("+") ||child.getText().equals("*")||child.getText().equals("<")||child.getText().equals("-"))//on ne traite que l'addition et soustraction pour le moment 
+		if(child.getText().equals("+") ||child.getText().equals("*")||child.getText().equals("<")||child.getText().equals("-")||child.getText().equals(">")||child.getText().equals(">=")||child.getText().equals("<=")||child.getText().equals("==")||child.getText().equals("!="))//on ne traite que l'addition et soustraction pour le moment 
 		{
 		Tree opg=child.getChild(0);	
 		Tree opd=child.getChild(1);
